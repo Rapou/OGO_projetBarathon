@@ -1,0 +1,153 @@
+body{
+    position:absolute;
+    width:100%;
+    height: 100%; 
+    margin: 0; 
+    padding: 0;
+    color:black;
+    background-color:white;
+}
+
+#header{
+    position:absolute;
+    width:100%;
+    height:50px;
+    background-color:#2980b9;
+    z-index:5;
+    text-align:left;
+}
+
+#header_admin{
+    position:absolute;
+    width:100%;
+    height:50px;
+    background-color:#e74c3c;
+    z-index:5;
+    text-align:left;
+}
+
+#header h1, #header_admin h1{
+    position:relative;
+    font-family: 'Satisfy', 'cursive';
+    font-weight: normal;
+    color:white;
+    width:auto;
+    height:42px;
+    margin:0px 0 0 5px;
+    font-size:21px;
+    background-image:URL('logo2.png');
+    text-align:left;
+    padding-left:55px;
+    padding-top:8px;
+    background-size:45px;
+    background-position:left center;
+    background-repeat:no-repeat;
+}
+
+#etape{
+    position:absolute;
+    top:50px;
+    left:0px;
+    width:100%;
+    height:32px;
+    padding:0px;
+    padding-top:8px;
+    margin:0;
+    font-size:24px;
+    text-align:center;
+    background-color:white;
+    font-family: 'Josefin Sans', 'serif';
+    z-index:3;
+}
+
+#etablissement{
+    position:absolute;
+    top:90px;
+    left:0px;
+    width:100%;
+    height:35px;
+    padding:0px;
+    padding-top:5px;
+    margin:0;
+    font-size:24px;
+    text-align:center;
+    background-color:white;
+    font-family: 'Josefin Sans', 'serif';
+    z-index:2;
+}
+#etablissement p, #etape p{
+    padding:0;
+    margin:0;
+}
+
+#map-canvas { 
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    z-index:1;
+}
+
+#btn_avant{
+    position:absolute;
+    top:150px;
+    width:60%;
+    margin:0 20%;
+    height:60px;
+    padding-top:30px;
+    color:white;
+    font-size:28px;
+    text-align:center;
+    font-family: 'Josefin Sans', 'serif';
+    background-color:#c0392b;
+    cursor: pointer;
+    z-index:2;
+}
+
+#btn_apres{
+    position:absolute;
+    top:260px;
+    width:60%;
+    margin:0 20%;
+    height:60px;
+    padding-top:30px;
+    font-size:28px;
+    color:white;
+    text-align:center;
+    font-family: 'Josefin Sans', 'serif';
+    background-color:#2ecc71;
+    cursor: pointer;
+    z-index:2;
+}
+
+#chargement{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:#34495e;
+    z-index:4;
+}
+
+#chargement p{
+    margin-top:100px;
+    width:100%;
+    text-align:center;
+    font-size:28px;
+    color:white;
+    font-family: 'Josefin Sans', 'serif';
+}
+
+h1.firstHeading{
+    font-size:16px;
+    margin:0;
+    padding:0;
+    margin-top:-3px;
+}
+div.bodyContent p{
+    margin:0px;
+    padding:0px;
+    padding-top:2px;
+}
