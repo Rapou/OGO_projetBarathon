@@ -13,6 +13,7 @@ $(document).ready(function(){
 		sphericalMercator: true
 	    }
         );
+	
 	var hauteur = $(document).height() - 40;
 	$("#map").css("height", hauteur + "px");
         map.addLayer(goog);
@@ -22,6 +23,19 @@ $(document).ready(function(){
 	    var nouvelleHauteur = $(window).height() - 40;
 	    $("#map").css("height", nouvelleHauteur + "px");
 	});
+	
+	capitals = new OpenLayers.Layer.Vector("WFS - cities (capitals)", {
+	    protocol: new OpenLayers.Protocol.WFS({
+		url: myWFS,
+		featureType: "cities",
+		featurePrefix: "ogo",
+		featureNS: "http://mediamaps.ch/ogo",
+		srsName: "EPSG:900913"
+	    }),
+	    strategies: [new OpenLayers.Strategy.Fixed()],
+	    styleMap: new OpenLayers.Style(ptSymbolizer, {context: ctxCategorize})                    
+	});
+	map.addLayer(capitals);
 });
 
 
