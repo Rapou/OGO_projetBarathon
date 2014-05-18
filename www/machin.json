@@ -1,0 +1,3449 @@
+{
+    type: "FeatureCollection",
+    features: [
+	{
+	    "type": "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6610834,
+		    46.5434942
+		]
+	    },
+	    id: 0,
+	    properties: {
+		name: "Union"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5677307,
+		    46.5204385
+		]
+	    },
+	    id: 1,
+	    properties: {
+		name: "Satellite"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6353047,
+		    46.5234259
+		]
+	    },
+	    id: 2,
+	    properties: {
+		name: "Le XIIIe siecle"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5800039,
+		    46.526064
+		]
+	    },
+	    id: 3,
+	    properties: {
+		name: "Zelig"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6320715,
+		    46.5206942
+		]
+	    },
+	    id: 4,
+	    properties: {
+		name: "Le Central"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6320281,
+		    46.5207646
+		]
+	    },
+	    id: 5,
+	    properties: {
+		name: "Central Park"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6269377,
+		    46.5219023
+		]
+	    },
+	    id: 6,
+	    properties: {
+		name: "King Size pub"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6359008,
+		    46.5235889
+		]
+	    },
+	    id: 7,
+	    properties: {
+		name: "Le Lapin Vert"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6343493,
+		    46.5224857
+		]
+	    },
+	    id: 8,
+	    properties: {
+		name: "La Girafe"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6369462,
+		    46.5198707
+		]
+	    },
+	    id: 9,
+	    properties: {
+		name: "Captain Cook"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6475978,
+		    46.5139629
+		]
+	    },
+	    id: 10,
+	    properties: {
+		name: "Les Faverges"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.62574,
+		    46.507429
+		]
+	    },
+	    id: 11,
+	    properties: {
+		name: "MGM"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6360738,
+		    46.5254426
+		]
+	    },
+	    id: 12,
+	    properties: {
+		name: "Harper's Pub"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6367336,
+		    46.5259964
+		]
+	    },
+	    id: 13,
+	    properties: {
+		name: "La Bossette"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6331436,
+		    46.5227776
+		]
+	    },
+	    id: 14,
+	    properties: {
+		name: "The Great Escape"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6140056,
+		    46.529764
+		]
+	    },
+	    id: 15,
+	    properties: {
+		name: "Chez LoÃÂ¯c"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6737145,
+		    46.5062034
+		]
+	    },
+	    id: 16,
+	    properties: {
+		name: "Le Convivial"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6726038,
+		    46.5056429
+		]
+	    },
+	    id: 17,
+	    properties: {
+		name: "CafÃÂ© de Paudex"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6717941,
+		    46.5075199
+		]
+	    },
+	    id: 18,
+	    properties: {
+		name: "CafÃÂ© du ChÃÂ¢teau"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6716169,
+		    46.5064876
+		]
+	    },
+	    id: 19,
+	    properties: {
+		name: "Pizzeria La Fontaine"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6713728,
+		    46.5073242
+		]
+	    },
+	    id: 20,
+	    properties: {
+		name: "Le Ranch"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5894522,
+		    46.5314132
+		]
+	    },
+	    id: 21,
+	    properties: {
+		name: "Coop (restaurant du personnel ouvert au public,"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5766735,
+		    46.5541953
+		]
+	    },
+	    id: 22,
+	    properties: {
+		name: "HÃÂ´tel de Ville"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5995132,
+		    46.519408
+		]
+	    },
+	    id: 23,
+	    properties: {
+		name: "Relais de Vidy"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5916622,
+		    46.5299861
+		]
+	    },
+	    id: 24,
+	    properties: {
+		name: "il Bacio"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5806835,
+		    46.535712
+		]
+	    },
+	    id: 25,
+	    properties: {
+		name: "Le Paradis"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5915068,
+		    46.5334802
+		]
+	    },
+	    id: 26,
+	    properties: {
+		name: "Sao GonÃÂ§alo Mario"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5764869,
+		    46.545336
+		]
+	    },
+	    id: 27,
+	    properties: {
+		name: "Il Capriccio"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6611105,
+		    46.5438584
+		]
+	    },
+	    id: 28,
+	    properties: {
+		name: "Tea-Room Boulangerie Fleur de pains"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6592208,
+		    46.5443946
+		]
+	    },
+	    id: 29,
+	    properties: {
+		name: "Pizzeria des Tuileries"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6584956,
+		    46.5439359
+		]
+	    },
+	    id: 30,
+	    properties: {
+		name: "Le Casting"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6246058,
+		    46.523732
+		]
+	    },
+	    id: 31,
+	    properties: {
+		name: "Cavallo Blanco"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6247761,
+		    46.5239142
+		]
+	    },
+	    id: 32,
+	    properties: {
+		name: "Saigon"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5942975,
+		    46.5286177
+		]
+	    },
+	    id: 33,
+	    properties: {
+		name: "Centro Asturiano de Lausana"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5901054,
+		    46.5292405
+		]
+	    },
+	    id: 34,
+	    properties: {
+		name: "Restaurant du ChÃÂªne"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5670374,
+		    46.5279724
+		]
+	    },
+	    id: 35,
+	    properties: {
+		name: "Taverne de l'Uni"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5654592,
+		    46.5201327
+		]
+	    },
+	    id: 36,
+	    properties: {
+		name: "L'esplanade"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5929508,
+		    46.526208
+		]
+	    },
+	    id: 37,
+	    properties: {
+		name: "Meson Gallego"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6048588,
+		    46.5842009
+		]
+	    },
+	    id: 38,
+	    properties: {
+		name: "GalionÃÂ´s Pub"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6045565,
+		    46.5843458
+		]
+	    },
+	    id: 39,
+	    properties: {
+		name: "Tea-room Au P'tit Bonheur"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6062135,
+		    46.5634365
+		]
+	    },
+	    id: 40,
+	    properties: {
+		name: "Hotel-Restaurant ÃÂ  la Chotte"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5643819,
+		    46.520841
+		]
+	    },
+	    id: 41,
+	    properties: {
+		name: "Le Corbusier"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5672157,
+		    46.5203721
+		]
+	    },
+	    id: 42,
+	    properties: {
+		name: "Le Parmentier"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5675081,
+		    46.520374
+		]
+	    },
+	    id: 43,
+	    properties: {
+		name: "Le Vinci"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5688234,
+		    46.520333
+		]
+	    },
+	    id: 44,
+	    properties: {
+		name: "Le Copernic"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5875965,
+		    46.5360463
+		]
+	    },
+	    id: 45,
+	    properties: {
+		name: "La Rose Rouge"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5790352,
+		    46.5368952
+		]
+	    },
+	    id: 46,
+	    properties: {
+		name: "Buffet-Express"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5603361,
+		    46.5091647
+		]
+	    },
+	    id: 47,
+	    properties: {
+		name: "Le dÃÂ©barcadÃÂ¨re"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5807044,
+		    46.5370446
+		]
+	    },
+	    id: 48,
+	    properties: {
+		name: "BigBen"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6627064,
+		    46.5059938
+		]
+	    },
+	    id: 49,
+	    properties: {
+		name: "Restaurant du Port-de-Pully"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.7047034,
+		    46.5406511
+		]
+	    },
+	    id: 50,
+	    properties: {
+		name: "Claie-aux-Moines"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5647162,
+		    46.5196529
+		]
+	    },
+	    id: 51,
+	    properties: {
+		name: "CafÃÂ©taria ELA"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5802756,
+		    46.5227635
+		]
+	    },
+	    id: 52,
+	    properties: {
+		name: "Restaurant de Dorigny"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5740002,
+		    46.5211797
+		]
+	    },
+	    id: 53,
+	    properties: {
+		name: "CafÃÂ©teria Amphimax"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6128535,
+		    46.5207437
+		]
+	    },
+	    id: 54,
+	    properties: {
+		name: "CafÃÂ© de Montelly"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6051584,
+		    46.5843744
+		]
+	    },
+	    id: 55,
+	    properties: {
+		name: "CafÃÂ© de la Garre"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6174707,
+		    46.541417
+		]
+	    },
+	    id: 56,
+	    properties: {
+		name: "Restaurant de l'AÃÂ©roport"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5620608,
+		    46.5183541
+		]
+	    },
+	    id: 57,
+	    properties: {
+		name: "BC CafÃÂ©tÃÂ©ria"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5883288,
+		    46.5320808
+		]
+	    },
+	    id: 58,
+	    properties: {
+		name: "L'Orangerie"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5884489,
+		    46.5316852
+		]
+	    },
+	    id: 59,
+	    properties: {
+		name: "Restaurant du LÃÂ©man"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6845458,
+		    46.5025853
+		]
+	    },
+	    id: 60,
+	    properties: {
+		name: "Aux Quatre Saisons"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6422132,
+		    46.5252346
+		]
+	    },
+	    id: 61,
+	    properties: {
+		name: "CafÃÂ©teria"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6836715,
+		    46.5031788
+		]
+	    },
+	    id: 62,
+	    properties: {
+		name: "Restaurant de la Tour"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6848646,
+		    46.5021939
+		]
+	    },
+	    id: 63,
+	    properties: {
+		name: "Le Richelieu"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6848685,
+		    46.5025557
+		]
+	    },
+	    id: 64,
+	    properties: {
+		name: "Restaurant du LÃÂ©man"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6864772,
+		    46.5020845
+		]
+	    },
+	    id: 65,
+	    properties: {
+		name: "CafÃÂ© de la Poste"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6851207,
+		    46.5019501
+		]
+	    },
+	    id: 66,
+	    properties: {
+		name: "La Barca"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6831642,
+		    46.5051388
+		]
+	    },
+	    id: 67,
+	    properties: {
+		name: "Le Zodiaque"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6271334,
+		    46.5071714
+		]
+	    },
+	    id: 68,
+	    properties: {
+		name: "Boccalino"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6374295,
+		    46.5196658
+		]
+	    },
+	    id: 69,
+	    properties: {
+		name: "Charlies Place"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6272755,
+		    46.5268037
+		]
+	    },
+	    id: 70,
+	    properties: {
+		name: "CafÃÂ© de Beaulieu"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6326487,
+		    46.5199123
+		]
+	    },
+	    id: 71,
+	    properties: {
+		name: "Starbucks"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6324949,
+		    46.5198881
+		]
+	    },
+	    id: 72,
+	    properties: {
+		name: "CafÃÂ© Romand"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.632013,
+		    46.5207083
+		]
+	    },
+	    id: 73,
+	    properties: {
+		name: "The Grail"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6264987,
+		    46.5221288
+		]
+	    },
+	    id: 74,
+	    properties: {
+		name: "ThaÃÂ¯ OrchidÃÂ©e"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6259904,
+		    46.5231452
+		]
+	    },
+	    id: 75,
+	    properties: {
+		name: "Movida"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6614069,
+		    46.53337
+		]
+	    },
+	    id: 76,
+	    properties: {
+		name: "Coteau-Fleuri"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6358918,
+		    46.5167526
+		]
+	    },
+	    id: 77,
+	    properties: {
+		name: "Oh! Liban"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6325659,
+		    46.5199678
+		]
+	    },
+	    id: 78,
+	    properties: {
+		name: "Le Dynasty"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6376677,
+		    46.5175607
+		]
+	    },
+	    id: 79,
+	    properties: {
+		name: "Le Lyrique"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6335973,
+		    46.5164356
+		]
+	    },
+	    id: 80,
+	    properties: {
+		name: "Pastaesfizi"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6338137,
+		    46.5180823
+		]
+	    },
+	    id: 81,
+	    properties: {
+		name: "Carrefour CafÃÂ©"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6120673,
+		    46.5173336
+		]
+	    },
+	    id: 82,
+	    properties: {
+		name: "Le Don Juan"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6475651,
+		    46.5435509
+		]
+	    },
+	    id: 83,
+	    properties: {
+		name: "I. Montolieu Pizzeria"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5828061,
+		    46.5369086
+		]
+	    },
+	    id: 84,
+	    properties: {
+		name: "trattoria du commerce"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6317433,
+		    46.523272
+		]
+	    },
+	    id: 85,
+	    properties: {
+		name: "Le Vaudois"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6038643,
+		    46.5871514
+		]
+	    },
+	    id: 86,
+	    properties: {
+		name: "Au P'tit Bistrot"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6305517,
+		    46.5174069
+		]
+	    },
+	    id: 87,
+	    properties: {
+		name: "Bella Vita"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6377084,
+		    46.5195836
+		]
+	    },
+	    id: 88,
+	    properties: {
+		name: "L'Etoile Blanche"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6384039,
+		    46.5194677
+		]
+	    },
+	    id: 89,
+	    properties: {
+		name: "Jagger's"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6291332,
+		    46.5312772
+		]
+	    },
+	    id: 90,
+	    properties: {
+		name: "les alliÃÂ©s"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6259368,
+		    46.5229422
+		]
+	    },
+	    id: 91,
+	    properties: {
+		name: "poco loco"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6302399,
+		    46.5225077
+		]
+	    },
+	    id: 92,
+	    properties: {
+		name: "Starbucks"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6307299,
+		    46.5233933
+		]
+	    },
+	    id: 93,
+	    properties: {
+		name: "Le Lavaux"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6191248,
+		    46.5228746
+		]
+	    },
+	    id: 94,
+	    properties: {
+		name: "Le Base Bar"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6296038,
+		    46.5232853
+		]
+	    },
+	    id: 95,
+	    properties: {
+		name: "La Pinte Besson"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6278242,
+		    46.5234405
+		]
+	    },
+	    id: 96,
+	    properties: {
+		name: "Mombassa Island"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6274562,
+		    46.523876
+		]
+	    },
+	    id: 97,
+	    properties: {
+		name: "Le Cygne"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6267642,
+		    46.5215913
+		]
+	    },
+	    id: 98,
+	    properties: {
+		name: "Le Pur"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6288542,
+		    46.521912
+		]
+	    },
+	    id: 99,
+	    properties: {
+		name: "Loft CafÃÂ©"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6257858,
+		    46.5247077
+		]
+	    },
+	    id: 100,
+	    properties: {
+		name: "la Nonna"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6277798,
+		    46.5236754
+		]
+	    },
+	    id: 101,
+	    properties: {
+		name: "Pizzeria La Torre"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.628513,
+		    46.5232854
+		]
+	    },
+	    id: 102,
+	    properties: {
+		name: "L'OrchidÃÂ©e"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6285481,
+		    46.523276
+		]
+	    },
+	    id: 103,
+	    properties: {
+		name: "Lotus Bleu Club"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6276244,
+		    46.5235403
+		]
+	    },
+	    id: 104,
+	    properties: {
+		name: "Chez Jaime"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6298388,
+		    46.5231056
+		]
+	    },
+	    id: 105,
+	    properties: {
+		name: "Le National"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6299021,
+		    46.5230605
+		]
+	    },
+	    id: 106,
+	    properties: {
+		name: "El Chiringuito"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6296788,
+		    46.5235364
+		]
+	    },
+	    id: 107,
+	    properties: {
+		name: "L'Esco-Bar"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5786004,
+		    46.5380599
+		]
+	    },
+	    id: 108,
+	    properties: {
+		name: "le terminus"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5639669,
+		    46.5340978
+		]
+	    },
+	    id: 109,
+	    properties: {
+		name: "New Bubble Bowling"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.7209884,
+		    46.5118525
+		]
+	    },
+	    id: 110,
+	    properties: {
+		name: "Au Ranch"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6143739,
+		    46.5160911
+		]
+	    },
+	    id: 111,
+	    properties: {
+		name: "Bangal"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6474207,
+		    46.5337196
+		]
+	    },
+	    id: 112,
+	    properties: {
+		name: "Stadium"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.647118,
+		    46.532286
+		]
+	    },
+	    id: 113,
+	    properties: {
+		name: "Brasserie de la Sallaz"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6232153,
+		    46.5263367
+		]
+	    },
+	    id: 114,
+	    properties: {
+		name: "Le Centenaire"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6385343,
+		    46.518143
+		]
+	    },
+	    id: 115,
+	    properties: {
+		name: "La Clef"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6360667,
+		    46.5217863
+		]
+	    },
+	    id: 116,
+	    properties: {
+		name: "Le CafÃÂ© de l'EvÃÂªchÃÂ©"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.609266,
+		    46.5119378
+		]
+	    },
+	    id: 117,
+	    properties: {
+		name: "Voile d'Or"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6474109,
+		    46.5328266
+		]
+	    },
+	    id: 118,
+	    properties: {
+		name: "La Rotonde"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6399998,
+		    46.5215152
+		]
+	    },
+	    id: 119,
+	    properties: {
+		name: "Le Nil Bleu"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6098001,
+		    46.5215135
+		]
+	    },
+	    id: 120,
+	    properties: {
+		name: "Harmonia"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6340684,
+		    46.5183958
+		]
+	    },
+	    id: 121,
+	    properties: {
+		name: "Le Standard CafÃÂ©"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6297609,
+		    46.5209539
+		]
+	    },
+	    id: 122,
+	    properties: {
+		name: "Le Nomade"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6311119,
+		    46.5209547
+		]
+	    },
+	    id: 123,
+	    properties: {
+		name: "D! Club"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6263109,
+		    46.5071717
+		]
+	    },
+	    id: 124,
+	    properties: {
+		name: "La Riviera"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6276147,
+		    46.506718
+		]
+	    },
+	    id: 125,
+	    properties: {
+		name: "ChÃÂ¢teau d'Ouchy"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.63773,
+		    46.5200931
+		]
+	    },
+	    id: 126,
+	    properties: {
+		name: "Bleu LÃÂ©zard"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6303989,
+		    46.5183678
+		]
+	    },
+	    id: 127,
+	    properties: {
+		name: "Le Petit-Chene"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6728024,
+		    46.5479891
+		]
+	    },
+	    id: 128,
+	    properties: {
+		name: "Sushi Zen"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6245733,
+		    46.5240506
+		]
+	    },
+	    id: 129,
+	    properties: {
+		name: "Maharaja"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6252021,
+		    46.5238853
+		]
+	    },
+	    id: 130,
+	    properties: {
+		name: "Le Canard PÃÂ©kinois"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6315365,
+		    46.523349
+		]
+	    },
+	    id: 131,
+	    properties: {
+		name: "Bruxelles CafÃÂ©"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6342042,
+		    46.5253057
+		]
+	    },
+	    id: 132,
+	    properties: {
+		name: "Lausanne-Moudon"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6336034,
+		    46.5248738
+		]
+	    },
+	    id: 133,
+	    properties: {
+		name: "La Couronne d'Or"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6318439,
+		    46.524324
+		]
+	    },
+	    id: 134,
+	    properties: {
+		name: "Abyssinia"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6288881,
+		    46.5235895
+		]
+	    },
+	    id: 135,
+	    properties: {
+		name: "Red Sea"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6313273,
+		    46.5244233
+		]
+	    },
+	    id: 136,
+	    properties: {
+		name: "DÃÂ©lices indiens"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.631927,
+		    46.5186325
+		]
+	    },
+	    id: 137,
+	    properties: {
+		name: "Taiyo"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6306834,
+		    46.5332235
+		]
+	    },
+	    id: 138,
+	    properties: {
+		name: "Pizzeria Bellevaux"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.63305,
+		    46.51719
+		]
+	    },
+	    id: 139,
+	    properties: {
+		name: "Les Gosses du QuÃÂ©bec"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.633682,
+		    46.5171556
+		]
+	    },
+	    id: 140,
+	    properties: {
+		name: "San Marino"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.57983,
+		    46.53774
+		]
+	    },
+	    id: 141,
+	    properties: {
+		name: "Maxy Orient"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.57987,
+		    46.53759
+		]
+	    },
+	    id: 142,
+	    properties: {
+		name: "Zig Zag CafÃÂ©"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5792859,
+		    46.53936
+		]
+	    },
+	    id: 143,
+	    properties: {
+		name: "Pizzeria des chemins de fer"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.63695,
+		    46.51844
+		]
+	    },
+	    id: 144,
+	    properties: {
+		name: "Arirang"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.63748,
+		    46.51818
+		]
+	    },
+	    id: 145,
+	    properties: {
+		name: "Jardin d'Asie"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6367363,
+		    46.5180785
+		]
+	    },
+	    id: 146,
+	    properties: {
+		name: "Le ThÃÂ©ÃÂ¢tre"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6385134,
+		    46.5205713
+		]
+	    },
+	    id: 147,
+	    properties: {
+		name: "Le Java"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6259591,
+		    46.5336351
+		]
+	    },
+	    id: 148,
+	    properties: {
+		name: "Lausanne-Sport"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6538397,
+		    46.5145301
+		]
+	    },
+	    id: 149,
+	    properties: {
+		name: "Le Grotto"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6324936,
+		    46.5221085
+		]
+	    },
+	    id: 150,
+	    properties: {
+		name: "CafÃÂ© de l'Hotel de Ville"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6333454,
+		    46.5210346
+		]
+	    },
+	    id: 151,
+	    properties: {
+		name: "Le Karma"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6358996,
+		    46.521448
+		]
+	    },
+	    id: 152,
+	    properties: {
+		name: "Bourg-Plage"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6349215,
+		    46.5216106
+		]
+	    },
+	    id: 153,
+	    properties: {
+		name: "CrÃÂªperie la Chandeleur"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6360669,
+		    46.5236736
+		]
+	    },
+	    id: 154,
+	    properties: {
+		name: "La Pomme de Pin"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.671251,
+		    46.547521
+		]
+	    },
+	    id: 155,
+	    properties: {
+		name: "CafÃÂ© restaurant des Tramways"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6208274,
+		    46.5209948
+		]
+	    },
+	    id: 156,
+	    properties: {
+		name: "Pink Beach"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6352417,
+		    46.5232598
+		]
+	    },
+	    id: 157,
+	    properties: {
+		name: "L'Ãâ°lÃÂ©phant Blanc"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.660958,
+		    46.5111587
+		]
+	    },
+	    id: 158,
+	    properties: {
+		name: "New China"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6234794,
+		    46.5265746
+		]
+	    },
+	    id: 159,
+	    properties: {
+		name: "Petit BÃâuf"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6355599,
+		    46.516759
+		]
+	    },
+	    id: 160,
+	    properties: {
+		name: "Restaurant Mirabeau"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6281148,
+		    46.5212632
+		]
+	    },
+	    id: 161,
+	    properties: {
+		name: "Epicurious"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5826303,
+		    46.5299762
+		]
+	    },
+	    id: 162,
+	    properties: {
+		name: "Restaurant de la Piscine"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5900896,
+		    46.5280866
+		]
+	    },
+	    id: 163,
+	    properties: {
+		name: "Centre Portugais"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6267154,
+		    46.540911
+		]
+	    },
+	    id: 164,
+	    properties: {
+		name: "Al Dente"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6278714,
+		    46.5071861
+		]
+	    },
+	    id: 165,
+	    properties: {
+		name: "Cafe de la vieil Ouchy"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6281182,
+		    46.5071933
+		]
+	    },
+	    id: 166,
+	    properties: {
+		name: "Creperie"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6268412,
+		    46.5070458
+		]
+	    },
+	    id: 167,
+	    properties: {
+		name: "Le Pirate"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6368592,
+		    46.5112215
+		]
+	    },
+	    id: 168,
+	    properties: {
+		name: "Le cafÃÂ© des Avenues"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6286248,
+		    46.5152658
+		]
+	    },
+	    id: 169,
+	    properties: {
+		name: "CafÃÂ© de Grancy"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6310227,
+		    46.5156128
+		]
+	    },
+	    id: 170,
+	    properties: {
+		name: "les Trois Rois"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6370259,
+		    46.5125915
+		]
+	    },
+	    id: 171,
+	    properties: {
+		name: "L'Oasis"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6213725,
+		    46.5260925
+		]
+	    },
+	    id: 172,
+	    properties: {
+		name: "Baz'Art"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6335811,
+		    46.5217909
+		]
+	    },
+	    id: 173,
+	    properties: {
+		name: "Le Grutli"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6531325,
+		    46.5146217
+		]
+	    },
+	    id: 174,
+	    properties: {
+		name: "Sri Krishna"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6617854,
+		    46.5094697
+		]
+	    },
+	    id: 175,
+	    properties: {
+		name: "Restaurant du PrieurÃÂ©"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6249302,
+		    46.5421928
+		]
+	    },
+	    id: 176,
+	    properties: {
+		name: "Restaurant Le Tournesol"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5947658,
+		    46.5354943
+		]
+	    },
+	    id: 177,
+	    properties: {
+		name: "Kashmir"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6301473,
+		    46.5157364
+		]
+	    },
+	    id: 178,
+	    properties: {
+		name: "CafÃÂ© du Simplon"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6286047,
+		    46.5161102
+		]
+	    },
+	    id: 179,
+	    properties: {
+		name: "Restaurant de l'Europe"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.627961,
+		    46.5159035
+		]
+	    },
+	    id: 180,
+	    properties: {
+		name: "CafÃÂ© L'Avenir"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6786544,
+		    46.5235948
+		]
+	    },
+	    id: 181,
+	    properties: {
+		name: "La Principessa"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6298789,
+		    46.5203132
+		]
+	    },
+	    id: 182,
+	    properties: {
+		name: "N2O"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6307171,
+		    46.5216295
+		]
+	    },
+	    id: 183,
+	    properties: {
+		name: "La Coccinelle"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6372396,
+		    46.5176298
+		]
+	    },
+	    id: 184,
+	    properties: {
+		name: "Au chat noir"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6336577,
+		    46.5219686
+		]
+	    },
+	    id: 185,
+	    properties: {
+		name: "Laxmi"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6051009,
+		    46.53414
+		]
+	    },
+	    id: 186,
+	    properties: {
+		name: "Delta du MÃÂ©kong"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6301538,
+		    46.5174475
+		]
+	    },
+	    id: 187,
+	    properties: {
+		name: "Boky"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6299556,
+		    46.5174807
+		]
+	    },
+	    id: 188,
+	    properties: {
+		name: "Continental"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6418872,
+		    46.5412548
+		]
+	    },
+	    id: 189,
+	    properties: {
+		name: "O Madeirense"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6379609,
+		    46.5223461
+		]
+	    },
+	    id: 190,
+	    properties: {
+		name: "espace autogÃÂ©rÃÂ©"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6376766,
+		    46.5251549
+		]
+	    },
+	    id: 191,
+	    properties: {
+		name: "CafÃÂ© des Amis"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6329685,
+		    46.5209843
+		]
+	    },
+	    id: 192,
+	    properties: {
+		name: "Le cinq"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6597667,
+		    46.5115988
+		]
+	    },
+	    id: 193,
+	    properties: {
+		name: "Migros"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6348675,
+		    46.5180673
+		]
+	    },
+	    id: 194,
+	    properties: {
+		name: "Bar Tabac"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6200385,
+		    46.5236435
+		]
+	    },
+	    id: 195,
+	    properties: {
+		name: "Sasha Lounge"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6404037,
+		    46.5186199
+		]
+	    },
+	    id: 196,
+	    properties: {
+		name: "Gigio's Best Restopizza"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6736345,
+		    46.5483152
+		]
+	    },
+	    id: 197,
+	    properties: {
+		name: "Fleur de Pain"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6304421,
+		    46.5157158
+		]
+	    },
+	    id: 198,
+	    properties: {
+		name: "Dhanyaa"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.567002,
+		    46.5204437
+		]
+	    },
+	    id: 199,
+	    properties: {
+		name: "L'Atlantide"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5680231,
+		    46.5182086
+		]
+	    },
+	    id: 200,
+	    properties: {
+		name: "Paul Klee"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5636699,
+		    46.5200508
+		]
+	    },
+	    id: 201,
+	    properties: {
+		name: "L'Ornithorynque"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5638979,
+		    46.5200213
+		]
+	    },
+	    id: 202,
+	    properties: {
+		name: "Cyber CafÃÂ© SV"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5688787,
+		    46.517884
+		]
+	    },
+	    id: 203,
+	    properties: {
+		name: "La Table de Vallotton"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5621224,
+		    46.5163226
+		]
+	    },
+	    id: 204,
+	    properties: {
+		name: "Puur Innovation"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5681301,
+		    46.5180194
+		]
+	    },
+	    id: 205,
+	    properties: {
+		name: "le Hodler"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6394531,
+		    46.5198658
+		]
+	    },
+	    id: 206,
+	    properties: {
+		name: "Chorus"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6341258,
+		    46.5536999
+		]
+	    },
+	    id: 207,
+	    properties: {
+		name: "Juli"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6609818,
+		    46.5102429
+		]
+	    },
+	    id: 208,
+	    properties: {
+		name: "La Stella"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.56336,
+		    46.5185684
+		]
+	    },
+	    id: 209,
+	    properties: {
+		name: "CafÃÂ©tÃÂ©ria INM"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5636255,
+		    46.5191968
+		]
+	    },
+	    id: 210,
+	    properties: {
+		name: "CafÃÂ©tÃÂ©ria MX"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5694217,
+		    46.520415
+		]
+	    },
+	    id: 211,
+	    properties: {
+		name: "L'Arcadie"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6250165,
+		    46.5216425
+		]
+	    },
+	    id: 212,
+	    properties: {
+		name: "Copacabana"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6049531,
+		    46.5446586
+		]
+	    },
+	    id: 213,
+	    properties: {
+		name: "Auberge de la Fleur de Lys"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6372605,
+		    46.5196363
+		]
+	    },
+	    id: 214,
+	    properties: {
+		name: "Happy Days"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6274004,
+		    46.5181389
+		]
+	    },
+	    id: 215,
+	    properties: {
+		name: "New Delhi"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6293048,
+		    46.5176553
+		]
+	    },
+	    id: 216,
+	    properties: {
+		name: "Va Piano"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6306486,
+		    46.5185947
+		]
+	    },
+	    id: 217,
+	    properties: {
+		name: "La Suite"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6318376,
+		    46.5192105
+		]
+	    },
+	    id: 218,
+	    properties: {
+		name: "Bavaria"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6377057,
+		    46.5199353
+		]
+	    },
+	    id: 219,
+	    properties: {
+		name: "Holy Cow"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6371424,
+		    46.5193539
+		]
+	    },
+	    id: 220,
+	    properties: {
+		name: "CafÃÂ© St. Pierre"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6461708,
+		    46.531467
+		]
+	    },
+	    id: 221,
+	    properties: {
+		name: "l'Amica"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6469407,
+		    46.5319879
+		]
+	    },
+	    id: 222,
+	    properties: {
+		name: "St-Christophe"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6302842,
+		    46.5216566
+		]
+	    },
+	    id: 223,
+	    properties: {
+		name: "Burger King"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.614853,
+		    46.528867
+		]
+	    },
+	    id: 224,
+	    properties: {
+		name: "L'Indochine"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6027191,
+		    46.5581745
+		]
+	    },
+	    id: 225,
+	    properties: {
+		name: "La Coccinelle"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6467797,
+		    46.5333581
+		]
+	    },
+	    id: 226,
+	    properties: {
+		name: "Tsasiski Lounge"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6362357,
+		    46.5215038
+		]
+	    },
+	    id: 227,
+	    properties: {
+		name: "L'AO"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6374803,
+		    46.5202341
+		]
+	    },
+	    id: 228,
+	    properties: {
+		name: "Bleu Lezard"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6373944,
+		    46.5201972
+		]
+	    },
+	    id: 229,
+	    properties: {
+		name: "Le CafÃÂ© Enning"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6199923,
+		    46.5362001
+		]
+	    },
+	    id: 230,
+	    properties: {
+		name: "Brasserie des Sauges"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6371126,
+		    46.5201234
+		]
+	    },
+	    id: 231,
+	    properties: {
+		name: "Da Carlo"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.636048,
+		    46.5251266
+		]
+	    },
+	    id: 232,
+	    properties: {
+		name: "Sweet Dreams Cupcake CafÃÂ©"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6296053,
+		    46.5240876
+		]
+	    },
+	    id: 233,
+	    properties: {
+		name: "Fu Tai"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6311846,
+		    46.5215882
+		]
+	    },
+	    id: 234,
+	    properties: {
+		name: "Aux Trois Tonneaux"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6343606,
+		    46.5207479
+		]
+	    },
+	    id: 235,
+	    properties: {
+		name: "CafÃÂ© des Artisans"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5982233,
+		    46.5328374
+		]
+	    },
+	    id: 236,
+	    properties: {
+		name: "Le Florissant"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6281576,
+		    46.5177866
+		]
+	    },
+	    id: 237,
+	    properties: {
+		name: "Ticino"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6336183,
+		    46.5223514
+		]
+	    },
+	    id: 238,
+	    properties: {
+		name: "The Great Escape"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6516532,
+		    46.5271484
+		]
+	    },
+	    id: 239,
+	    properties: {
+		name: "Brasserie de Chailly"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5982856,
+		    46.5322761
+		]
+	    },
+	    id: 240,
+	    properties: {
+		name: "Le Raisin"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6514913,
+		    46.5264051
+		]
+	    },
+	    id: 241,
+	    properties: {
+		name: "R. Mojonnier"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6420836,
+		    46.5193375
+		]
+	    },
+	    id: 242,
+	    properties: {
+		name: "Folie Voltaire"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.5657367,
+		    46.5223302
+		]
+	    },
+	    id: 243,
+	    properties: {
+		name: "Tekoe - Tea Lounge"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6453552,
+		    46.5253351
+		]
+	    },
+	    id: 244,
+	    properties: {
+		name: "Gourmandise"
+	    }
+	},
+	{
+	    type: "Feature",
+	    geometry: {
+		type: "Point",
+		coordinates: [
+		    6.6336608,
+		    46.5185804
+		]
+	    },
+	    id: 245,
+	    properties: {
+		name: "CafÃÂ© Mozart"
+	    }
+	}
+    ]
+}

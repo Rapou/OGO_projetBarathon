@@ -1,0 +1,81 @@
+{ "features" : 
+	[ 
+      { "geometry" : { "coordinates" : [ 2.3332999999999999, 48.866700000000002
+              ],
+            "type" : "Point"
+          },
+        "geometry_name" : "the_geom",
+        "id" : "cities_capital_pt.247",
+        "properties" : { "CAPIT_1_0" : 1,
+            "CNTRY_NAME" : "France",
+            "GEO_CODE" : 1664,
+            "GEO_REGION" : "Europe",
+            "GEO_SUBREG" : "Western Europe",
+            "IMS_ID" : 256,
+            "UN_CODE" : 250,
+            "WUP_AGGL" : "Paris",
+            "WUP_CAPIT" : "Paris",
+            "Y_2003" : 9794
+          },
+        "type" : "Feature"
+      },
+      { "geometry" : { "coordinates" : [ 7.4333, 46.950000000000003
+              ],
+            "type" : "Point"
+          },
+        "geometry_name" : "the_geom",
+        "id" : "cities_capital_pt.549",
+        "properties" : { "CAPIT_1_0" : 1,
+            "CNTRY_NAME" : "Switzerland",
+            "GEO_CODE" : 264,
+            "GEO_REGION" : "Europe",
+            "GEO_SUBREG" : "Western Europe",
+            "IMS_ID" : 565,
+            "UN_CODE" : 756,
+            "WUP_AGGL" : "Bern",
+            "WUP_CAPIT" : "Bern",
+            "Y_2003" : 320
+          },
+        "type" : "Feature"
+      },
+      { "geometry" : { "coordinates" : [ 12.5, 41.883299999999998
+              ],
+            "type" : "Point"
+          },
+        "geometry_name" : "the_geom",
+        "id" : "cities_capital_pt.366",
+        "properties" : { "CAPIT_1_0" : 1,
+            "CNTRY_NAME" : "Italy",
+            "GEO_CODE" : 1880,
+            "GEO_REGION" : "Europe",
+            "GEO_SUBREG" : "Western Europe",
+            "IMS_ID" : 377,
+            "UN_CODE" : 380,
+            "WUP_AGGL" : "Rome",
+            "WUP_CAPIT" : "Rome",
+            "Y_2003" : 2665
+          },
+        "type" : "Feature"
+      },
+      { "geometry" : { "coordinates" : [ -3.71, 40.409999999999997
+              ],
+            "type" : "Point"
+          },
+        "geometry_name" : "the_geom",
+        "id" : "cities_capital_pt.541",
+        "properties" : { "CAPIT_1_0" : 1,
+            "CNTRY_NAME" : "Spain",
+            "GEO_CODE" : 1280,
+            "GEO_REGION" : "Europe",
+            "GEO_SUBREG" : "Western Europe",
+            "IMS_ID" : 557,
+            "UN_CODE" : 724,
+            "WUP_AGGL" : "Madrid",
+            "WUP_CAPIT" : "Madrid",
+            "Y_2003" : 5103
+          },
+        "type" : "Feature"
+      } 
+  ],
+  "type" : "FeatureCollection"
+}
