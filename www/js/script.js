@@ -19,7 +19,6 @@ $(document).ready(function(){
         map.setCenter(new OpenLayers.LonLat(8, 47).transform("EPSG:4326", "EPSG:900913"), 6);
 	
 	$(window).resize(function(){
-	    console.log("ouat?");
 	    var nouvelleHauteur = $(window).height() - 40;
 	    $("#map").css("height", nouvelleHauteur + "px");
 	});
