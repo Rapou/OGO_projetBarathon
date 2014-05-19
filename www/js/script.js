@@ -239,7 +239,7 @@ app.controller('LoginCtrl', function() {
         
     });
     
-    $("#cancelLogin").click(function() {
+    $(".logo").click(function() {
         history.back();
     });
 });
@@ -293,10 +293,6 @@ app.controller('BarathonsCtrl', function($scope, $http){
     */
     
     
-    //map.addLayer($scope.bars);        
-            
-    
-    
     $(".logo").click(function(){
         history.back();
     });
@@ -307,7 +303,6 @@ app.controller('BarathonsCtrl', function($scope, $http){
  * Controleur affichage 1 Barathon
  */
 app.controller('BarathonCtrl', function($scope, $http){
-    
     
 
 
