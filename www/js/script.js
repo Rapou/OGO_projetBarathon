@@ -1,5 +1,9 @@
 var bootstrap = "bootstrap.php";
 var map;
+
+/*
+ * CHARGEMENT DES MODULES NECESSAIRES
+ */
 var app = angular.module('Barathon', ['ngRoute']);
 
 /*
@@ -32,11 +36,11 @@ app.config(function($routeProvider) {
 
 
 /**
-  * Controlleur de la page d'accueil
+  * Contrôleur de la page d'accueil
   */
 
 /**
-  * Controlleur de la page de carte
+  * Contrôleur de la page de carte
   */
 app.controller('CarteCtrl', function() {
     map = new OpenLayers.Map('map', {
@@ -81,7 +85,7 @@ app.controller('CarteCtrl', function() {
 }); // controlleur carte
 
 /**
- * Controlleur login
+ * Contrôleur login
  */
 app.controller('LoginCtrl', function() {
     
