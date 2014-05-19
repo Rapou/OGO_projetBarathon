@@ -238,27 +238,45 @@ app.controller('LoginCtrl', function() {
     });
 });
 
+/**
+ * Controleur Barathon
+ */
 app.controller('BarathonsCtrl', function($scope, $http){
     
-    
-    
-    $scope.mesBarathons = $http({
+    /*
+    //Récupère la liste des Barathons proposés
+    $scope.barathonsProposes = $http({
         method: 'GET',
         url: 'bootstrap.php?controller=Barathons',
-        params: "action=rend&userId="+loggedUserId
-     }).success(function(data){
+        params: "action=rendBarathonsProposes"
+        }).success(function(data){
         // With the data succesfully returned, call our callback
         //callbackFunc(data);
-        alert("Success ! : action=rend&userId="+loggedUserId);
+        alert("Success !");
+        alert("Data : "+data);
     }).error(function(){
         alert("error");
     });
     
+    //Récupère la liste des Barathons du user loggé (s'il y a un user loggé)
+    if (loggedUserId !== undefined){
+        alert("User logged : " + loggedUserId);
+        
+        $scope.mesBarathons = $http({
+            method: 'GET',
+            url: 'bootstrap.php?controller=Barathons',
+            params: "action=rendMesBarathons&userId="+loggedUserId
+         }).success(function(data){
+            // With the data succesfully returned, call our callback
+            //callbackFunc(data);
+            alert("Success ! : action=rend&userId="+loggedUserId);
+        }).error(function(){
+            alert("error");
+        });
+        
+    }
+    */
     
-    
-    
-            
-            
     
     //map.addLayer($scope.bars);        
             
