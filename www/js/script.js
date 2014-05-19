@@ -44,17 +44,17 @@ app.controller('HomeCtrl', function() {
     }
     );
 
-    var hauteur = $(document).height() - 40;
-    $("#map").css("height", hauteur + "px");
+   /* var hauteur = $(document).height() - 40;
+    $("#map").css("height", hauteur + "px");*/
     map.addLayer(goog);
     map.setCenter(new OpenLayers.LonLat(8, 47).transform("EPSG:4326", "EPSG:900913"), 6);
 
-
+/*
     $(window).resize(function() {
 	var nouvelleHauteur = $(window).height() - 40;
 	$("#map").css("height", nouvelleHauteur + "px");
     });
-
+*/
     
 /*
     vectorLyr = new OpenLayers.Layer.Vector("Vector layer from GeoJSON", {
