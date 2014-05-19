@@ -19,8 +19,8 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/carte.html', 
 	controller: 'CarteCtrl'
     })
-    .when('/contact', {
-	templateUrl: 'views/contact.html'
+    .when('/login', {
+	templateUrl: 'views/login.html'
     })
     .otherwise({
 	redirectTo: '/'
