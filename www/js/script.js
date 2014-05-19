@@ -242,6 +242,10 @@ app.controller('LoginCtrl', function() {
     $(".logo").click(function() {
         history.back();
     });
+    
+    $("#cancelLogin").click(function() {
+        history.back();
+    });
 });
 
 /**
