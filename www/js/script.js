@@ -2,6 +2,23 @@ var bootstrap = "bootstrap.php";
 var map;
 var loggedUserId;
 
+
+$(document).ready(function(){
+    map = new OpenLayers.Map('map', {
+	projection: new OpenLayers.Projection("EPSG:3857"),
+	maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508)
+    });
+    goog = new OpenLayers.Layer.Google("Google layer",
+    {
+	type: google.maps.MapTypeId.ROADMAP,
+	sphericalMercator: true,
+	maxZoomLevel:20
+    }
+    );
+
+    map.addLayer(goog);
+    map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14); 
+});
 /*
  * CHARGEMENT DES MODULES NECESSAIRES
  */
@@ -12,15 +29,14 @@ var app = angular.module('Barathon', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
-	templateUrl: 'views/home.html',
-        controller: 'CarteCtrl'
+	templateUrl: 'views/home.html'
     })
     .when('/listeBars', {
 	templateUrl: 'views/listeBars.html'
     })
     .when('/carte', {
-	templateUrl: 'views/carte.html'
-	//controller: 'CarteCtrl'
+	templateUrl: 'views/carte.html',
+	controller: 'CarteCtrl'
     })
     .when('/login', {
 	templateUrl: 'views/login.html',
@@ -90,20 +106,7 @@ app.controller('BarsListCtrl', function($scope) {
   */
 
 app.controller('CarteCtrl', function($scope) {
-    map = new OpenLayers.Map('map', {
-	projection: new OpenLayers.Projection("EPSG:3857"),
-	maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508)
-    });
-    goog = new OpenLayers.Layer.Google("Google layer",
-    {
-	type: google.maps.MapTypeId.ROADMAP,
-	sphericalMercator: true,
-	maxZoomLevel:20
-    }
-    );
-
-    map.addLayer(goog);
-    map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
+   
     
     ptSymbolizer = new OpenLayers.Symbolizer.Point({
 	externalGraphic: "img/logo_dot.png",
