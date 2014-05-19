@@ -37,7 +37,7 @@
     width:100%; 
     height:100%;
 }
-.map-wrapper {
+.map-hider {
     position:absolute;
     top:0px;
     left:0;
