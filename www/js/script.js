@@ -18,10 +18,11 @@ app.config(function($routeProvider) {
 	controller: 'CarteCtrl'
     })
     .when('/login', {
-	templateUrl: 'views/login.html'
+	templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
     })
-    .when('/nouvel-utilisateur', {
-	templateUrl: 'views/user-nouveau.html'
+    .when('/listeBarathons', {
+	templateUrl: 'views/listeBarathons.html'
     })
     .otherwise({
 	redirectTo: '/'
@@ -83,12 +84,15 @@ app.controller('CarteCtrl', function() {
  * Controlleur login
  */
 app.controller('LoginCtrl', function() {
+    
     $("#submitLogin").click(function(){
         
         var login = $("#inputLogin").val();
         var mdp = $("#inputPassword").val();
         
+        //bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
         
+        // Validate mdp : Controller_Users->validerUsers();
         
     });
 });
