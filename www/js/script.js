@@ -35,7 +35,7 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/listeBars.html'
     })
     .when('/carte', {
-	templateUrl: 'views/carte.html',
+	/*templateUrl: 'views/carte.html',*/
 	controller: 'CarteCtrl'
     })
     .when('/login', {
@@ -107,7 +107,6 @@ app.controller('BarsListCtrl', function($scope) {
 
 app.controller('CarteCtrl', function($scope) {
    
-    
     ptSymbolizer = new OpenLayers.Symbolizer.Point({
 	externalGraphic: "img/logo_dot.png",
 	graphicWidth: 40,
