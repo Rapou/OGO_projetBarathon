@@ -42,7 +42,7 @@ app.config(function($routeProvider) {
 /**
  * Contrôleur de la liste des bars
  */
-function BarsListCtrl($scope) {
+app.controller('BarsListCtrl', function($scope) {
     
     // Le scope récupère la liste des bars depuis un service
     $scope.bars = [
@@ -83,12 +83,12 @@ function BarsListCtrl($scope) {
         "longitude": -36.156543
     }
     ];
-}
+});
 
 /**
   * Contrôleur de la page de carte
   */
-app.controller('CarteCtrl', function() {
+app.controller('CarteCtrl', function($scope) {
     map = new OpenLayers.Map('map', {
 	projection: new OpenLayers.Projection("EPSG:3857"),
 	maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508)
