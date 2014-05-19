@@ -285,7 +285,7 @@ app.controller('BarathonsCtrl', function($scope, $http){
             
     
     
-    $(".backBtn").click(function(){
+    $(".logo").click(function(){
         history.back();
     });
 });

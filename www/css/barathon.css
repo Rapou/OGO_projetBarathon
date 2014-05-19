@@ -13,7 +13,6 @@
 .container {
     margin-top: 80px !important;
     position: relative;
-    position: relative;
 }
 
 #page{
@@ -22,7 +21,30 @@
     z-index:9999;
 }
 
-#logo{
+@media screen and (min-width: 0px){
+    #logo{
+        margin-left:10px;
+    }
+}
+
+@media screen and (min-width: 760px){
+    #logo{
+        margin-left:10%;
+    }
+}
+
+#logoHome{
+    width:150px;
+    height:150px;
+    background-image:URL('../img/logo_vFlat2.png');
+    background-repeat:no-repeat;
+    background-size:150px 150px;
+    background-position: left;
+    position: relative;
+    margin-top:40px;
+}
+
+.logo {
     width:60px;
     height:80px;
     background-image:URL('../img/logo_vFlat2.png');
@@ -32,7 +54,7 @@
     position: relative;
 }
 
-#logo:hover {
+.logo:hover {
     background-size:62px 62px;
 }
 .site-title {
@@ -86,6 +108,8 @@
 
 .headerText {
     color : white;
+    text-align: center;
+    vertical-align: central;
 }
 
 
