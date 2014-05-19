@@ -3,9 +3,8 @@ var map;
 var app = angular.module('Barathon', ['ngRoute']);
 
 /*
-     * REGLES DE ROUTAGE DES PAGES
-     */
-
+* REGLES DE ROUTAGE DES PAGES
+*/
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
@@ -123,4 +122,19 @@ app.controller('CarteCtrl', function() {
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
     map.addLayer(vectorLyr);
+}); // controlleur carte
+
+/**
+ * Controlleur login
+ */
+app.controller('LoginCtrl', function() {
+    $("#submitLogin").click(function(){
+        
+        var login = $("#inputLogin").val();
+        var mdp = $("#inputPassword").val();
+        
+        
+        
+    });
 });
+
