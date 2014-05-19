@@ -11,6 +11,8 @@
 }
 
 .container {
+    margin-top: 80px !important;
+    position: relative;
     position: relative;
 }
 
@@ -31,11 +33,6 @@
     margin-top: 80px;
 }
 .site-title {
-    position: relative;
-}
-.menu {
-    margin-top: 80px !important;
-    background-color: whitesmoke;
     position: relative;
 }
 
