@@ -14,8 +14,8 @@ app.config(function($routeProvider) {
     .when('/', {
 	templateUrl: 'views/home.html' 
     })
-    .when('/bars', {
-	templateUrl: 'views/bars.html'
+    .when('/listeBars', {
+	templateUrl: 'views/listeBars.html'
     })
     .when('/carte', {
 	templateUrl: 'views/carte.html', 
@@ -38,6 +38,52 @@ app.config(function($routeProvider) {
 /**
   * Contrôleur de la page d'accueil
   */
+ 
+/**
+ * Contrôleur de la liste des bars
+ */
+function BarsListCtrl($scope) {
+    
+    // Le scope récupère la liste des bars depuis un service
+    $scope.bars = [
+    {
+        "id": 0,
+        "nom": "Quility",
+        "latitude": -77.969742,
+        "longitude": -38.513007
+    },
+    {
+        "id": 1,
+        "nom": "Plexia",
+        "latitude": -16.959234,
+        "longitude": 134.023616
+    },
+    {
+        "id": 2,
+        "nom": "Halap",
+        "latitude": -25.651032,
+        "longitude": 10.235857
+    },
+    {
+        "id": 3,
+        "nom": "Musanpoly",
+        "latitude": -81.267279,
+        "longitude": 10.212763
+    },
+    {
+        "id": 4,
+        "nom": "Puria",
+        "latitude": 62.473652,
+        "longitude": -1.497673
+    },
+    {
+        "id": 5,
+        "nom": "Enersave",
+        "latitude": 21.109301,
+        "longitude": -36.156543
+    }
+    ];
+}
 
 /**
   * Contrôleur de la page de carte
