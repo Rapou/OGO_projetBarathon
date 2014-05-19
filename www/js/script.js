@@ -46,6 +46,10 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/barathons.html',
         controller: 'BarathonsCtrl'
     })
+    .when('/barathons/:id', {
+	templateUrl: 'views/barathon.html',
+        controller: 'BarathonCtrl'
+    })
     .otherwise({
 	redirectTo: '/'
     });
@@ -241,9 +245,18 @@ app.controller('LoginCtrl', function() {
 });
 
 /**
- * Controleur Barathon
+ * Controleur liste des Barathons
  */
 app.controller('BarathonsCtrl', function($scope, $http){
+    
+    $scope.barathons = [
+    {
+	"id": 0,
+	"nom": "SuperStar Barathon"
+    }, {
+	"id": 1,
+	"nom": "Mon Barathon"
+    }]
     
     /*
     //Récupère la liste des Barathons proposés
@@ -287,4 +300,16 @@ app.controller('BarathonsCtrl', function($scope, $http){
     $(".logo").click(function(){
         history.back();
     });
+});
+
+
+/**
+ * Controleur affichage 1 Barathon
+ */
+app.controller('BarathonCtrl', function($scope, $http){
+    
+    
+
+
+    
 });

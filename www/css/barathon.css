@@ -21,18 +21,6 @@
     z-index:9999;
 }
 
-@media screen and (min-width: 0px){
-    #logo{
-        margin-left:10px;
-    }
-}
-
-@media screen and (min-width: 760px){
-    #logo{
-        margin-left:10%;
-    }
-}
-
 #logoHome{
     width:150px;
     height:150px;
@@ -44,19 +32,7 @@
     margin-top:40px;
 }
 
-.logo {
-    width:60px;
-    height:80px;
-    background-image:URL('../img/logo_vFlat2.png');
-    background-repeat:no-repeat;
-    background-size:60px 60px;
-    background-position: left;
-    position: relative;
-}
 
-.logo:hover {
-    background-size:62px 62px;
-}
 .site-title {
     position: relative;
 }
@@ -78,14 +54,12 @@
     background-color: whitesmoke;
     opacity: 0.4;
 }
-
 .ng-scope {
     margin: 0px auto 0 auto;
     z-index: 99999;
 }
 
-
-/*   Div appHeader   */
+/*     ---  Header  --- */
 .appHeader {
     background-color: whitesmoke;//#2980b9;
     width: 100%;
@@ -93,34 +67,36 @@
     //float:left;
     position: relative;
 }
-
 .appHeader div {
     float:left;
 }
-
-.backBtn {
-    width: 50px;
-    height:50px;
-    margin : 3px;
-    background-image: url('../img/backArrow.png');
+.appHeader .logo {
+    width:60px;
+    height:80px;
+    background-image:URL('../img/logo_vFlat2.png');
+    background-repeat:no-repeat;
+    background-size:60px 60px;
+    background-position: left;
+    position: relative;
+    margin-left:10px;
 }
-
+.appHeader .logo:hover {
+    background-size:62px 62px;
+}
 .headerText {
     color : white;
     text-align: center;
     vertical-align: central;
+    color : #2980b9;
 }
 
-
-/*   Liste Barathons    */
+/*    ---  Liste Barathons   --- */
 #wrapperBarathons li {
     list-style-type: none;
 }
-
 #wrapperBarathons ul {
     padding-left:0px;
 }
-
 #wrapperBarathons {
     margin-top:0px;
     
