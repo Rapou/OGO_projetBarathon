@@ -19,9 +19,9 @@ $(document).ready(function(){
     map.addLayer(goog);
     map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14); 
 });
-/*
- * CHARGEMENT DES MODULES NECESSAIRES
- */
+/*******************************************************************************
+ *  CHARGEMENT DES MODULES NECESSAIRES
+ ******************************************************************************/
 var app = angular.module('Barathon', ['ngRoute']);
 /*
 * REGLES DE ROUTAGE DES PAGES
@@ -55,6 +55,35 @@ app.config(function($routeProvider) {
     });
 });
 
+/*******************************************************************************
+ *  SERVICES
+ ******************************************************************************/
+/*
+ * A TESTER - Factory pour récupérer un bar dans la base de données
+ */
+app.factory('Bar', function($http, $q){
+    var factory = {
+        bars : false,
+        getBars : function(){
+            return $http.get('bars.json'); // TODO Adresse à modifier pour utiliser le proxy
+        },
+        getBar : function(id){
+            var bar = {};
+            angular.forEach(factory.bars, function(value, key){
+                if(value.id == key){
+                    post = value;
+                }
+            });
+            return bar;
+        }
+        
+    };
+    return factory;
+})
+
+/*******************************************************************************
+ *  CONTROLEURS
+ ******************************************************************************/
 /**
   * Contrôleur de la page d'accueil
   */
