@@ -20,7 +20,7 @@ class Controller_Users{
     }
     
     public function rendUserParId(){
-        return $this->model->rendUser();
+        return $this->model->rendUserParId();
     }
     
     public function rendUserParLogin(){
@@ -37,14 +37,12 @@ class Controller_Users{
         
         $user = $this->rendUserParLogin();
         
-        var_dump($user);
-        
         $mdpBD = $user['mdp'];
         
         if( $mdpRecu == $mdpBD ) {
             echo "user OK";
         } else {
-            echo "login non OK";
+            echo "mdp non OK";
         }
         
         die();
