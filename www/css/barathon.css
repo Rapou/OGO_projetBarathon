@@ -1,0 +1,32 @@
+.starter-template{
+    margin-top:60px;
+}
+
+.navbar-default {
+    /*background-color: transparent;*/
+    
+}
+.navbar-nav {
+    font-size: 1.0em;
+}
+
+.logo {
+    background-image: url("../img/logo_desktop.png");
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+}
+
+#map{
+    position:absolute;
+    top:0px;
+    left:0;
+    width:100%; 
+    height:100%;
+}
+
+.ng-scope {
+    margin: 120px auto 0 auto;
+}
