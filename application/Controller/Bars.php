@@ -10,8 +10,8 @@ class Controller_Bars{
 	$this->model = new Model_Bars($dbh); 
     }
 
-    public function rends(){
-	$res = $this->model->rends();
+    public function rend(){
+	$res = $this->model->rend();
 	$tableau_partie = "";
 	foreach($res as $i => $partie){
 	    $tableau_partie = $partie;
@@ -19,12 +19,21 @@ class Controller_Bars{
 	return $tableau_partie;
     }
     
-    public function rendsPub(){
-	$res = $this->model->rendsPub();
+    public function rendPub(){
+	$res = $this->model->rendPub();
 	$tableau_partie = "";
 	foreach($res as $i => $partie){
 	    $tableau_partie = $partie;
 	}
 	return $tableau_partie;
     }
+    public function rendBarEtPub(){
+	$res = $this->model->rendBarEtPub();
+	$tableau_partie = "";
+	foreach($res as $i => $partie){
+	    $tableau_partie = $partie;
+	}
+	return $tableau_partie;
+    }
+    
 }
