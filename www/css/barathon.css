@@ -21,22 +21,26 @@
 }
 
 #logo{
-    width:100%;
-    height:100px;
+    width:60px;
+    height:80px;
     background-image:URL('../img/logo_vFlat2.png');
     background-repeat:no-repeat;
-    background-size:100px 100px;
-    background-position: center;
+    background-size:60px 60px;
+    background-position: left;
     position: relative;
-    margin-top: 80px;
+}
+
+#logo:hover {
+    background-size:62px 62px;
 }
 .site-title {
     position: relative;
 }
+
 .menu {
+    position: relative;
     margin-top: 80px !important;
     background-color: whitesmoke;
-    position: relative;
 }
 
 #map{
@@ -65,10 +69,11 @@
 
 /*   Div appHeader   */
 .appHeader {
-    background-color: #2980b9;
+    background-color: whitesmoke;//#2980b9;
     width: 100%;
-    height:10%;
-    float:left;
+    height:80px;
+    //float:left;
+    position: relative;
 }
 
 .appHeader div {
@@ -88,3 +93,15 @@
 
 
 /*   Liste Barathons    */
+#wrapperBarathons li {
+    list-style-type: none;
+}
+
+#wrapperBarathons ul {
+    padding-left:0px;
+}
+
+#wrapperBarathons {
+    margin-top:0px;
+    
+}
