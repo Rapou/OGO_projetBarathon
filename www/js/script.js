@@ -23,7 +23,7 @@ app.config(function($routeProvider) {
     })
     .when('/login', {
 	templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
+	controller: 'LoginCtrl'
     })
     .when('/barathons', {
 	templateUrl: 'views/barathons.html',
@@ -46,40 +46,40 @@ app.controller('BarsListCtrl', function($scope) {
     // Le scope récupère la liste des bars depuis un service
     $scope.bars = [
     {
-        "id": 0,
-        "nom": "Quility",
-        "latitude": -77.969742,
-        "longitude": -38.513007
+	"id": 0,
+	"nom": "Quility",
+	"latitude": -77.969742,
+	"longitude": -38.513007
     },
     {
-        "id": 1,
-        "nom": "Plexia",
-        "latitude": -16.959234,
-        "longitude": 134.023616
+	"id": 1,
+	"nom": "Plexia",
+	"latitude": -16.959234,
+	"longitude": 134.023616
     },
     {
-        "id": 2,
-        "nom": "Halap",
-        "latitude": -25.651032,
-        "longitude": 10.235857
+	"id": 2,
+	"nom": "Halap",
+	"latitude": -25.651032,
+	"longitude": 10.235857
     },
     {
-        "id": 3,
-        "nom": "Musanpoly",
-        "latitude": -81.267279,
-        "longitude": 10.212763
+	"id": 3,
+	"nom": "Musanpoly",
+	"latitude": -81.267279,
+	"longitude": 10.212763
     },
     {
-        "id": 4,
-        "nom": "Puria",
-        "latitude": 62.473652,
-        "longitude": -1.497673
+	"id": 4,
+	"nom": "Puria",
+	"latitude": 62.473652,
+	"longitude": -1.497673
     },
     {
-        "id": 5,
-        "nom": "Enersave",
-        "latitude": 21.109301,
-        "longitude": -36.156543
+	"id": 5,
+	"nom": "Enersave",
+	"latitude": 21.109301,
+	"longitude": -36.156543
     }
     ];
 });
@@ -111,18 +111,41 @@ app.controller('CarteCtrl', function($scope) {
 	graphicOpacity: 1
     });
 
-    $scope.bars = new OpenLayers.Layer.Vector("Vector layer from GeoJSON", {
+    $scope.bars  = new OpenLayers.Layer.Vector("Features", {
 	protocol: new OpenLayers.Protocol.HTTP({
 	    url: bootstrap + "?controller=Bars&action=rendBarEtPub",
-	    format: new OpenLayers.Format.GeoJSON({
-		ignoreExtraDims: true
-	    })
+	    format: new OpenLayers.Format.GeoJSON()
 	}),
-	styleMap: new OpenLayers.Style(ptSymbolizer),
-	strategies: [new OpenLayers.Strategy.Fixed()],
+	strategies: [
+	new OpenLayers.Strategy.Fixed()/*,
+	new OpenLayers.Strategy.AnimatedCluster({
+	    distance: 45,
+	    animationMethod: OpenLayers.Easing.Expo.easeOut,
+	    animationDuration: 10
+	})*/
+	],
+	styleMap:  new OpenLayers.StyleMap(ptSymbolizer),
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
     map.addLayer($scope.bars);
+
+    /* $scope.bars = new OpenLayers.Layer.Vector("Vector layer from GeoJSON", {
+	protocol: new OpenLayers.Protocol.HTTP({
+	    url: bootstrap + "?controller=Bars&action=rendBarEtPub",
+	    format: new OpenLayers.Format.GeoJSON()
+	}),
+	styleMap: new OpenLayers.Style(ptSymbolizer),
+	strategies: [
+	new OpenLayers.Strategy.Fixed(),
+	new OpenLayers.Strategy.AnimatedCluster({
+	    distance: 45,
+	    animationMethod: OpenLayers.Easing.Expo.easeOut,
+	    animationDuration: 10
+	})
+	],
+	projection: new OpenLayers.Projection("EPSG:4326")
+    });
+    map.addLayer($scope.bars);*/
     
     
     function onPopupClose(evt) {
@@ -203,9 +226,9 @@ app.controller('LoginCtrl', function() {
 	var login = $("#inputLogin").val();
 	var mdp = $("#inputPassword").val();
         
-        //bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
+    //bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
         
-        // Validate mdp : Controller_Users->validerUsers();
+    // Validate mdp : Controller_Users->validerUsers();
         
     });
 });
