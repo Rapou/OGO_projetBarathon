@@ -26,7 +26,8 @@ app.config(function($routeProvider) {
         controller: 'LoginCtrl'
     })
     .when('/listeBarathons', {
-	templateUrl: 'views/listeBarathons.html'
+	templateUrl: 'views/listeBarathons.html',
+        controller: 'ListeBarathonsCtrl'
     })
     .otherwise({
 	redirectTo: '/'
@@ -147,3 +148,10 @@ app.controller('LoginCtrl', function() {
     });
 });
 
+app.controller('ListeBarathonsCtrl', function(){
+    
+    $(".backBtn").click(function(){
+        //alert("Back");
+    });
+    
+});
