@@ -11,6 +11,8 @@
 }
 
 .container {
+    margin-top: 80px !important;
+    position: relative;
     position: relative;
 }
 
@@ -36,12 +38,15 @@
 .site-title {
     position: relative;
 }
+<<<<<<< HEAD
 
 .menu {
     position: relative;
     margin-top: 80px !important;
     background-color: whitesmoke;
 }
+=======
+>>>>>>> 9cdb31f1ef0593f0f0c45d4b8b9cc8cb1cf1b399
 
 #map{
     position:absolute;
