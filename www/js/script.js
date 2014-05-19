@@ -1,6 +1,10 @@
 var bootstrap = "bootstrap.php";
 var app = angular.module('MonApp', ['ngRoute']);
 var map;
+
+/*
+     * REGLES DE ROUTAGE DES PAGES
+     */
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
@@ -10,14 +14,23 @@ app.config(function($routeProvider) {
     .when('/bars', {
 	templateUrl: 'views/bars.html'
     })
+    .when('/contact', {
+	templateUrl: 'views/contact.html'
+    })
     .otherwise({
 	redirectTo: '/'
     });
 });
 
+
+/**
+     * Permet d'afficher la carte dans un layer OpenLayer
+     * @param {type} param1
+     * @param {type} param2
+     */
 app.controller('HomeCtrl', function() {
     map = new OpenLayers.Map('map', {
-	projection: new OpenLayers.Projection("EPSG:900913"),
+	projection: new OpenLayers.Projection("EPSG:3857"),
 	maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508)
     });
     goog = new OpenLayers.Layer.Google("Google layer",
@@ -32,21 +45,24 @@ app.controller('HomeCtrl', function() {
     map.addLayer(goog);
     map.setCenter(new OpenLayers.LonLat(8, 47).transform("EPSG:4326", "EPSG:900913"), 6);
 
+
     $(window).resize(function() {
 	var nouvelleHauteur = $(window).height() - 40;
 	$("#map").css("height", nouvelleHauteur + "px");
     });
-	
-	vectorLyr = new OpenLayers.Layer.Vector("Vector layer from GeoJSON", {
-	    protocol: new OpenLayers.Protocol.HTTP({
-		url: "bootstrap.php?controller=Bars&action=rends",
-		format: new OpenLayers.Format.GeoJSON({
-		    ignoreExtraDims: true
-		})
-	    }),
-	    strategies: [new OpenLayers.Strategy.Fixed()],
-	    projection: new OpenLayers.Projection("EPSG:4326")
-	});
-	console.log(vectorLyr);
-	map.addLayer(vectorLyr);
+
+    
+	/*
+    vectorLyr = new OpenLayers.Layer.Vector("Vector layer from GeoJSON", {
+	protocol: new OpenLayers.Protocol.HTTP({
+	    url: "bootstrap.php?controller=Bars&action=rends",
+	    format: new OpenLayers.Format.GeoJSON({
+		ignoreExtraDims: true
+	    })
+	}),
+	strategies: [new OpenLayers.Strategy.Fixed()],
+	projection: new OpenLayers.Projection("EPSG:4326")
+    });
+    console.log(vectorLyr);
+    map.addLayer(vectorLyr);*/
 });
