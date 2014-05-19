@@ -1,5 +1,5 @@
 <?php
-class Model_ListeBarathons{ 
+class Model_Barathons{ 
 	/**
 	 *
 	 * @var PDO
