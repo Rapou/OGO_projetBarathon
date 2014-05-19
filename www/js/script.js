@@ -11,14 +11,15 @@ var app = angular.module('Barathon', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
-	templateUrl: 'views/home.html' 
+	templateUrl: 'views/home.html',
+        controller: 'CarteCtrl'
     })
     .when('/listeBars', {
 	templateUrl: 'views/listeBars.html'
     })
     .when('/carte', {
-	templateUrl: 'views/carte.html', 
-	controller: 'CarteCtrl'
+	templateUrl: 'views/carte.html'
+	//controller: 'CarteCtrl'
     })
     .when('/login', {
 	templateUrl: 'views/login.html',
@@ -207,12 +208,16 @@ app.controller('LoginCtrl', function() {
         // Validate mdp : Controller_Users->validerUsers();
         
     });
+    
+    $("#cancelLogin").click(function() {
+        history.back();
+    })
 });
 
 app.controller('ListeBarathonsCtrl', function(){
     
     $(".backBtn").click(function(){
-        //alert("Back");
+        history.back();
     });
     
 });
