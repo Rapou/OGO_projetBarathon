@@ -4,8 +4,8 @@
 
 .navbar-default {
     /*background-color: transparent;*/
-    
 }
+
 .navbar-nav {
     font-size: 1.0em;
 }
@@ -18,7 +18,14 @@
     background-size: 40px;
     background-position: center;
 }
-
+#logo{
+    width:100%;
+    height:100px;
+    background-image:URL('../img/logo_vFlat2.png');
+    background-repeat:no-repeat;
+    background-size:100px 100px;
+    background-position: center;
+}
 #map{
     position:absolute;
     top:0px;
@@ -28,5 +35,5 @@
 }
 
 .ng-scope {
-    margin: 120px auto 0 auto;
+    margin: 0px auto 0 auto;
 }
