@@ -1,5 +1,6 @@
 var bootstrap = "bootstrap.php";
 var map;
+var loggedUserId;
 
 /*
  * CHARGEMENT DES MODULES NECESSAIRES
@@ -25,9 +26,9 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/login.html',
 	controller: 'LoginCtrl'
     })
-    .when('/listeBarathons', {
-	templateUrl: 'views/listeBarathons.html',
-	controller: 'ListeBarathonsCtrl'
+    .when('/barathons', {
+	templateUrl: 'views/barathons.html',
+        controller: 'BarathonsCtrl'
     })
     .otherwise({
 	redirectTo: '/'
@@ -237,7 +238,31 @@ app.controller('LoginCtrl', function() {
     });
 });
 
-app.controller('ListeBarathonsCtrl', function(){
+app.controller('BarathonsCtrl', function($scope, $http){
+    
+    
+    
+    $scope.mesBarathons = $http({
+        method: 'GET',
+        url: 'bootstrap.php?controller=Barathons',
+        params: "action=rend&userId="+loggedUserId
+     }).success(function(data){
+        // With the data succesfully returned, call our callback
+        //callbackFunc(data);
+        alert("Success ! : action=rend&userId="+loggedUserId);
+    }).error(function(){
+        alert("error");
+    });
+    
+    
+    
+    
+            
+            
+    
+    //map.addLayer($scope.bars);        
+            
+    
     
     $(".backBtn").click(function(){
         history.back();
