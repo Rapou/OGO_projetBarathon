@@ -18,4 +18,13 @@ class Controller_Bars{
 	}
 	return $tableau_partie;
     }
+    
+    public function rendsPub(){
+	$res = $this->model->rendsPub();
+	$tableau_partie = "";
+	foreach($res as $i => $partie){
+	    $tableau_partie = $partie;
+	}
+	return $tableau_partie;
+    }
 }

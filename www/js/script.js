@@ -29,7 +29,7 @@ app.config(function($routeProvider) {
 
 
 
- /**
+/**
   * Controlleur de la page d'accueil
   */
 app.controller('HomeCtrl', function() {
@@ -59,7 +59,7 @@ app.controller('HomeCtrl', function() {
 /*
     vectorLyr = new OpenLayers.Layer.Vector("Vector layer from GeoJSON", {
 	protocol: new OpenLayers.Protocol.HTTP({
-	    url: "bootstrap.php?controller=Bars&action=rends",
+	    url: bootstrap + "?controller=Bars&action=rends",
 	    format: new OpenLayers.Format.GeoJSON({
 		ignoreExtraDims: true
 	    })
@@ -86,29 +86,41 @@ app.controller('CarteCtrl', function() {
     }
     );
 
-    var hauteur = $(document).height() - 40;
+   /* 
+    var hauteur = $(document).height() - 75;
     $("#map").css("height", hauteur + "px");
+    */
     map.addLayer(goog);
-    map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 13);
+    map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
 
-
+/*
     $(window).resize(function() {
-	var nouvelleHauteur = $(window).height() - 40;
+	var nouvelleHauteur = $(window).height() - 75;
 	$("#map").css("height", nouvelleHauteur + "px");
+    });*/
+    
+    ptSymbolizer = new OpenLayers.Symbolizer.Point({
+	externalGraphic: "../img/biereLogo.png",
+	graphicWidth: 25,
+	graphicHeight: 25,
+	graphicOpacity: 1,
+	label: "${name}",
+	labelYOffset: -30,
+	fontColor: "black",
+	fontSize: "20px"
     });
 
     
-/*
     vectorLyr = new OpenLayers.Layer.Vector("Vector layer from GeoJSON", {
 	protocol: new OpenLayers.Protocol.HTTP({
-	    url: "bootstrap.php?controller=Bars&action=rends",
+	    url: bootstrap + "?controller=Bars&action=rendsPub",
 	    format: new OpenLayers.Format.GeoJSON({
 		ignoreExtraDims: true
 	    })
 	}),
+	styleMap: new OpenLayers.Style(ptSymbolizer),
 	strategies: [new OpenLayers.Strategy.Fixed()],
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
-    console.log(vectorLyr);
-    map.addLayer(vectorLyr);*/
+    map.addLayer(vectorLyr);
 });
