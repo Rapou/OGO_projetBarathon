@@ -24,6 +24,15 @@ class Controller_Barathons{
     }
     
     /**
+     * Rend le Barathon avec l'id désiré
+     * @return type
+     */
+    public function rendBarathonParId(){
+	return $res = $this->model->rendBarathonParId();
+    }
+    
+    
+    /**
      * Rend une liste des Barathons de l'utilisateur loggé
      * @return type
      */

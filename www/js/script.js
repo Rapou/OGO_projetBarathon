@@ -23,9 +23,9 @@ $(document).ready(function(){
  *  CHARGEMENT DES MODULES NECESSAIRES
  ******************************************************************************/
 var app = angular.module('Barathon', ['ngRoute']);
-/*
+/*******************************************************************************
 * REGLES DE ROUTAGE DES PAGES
-*/
+ ******************************************************************************/
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
@@ -335,9 +335,21 @@ app.controller('BarathonsCtrl', function($scope, $http){
 /**
  * Controleur affichage 1 Barathon
  */
-app.controller('BarathonCtrl', function($scope, $http){
+app.controller('BarathonCtrl', function($scope, $http, $routeParams){
     
-
-
+    // Récupération de l'id dans l'URL !
+    console.log("routeParams : "+ $routeParams['id']);
     
+    idBarathon = $routeParams['id'];
+    
+    // Appel ajax pour récupérer le barathon
+    //$scope.barathon = rendBarathonParId();
+    
+    $scope.barathon = {
+	"id": 1,
+	"nom": "SuperStar Barathon"
+    };
+    
+    // L'affichage barathon.html recherche l'info ici pour affichage d'un unique Barathon
+
 });
