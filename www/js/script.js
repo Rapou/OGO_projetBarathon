@@ -523,13 +523,11 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
 
 /**
  * Controleur affichage 1 Barathon
- */     
+ */
 app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     
     $scope.idBarathon = $routeParams['id'];
-    
-    
-    
+
     $scope.barathon = Barathon.get($scope.idBarathon).then(function(barathon){
         $scope.barathon = barathon;
         console.log(barathon);
@@ -537,8 +535,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
         alert(msg);
     });
     
-    /*
-    $scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
+    /*$scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
         $scope.listeBars = listeBars;
         console.log(listeBars);
         }, function(msg){
@@ -549,14 +546,14 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     // Appel Ajax :
     //$scope.listeBars = listeBars.rendListeBarsPourBarathon;
     
-    $scope.listeBars = [
+    /*$scope.listeBars = [
         {
             "nom" : "Great Escape"
         },
         {
             "nom" : "Lapin vert"
         },
-    ];
+    ];*/
     
     $(".logo").click(function() {
         history.back();
