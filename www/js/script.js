@@ -3,6 +3,10 @@ var map;
 var loggedUserId;
 var geoBar;
 
+/**
+ * Représentation d'un Bar
+ * @type OpenLayers.Symbolizer.Point
+ */
 var ptsBar = new OpenLayers.Symbolizer.Point({
 	externalGraphic: "${myImage}",
 	graphicWidth: "${myWidth}",
@@ -18,6 +22,10 @@ var ptsBar = new OpenLayers.Symbolizer.Point({
 	labelSelect:true
     });
     
+/**
+ * Fonction qui définit les paramètres selon le contexte
+ * @type type
+ */
 var ctxBar = { 
 	nombre: function(feature) {
 	    if(feature.attributes.count>=2){
@@ -42,6 +50,10 @@ var ctxBar = {
 	}
     };
     
+/**
+ * Représentation d'un Bar:hover
+ * @type OpenLayers.Symbolizer.Point
+ */
 var ptsBarOver = new OpenLayers.Symbolizer.Point({
 	externalGraphic: "${myImage}",
 	graphicWidth: "${myWidth}",
@@ -58,6 +70,10 @@ var ptsBarOver = new OpenLayers.Symbolizer.Point({
 	labelPosition:30
     });
     
+/**
+ * Fonction qui définit les paramètres selon le contexte en mode :hover
+ * @type type
+ */
 var ctxBarOver = { 
 	nombre: function(feature) {
 	    if(feature.attributes.count>=2){
@@ -83,8 +99,13 @@ var ctxBarOver = {
 	}
     };
 
-
+/**
+ *                       ---- DOC READY
+ * @param {type} param
+*/
 $(document).ready(function(){
+    
+    // crée la map OpenLayers tirée de Google
     map = new OpenLayers.Map('map', {
 	projection: new OpenLayers.Projection("EPSG:3857"),
 	maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508)
@@ -99,14 +120,15 @@ $(document).ready(function(){
 
     map.addLayer(goog);
     map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14); 
-});
+}); // DOC READY
+
 /*******************************************************************************
- *  CHARGEMENT DES MODULES NECESSAIRES
+ *  CHARGEMENT DES MODULES ANGULAR NECESSAIRES
  ******************************************************************************/
 var app = angular.module('Barathon', ['ngRoute']);
 
 /*******************************************************************************
- * REGLES DE ROUTAGE DES PAGES
+ * REGLES DE ROUTAGE DES PAGES   - Angular
  ******************************************************************************/
 app.config(function($routeProvider) {
     $routeProvider
@@ -139,10 +161,10 @@ app.config(function($routeProvider) {
 });
 
 /*******************************************************************************
- *  SERVICES
+ *  SERVICES ANGULAR
  ******************************************************************************/
 /*
- * A TESTER - Factory pour gérer un bar dans la base de données
+ * Factory qui gère les requêtes Ajax pour la classe Bars
  */
 app.factory('Bar', function($http, $q){
     var factory = {
@@ -181,7 +203,9 @@ app.factory('Bar', function($http, $q){
         
     };
     return factory;
-});
+}); // factory Bar
+
+
 
 /*******************************************************************************
  *  CONTROLEURS
