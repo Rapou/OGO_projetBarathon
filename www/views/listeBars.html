@@ -3,8 +3,8 @@
 <div class="container">
     <div class="well bs-component">
         <h1>We're in the bars, y'all!</h1>
-        <div ng-controller="barsCtrl">
-            <div ng-repeat="bar in bars.features">
+        <div ng-controller="testNicoCtrl">
+            <div ng-repeat="bar in bars.features | orderBy: '+properties.name'">
                 <strong>{{bar.properties.name}}</strong>
             </div>
         </div>

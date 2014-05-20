@@ -74,7 +74,7 @@ app.config(function($routeProvider) {
     })
     .when('/listeBars', {
 	templateUrl: 'views/listeBars.html',
-        controller: 'barsCtrl'
+        controller: 'testNicoCtrl'
     })
     .when('/carte', {
 	templateUrl: 'views/carte.html',
@@ -152,7 +152,7 @@ app.factory('Bar', function($http, $q){
 /**
  * Controleur affichage des bars dans les environs
  */     
-app.controller('barsCtrl', function($scope, Bar){
+app.controller('testNicoCtrl', function($scope, Bar){
     $scope.bars = Bar.find().then(function(bars){
         $scope.bars = bars;
         console.log(bars);
@@ -160,7 +160,7 @@ app.controller('barsCtrl', function($scope, Bar){
         alert(msg);
     });
     
-    /*geoBars  = new OpenLayers.Layer.Vector("Features", {
+    geoBars  = new OpenLayers.Layer.Vector("Features", {
 	strategies: [
 	    new OpenLayers.Strategy.Fixed(),
 	    new OpenLayers.Strategy.AnimatedCluster({
@@ -174,15 +174,17 @@ app.controller('barsCtrl', function($scope, Bar){
     });
     
     map.addLayer(geoBars);
+    features = new OpenLayers.Feature.Vector();
+    var feature;
     $.each($scope.bars.features, function(i, elem){
-	feature = new OpenLayers.Feature.Vector();
+	feature = new OpenLayers.Feature();
 	feature.geometry = new OpenLayers.Geometry.Point(elem.geometry.coordinates);
 	feature.attributes = {
 	    name: elem.properties.name,
 	    id: elem.properties.id
 	};
 	geoBars.addFeatures([feature]);
-    });*/
+    });
 });
 
 
@@ -415,17 +417,5 @@ app.controller('BarathonCtrl', function($scope, $http, $routeParams){
 
     $(".logo").click(function() {
         history.back();
-    });
-});
-
-/**
- * Controleur affichage des bars dans les environs
- */     
-app.controller('listeBarsCtrl', function($scope, Bar){
-    $scope.bars = Bar.find().then(function(bars){
-        $scope.bars = bars;
-        console.log(bars);
-    }, function(msg){
-        alert(msg);
     });
 });
