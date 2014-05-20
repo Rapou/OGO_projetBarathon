@@ -11,17 +11,14 @@ class Controller_ListeBars{
     }
 
     public function rend(){
-	$res = $this->model->rend();
-	$tableau_listeBars = "";
-	foreach($res as $i => $bar){
-	    $tableau_listeBars = $bar;
-	}
-	return $tableau_listeBars;
+	return $this->model->rend();
     }
     
     public function rendListeBarsPourBarathon(){
-        
         return $this->model->rendListeBarsPourBarathon();
     }
     
+    public function addBarToBarathon(){
+        return $this->model->addBarToBarathon();
+    }
 }

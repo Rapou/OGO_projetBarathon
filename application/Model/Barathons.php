@@ -50,8 +50,11 @@ class Model_Barathons{
             $userCreateurId;
             
             $listeBars;
+            // créer liste de bars dans table associative : 
+            // foreach bar in listeBars, addBarToBarathon
             
-            // Ajax create new bar
+            
+            // Ajax create new barathon
             
         }
 	
