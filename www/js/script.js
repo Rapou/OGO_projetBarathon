@@ -261,6 +261,21 @@ app.factory('Barathon', function($http, $q){
             });
             return barathon;
         },
+        rendBarathonsProposes : function(){
+            var deferred = $q.defer();
+            
+            $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
+                .success(function(data, status){
+                    factory.barathons = data;
+                    deferred.resolve(factory.barathons);
+                        })
+                .error(function(){
+                    deferred.reject("msg");
+                });
+            
+            
+            return deferred.promise;
+        },
         
         rendBarathonParId : function(idBarathon){
             var deferred = $q.defer();
@@ -451,6 +466,22 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
     }, function(msg){
         alert(msg);
     });
+    
+    // Set la liste des barathons dans le scope
+    $scope.barathonsProposes = Barathon.rendBarathonsProposes().then(function(barathonsProposes){
+        $scope.barathonsProposes = barathonsProposes;
+        console.log("Liste des barathons proposés --------"+barathonsProposes);
+    }, function(msg){
+        alert(msg);
+    });
+    
+    $scope.mesBarathons = Barathon.find().then(function(mesBarathons){
+        $scope.mesBarathons = mesBarathons;
+        console.log(mesBarathons);
+    }, function(msg){
+        alert(msg);
+    });
+    
     
     $(".logo").click(function(){
         history.back();
