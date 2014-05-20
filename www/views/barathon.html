@@ -1,19 +1,18 @@
 <div class="map-hider"></div>
 <div class="appHeader">
     <div class="col-lg-12">
-	<div class="logo">&nbsp;</div>
-	<div class="headerText">Affichage d'un Barathon</div>
+        <div class="logo">&nbsp;</div>
+        <div class="headerText" ng-controller="BarathonCtrl"><h3>{{barathon.nom}}</h3></div>
     </div>
 </div>
 <div class="containerBarathons">
     <div class="well bs-component">
-        <h3>Mon Super Barathon</h3>
         
         <div ng-controller="BarathonCtrl">
-
-            <p>barathonid : {{idBarathon}}</p>
-
-            <p>Notre Barathon. Nom : {{barathon.nom}}</p>
+            <ul>
+                <li>Temps estimé : {{barathon.tempsestime}}</li>
+                <li>Difficulté : {{barathon.difficulte}}</li>
+            </ul>
             
             <h3>Liste des bars :</h3>
             
