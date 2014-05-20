@@ -421,15 +421,7 @@ app.controller('LoginCtrl', function() {
  */
 app.controller('BarathonsCtrl', function($scope, Barathon){
     
-    $scope.barathons = [
-	{
-	    "id": 0,
-	    "nom": "SuperStar Barathon"
-	}, {
-	    "id": 1,
-	    "nom": "Mon Barathon"
-	}];
-    
+    // Set la liste des barathons dans le scope
     $scope.barathons = Barathon.find().then(function(barathons){
         $scope.barathons = barathons;
         console.log(barathons);
@@ -437,6 +429,9 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
         alert(msg);
     });
     
+    $(".logo").click(function(){
+        history.back();
+    });
     
     /*
     //Récupère la liste des Barathons proposés
@@ -472,10 +467,6 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
     }
      */
     
-    
-    $(".logo").click(function(){
-        history.back();
-    });
 });
 
 /**
