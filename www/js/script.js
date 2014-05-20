@@ -161,10 +161,15 @@ app.config(function($routeProvider) {
 });
 
 /*******************************************************************************
- *  SERVICES ANGULAR
+ *                          SERVICES ANGULAR
+ *
+ *  FACTORIES
+ *  Gère les requêtes Ajax. A la fonction de Modèle du MVC.
  ******************************************************************************/
+
+
 /*
- * Factory qui gère les requêtes Ajax pour la classe Bars
+ * Factory pour les Bars
  */
 app.factory('Bar', function($http, $q){
     var factory = {
@@ -173,10 +178,58 @@ app.factory('Bar', function($http, $q){
         find : function(params){
             //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); // TODO Adresse à modifier pour utiliser le proxy
             var deferred = $q.defer();
+            
+            // requête Ajax
             $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
                 .success(function(data, status){
                     factory.bars = data;
                     deferred.resolve(factory.bars);
+                        })
+                .error(function(){
+                    deferred.reject("msg");
+                });
+                return deferred.promise;
+        },
+        
+        // Permet de rendre un bar si on a son ID
+        get : function(id){
+            var bar = {};
+            angular.forEach(factory.bars, function(value, key){
+                if(value.id == key){
+                    bar = value;
+                }
+            });
+            return bar;
+        },
+        
+        // Permet d'ajouter un bar
+        addBar : function(bar){
+            var deferred = $q.defer();
+            /* TODO ...*/
+            deferred.resolve();
+            return deferred.promise;
+        }
+        
+    };
+    return factory;
+}); // factory Bar
+
+
+/*
+ * Factory pour les Barathons
+ */
+app.factory('Barathon', function($http, $q){
+    var factory = {
+        barathons : false,
+        
+        // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+        find : function(params){
+            //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); // TODO Adresse à modifier pour utiliser le proxy
+            var deferred = $q.defer();
+            $http.get(bootstrap + "?controller=Barathons&action=rend")
+                .success(function(data, status){
+                    factory.barathons = data;
+                    deferred.resolve(factory.barathons);
                         })
                 .error(function(){
                     deferred.reject("msg");
@@ -204,6 +257,8 @@ app.factory('Bar', function($http, $q){
     };
     return factory;
 }); // factory Bar
+
+
 
 
 
@@ -363,7 +418,7 @@ app.controller('LoginCtrl', function() {
 /**
  * Controleur liste des Barathons
  */
-app.controller('BarathonsCtrl', function($scope, $http){
+app.controller('BarathonsCtrl', function($scope, Barathon){
     
     $scope.barathons = [
 	{
@@ -372,7 +427,15 @@ app.controller('BarathonsCtrl', function($scope, $http){
 	}, {
 	    "id": 1,
 	    "nom": "Mon Barathon"
-	}]
+	}];
+    
+    $scope.barathons = Barathon.find().then(function(barathons){
+        $scope.barathons = barathons;
+        console.log(barathons);
+    }, function(msg){
+        alert(msg);
+    });
+    
     
     /*
     //Récupère la liste des Barathons proposés
@@ -442,11 +505,6 @@ app.controller('BarathonCtrl', function($scope, $http, $routeParams){
         },
     ];
     
-    
-    // L'affichage barathon.html recherche l'info ici pour affichage d'un unique Barathon
-
-
-
     $(".logo").click(function() {
         history.back();
     });
