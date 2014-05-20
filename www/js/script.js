@@ -104,7 +104,6 @@ var ctxBarOver = {
  * @param {type} param
 */
 $(document).ready(function(){
-    
     // crée la map OpenLayers tirée de Google
     map = new OpenLayers.Map('map', {
 	projection: new OpenLayers.Projection("EPSG:3857"),
@@ -117,6 +116,7 @@ $(document).ready(function(){
 	maxZoomLevel:20
     }
 );
+    map.addControl(new OpenLayers.Control.LayerSwitcher());
 
     map.addLayer(goog);
     map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14); 
@@ -385,50 +385,20 @@ app.controller('CarteCtrl', function($scope) {
                         "default": new OpenLayers.Style(ptsBar, {context: ctxBar}),
                         "select": new OpenLayers.Style(ptsBarOver, {context: ctxBarOver})
                     }),
-	// styleMap: new OpenLayers.Style(ptsBar, {context: ctxBar}),
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
     map.addLayer($scope.bars);
 
-    selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {hover:true});
+    selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {
+	clickout: false, toggle: true,
+		multiple: true, hover: false,
+		toggleKey: "ctrlKey", // ctrl key removes from selection
+		multipleKey: "shiftKey", // shift key adds to selection
+    });
     map.addControl(selectControl);
     selectControl.activate();
-   /*
-    drawControls = {
-                point: new OpenLayers.Control.DrawFeature(
-                    vectors, OpenLayers.Handler.Point
-                ),
-                line: new OpenLayers.Control.DrawFeature(
-                    vectors, OpenLayers.Handler.Path
-                ),
-                polygon: new OpenLayers.Control.DrawFeature(
-                    vectors, OpenLayers.Handler.Polygon
-                ),
-                select: new OpenLayers.Control.SelectFeature(
-                    vectors,
-                    {
-                        clickout: false, toggle: false,
-                        multiple: false, hover: false,
-                        toggleKey: "ctrlKey", // ctrl key removes from selection
-                        multipleKey: "shiftKey", // shift key adds to selection
-                        box: true
-                    }
-                ),
-                selecthover: new OpenLayers.Control.SelectFeature(
-                    vectors,
-                    {
-                        multiple: false, hover: true,
-                        toggleKey: "ctrlKey", // ctrl key removes from selection
-                        multipleKey: "shiftKey" // shift key adds to selection
-                    }
-                )
-            };
-            
-            for(var key in drawControls) {
-                map.addControl(drawControls[key]);
-            }*/
     
-    
+ 
 }); // controleur carte
 
 /**
