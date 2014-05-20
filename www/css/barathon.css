@@ -11,7 +11,7 @@
 }
 
 .container {
-    margin-top: 80px !important;
+    //margin-top: 80px !important;
     position: relative;
 }
 
@@ -88,6 +88,17 @@
     color : #2980b9;
 }
 
+/*    --- Création Barathon  --- */
+#barathonCreation {
+    width:100%;
+    heigth:auto;
+    background-color:whitesmoke;
+    color: #2980b9;
+    position:absolute;
+    bottom:0px;
+}
+
+
 /*    ---  Liste Barathons   --- */
 #wrapperBarathons li {
     list-style-type: none;
@@ -97,8 +108,15 @@
 }
 #wrapperBarathons {
     margin-top:0px;
+}
+
+.containerBarathons {
+    padding:0px;
+    margin-top: 160px;
     
 }
+
+
 
 /*
  * GESTION DES TRANSITIONS FADE-IN FADE-OUT

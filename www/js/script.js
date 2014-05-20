@@ -127,7 +127,18 @@ app.controller('barsCtrl', function($scope, Bar){
  */
 
 app.controller('CarteCtrl', function($scope) {
+    
+    $("#barathonCreation").hide();
+    
+    $("#newBarathonBtn").click(function(){
+        $("#barathonCreation").fadeToggle("slow", "linear");
+    });
    
+   $(".logo").click(function(){
+        history.back();
+    });
+    
+    
     ptsBar = new OpenLayers.Symbolizer.Point({
 	externalGraphic: "${myImage}",
 	graphicWidth: "${myWidth}",
@@ -269,7 +280,7 @@ app.controller('CarteCtrl', function($scope) {
     bars_overs.events.register("featureselected", bars_overs, onFeatureSelect);
     bars_overs.events.register("featureunselected", bars_overs, onFeatureUnselect);
      */ 
-}); // controlleur carte
+}); // controleur carte
 
 /**
  * Contrôleur login
