@@ -360,11 +360,8 @@ app.controller('testNicoCtrl', function($scope, Bar){
 /**
  * Contrôleur de la page de carte
  */
-
 app.controller('CarteCtrl', function($scope) {
 
-    
-   
    // logo back
    $(".logo").click(function(){
         history.back();
@@ -541,9 +538,6 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
     
-   
-   
-    
     $scope.listeBarsAValider = [
         {
             "nom" : "Great Escape"
@@ -552,8 +546,6 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
             "nom" : "Lapin vert"
         },
     ];
-    
-    
     
     
     $(".logo").click(function() {
