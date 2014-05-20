@@ -383,16 +383,13 @@ app.controller('BarathonsCtrl', function($scope, $http){
  */     
 app.controller('BarathonCtrl', function($scope, $http, $routeParams){
     
-    // Récupération de l'id dans l'URL !
-    console.log("routeParams : "+ $routeParams['id']);
-    
     idBarathon = $routeParams['id'];
     
     // Appel ajax pour récupérer le barathon
     //$scope.barathon = rendBarathonParId();
     
     $scope.barathon = {
-	"id": 1,
+	"id": idBarathon,
 	"nom": "SuperStar Barathon"
     };
     
