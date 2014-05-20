@@ -1,6 +1,46 @@
 var bootstrap = "bootstrap.php";
 var map;
 var loggedUserId;
+var geoBar;
+
+var ptsBar = new OpenLayers.Symbolizer.Point({
+	externalGraphic: "${myImage}",
+	graphicWidth: "${myWidth}",
+	graphicHeight: 50,
+	graphicOpacity: 1,
+	label:"${nombre}",
+	fontColor: "#2980B9",
+	fontSize: "14pt",
+	fontWeight: "bold",
+	labelOutlineColor: "#FFFFFF",
+	labelOutlineWidth: 4,
+	labelOutlineOpacity: 0.6,
+	labelSelect:true
+    });
+    
+var ctxBar = { 
+	nombre: function(feature) {
+	    if(feature.attributes.count>=2){
+		return feature.attributes.count;
+	    }else{
+		return "";
+	    }
+	},
+	myImage: function(feature) {
+	    if(feature.attributes.count>=2){
+		return "img/logo_multi2.png";
+	    }else{
+		return "img/logo_dot.png";
+	    }
+	},
+	myWidth: function(feature) {
+	    if(feature.attributes.count>=2){
+		return 50;
+	    }else{
+		return 40;
+	    }
+	}
+    };
 
 
 $(document).ready(function(){
@@ -119,6 +159,30 @@ app.controller('barsCtrl', function($scope, Bar){
     }, function(msg){
         alert(msg);
     });
+    
+    /*geoBars  = new OpenLayers.Layer.Vector("Features", {
+	strategies: [
+	    new OpenLayers.Strategy.Fixed(),
+	    new OpenLayers.Strategy.AnimatedCluster({
+		distance: 45,
+		animationMethod: OpenLayers.Easing.Expo.easeOut,
+		animationDuration: 10
+	    })
+	],
+	styleMap: new OpenLayers.Style(ptsBar, {context: ctxBar}),
+	projection: new OpenLayers.Projection("EPSG:4326")
+    });
+    
+    map.addLayer(geoBars);
+    $.each($scope.bars.features, function(i, elem){
+	feature = new OpenLayers.Feature.Vector();
+	feature.geometry = new OpenLayers.Geometry.Point(elem.geometry.coordinates);
+	feature.attributes = {
+	    name: elem.properties.name,
+	    id: elem.properties.id
+	};
+	geoBars.addFeatures([feature]);
+    });*/
 });
 
 
@@ -127,6 +191,7 @@ app.controller('barsCtrl', function($scope, Bar){
  */
 
 app.controller('CarteCtrl', function($scope) {
+
     
     $("#barathonCreation").hide();
     
@@ -136,52 +201,6 @@ app.controller('CarteCtrl', function($scope) {
    
    $(".logo").click(function(){
         history.back();
-    });
-    
-    
-    ptsBar = new OpenLayers.Symbolizer.Point({
-	externalGraphic: "${myImage}",
-	graphicWidth: "${myWidth}",
-	graphicHeight: 50,
-	graphicOpacity: 1,
-	label:"${nombre}",
-	fontColor: "#2980B9",
-	fontSize: "14pt",
-	fontWeight: "bold",
-	labelOutlineColor: "#FFFFFF",
-	labelOutlineWidth: 4,
-	labelOutlineOpacity: 0.6,
-	labelSelect:true
-    });
-    ctxBar = { 
-	nombre: function(feature) {
-	    if(feature.attributes.count>=2){
-		return feature.attributes.count;
-	    }else{
-		return "";
-	    }
-	},
-	myImage: function(feature) {
-	    if(feature.attributes.count>=2){
-		return "img/logo_multi2.png";
-	    }else{
-		return "img/logo_dot.png";
-	    }
-	},
-	myWidth: function(feature) {
-	    if(feature.attributes.count>=2){
-		return 50;
-	    }else{
-		return 40;
-	    }
-	}
-    };
-    
-    ptsBarHover = new OpenLayers.Symbolizer.Point({
-	externalGraphic: "img/logo_dot.png",
-	graphicWidth: 40,
-	graphicHeight: 50,
-	graphicOpacity: 1
     });
 
     $scope.bars  = new OpenLayers.Layer.Vector("Features", {
