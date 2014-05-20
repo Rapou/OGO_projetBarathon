@@ -55,7 +55,7 @@ class Model_Barathons{
 	    
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
-	    $barathons=$statement->fetchAll(PDO::FETCH_ASSOC);
+	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
             
             return $resultats;
 	}
