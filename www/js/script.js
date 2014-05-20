@@ -262,6 +262,8 @@ app.factory('Barathon', function($http, $q, ListeBars){
         // Permet de rendre un bar si on a son ID
         get : function(id){
             
+            var deferred = $q.defer();
+            
             $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
                 .success(function(data, status){
                     
