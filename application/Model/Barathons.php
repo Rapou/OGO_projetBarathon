@@ -37,6 +37,23 @@ class Model_Barathons{
 	    return $rendu;
             */
 	}
+        
+        /**
+	 * Rend un Barathon selon Id donné
+	 * @return array
+	 */
+	public function rendBarathonParId(){
+            
+            $barathonId = $_GET['barathonId'];
+            
+	    $sql =  "SELECT * FROM barathons WHERE id = " . barathonId;	    
+	    
+	    $statement=$this->db->prepare($sql);
+	    $statement->execute();
+	    $resultats=$statement->fetch();
+	    
+            return $resultats;
+	}
 	
 	
 }
