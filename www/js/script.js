@@ -143,6 +143,10 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/carte.html',
 	controller: 'CarteCtrl'
     })
+    .when('/creationBarathon', {
+	templateUrl: 'views/creationBarathon.html',
+	controller: 'CreationBarathonCtrl'
+    })
     .when('/login', {
 	templateUrl: 'views/login.html',
 	controller: 'LoginCtrl'
@@ -266,6 +270,8 @@ app.factory('Barathon', function($http, $q){
             
             $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
                 .success(function(data, status){
+                    angular.forEach()
+                    
                     factory.barathons = data;
                     deferred.resolve(factory.barathons);
                         })
@@ -353,17 +359,20 @@ app.controller('testNicoCtrl', function($scope, Bar){
 
 app.controller('CarteCtrl', function($scope) {
 
-    
+    // cache la div de création Barathon
     $("#barathonCreation").hide();
     
+    // bouton créer barathon
     $("#newBarathonBtn").click(function(){
         $("#barathonCreation").fadeToggle("slow", "linear");
     });
    
+   // logo back
    $(".logo").click(function(){
         history.back();
     });
 
+    // set les bars dans le scope
     $scope.bars  = new OpenLayers.Layer.Vector("Features", {
 	protocol: new OpenLayers.Protocol.HTTP({
 	    url: bootstrap + "?controller=Bars&action=rendBarEtPub",
@@ -386,9 +395,7 @@ app.controller('CarteCtrl', function($scope) {
     });
     map.addLayer($scope.bars);
 
-    selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {
-	hover:true
-    });
+    selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {hover:true});
     map.addControl(selectControl);
     selectControl.activate();
    /*
@@ -523,6 +530,36 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
             "nom" : "Lapin vert"
         },
     ];*/
+    
+    $(".logo").click(function() {
+        history.back();
+    });
+});
+
+
+
+/**
+ * Controleur Creation Barathon
+ */     
+app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
+    
+   
+   
+    
+    $scope.listeBarsAValider = [
+        {
+            "nom" : "Great Escape"
+        },
+        {
+            "nom" : "Lapin vert"
+        },
+    ];
+    
+    console.log("liste " + $scope.listeBarsAValider)
+    
+    $("#validerNewBarathonBtn").click(function() {
+        window.location.replace("#validerBarathon");
+    });
     
     $(".logo").click(function() {
         history.back();
