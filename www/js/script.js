@@ -35,7 +35,7 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/listeBars.html'
     })
     .when('/carte', {
-	/*templateUrl: 'views/carte.html',*/
+	templateUrl: 'views/carte.html',
 	controller: 'CarteCtrl'
     })
     .when('/login', {
