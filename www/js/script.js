@@ -194,7 +194,7 @@ app.factory('Bar', function($http, $q){
             // Quand on veut les bars visités par un barathon
             }else{
                 // requête Ajax
-                $http.get(bootstrap + "?controller=listeBars&action=rendListePourBarathon&id="+barathonId)
+                $http.get(bootstrap + "?controller=listeBars&action=rendListeBarsPourBarathon&barathonId="+barathonId)
                     .success(function(data, status){
                         factory.bars = data;
                         deferred.resolve(factory.bars);
@@ -254,20 +254,20 @@ app.factory('Barathon', function($http, $q){
         // Permet de rendre un bar si on a son ID
         get : function(id){
             var barathon = {};
-            angular.forEach(factory.barathons, function(value, key){
-                if(value.id == key){
-                    bar = value;
+            angular.forEach(factory.barathons, function(value, id){
+                if(value.id == id){
+                    barathon = value;
                 }
             });
             return barathon;
         },
         
-        rendBarathonParId : function(idBarathon){
+        /*rendBarathonParId : function(idBarathon){
             var deferred = $q.defer();
             /* TODO ...*/
-            deferred.resolve();
+            /*deferred.resolve();
             return deferred.promise;
-        },
+        },*/
         
         // Permet d'ajouter un bar
         addBar : function(bar){
@@ -495,39 +495,37 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
 /**
  * Controleur affichage 1 Barathon
  */     
-app.controller('BarathonCtrl', function($scope, $routeParams, Barathon){
+app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     
     idBarathon = $routeParams['id'];
     
-    $scope.barathon = Barathon.rendBarathonParId(idBarathon).then(function(barathons){
+    $scope.barathon = Barathon.get(idBarathon).then(function(barathon){
         $scope.barathon = barathon;
-        
-        $scope.listeBars = Bar.find(barathonId).then(function(listeBars){
-            $scope.listeBars = listeBars;
-        }, function(msg){
-                alert(msg);
-            });
-        
-        console.log(barathons);
+        console.log(barathon);
     }, function(msg){
         alert(msg);
     });
     
-    
+    $scope.listeBars = Bar.find(idBarathon).then(function(listeBars){
+        $scope.listeBars = listeBars;
+        console.log(listeBars);
+        }, function(msg){
+        alert(msg);
+    });
     
     
     // Récup la liste des Bars de ce Barathon
     // Appel Ajax :
     //$scope.listeBars = listeBars.rendListeBarsPourBarathon;
     
-    $scope.listeBars = [
+    /*$scope.listeBars = [
         {
             "nom" : "Great Escape"
         },
         {
             "nom" : "Lapin vert"
         },
-    ];
+    ];*/
     
     $(".logo").click(function() {
         history.back();
