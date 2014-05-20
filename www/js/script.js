@@ -25,7 +25,7 @@ $(document).ready(function(){
 var app = angular.module('Barathon', ['ngRoute']);
 
 /*******************************************************************************
-* REGLES DE ROUTAGE DES PAGES
+ * REGLES DE ROUTAGE DES PAGES
  ******************************************************************************/
 app.config(function($routeProvider) {
     $routeProvider
@@ -163,10 +163,17 @@ app.controller('CarteCtrl', function($scope) {
    
     ptsBar = new OpenLayers.Symbolizer.Point({
 	externalGraphic: "${myImage}",
-	graphicWidth: "${myWith}",
-	graphicHeight: "${myHeight}",
+	graphicWidth: "${myWidth}",
+	graphicHeight: 50,
 	graphicOpacity: 1,
-	label:"${nombre}"
+	label:"${nombre}",
+	fontColor: "#2980B9",
+	fontSize: "14pt",
+	fontWeight: "bold",
+	labelOutlineColor: "#FFFFFF",
+	labelOutlineWidth: 4,
+	labelOutlineOpacity: 0.6,
+	labelSelect:true
     });
     ctxBar = { 
 	nombre: function(feature) {
@@ -183,18 +190,11 @@ app.controller('CarteCtrl', function($scope) {
 		return "img/logo_dot.png";
 	    }
 	},
-	myWith: function(feature) {
+	myWidth: function(feature) {
 	    if(feature.attributes.count>=2){
-		return 60;
+		return 50;
 	    }else{
 		return 40;
-	    }
-	},
-	myHeight: function(feature) {
-	    if(feature.attributes.count>=2){
-		return 60;
-	    }else{
-		return 50;
 	    }
 	}
     };
@@ -206,21 +206,6 @@ app.controller('CarteCtrl', function($scope) {
 	graphicOpacity: 1
     });
 
-    var clusterStyle = new OpenLayers.Style({
-	label:"${nombre}",
-	graphicWidth: 20,
-	graphicHeight: 20
-    }, {
-	context: {
-	    nombre: function(feature) {
-		if(feature.attributes.count>=2)
-		    return feature.attributes.count;
-		else
-		    return "";
-	    }
-	}
-    });
-    
     $scope.bars  = new OpenLayers.Layer.Vector("Features", {
 	protocol: new OpenLayers.Protocol.HTTP({
 	    url: bootstrap + "?controller=Bars&action=rendBarEtPub",
