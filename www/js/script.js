@@ -41,6 +41,47 @@ var ctxBar = {
 	    }
 	}
     };
+    
+var ptsBarOver = new OpenLayers.Symbolizer.Point({
+	externalGraphic: "${myImage}",
+	graphicWidth: "${myWidth}",
+	graphicHeight: 50,
+	graphicOpacity: 1,
+	label:"${nombre}",
+	fontColor: "#e67e22",
+	fontSize: "14pt",
+	fontWeight: "bold",
+	labelOutlineColor: "#FFFFFF",
+	labelOutlineWidth: 4,
+	labelOutlineOpacity: 0.6,
+	labelSelect:true,
+	labelPosition:30
+    });
+    
+var ctxBarOver = { 
+	nombre: function(feature) {
+	    if(feature.attributes.count>=2){
+		return feature.attributes.count;
+	    }else{
+		console.log(feature);
+		return feature.cluster[0].attributes.name;
+	    }
+	},
+	myImage: function(feature) {
+	    if(feature.attributes.count>=2){
+		return "img/logo_multi_over.png";
+	    }else{
+		return "img/logo_dot_over.png";
+	    }
+	},
+	myWidth: function(feature) {
+	    if(feature.attributes.count>=2){
+		return 50;
+	    }else{
+		return 40;
+	    }
+	}
+    };
 
 
 $(document).ready(function(){
@@ -218,89 +259,23 @@ app.controller('CarteCtrl', function($scope) {
 		animationDuration: 10
 	    })
 	],
-	styleMap: new OpenLayers.Style(ptsBar, {context: ctxBar}),
-	/*styleMap: new OpenLayers.StyleMap({
-	    "default": new OpenLayers.StyleMap(ptsBar),
-	    "select": new OpenLayers.StyleMap(ptsBarHover)
-	}),*/
+	styleMap: new OpenLayers.StyleMap({
+                        "default": new OpenLayers.Style(ptsBar, {context: ctxBar}),
+                        "select": new OpenLayers.Style(ptsBarOver, {context: ctxBarOver})
+                    }),
+	// styleMap: new OpenLayers.Style(ptsBar, {context: ctxBar}),
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
-    
-    map.addLayer($scope.bars);
-    
     selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {
 	hover:true
     });
+    
+    map.addLayer($scope.bars);
     map.addControl(selectControl);
     selectControl.activate();
-    
-    /*
-    function onPopupClose(evt) {
-	// 'this' is the popup.
-	selectControl.unselect(this.feature);
-    }
         
-    function onFeatureSelect(evt) {
-	feature = evt.feature;
-	popup = new OpenLayers.Popup.FramedCloud("featurePopup",
-	    feature.geometry.getBounds().getCenterLonLat(),
-	    new OpenLayers.Size(100,100),
-	    "<h2>" + feature.attributes.name + "</h2>",
-	    null,
-	    true,
-	    onPopupClose
-	    );
-	feature.popup = popup;
-	popup.feature = feature;
-	map.addPopup(popup);
-    }
-              
-    function onFeatureUnselect(evt) {
-	feature = evt.feature;
-	if (feature.popup) {
-	    popup.feature = null;
-	    map.removePopup(feature.popup);
-	    feature.popup.destroy();
-	    feature.popup = null;
-	}
-    }
     
-    var defaultPoint = new OpenLayers.Symbolizer.Point({
-	graphicName: 'square',
-	pointRadius: 6,
-	fillColor: '#ffff00',
-	fillOpacity: 0,
-	stroke: 0
-    });
-    var selectPoint = defaultPoint.clone();                       
-    selectPoint.fillOpacity = 0.8;
-
-
-    bars_overs = new OpenLayers.Layer.Vector("Vector for over", {
-	protocol: new OpenLayers.Protocol.HTTP({
-	    url: bootstrap + "?controller=Bars&action=rendBarEtPub",
-	    format: new OpenLayers.Format.GeoJSON({
-		ignoreExtraDims: true
-	    })
-	}),
-	styleMap: new OpenLayers.StyleMap({
-	    "default": new OpenLayers.Style(defaultPoint),
-	    "select": new OpenLayers.Style(selectPoint)
-	}),
-	strategies: [new OpenLayers.Strategy.Fixed()],
-	projection: new OpenLayers.Projection("EPSG:4326")
-    });
-    map.addLayer(bars_overs);
     
-    selectControl = new OpenLayers.Control.SelectFeature(bars_overs, {
-	hover:true
-    });
-    map.addControl(selectControl);
-    selectControl.activate();
-    
-    bars_overs.events.register("featureselected", bars_overs, onFeatureSelect);
-    bars_overs.events.register("featureunselected", bars_overs, onFeatureUnselect);
-     */ 
 }); // controleur carte
 
 /**
