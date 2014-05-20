@@ -41,6 +41,24 @@ class Model_Barathons{
             return $resultats;
 	}
         
+        
+        /**
+	 * Rend un Barathon selon Id donné
+	 * @return array
+	 */
+	public function rendBarathonsProposes(){
+            
+            $userCreateurId = 0;
+            
+	    $sql =  "SELECT * FROM barathons WHERE userCreateurId = " . $userCreateurId;	    
+	    
+	    $statement=$this->db->prepare($sql);
+	    $statement->execute();
+	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
+	    
+            return $resultats;
+	}
+        
         public function ajouterBarahon(){
             
             $nom;

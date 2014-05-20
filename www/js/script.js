@@ -261,6 +261,21 @@ app.factory('Barathon', function($http, $q){
             });
             return barathon;
         },
+        rendBarathonsProposes : function(){
+            var deferred = $q.defer();
+            
+            $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
+                .success(function(data, status){
+                    factory.barathons = data;
+                    deferred.resolve(factory.barathons);
+                        })
+                .error(function(){
+                    deferred.reject("msg");
+                });
+            
+            
+            return deferred.promise;
+        },
         
         /*rendBarathonParId : function(idBarathon){
             var deferred = $q.defer();
@@ -452,43 +467,25 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
         alert(msg);
     });
     
+    // Set la liste des barathons dans le scope
+    $scope.barathonsProposes = Barathon.rendBarathonsProposes().then(function(barathonsProposes){
+        $scope.barathonsProposes = barathonsProposes;
+        console.log("Liste des barathons proposés --------"+barathonsProposes);
+    }, function(msg){
+        alert(msg);
+    });
+    
+    $scope.mesBarathons = Barathon.find().then(function(mesBarathons){
+        $scope.mesBarathons = mesBarathons;
+        console.log(mesBarathons);
+    }, function(msg){
+        alert(msg);
+    });
+    
+    
     $(".logo").click(function(){
         history.back();
     });
-    
-    /*
-    //Récupère la liste des Barathons proposés
-    $scope.barathonsProposes = $http({
-        method: 'GET',
-        url: 'bootstrap.php?controller=Barathons',
-        params: "action=rendBarathonsProposes"
-        }).success(function(data){
-        // With the data succesfully returned, call our callback
-        //callbackFunc(data);
-        alert("Success !");
-        alert("Data : "+data);
-    }).error(function(){
-        alert("error");
-    });
-    
-    //Récupère la liste des Barathons du user loggé (s'il y a un user loggé)
-    if (loggedUserId !== undefined){
-        alert("User logged : " + loggedUserId);
-        
-        $scope.mesBarathons = $http({
-            method: 'GET',
-            url: 'bootstrap.php?controller=Barathons',
-            params: "action=rendMesBarathons&userId="+loggedUserId
-         }).success(function(data){
-            // With the data succesfully returned, call our callback
-            //callbackFunc(data);
-            alert("Success ! : action=rend&userId="+loggedUserId);
-        }).error(function(){
-            alert("error");
-        });
-        
-    }
-     */
     
 });
 
