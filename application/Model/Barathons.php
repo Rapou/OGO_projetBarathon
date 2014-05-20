@@ -50,14 +50,32 @@ class Model_Barathons{
             
             $userCreateurId = 0;
             
+            // Récupération des barathons
 	    $sql =  "SELECT * FROM barathons WHERE userCreateurId = " . $userCreateurId;	    
 	    
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
-	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
-	    
+	    $barathons=$statement->fetchAll(PDO::FETCH_ASSOC);
+            
             return $resultats;
 	}
+        
+        /**
+         * Rend la liste des bars que l'on va visiter dans le barathon spécifié.
+         * @param idBarathon : l'id du barathon
+         */
+        public function rendListeBars($idBarathon){
+            // Récupération de la liste des bars de ce barathon
+	    $sql =  " SELECT * FROM listebars WHERE barathonid = " . $barathonId;	    
+	    
+	    $statement=$this->db->prepare($sql);
+	    $statement->execute();
+	    $listeBars=$statement->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $listeBars;
+        }
+	
+	
         
         public function ajouterBarahon(){
             
@@ -75,6 +93,4 @@ class Model_Barathons{
             // Ajax create new barathon
             
         }
-	
-	
 }

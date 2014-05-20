@@ -40,7 +40,13 @@ class Controller_Barathons{
      * @return type
      */
     public function rendBarathonsProposes(){
-	return $this->model->rendBarathonsProposes();
+        $barathons = $this->model->rendBarathonsProposes();
+        
+        foreach ($barathon as $barathons){
+            $barathon->listeBars = $this->model->rendListeBars($barathon.id);
+        }
+        
+	return $barathons;
     }
     
     
