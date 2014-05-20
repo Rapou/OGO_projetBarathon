@@ -33,7 +33,8 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/home.html'
     })
     .when('/listeBars', {
-	templateUrl: 'views/listeBars.html'
+	templateUrl: 'views/listeBars.html',
+        controller: 'listeBarsCtrl'
     })
     .when('/carte', {
 	templateUrl: 'views/carte.html',
@@ -60,22 +61,41 @@ app.config(function($routeProvider) {
  *  SERVICES
  ******************************************************************************/
 /*
- * A TESTER - Factory pour récupérer un bar dans la base de données
+ * A TESTER - Factory pour gérer un bar dans la base de données
  */
 app.factory('Bar', function($http, $q){
     var factory = {
         bars : false,
-        getBars : function(){
-            return $http.get('bars.json'); // TODO Adresse à modifier pour utiliser le proxy
+        // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+        find : function(params){
+            //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); // TODO Adresse à modifier pour utiliser le proxy
+            var deferred = $q.defer();
+            $http.get("4capitals.json")
+                .success(function(data, status){
+                    factory.bars = data;
+                    deferred.resolve(factory.bars);
+                        })
+                .error(function(){
+                    deferred.reject("msg");
+                });
+                return deferred.promise;
         },
-        getBar : function(id){
+        // Permet de rendre un bar si on a son ID
+        get : function(id){
             var bar = {};
             angular.forEach(factory.bars, function(value, key){
                 if(value.id == key){
-                    post = value;
+                    bar = value;
                 }
             });
             return bar;
+        },
+        // Permet d'ajouter un bar
+        addBar : function(bar){
+            var deferred = $q.defer();
+            /* TODO ...*/
+            deferred.resolve();
+            return deferred.promise;
         }
         
     };
@@ -395,4 +415,15 @@ app.controller('BarathonCtrl', function($scope, $http, $routeParams){
     
     // L'affichage barathon.html recherche l'info ici pour affichage d'un unique Barathon
 
+});
+
+/**
+ * Controleur affichage des bars dans les environs
+ */     
+app.controller('listeBarsCtrl', function($scope, Bar){
+    $scope.bars = Bar.find().then(function(bars){
+        $scope.bars = bars;
+    }, function(msg){
+        alert(msg);
+    });
 });
