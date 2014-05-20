@@ -501,6 +501,13 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon){
     
     $scope.barathon = Barathon.rendBarathonParId(idBarathon).then(function(barathons){
         $scope.barathon = barathon;
+        
+        $scope.listeBars = Bar.find(barathonId).then(function(listeBars){
+            $scope.listeBars = listeBars;
+        }, function(msg){
+                alert(msg);
+            });
+        
         console.log(barathons);
     }, function(msg){
         alert(msg);
