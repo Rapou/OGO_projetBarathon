@@ -15,12 +15,7 @@ class Controller_Barathons{
      * @return type
      */
     public function rend(){
-	$res = $this->model->rend();
-	$tableau_barathons = "";
-	foreach($res as $i => $barathon){
-	    $tableau_barathons = $barathon;
-	}
-	return $tableau_barathons;
+	return $this->model->rend();
     }
     
     /**
@@ -37,12 +32,7 @@ class Controller_Barathons{
      * @return type
      */
     public function rendMesBarathons(){
-	$res = $this->model->rendMesBarathons();
-	$tableau_barathons = "";
-	foreach($res as $i => $barathon){
-	    $tableau_barathons = $barathon;
-	}
-	return $tableau_barathons;
+	return $this->model->rendMesBarathons();
     }
     
     /**
@@ -50,12 +40,7 @@ class Controller_Barathons{
      * @return type
      */
     public function rendBarathonsProposes(){
-	$res = $this->model->rendBarathonsProposes();
-	$tableau_barathons = "";
-	foreach($res as $i => $barathon){
-	    $tableau_barathons = $barathon;
-	}
-	return $tableau_barathons;
+	return $this->model->rendBarathonsProposes();
     }
     
     

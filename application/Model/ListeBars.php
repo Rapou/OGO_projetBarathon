@@ -10,7 +10,7 @@ class Model_ListeBars{
 	}
 	
 	/**
-	 * 
+	 * Rend toutes les ListeBars 
 	 * @return array
 	 */
 	public function rend(){
@@ -32,7 +32,10 @@ class Model_ListeBars{
 	    return $rendu;
 	}
 	
-        
+        /**
+         * Rend la liste des Bars pour un Barathon(id)
+         * @return type
+         */
         public function rendListeBarsPourBarathon(){
 
             $barathonId = $_GET['barathonId'];
@@ -44,28 +47,34 @@ class Model_ListeBars{
 	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
             
             return $resultats;
-
         }
         
+        /**
+         * Ajoute un Bar à un Barathon
+         */
         public function addBarToBarathon(){
             
+            $barId;
             $barathonId;
+            $ordreDansBarathon;
             
+            $sql = "INSERT INTO listeBars (barId, barathonId, ordreDansBarathon) VALUES (:barId, :barathonid, :ordreDansBarathon)";
+            
+            // new data
+            $title = 'PHP Security';
+            $author = 'Jack Hijack';
+            // query
+            $sql = "INSERT INTO books (title,author) VALUES (:title,:author)";
+            
+            $q = $conn->prepare($sql);
+            $q->execute(array(':barId'=>$barId,
+                              ':barathonId'=>$barathonId,
+                              ':ordreDansbarathon'=>$ordreDansbarathon));
         }
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        /*
 	public function rendPub(){
 	    $sql =  "SELECT gid, name, ST_AsGeoJSON(the_geom) AS geometry FROM bars WHERE type like 'pub'";	    
 	    
@@ -101,5 +110,5 @@ class Model_ListeBars{
 	    	   array_push($rendu, $fc);
 
 	    return $rendu;
-	}
+	}*/
 }
