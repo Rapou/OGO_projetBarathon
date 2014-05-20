@@ -393,6 +393,25 @@ app.controller('BarathonCtrl', function($scope, $http, $routeParams){
 	"nom": "SuperStar Barathon"
     };
     
+    // Récup la liste des Bars de ce Barathon
+    // Appel Ajax :
+    //$scope.listeBars = listeBars.rendListeBarsPourBarathon;
+    
+    $scope.listeBars = [
+        {
+            "nom" : "Great Escape"
+        },
+        {
+            "nom" : "Lapin vert"
+        },
+    ];
+    
+    
     // L'affichage barathon.html recherche l'info ici pour affichage d'un unique Barathon
 
+
+
+    $(".logo").click(function() {
+        history.back();
+    });
 });

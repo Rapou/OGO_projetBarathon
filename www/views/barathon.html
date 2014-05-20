@@ -11,6 +11,12 @@
         
         <div ng-controller="BarathonCtrl">
             barathonid : {{barathon.id}}
+            <h3>Liste des bars :</h3>
+            
+            <ul ng-repeat="bar in listeBars">
+                <li>{{bar.nom}}</li>
+            </ul>
+            
         </div> 
         
     </div>
