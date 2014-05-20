@@ -14,7 +14,7 @@ $(document).ready(function(){
 	sphericalMercator: true,
 	maxZoomLevel:20
     }
-    );
+);
 
     map.addLayer(goog);
     map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14); 
@@ -24,8 +24,8 @@ $(document).ready(function(){
  ******************************************************************************/
 var app = angular.module('Barathon', ['ngRoute']);
 /*
-* REGLES DE ROUTAGE DES PAGES
-*/
+ * REGLES DE ROUTAGE DES PAGES
+ */
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
@@ -85,8 +85,8 @@ app.factory('Bar', function($http, $q){
  *  CONTROLEURS
  ******************************************************************************/
 /**
-  * Contrôleur de la page d'accueil
-  */
+ * Contrôleur de la page d'accueil
+ */
  
 /**
  * Contrôleur de la liste des bars
@@ -95,95 +95,141 @@ app.controller('BarsListCtrl', function($scope) {
     
     // Le scope récupère la liste des bars depuis un service
     $scope.bars = [
-    {
-	"id": 0,
-	"nom": "Quility",
-	"latitude": -77.969742,
-	"longitude": -38.513007
-    },
-    {
-	"id": 1,
-	"nom": "Plexia",
-	"latitude": -16.959234,
-	"longitude": 134.023616
-    },
-    {
-	"id": 2,
-	"nom": "Halap",
-	"latitude": -25.651032,
-	"longitude": 10.235857
-    },
-    {
-	"id": 3,
-	"nom": "Musanpoly",
-	"latitude": -81.267279,
-	"longitude": 10.212763
-    },
-    {
-	"id": 4,
-	"nom": "Puria",
-	"latitude": 62.473652,
-	"longitude": -1.497673
-    },
-    {
-	"id": 5,
-	"nom": "Enersave",
-	"latitude": 21.109301,
-	"longitude": -36.156543
-    }
+	{
+	    "id": 0,
+	    "nom": "Quility",
+	    "latitude": -77.969742,
+	    "longitude": -38.513007
+	},
+	{
+	    "id": 1,
+	    "nom": "Plexia",
+	    "latitude": -16.959234,
+	    "longitude": 134.023616
+	},
+	{
+	    "id": 2,
+	    "nom": "Halap",
+	    "latitude": -25.651032,
+	    "longitude": 10.235857
+	},
+	{
+	    "id": 3,
+	    "nom": "Musanpoly",
+	    "latitude": -81.267279,
+	    "longitude": 10.212763
+	},
+	{
+	    "id": 4,
+	    "nom": "Puria",
+	    "latitude": 62.473652,
+	    "longitude": -1.497673
+	},
+	{
+	    "id": 5,
+	    "nom": "Enersave",
+	    "latitude": 21.109301,
+	    "longitude": -36.156543
+	}
     ];
 });
 
 /**
-  * Contrôleur de la page de carte
-  */
+ * Contrôleur de la page de carte
+ */
 
 app.controller('CarteCtrl', function($scope) {
    
-    ptSymbolizer = new OpenLayers.Symbolizer.Point({
+    ptsBar = new OpenLayers.Symbolizer.Point({
+	externalGraphic: "${myImage}",
+	graphicWidth: "${myWith}",
+	graphicHeight: "${myHeight}",
+	graphicOpacity: 1,
+	label:"${nombre}"
+    });
+    ctxBar = { 
+	nombre: function(feature) {
+	    if(feature.attributes.count>=2){
+		return feature.attributes.count;
+	    }else{
+		return "";
+	    }
+	},
+	myImage: function(feature) {
+	    if(feature.attributes.count>=2){
+		return "img/logo_multi2.png";
+	    }else{
+		return "img/logo_dot.png";
+	    }
+	},
+	myWith: function(feature) {
+	    if(feature.attributes.count>=2){
+		return 60;
+	    }else{
+		return 40;
+	    }
+	},
+	myHeight: function(feature) {
+	    if(feature.attributes.count>=2){
+		return 60;
+	    }else{
+		return 50;
+	    }
+	}
+    };
+    
+    ptsBarHover = new OpenLayers.Symbolizer.Point({
 	externalGraphic: "img/logo_dot.png",
 	graphicWidth: 40,
 	graphicHeight: 50,
 	graphicOpacity: 1
     });
 
+    var clusterStyle = new OpenLayers.Style({
+	label:"${nombre}",
+	graphicWidth: 20,
+	graphicHeight: 20
+    }, {
+	context: {
+	    nombre: function(feature) {
+		if(feature.attributes.count>=2)
+		    return feature.attributes.count;
+		else
+		    return "";
+	    }
+	}
+    });
+    
     $scope.bars  = new OpenLayers.Layer.Vector("Features", {
 	protocol: new OpenLayers.Protocol.HTTP({
 	    url: bootstrap + "?controller=Bars&action=rendBarEtPub",
 	    format: new OpenLayers.Format.GeoJSON()
 	}),
 	strategies: [
-	new OpenLayers.Strategy.Fixed()/*,
-	new OpenLayers.Strategy.AnimatedCluster({
-	    distance: 45,
-	    animationMethod: OpenLayers.Easing.Expo.easeOut,
-	    animationDuration: 10
-	})*/
+	    new OpenLayers.Strategy.Fixed(),
+	    new OpenLayers.Strategy.AnimatedCluster({
+		distance: 45,
+		animationMethod: OpenLayers.Easing.Expo.easeOut,
+		animationDuration: 10
+	    })
 	],
-	styleMap:  new OpenLayers.StyleMap(ptSymbolizer),
+	styleMap: new OpenLayers.Style(ptsBar, {context: ctxBar}),
+	/*styleMap: new OpenLayers.StyleMap({
+	    "default": new OpenLayers.StyleMap(ptsBar),
+	    "select": new OpenLayers.StyleMap(ptsBarHover)
+	}),*/
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
+    
     map.addLayer($scope.bars);
-
-    /* $scope.bars = new OpenLayers.Layer.Vector("Vector layer from GeoJSON", {
-	protocol: new OpenLayers.Protocol.HTTP({
-	    url: bootstrap + "?controller=Bars&action=rendBarEtPub",
-	    format: new OpenLayers.Format.GeoJSON()
-	}),
-	styleMap: new OpenLayers.Style(ptSymbolizer),
-	strategies: [
-	new OpenLayers.Strategy.Fixed(),
-	new OpenLayers.Strategy.AnimatedCluster({
-	    distance: 45,
-	    animationMethod: OpenLayers.Easing.Expo.easeOut,
-	    animationDuration: 10
-	})
-	],
-	projection: new OpenLayers.Projection("EPSG:4326")
+    
+    selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {
+	hover:true
     });
-    map.addLayer($scope.bars);*/
+    map.addControl(selectControl);
+    selectControl.activate();
     
-    
+    /*
     function onPopupClose(evt) {
 	// 'this' is the popup.
 	selectControl.unselect(this.feature);
@@ -249,7 +295,7 @@ app.controller('CarteCtrl', function($scope) {
     
     bars_overs.events.register("featureselected", bars_overs, onFeatureSelect);
     bars_overs.events.register("featureunselected", bars_overs, onFeatureUnselect);
-    
+     */ 
 }); // controlleur carte
 
 /**
@@ -262,9 +308,9 @@ app.controller('LoginCtrl', function() {
 	var login = $("#inputLogin").val();
 	var mdp = $("#inputPassword").val();
         
-    //bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
+	//bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
         
-    // Validate mdp : Controller_Users->validerUsers();
+	// Validate mdp : Controller_Users->validerUsers();
         
     });
     
@@ -283,13 +329,13 @@ app.controller('LoginCtrl', function() {
 app.controller('BarathonsCtrl', function($scope, $http){
     
     $scope.barathons = [
-    {
-	"id": 0,
-	"nom": "SuperStar Barathon"
-    }, {
-	"id": 1,
-	"nom": "Mon Barathon"
-    }]
+	{
+	    "id": 0,
+	    "nom": "SuperStar Barathon"
+	}, {
+	    "id": 1,
+	    "nom": "Mon Barathon"
+	}]
     
     /*
     //Récupère la liste des Barathons proposés
@@ -323,7 +369,7 @@ app.controller('BarathonsCtrl', function($scope, $http){
         });
         
     }
-    */
+     */
     
     
     $(".logo").click(function(){
@@ -331,13 +377,9 @@ app.controller('BarathonsCtrl', function($scope, $http){
     });
 });
 
-
 /**
  * Controleur affichage 1 Barathon
  */
 app.controller('BarathonCtrl', function($scope, $http){
-    
-
-
-    
+     
 });
