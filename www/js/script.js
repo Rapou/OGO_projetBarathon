@@ -224,7 +224,7 @@ app.factory('Barathon', function($http, $q){
         
         // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
         find : function(params){
-            //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); // TODO Adresse à modifier pour utiliser le proxy
+            //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
             var deferred = $q.defer();
             $http.get(bootstrap + "?controller=Barathons&action=rend")
                 .success(function(data, status){
@@ -238,14 +238,22 @@ app.factory('Barathon', function($http, $q){
         },
         // Permet de rendre un bar si on a son ID
         get : function(id){
-            var bar = {};
-            angular.forEach(factory.bars, function(value, key){
+            var barathon = {};
+            angular.forEach(factory.barathons, function(value, key){
                 if(value.id == key){
                     bar = value;
                 }
             });
-            return bar;
+            return barathon;
         },
+        
+        rendBarathonParId : function(idBarathon){
+            var deferred = $q.defer();
+            /* TODO ...*/
+            deferred.resolve();
+            return deferred.promise;
+        },
+        
         // Permet d'ajouter un bar
         addBar : function(bar){
             var deferred = $q.defer();
@@ -472,17 +480,19 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
 /**
  * Controleur affichage 1 Barathon
  */     
-app.controller('BarathonCtrl', function($scope, $http, $routeParams){
+app.controller('BarathonCtrl', function($scope, $routeParams, Barathon){
     
     idBarathon = $routeParams['id'];
     
-    // Appel ajax pour récupérer le barathon
-    //$scope.barathon = rendBarathonParId();
+    $scope.barathon = Barathon.rendBarathonParId(idBarathon).then(function(barathons){
+        $scope.barathon = barathon;
+        console.log(barathons);
+    }, function(msg){
+        alert(msg);
+    });
     
-    $scope.barathon = {
-	"id": idBarathon,
-	"nom": "SuperStar Barathon"
-    };
+    
+    
     
     // Récup la liste des Bars de ce Barathon
     // Appel Ajax :

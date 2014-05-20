@@ -7,21 +7,32 @@
 <div class="container containerBarathons">
 	<div id="wrapperBarathons" class="well bs-component">
             <div id="mesBarathons">
+                
+                <h3>Barathons proposés</h3>
+                <ul>
+                    <div ng-controller="BarathonsCtrl">
+                        <div ng-repeat="barathon in barathons ">
+
+                            <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
+                        </div>
+                    </div>
+                </ul>
+                
                 <h3>Mes Barathons</h3>
                 <ul>
-                    <li><a href="#barathons/1">Mon premier Barathon</a></li>
-                    <li><a href="#barathons/2">Mon deuxième Barathon</a></li>
-                </ul>
+                    <div ng-repeat="barathon in barathons ">
 
+                        <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
+                    </div>
+                </ul>
+                    
+                    
             </div>
+        </div>
             
             
             
-            <div ng-controller="BarathonsCtrl" id="barathons">Barathons ajax: 
-                <div ng-repeat="barathon in barathons ">
-                    <strong>{{barathon.nom}}</strong>
-                </div>
-            </div>
+            
             
             <!--
             <div id="barathonsProposes">
