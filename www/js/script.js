@@ -181,6 +181,60 @@ app.config(function($routeProvider) {
 
 
 /*
+ * Factory pour les Login
+ */
+app.factory('User', function($http, $q){
+    var factory = {
+        bars : false,
+        // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+        // TODO : si nécessaire, traitement en fonction des params.
+        find : function(barathonId){
+            var deferred = $q.defer();
+            
+            // Quand on veut récupérer tous les barathons
+            if(barathonId === undefined){
+                // requête Ajax
+                $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
+                    .success(function(data, status){
+                        factory.bars = data;
+                        deferred.resolve(factory.bars);
+                    })
+                    .error(function(){
+                        deferred.reject("factory.bars : Erreur lors de la récupéaration de tous les bars");
+                    });
+                    return deferred.promise;
+            // Quand on veut les bars visités par un barathon
+            }else{
+                // requête Ajax
+                $http.get(bootstrap + "?controller=listeBars&action=rendListeBarsPourBarathon&barathonId="+barathonId)
+                    .success(function(data, status){
+                        factory.bars = data;
+                        deferred.resolve(factory.bars);
+                    })
+                    .error(function(){
+                        deferred.reject("factory.bars : Erreur lors de la récupération des bars du barathon "+barathonId);
+                    });
+                    return deferred.promise;
+            }
+        },
+        
+        // Permet de rendre un bar si on a son ID
+        validerUser : function(){
+            var bar = {};
+            angular.forEach(factory.bars, function(value, key){
+                if(value.id == key){
+                    bar = value;
+                }
+            });
+            return bar;
+        },
+        
+        
+    };
+    return factory;
+});
+
+/*
  * Factory pour les Bars
  */
 app.factory('Bar', function($http, $q){
@@ -240,6 +294,9 @@ app.factory('Bar', function($http, $q){
     };
     return factory;
 }); // factory Bar
+
+
+
 
 
 /*
