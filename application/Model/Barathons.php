@@ -60,7 +60,7 @@ class Model_Barathons{
             return $resultats;
 	}
         
-        public function ajouterBarahon(){
+        public function ajouterBarathon(){
             
             $nom;
             $difficulte; //calculé en fonction du nbre de bars ?
