@@ -179,16 +179,31 @@ app.factory('Bar', function($http, $q){
         find : function(params){
             var deferred = $q.defer();
             
-            // requête Ajax
-            $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
-                .success(function(data, status){
-                    factory.bars = data;
-                    deferred.resolve(factory.bars);
-                        })
-                .error(function(){
-                    deferred.reject("msg");
-                });
-                return deferred.promise;
+            // Quand on veut récupérer tous les barathons
+            if(params === undefined){
+                // requête Ajax
+                $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
+                    .success(function(data, status){
+                        factory.bars = data;
+                        deferred.resolve(factory.bars);
+                            })
+                    .error(function(){
+                        deferred.reject("factory.bars : Erreur lors de la récupéaration de tous les bars");
+                    });
+                    return deferred.promise;
+            // Quand on veut les bars visités par un barathon
+            }else{
+                // requête Ajax
+                $http.get(bootstrap + "?controller=listeBars&action=rendListePourBarathon&id=barathonId")
+                    .success(function(data, status){
+                        factory.bars = data;
+                        deferred.resolve(factory.bars);
+                            })
+                    .error(function(){
+                        deferred.reject("factory.bars : Erreur lors de la récupération des bars d'un barathon. params : "+params);
+                    });
+                    return deferred.promise;
+            }
         },
         
         // Permet de rendre un bar si on a son ID
