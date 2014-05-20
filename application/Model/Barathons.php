@@ -32,7 +32,7 @@ class Model_Barathons{
             
             $barathonId = $_GET['barathonId'];
             
-	    $sql =  "SELECT * FROM barathons WHERE id = " . barathonId;	    
+	    $sql =  "SELECT * FROM barathons WHERE id = " . $barathonId;	    
 	    
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();

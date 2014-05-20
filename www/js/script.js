@@ -263,23 +263,19 @@ app.factory('Barathon', function($http, $q, ListeBars){
                 });
                 return deferred.promise;
         },
-        // Permet de rendre un bar si on a son ID
+        // Permet de rendre un barathon selon l ID
         get : function(id){
             
             var deferred = $q.defer();
             
-            $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
+            $http.get(bootstrap + "?controller=Barathons&action=rendBarathonParId&barathonId="+id)
                 .success(function(data, status){
                     
-                    var listeBars = {};
-                    angular.forEach(factory.listeBars, function(value, key){
-                        if(value.id == key){
-                            barathon = value;
-                        }
-                    });
+                    barathon : false;
                     
-                    factory.listeBars = data;
-                    deferred.resolve(factory.listeBars);
+                    factory.barathon = data;
+                    deferred.resolve(factory.barathon);
+                    
                 })
                 .error(function(){
                     deferred.reject("msg");
