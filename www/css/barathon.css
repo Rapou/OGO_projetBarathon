@@ -111,15 +111,16 @@
 }
 
 .containerBarathons {
-    padding:0px;
     //margin-top: 10px;
     height:auto;
     width:100%;
     position:absolute;
     bottom:0px;
-    
+    width:100%;
+    heigth:auto;
+    background-color:whitesmoke;
+    color: #2980b9;
 }
-
 
 
 /*

@@ -1,0 +1,29 @@
+<div class="map-hider"></div>
+<div class="appHeader">
+    <div class="col-lg-12">
+	<div class="logo">&nbsp;</div>
+	<div class="headerText">Valider le bar / Aller au prochain bar</div>
+    </div>
+</div>
+
+<div class="containerBarathons">
+    <h3>Prochain bar : Great Escape </h3>
+    
+    <button class="btn btn-primary" style="float:right; margin: 5px;" id="validerEtape">Valider etape</button>
+    <button class="btn " style="float:right; margin: 5px;" id="prochainBar">Prochain bar</button>
+</div>
+
+<script>
+    $(".logo").click(function() {
+        history.back();
+    });
+    
+    $("#validerEtape").click(function() {
+        alert("Valide étape");
+    });
+    
+    $("#prochainBar").click(function() {
+        alert("Prochain bar");
+    });
+    
+</script>

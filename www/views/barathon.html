@@ -10,7 +10,7 @@
         <h3>Mon Super Barathon</h3>
         
         <div ng-controller="BarathonCtrl">
-            <p>barathonid : {{barathon.id}}</p>
+            <p>barathonid : {{idBarathon}}</p>
             <h3>Liste des bars :</h3>
             
             <ul ng-repeat="bar in listeBars">
@@ -20,10 +20,17 @@
         </div> 
         
     </div>
+    
+    <button class="btn btn-primary" style="float:right; margin: 5px;" id="launchButton">Lancer Barathon !</button>
 </div>
 
 <script>
     $(".logo").click(function() {
         history.back();
     });
+    
+    $("#launchButton").click(function(){
+        window.location.replace("#partieEnCours");
+    });
+    
 </script>

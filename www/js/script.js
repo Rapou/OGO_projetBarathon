@@ -163,6 +163,10 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/barathon.html',
         controller: 'BarathonCtrl'
     })
+    .when('/partieEnCours', {
+	templateUrl: 'views/partieEnCours.html',
+        controller: 'partieEnCoursCtrl'
+    })
     .otherwise({
 	redirectTo: '/'
     });
@@ -496,35 +500,37 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
  */     
 app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     
-    idBarathon = $routeParams['id'];
+    $scope.idBarathon = $routeParams['id'];
     
-    $scope.barathon = Barathon.get(idBarathon).then(function(barathon){
+    
+    /*
+    $scope.barathon = Barathon.get($scope.idBarathon).then(function(barathon){
         $scope.barathon = barathon;
         console.log(barathon);
     }, function(msg){
         alert(msg);
-    });
+    });*/
     
-    $scope.listeBars = Bar.find(idBarathon).then(function(listeBars){
+    /*
+    $scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
         $scope.listeBars = listeBars;
         console.log(listeBars);
         }, function(msg){
         alert(msg);
-    });
-    
+    });*/
     
     // Récup la liste des Bars de ce Barathon
     // Appel Ajax :
     //$scope.listeBars = listeBars.rendListeBarsPourBarathon;
     
-    /*$scope.listeBars = [
+    $scope.listeBars = [
         {
             "nom" : "Great Escape"
         },
         {
             "nom" : "Lapin vert"
         },
-    ];*/
+    ];
     
     $(".logo").click(function() {
         history.back();
@@ -557,7 +563,36 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
 /**
  * Controleur Creation Barathon
  */     
-app.controller('ValiderBarathonCtrlCtrl', function($scope, $routeParams, Barathon){
+app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
+    
+    
+    $scope.listeBarsAValider = [
+        {
+            "nom" : "Great Escape"
+        },
+        {
+            "nom" : "Lapin vert"
+        },
+    ];
+    
+    console.log("liste " + $scope.listeBarsAValider)
+    
+    
+    
+    $(".logo").click(function() {
+        history.back();
+    });
+});
+
+
+
+
+
+
+/**
+ * Controleur Creation Barathon
+ */     
+app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     
     
     $scope.listeBarsAValider = [
