@@ -104,7 +104,6 @@ var ctxBarOver = {
  * @param {type} param
 */
 $(document).ready(function(){
-    
     // crée la map OpenLayers tirée de Google
     map = new OpenLayers.Map('map', {
 	projection: new OpenLayers.Projection("EPSG:3857"),
@@ -117,6 +116,7 @@ $(document).ready(function(){
 	maxZoomLevel:20
     }
 );
+    map.addControl(new OpenLayers.Control.LayerSwitcher());
 
     map.addLayer(goog);
     map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14); 
@@ -198,7 +198,7 @@ app.factory('Bar', function($http, $q){
                     .success(function(data, status){
                         factory.bars = data;
                         deferred.resolve(factory.bars);
-                            })
+                    })
                     .error(function(){
                         deferred.reject("factory.bars : Erreur lors de la récupéaration de tous les bars");
                     });
@@ -210,7 +210,7 @@ app.factory('Bar', function($http, $q){
                     .success(function(data, status){
                         factory.bars = data;
                         deferred.resolve(factory.bars);
-                            })
+                    })
                     .error(function(){
                         deferred.reject("factory.bars : Erreur lors de la récupération des bars du barathon "+barathonId);
                     });
@@ -245,7 +245,7 @@ app.factory('Bar', function($http, $q){
 /*
  * Factory pour les Barathons
  */
-app.factory('Barathon', function($http, $q){
+app.factory('Barathon', function($http, $q, ListeBars){
     var factory = {
         barathons : false,
         
@@ -265,20 +265,34 @@ app.factory('Barathon', function($http, $q){
         },
         // Permet de rendre un bar si on a son ID
         get : function(id){
-            var barathon = {};
-            angular.forEach(factory.barathons, function(value, id){
-                if(value.id == id){
-                    barathon = value;
-                }
-            });
-            return barathon;
+            
+            var deferred = $q.defer();
+            
+            $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
+                .success(function(data, status){
+                    
+                    var listeBars = {};
+                    angular.forEach(factory.listeBars, function(value, key){
+                        if(value.id == key){
+                            barathon = value;
+                        }
+                    });
+                    
+                    factory.listeBars = data;
+                    deferred.resolve(factory.listeBars);
+                })
+                .error(function(){
+                    deferred.reject("msg");
+                });
+                
+                return deferred.promise;
         },
         rendBarathonsProposes : function(){
             var deferred = $q.defer();
             
             $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
                 .success(function(data, status){
-                    angular.forEach()
+                    //angular.forEach() // TODOOOOOOOOOOOOOO !!!!!!!!!!!!!!!!!
                     
                     factory.barathons = data;
                     deferred.resolve(factory.barathons);
@@ -310,7 +324,49 @@ app.factory('Barathon', function($http, $q){
     return factory;
 }); // factory Bar
 
-
+/*
+ * Factory pour la liste des bars d'un barathon
+ */
+app.factory('ListeBars', function($http, $q){
+    var factory = {
+        listeBars : false,
+        
+        // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+        find : function(params){
+            //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
+            var deferred = $q.defer();
+            $http.get(bootstrap + "?controller=Barathons&action=rend")
+                .success(function(data, status){
+                    factory.listeBars = data;
+                    deferred.resolve(factory.listeBars);
+                        })
+                .error(function(){
+                    deferred.reject("msg");
+                });
+                return deferred.promise;
+        },
+        // Permet de rendre un bar si on a son ID
+        get : function(id){
+            listeBars = {};
+            angular.forEach(factory.listeBars, function(value, key){
+                if(value.id == key){
+                    listebars = value;
+                }
+            });
+            return listebars;
+        },
+       
+        // Permet d'ajouter un bar
+        /*addBar : function(bar){
+            var deferred = $q.defer();
+            /* TODO ...*/
+            /*deferred.resolve();
+            return deferred.promise;
+        }*/
+        
+    };
+    return factory;
+}); // factory ListeBars
 
 
 
@@ -389,50 +445,20 @@ app.controller('CarteCtrl', function($scope) {
                         "default": new OpenLayers.Style(ptsBar, {context: ctxBar}),
                         "select": new OpenLayers.Style(ptsBarOver, {context: ctxBarOver})
                     }),
-	// styleMap: new OpenLayers.Style(ptsBar, {context: ctxBar}),
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
     map.addLayer($scope.bars);
 
-    selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {hover:true});
+    selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {
+	clickout: false, toggle: true,
+		multiple: true, hover: false,
+		toggleKey: "ctrlKey", // ctrl key removes from selection
+		multipleKey: "shiftKey", // shift key adds to selection
+    });
     map.addControl(selectControl);
     selectControl.activate();
-   /*
-    drawControls = {
-                point: new OpenLayers.Control.DrawFeature(
-                    vectors, OpenLayers.Handler.Point
-                ),
-                line: new OpenLayers.Control.DrawFeature(
-                    vectors, OpenLayers.Handler.Path
-                ),
-                polygon: new OpenLayers.Control.DrawFeature(
-                    vectors, OpenLayers.Handler.Polygon
-                ),
-                select: new OpenLayers.Control.SelectFeature(
-                    vectors,
-                    {
-                        clickout: false, toggle: false,
-                        multiple: false, hover: false,
-                        toggleKey: "ctrlKey", // ctrl key removes from selection
-                        multipleKey: "shiftKey", // shift key adds to selection
-                        box: true
-                    }
-                ),
-                selecthover: new OpenLayers.Control.SelectFeature(
-                    vectors,
-                    {
-                        multiple: false, hover: true,
-                        toggleKey: "ctrlKey", // ctrl key removes from selection
-                        multipleKey: "shiftKey" // shift key adds to selection
-                    }
-                )
-            };
-            
-            for(var key in drawControls) {
-                map.addControl(drawControls[key]);
-            }*/
     
-    
+ 
 }); // controleur carte
 
 /**
