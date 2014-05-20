@@ -175,8 +175,8 @@ app.factory('Bar', function($http, $q){
     var factory = {
         bars : false,
         // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+        // TODO : si nécessaire, traitement en fonction des params.
         find : function(params){
-            //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); // TODO Adresse à modifier pour utiliser le proxy
             var deferred = $q.defer();
             
             // requête Ajax
@@ -270,12 +270,12 @@ app.factory('Barathon', function($http, $q){
  */
 
 /**
- * Controleur affichage des bars dans les environs
+ * Controleur de test
  */     
 app.controller('testNicoCtrl', function($scope, Bar){
     $scope.bars = Bar.find().then(function(bars){
         $scope.bars = bars;
-        console.log(bars);
+        console.log($scope.bars);
     }, function(msg){
         alert(msg);
     });
@@ -293,10 +293,11 @@ app.controller('testNicoCtrl', function($scope, Bar){
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
     
-    map.addLayer(geoBars);
+    /*map.addLayer(geoBars);
     features = new OpenLayers.Feature.Vector();
     var feature;
     $.each($scope.bars.features, function(i, elem){
+        console.log(elem.properties.name);
 	feature = new OpenLayers.Feature();
 	feature.geometry = new OpenLayers.Geometry.Point(elem.geometry.coordinates);
 	feature.attributes = {
@@ -304,7 +305,7 @@ app.controller('testNicoCtrl', function($scope, Bar){
 	    id: elem.properties.id
 	};
 	geoBars.addFeatures([feature]);
-    });
+    });*/
 });
 
 
