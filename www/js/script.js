@@ -529,13 +529,13 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     $scope.idBarathon = $routeParams['id'];
     
     
-    /*
+    
     $scope.barathon = Barathon.get($scope.idBarathon).then(function(barathon){
         $scope.barathon = barathon;
         console.log(barathon);
     }, function(msg){
         alert(msg);
-    });*/
+    });
     
     /*
     $scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
