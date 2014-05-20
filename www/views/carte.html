@@ -1,6 +1,16 @@
 <div class="appHeader">
     <div class="col-lg-12">
 	<div class="logo">&nbsp;</div>
-        <div class="headerText">    <a href="#creationBarathon">clic</a>   <!-- <button class="btn" id="newBarathonBtn">Créer un barathon !</button>--></div>
+        <div class="headerText">    <button id="creationBarathon">Créer un Barathon !</button>   <!-- <button class="btn" id="newBarathonBtn">Créer un barathon !</button>--></div>
     </div>
 </div>
+
+<script>
+    // cache la div de création Barathon
+    $("#barathonCreation").hide();
+    
+    $("#creationBarathon").click(function() {
+        window.location.replace("#creationBarathon");
+    });
+    
+</script>

@@ -147,6 +147,10 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/creationBarathon.html',
 	controller: 'CreationBarathonCtrl'
     })
+    .when('/validerBarathon', {
+	templateUrl: 'views/validerBarathon.html',
+	controller: 'ValiderBarathonCtrl'
+    })
     .when('/login', {
 	templateUrl: 'views/login.html',
 	controller: 'LoginCtrl'
@@ -359,13 +363,7 @@ app.controller('testNicoCtrl', function($scope, Bar){
 
 app.controller('CarteCtrl', function($scope) {
 
-    // cache la div de création Barathon
-    $("#barathonCreation").hide();
     
-    // bouton créer barathon
-    $("#newBarathonBtn").click(function(){
-        $("#barathonCreation").fadeToggle("slow", "linear");
-    });
    
    // logo back
    $(".logo").click(function(){
@@ -555,11 +553,33 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
         },
     ];
     
+    
+    
+    
+    $(".logo").click(function() {
+        history.back();
+    });
+});
+
+
+/**
+ * Controleur Creation Barathon
+ */     
+app.controller('ValiderBarathonCtrlCtrl', function($scope, $routeParams, Barathon){
+    
+    
+    $scope.listeBarsAValider = [
+        {
+            "nom" : "Great Escape"
+        },
+        {
+            "nom" : "Lapin vert"
+        },
+    ];
+    
     console.log("liste " + $scope.listeBarsAValider)
     
-    $("#validerNewBarathonBtn").click(function() {
-        window.location.replace("#validerBarathon");
-    });
+    
     
     $(".logo").click(function() {
         history.back();
