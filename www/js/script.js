@@ -34,7 +34,7 @@ app.config(function($routeProvider) {
     })
     .when('/listeBars', {
 	templateUrl: 'views/listeBars.html',
-        controller: 'listeBarsCtrl'
+        controller: 'barsCtrl'
     })
     .when('/carte', {
 	templateUrl: 'views/carte.html',
@@ -70,7 +70,7 @@ app.factory('Bar', function($http, $q){
         find : function(params){
             //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); // TODO Adresse à modifier pour utiliser le proxy
             var deferred = $q.defer();
-            $http.get("4capitals.json")
+            $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
                 .success(function(data, status){
                     factory.bars = data;
                     deferred.resolve(factory.bars);
@@ -100,7 +100,7 @@ app.factory('Bar', function($http, $q){
         
     };
     return factory;
-})
+});
 
 /*******************************************************************************
  *  CONTROLEURS
@@ -108,52 +108,19 @@ app.factory('Bar', function($http, $q){
 /**
  * Contrôleur de la page d'accueil
  */
- 
+
 /**
- * Contrôleur de la liste des bars
- */
-app.controller('BarsListCtrl', function($scope) {
-    
-    // Le scope récupère la liste des bars depuis un service
-    $scope.bars = [
-	{
-	    "id": 0,
-	    "nom": "Quility",
-	    "latitude": -77.969742,
-	    "longitude": -38.513007
-	},
-	{
-	    "id": 1,
-	    "nom": "Plexia",
-	    "latitude": -16.959234,
-	    "longitude": 134.023616
-	},
-	{
-	    "id": 2,
-	    "nom": "Halap",
-	    "latitude": -25.651032,
-	    "longitude": 10.235857
-	},
-	{
-	    "id": 3,
-	    "nom": "Musanpoly",
-	    "latitude": -81.267279,
-	    "longitude": 10.212763
-	},
-	{
-	    "id": 4,
-	    "nom": "Puria",
-	    "latitude": 62.473652,
-	    "longitude": -1.497673
-	},
-	{
-	    "id": 5,
-	    "nom": "Enersave",
-	    "latitude": 21.109301,
-	    "longitude": -36.156543
-	}
-    ];
+ * Controleur affichage des bars dans les environs
+ */     
+app.controller('barsCtrl', function($scope, Bar){
+    $scope.bars = Bar.find().then(function(bars){
+        $scope.bars = bars;
+        console.log(bars);
+    }, function(msg){
+        alert(msg);
+    });
 });
+
 
 /**
  * Contrôleur de la page de carte
@@ -427,6 +394,7 @@ app.controller('BarathonCtrl', function($scope, $http, $routeParams){
 app.controller('listeBarsCtrl', function($scope, Bar){
     $scope.bars = Bar.find().then(function(bars){
         $scope.bars = bars;
+        console.log(bars);
     }, function(msg){
         alert(msg);
     });

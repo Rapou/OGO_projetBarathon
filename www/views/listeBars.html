@@ -3,9 +3,9 @@
 <div class="container">
     <div class="well bs-component">
         <h1>We're in the bars, y'all!</h1>
-        <div ng-controller="BarsListCtrl">
-            <div ng-repeat="bar in bars">
-                <strong>{{bar.nom}}</strong> ({{bar.latitude}}, {{bar.longitude}})
+        <div ng-controller="barsCtrl">
+            <div ng-repeat="bar in bars.features">
+                <strong>{{bar.properties.name}}</strong>
             </div>
         </div>
     </div>
