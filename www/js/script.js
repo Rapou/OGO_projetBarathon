@@ -266,14 +266,47 @@ app.controller('CarteCtrl', function($scope) {
 	// styleMap: new OpenLayers.Style(ptsBar, {context: ctxBar}),
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
+    map.addLayer($scope.bars);
+
     selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {
 	hover:true
     });
-    
-    map.addLayer($scope.bars);
     map.addControl(selectControl);
     selectControl.activate();
-        
+   /*
+    drawControls = {
+                point: new OpenLayers.Control.DrawFeature(
+                    vectors, OpenLayers.Handler.Point
+                ),
+                line: new OpenLayers.Control.DrawFeature(
+                    vectors, OpenLayers.Handler.Path
+                ),
+                polygon: new OpenLayers.Control.DrawFeature(
+                    vectors, OpenLayers.Handler.Polygon
+                ),
+                select: new OpenLayers.Control.SelectFeature(
+                    vectors,
+                    {
+                        clickout: false, toggle: false,
+                        multiple: false, hover: false,
+                        toggleKey: "ctrlKey", // ctrl key removes from selection
+                        multipleKey: "shiftKey", // shift key adds to selection
+                        box: true
+                    }
+                ),
+                selecthover: new OpenLayers.Control.SelectFeature(
+                    vectors,
+                    {
+                        multiple: false, hover: true,
+                        toggleKey: "ctrlKey", // ctrl key removes from selection
+                        multipleKey: "shiftKey" // shift key adds to selection
+                    }
+                )
+            };
+            
+            for(var key in drawControls) {
+                map.addControl(drawControls[key]);
+            }*/
     
     
 }); // controleur carte
