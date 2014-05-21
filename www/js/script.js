@@ -1,6 +1,6 @@
 var bootstrap = "bootstrap.php";
 var map;
-var loggedUserId;
+var loggedUserId = 2;
 var geoBar;
 
 /**
@@ -358,6 +358,29 @@ app.factory('Barathon', function($http, $q, ListeBars){
             return deferred.promise;
         },
         
+        ajouterBarathon : function(inputNomBarathon, inputDifficulteBarathon, inputListeBars, userCreateurId){
+            var deferred = $q.defer();
+            barathon : false;
+            
+            
+            
+            
+            
+            
+            $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&inputListeBars="+inputListeBars+"&userCreateurId="+userCreateurId)
+                .success(function(data, status){
+                    
+                    factory.barathon = data;
+                    deferred.resolve(factory.barathon);
+                        })
+                .error(function(){
+                    deferred.reject("msg");
+                });
+            
+            
+            return deferred.promise;
+        },
+        
         /*rendBarathonParId : function(idBarathon){
             var deferred = $q.defer();
             /* TODO ...*/
@@ -629,10 +652,6 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
         },
     ];
     
-    
-    $(".logo").click(function() {
-        history.back();
-    });
 });
 
 
@@ -640,7 +659,6 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
  * Controleur Creation Barathon
  */     
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
-    
     
     $scope.listeBarsAValider = [
         {
@@ -651,17 +669,27 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
         },
     ];
     
-    console.log("liste " + $scope.listeBarsAValider)
     
-    
-    
-    $(".logo").click(function() {
-        history.back();
+    $("#okButton").click(function() {
+        inputNomBarathon = $("#inputNomBarathon").val();
+        inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
+        inputListeBars = $scope.listeBarsAValider;
+        createurId = loggedUserId;
+        
+        alert("Enregistrement du Barathon... nom : " +inputNomBarathon +" liste des bars : "+inputListeBars );
+        
+        ajout = Barathon.ajouterBarathon(inputNomBarathon,inputDifficulteBarathon, inputListeBars).then(function(){
+            alert("ajout barathon : " + ajout);
+            console.log("ajout barathon : ");
+            console.log(ajout);
+        });
+        
+        
+        //window.location.replace("#home");
     });
+    
+    
 });
-
-
-
 
 
 

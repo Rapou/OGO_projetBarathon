@@ -26,6 +26,20 @@ class Controller_Barathons{
 	return $res = $this->model->rendBarathonParId();
     }
     
+    public function ajouterBarathon(){
+        //$res = $this->model->ajouterBarathon();
+        
+        //$listeBars = $_GET['listeBars'];
+        
+        /*foreach ($listeBars as $bars){
+            echo "BAR A AJOUTER";
+            var_dump($bars);
+        }*/
+        
+        $res = "TESTESTESTEST";
+        
+        return $res;
+    }
     
     /**
      * Rend une liste des Barathons de l'utilisateur loggé

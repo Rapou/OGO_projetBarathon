@@ -21,4 +21,9 @@ class Controller_ListeBars{
     public function addBarToBarathon(){
         return $this->model->addBarToBarathon();
     }
+    
+    public function ajouteBarABarathon(){
+            
+    }
+    
 }

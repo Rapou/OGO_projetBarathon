@@ -60,55 +60,18 @@ class Model_ListeBars{
             
             $sql = "INSERT INTO listeBars (barId, barathonId, ordreDansBarathon) VALUES (:barId, :barathonid, :ordreDansBarathon)";
             
-            // new data
-            $title = 'PHP Security';
-            $author = 'Jack Hijack';
-            // query
-            $sql = "INSERT INTO books (title,author) VALUES (:title,:author)";
-            
             $q = $conn->prepare($sql);
             $q->execute(array(':barId'=>$barId,
                               ':barathonId'=>$barathonId,
                               ':ordreDansbarathon'=>$ordreDansbarathon));
+            
+            return $q;
+        }
+        
+        public function ajouteBarABarathon(){
+            
         }
         
         
         
-        /*
-	public function rendPub(){
-	    $sql =  "SELECT gid, name, ST_AsGeoJSON(the_geom) AS geometry FROM bars WHERE type like 'pub'";	    
-	    
-	    $statement=$this->db->prepare($sql);
-	    $statement->execute();
-	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
-	    
-	    $i = 0;
-	    $rendu = Array();
-
-	    $fc = new FeatureCollection();
-	    foreach ($resultats as $i => $resultat) {
-		$fc->addFeature(new Feature($i, (json_decode($resultat['geometry'])), array("name" => $resultat['name'])));
-	    }
-	    	   array_push($rendu, $fc);
-
-	    return $rendu;
-	}
-	public function rendBarEtPub(){
-	    $sql =  "SELECT gid, name, ST_AsGeoJSON(the_geom) AS geometry FROM bars WHERE type like 'pub' OR type like 'bar'";	    
-	    
-	    $statement=$this->db->prepare($sql);
-	    $statement->execute();
-	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
-	    
-	    $i = 0;
-	    $rendu = Array();
-
-	    $fc = new FeatureCollection();
-	    foreach ($resultats as $i => $resultat) {
-		$fc->addFeature(new Feature($i, (json_decode($resultat['geometry'])), array("name" => $resultat['name'])));
-	    }
-	    	   array_push($rendu, $fc);
-
-	    return $rendu;
-	}*/
 }

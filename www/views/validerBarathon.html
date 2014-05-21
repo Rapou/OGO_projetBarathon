@@ -7,13 +7,24 @@
 </div>
 
 
-<div id="barathonCreation">
-    <h3>nom du barathon : ...</h3>
-    <h3>Liste ordrée des bars :</h3>
+<div id="barathonValidation">
+    
+    <h4>Entrez infos du Barathon</h4>
+    <div style="padding:5px;" class="form-group">
+        <input  type="text" class="form-control" id="inputNomBarathon" placeholder="Nom Barathon">
+        <span>Difficulté : </span>
+        <select id="inputDifficulteBarathon" style="margin-top:5px;">
+            <option value="easy">easy</option>
+            <option value="middle">middle</option>
+            <option value="hard">hard</option>
+        </select>
+    </div>
+    
+    <h4>Liste ordrée et validée des bars :</h4>
     
     <div ng-controller="CreationBarathonCtrl">
         <ul ng-repeat="bar in listeBarsAValider" id="listeBarsAValider">
-            <li>{{bar.nom}} <button class="removeBar">remove</button></li>
+            <li>{{bar.nom}}</li>
         </ul>
     </div>
 
@@ -21,7 +32,9 @@
 </div>
 
 <script>
-    $("#okButton").click(function() {
-        window.location.replace("#home");
+    
+    $(".logo").click(function(){
+        history.back();
     });
+    
 </script>

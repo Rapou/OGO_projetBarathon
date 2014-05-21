@@ -1,4 +1,7 @@
 <?php
+
+include_once 'ListeBars.php';
+
 class Model_Barathons{ 
 	/**
 	 *
@@ -62,18 +65,17 @@ class Model_Barathons{
         
         public function ajouterBarathon(){
             
-            $nom;
-            $difficulte; //calculé en fonction du nbre de bars ?
-            $tempsEstime;//calculé en fonction du nbre de bars + durée trajets
-            $description;
-            $userCreateurId;
+            $inputNom = $_GET['inputNomBarathon'];
+            $difficulte = $_GET['inputDifficulteBarathon']; //calculé en fonction du nbre de bars ?
+            $tempsEstime = "3h";//calculé en fonction du nbre de bars + durée trajets
+            $description = "Description de " . $inputNom;
+            $userCreateurId = $_GET['$userCreateurId'];
             
-            $listeBars;
-            // créer liste de bars dans table associative : 
-            // foreach bar in listeBars, addBarToBarathon
+            $sql = "INSERT INTO Barathons (nom, difficulte, tempsEstime, description, userCreateurId) VALUES ( ".$inputNom.", ". $difficulte .",". $tempsEstime .", ".$description.", ".$userCreateurId." )";
             
+            $statement=$this->db->prepare($sql);
+	    $resultat = $statement->execute();
             
-            // Ajax create new barathon
-            
+            return $resultat;
         }
 }
