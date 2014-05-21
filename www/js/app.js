@@ -154,7 +154,8 @@ var app = angular.module('Barathon', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
-	templateUrl: 'views/home.html'
+	templateUrl: 'views/home.html',
+        controller: 'homeCtrl'
     })
     .when('/listeBars', {
 	templateUrl: 'views/listeBars.html',

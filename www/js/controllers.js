@@ -4,6 +4,14 @@
 /**
  * Contrôleur de la page d'accueil
  */
+app.controller('homeCtrl', function(){
+    if(loggedUserId == -1){
+        $("#login").html("Login");
+    }
+    else {
+        $("#login").html("Loggé en tant que <strong>"+loggedUserId+"</strong>");
+    }
+});
 
 /**
  * Controleur de test
@@ -210,8 +218,7 @@ app.controller('LoginCtrl', function($scope, User) {
 
 	// Set l'id et le login de l'utilisateur loggé
 	$scope.user = User.login(login, mdp).then(function(user){
-            
-	    // Utile ?
+
 	    login = $("#inputLogin").val();
 	    mdp = $("#inputPassword").val();
             
@@ -225,6 +232,7 @@ app.controller('LoginCtrl', function($scope, User) {
                 $("#inputPassword").val("");
                 $("#erreurLogin").fadeIn(1000);
             }
+            // En cas de concordance du couple login-mot de passe
             else {
                 loggedUserId = user.login;
                 console.log($scope.user);
