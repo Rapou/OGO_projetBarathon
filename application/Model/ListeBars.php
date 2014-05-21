@@ -40,7 +40,8 @@ class Model_ListeBars{
 
             $barathonId = $_GET['barathonId'];
 
-            $sql = "SELECT * FROM ListeBars WHERE barathonId = $barathonId ODRER BY listeDansBarathon ASC";
+            $sql = "SELECT * from Bars as b LEFT JOIN ListeBars ON b.gid = ListeBars.barId ".
+                "WHERE barathonId = $barathonId ORDER BY ListeBars.ordreDansBarathon ASC";
 
             $statement=$this->db->prepare($sql);
 	    $statement->execute();

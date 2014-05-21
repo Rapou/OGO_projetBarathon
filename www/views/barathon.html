@@ -2,29 +2,30 @@
 <div class="appHeader">
     <div class="col-lg-12">
         <div class="logo">&nbsp;</div>
-        <div class="headerText" ng-controller="BarathonCtrl"><h3>{{barathon.nom}}</h3></div>
+        <div class="headerText"><h3>{{barathon.nom}}</h3></div>
     </div>
 </div>
 <div class="containerBarathons">
     <div class="well bs-component">
         
-        <div ng-controller="BarathonCtrl">
+        <button class="btn btn-primary" style="float:right; margin: 5px;" id="launchButton">Lancer Barathon !</button>
+        
+        <!--<div ng-controller="BarathonCtrl">-->
+        <div>
             <ul>
                 <li>Temps estimé : {{barathon.tempsestime}}</li>
                 <li>Difficulté : {{barathon.difficulte}}</li>
+                <li>Distance : A CALCULER</li>
             </ul>
             
             <h3>Liste des bars :</h3>
             
             <ul ng-repeat="bar in listeBars">
-                <li>{{bar.nom}}</li>
+                <li>{{bar.name}}</li>
             </ul>
             
         </div> 
-        
     </div>
-    
-    <button class="btn btn-primary" style="float:right; margin: 5px;" id="launchButton">Lancer Barathon !</button>
 </div>
 
 <script>
