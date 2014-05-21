@@ -1,6 +1,6 @@
 var bootstrap = "bootstrap.php";
 var map;
-var loggedUserId = 2;
+var loggedUserId = -1; // Par défaut, le user n'est pas loggé (= -1)
 var geoBar;
 var barAValider;
 
@@ -198,48 +198,30 @@ app.config(function($routeProvider) {
  *  FACTORIES
  *  Gère les requêtes Ajax. A la fonction de Modèle du MVC.
  ******************************************************************************/
-
-
 /*
  * Factory pour les Login
  */
 app.factory('User', function($http, $q){
     var factory = {
-	bars : false,
-	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-	// TODO : si nécessaire, traitement en fonction des params.
-	find : function(barathonId){
-	    var deferred = $q.defer();
-            
-	    // Quand on veut récupérer tous les barathons
-	    if(barathonId === undefined){
-		// requête Ajax
-		$http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
-		.success(function(data, status){
-		    factory.bars = data;
-		    deferred.resolve(factory.bars);
-		})
-		.error(function(){
-		    deferred.reject("factory.bars : Erreur lors de la récupéaration de tous les bars");
-		});
-		return deferred.promise;
-	    // Quand on veut les bars visités par un barathon
-	    }else{
-		// requête Ajax
-		$http.get(bootstrap + "?controller=listeBars&action=rendListeBarsPourBarathon&barathonId="+barathonId)
-		.success(function(data, status){
-		    factory.bars = data;
-		    deferred.resolve(factory.bars);
-		})
-		.error(function(){
-		    deferred.reject("factory.bars : Erreur lors de la récupération des bars du barathon "+barathonId);
-		});
-		return deferred.promise;
-	    }
-	},
+	user : -1,
         
-	// Permet de rendre un bar si on a son ID
-	validerUser : function(){
+        // On vérifie si le couple utilisateur + mot de passe est correct
+        login : function(userId, pass){
+            var deferred = $q.defer();
+            $http.get(bootstrap + "?controller=Users&action=validerUser&userLogin="+userId+"&mdp="+pass)
+                // Si oui, on set la globale userLoggedIn et on revient à l'index
+                .success(function(data, status){
+                    factory.user = data;
+                    deferred.resolve(factory.user);
+                    })
+                // Sinon on affiche un message d'erreur et on vide le champs password
+                .error(function(){
+                    deferred.reject("msg");
+                });
+                return deferred.promise;
+            }
+        
+	/*validerUser : function(){
 	    var bar = {};
 	    angular.forEach(factory.bars, function(value, key){
 		if(value.id == key){
@@ -247,7 +229,7 @@ app.factory('User', function($http, $q){
 		}
 	    });
 	    return bar;
-	}
+	}*/
         
         
     };
@@ -636,17 +618,27 @@ app.controller('CarteCtrl', function($scope) {
 /**
  * Contrôleur login
  */
-app.controller('LoginCtrl', function() {
-    
-    $("#submitLogin").click(function(){
-        
-	var login = $("#inputLogin").val();
-	var mdp = $("#inputPassword").val();
-        
+app.controller('LoginCtrl', function($scope, User) {
+      
     //bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
         
     // Validate mdp : Controller_Users->validerUsers();
+
+    login = $("#inputLogin").val();
+    mdp = $("#inputPassword").val();
         
+    $("#submitLogin").click(function(){
+        // Set l'id et le login de l'utilisateur loggé
+        $scope.user = User.login(login, mdp).then(function(){
+            
+            // Utile ?
+            login = $("#inputLogin").val();
+            mdp = $("#inputPassword").val();
+            
+            
+        }, function(msg){
+            alert(msg);
+        });
     });
     
     $(".logo").click(function() {
