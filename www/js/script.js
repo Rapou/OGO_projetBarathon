@@ -499,14 +499,14 @@ app.controller('testNicoCtrl', function($scope, Bar){
     $scope.bars = Bar.find().then(function(bars){
 	$scope.bars = bars;
 	geoBars  = new OpenLayers.Layer.Vector("Features", {
-	    /*strategies: [
+	    strategies: [
 	    new OpenLayers.Strategy.Fixed(),
 	    new OpenLayers.Strategy.AnimatedCluster({
 		distance: 45,
 		animationMethod: OpenLayers.Easing.Expo.easeOut,
 		animationDuration: 10
 	    })
-	    ],*/
+	    ],
 	    styleMap: new OpenLayers.Style(ptsBar, {
 		context: ctxBar
 	    })
@@ -517,7 +517,7 @@ app.controller('testNicoCtrl', function($scope, Bar){
 
 	$.each($scope.bars.features, function(i, elem){
 	    ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates);
-	   //  ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+	    ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
 	    features[i] = new OpenLayers.Feature.Vector(ptGeom);
 	    features[i].attributes = {
 		name: elem.properties.name,
