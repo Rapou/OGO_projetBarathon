@@ -38,24 +38,7 @@ class Controller_Barathons{
         // crée le Barathon
         $idBarathonCree = $this->model->ajouterBarathon();
         
-        // crée la listeBars pour ce Barathon
-        if($idBarathonCree){
-            $listeBars = $_GET['listeIdBarsAValider'];
-            
-            $ordreDansB = 1;
-            //$resultatListeBars = array();
-            
-            
-            // ------------------------------------------------------------------------------------------
-            for($i=0; $i < count($listeBars); $i++){
-                
-                //$this->modelListeBars->ajouterBarPourBarathon($idBarathonCree, $listeBars[$i], $ordreDansB);
-                $ordreDansB++;
-            }
-            
-        }
-        
-        return count($listeBars);
+        return $idBarathonCree;
         die();
     }
     
