@@ -110,11 +110,16 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 		map.zoomIn();
 		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
 	    }else{
-		var barsARendre = 
-		    {
+		var barsARendre = {
 		       gid: feature.cluster[0].attributes.id,
 		       nom: feature.cluster[0].attributes.name                             
-		    };
+		};
+		if(barsAValider == "UNDEFINED"){
+		    barsAValider = [barsARendre];
+		}else{
+		    barsAValider.push(barsARendre);
+		}
+		console.log(barsAValider);
 	    }
 	}
 
