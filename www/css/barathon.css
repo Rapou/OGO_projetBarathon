@@ -74,17 +74,17 @@
     float:left;
 }
 .appHeader .logo {
-    width:60px;
+    width:80px;
     height:80px;
-    background-image:URL('../img/logo_vFlat2.png');
+    background-image:URL('../img/back_button.png');
     background-repeat:no-repeat;
-    background-size:60px 60px;
+    background-size:77px 60px;
     background-position: left;
     position: relative;
     margin-left:10px;
 }
 .appHeader .logo:hover {
-    background-size:62px 62px;
+    background-size:79px 62px;
 }
 .headerText {
     color : white;
