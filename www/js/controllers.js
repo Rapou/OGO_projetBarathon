@@ -106,6 +106,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
  * Controleur Creation Barathon
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, Bar){
+    $scope.listeBarsAValider = listeBarsAValider;
     
     $("#creerNewBarathonBtn").click(function() {
 	window.location.href= "#validerBarathon";
@@ -122,13 +123,13 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 		       gid: feature.cluster[0].attributes.id,
 		       nom: feature.cluster[0].attributes.name                             
 		};
-		if(barsAValider == "UNDEFINED"){
-		    barsAValider = [barsARendre];
+		if(listeBarsAValider == "UNDEFINED"){
+		    listeBarsAValider = [barsARendre];
 		}else{
-		    barsAValider.push(barsARendre);
+		    listeBarsAValider.push(barsARendre);
 		}
-		$scope.barsAValider = barsAValider;
-		$routeParams.reload();
+
+		//$routeParams.reload();
 	    }
 	}
 
@@ -314,18 +315,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	alert(msg);
     });
     
-    // Récup la liste des Bars de ce Barathon
-    // Appel Ajax :
-    //$scope.listeBars = listeBars.rendListeBarsPourBarathon;
     
-    /*$scope.listeBars = [
-        {
-            "nom" : "Great Escape"
-        },
-        {
-            "nom" : "Lapin vert"
-        },
-    ];*/
     
     
     $(".logo").click(function() {
@@ -338,19 +328,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
  */     
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
     
-    $scope.listeBarsAValider = [
-    {
-	"nom" : "Great Escape"
-    },
-    {
-	"nom" : "Lapin vert"
-    },{
-        "nom" : "Bleu Lézard"
-    }
-    ];
     
-    console.log("Liste des bars à valider : ---");
-    console.log("liste " + $scope.listeBarsAValider)
     
     /**
      * Bouton valider New Barathon
@@ -362,7 +340,10 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	var inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
 	var userCreateurId = loggedUserId;
         
-        $scope.listeBarsAValider = listeBarsAValider;
+        $scope.listeBarsAValider = barsAValider;
+        
+        console.log("Liste des bars à valider : ---");
+        console.log("liste " + $scope.listeBarsAValider)
         
 	//alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + " userCreateurId = " + userCreateurId);
         
