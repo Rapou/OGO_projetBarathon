@@ -330,7 +330,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	    var features = new Array();
 
 	    $.each($scope.listeBars, function(i, elem){
-		var myGeo = $.parseJSON(elem.the_geom);
+		var myGeo = $.parseJSON(elem.geometry);
 		ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
 		ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
 		features[i] = new OpenLayers.Feature.Vector(ptGeom);
