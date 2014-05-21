@@ -1,7 +1,8 @@
 var bootstrap = "bootstrap.php";
 var map;
+var geoBars = "UNDEFINED";
+
 var loggedUserId = -1; // Par défaut, le user n'est pas loggé (= -1)
-var geoBar;
 var barAValider;
 
 /**
