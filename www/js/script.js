@@ -52,6 +52,34 @@ var ctxBar = {
 };
     
 /**
+ * Fonction qui définit les paramètres selon le contexte en mode :hover
+ * @type type
+ */
+var ctxBarOver = { 
+    nombre: function(feature) {
+	if(feature.attributes.count>=2){
+	    return feature.attributes.count;
+	}else{
+	    return feature.cluster[0].attributes.name;
+	}
+    },
+    myImage: function(feature) {
+	if(feature.attributes.count>=2){
+	    return "img/logo_multi_over.png";
+	}else{
+	    return "img/logo_dot_over.png";
+	}
+    },
+    myWidth: function(feature) {
+	if(feature.attributes.count>=2){
+	    return 50;
+	}else{
+	    return 40;
+	}
+    }
+};
+
+/**
  * Représentation d'un Bar:hover
  * @type OpenLayers.Symbolizer.Point
  */
@@ -89,34 +117,6 @@ var ptsBarValider = new OpenLayers.Symbolizer.Point({
     labelSelect:true,
     labelPosition:30
 });
-    
-/**
- * Fonction qui définit les paramètres selon le contexte en mode :hover
- * @type type
- */
-var ctxBarOver = { 
-    nombre: function(feature) {
-	if(feature.attributes.count>=2){
-	    return feature.attributes.count;
-	}else{
-	    return feature.cluster[0].attributes.name;
-	}
-    },
-    myImage: function(feature) {
-	if(feature.attributes.count>=2){
-	    return "img/logo_multi_over.png";
-	}else{
-	    return "img/logo_dot_over.png";
-	}
-    },
-    myWidth: function(feature) {
-	if(feature.attributes.count>=2){
-	    return 50;
-	}else{
-	    return 40;
-	}
-    }
-};
 
 /**
  *                       ---- DOC READY
@@ -365,10 +365,6 @@ app.factory('Barathon', function($http, $q, ListeBars){
             barathon : false;
             
             
-            
-            
-            
-            
             $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&inputListeBars="+inputListeBars+"&userCreateurId="+userCreateurId)
                 .success(function(data, status){
                     
@@ -408,39 +404,39 @@ app.factory('Barathon', function($http, $q, ListeBars){
 app.factory('ListeBars', function($http, $q){
     var factory = {
         
-        listeBars : {},
+	listeBars : {},
         
-        // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-        find : function(barathonId){
-            var deferred = $q.defer();
+	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+	find : function(barathonId){
+	    var deferred = $q.defer();
             
-            // Quand on veut récupérer tous les barathons
-            if(barathonId === undefined){
-                $http.get(bootstrap + "?controller=Barathons&action=rend")
-                    .success(function(data, status){
-                        factory.listeBars = data;
-                        deferred.resolve(factory.listeBars);
-                            })
-                    .error(function(){
-                        deferred.reject("msg");
-                    });
-                    return deferred.promise;
-            }
-            // Quand on ne récupère qu'un Bar à la fois
-            else{
-                $http.get(bootstrap + "?controller=Barathons&action=rend")
-                    .success(function(data, status){
-                        factory.listeBars = data;
-                        deferred.resolve(factory.listeBars);
-                            })
-                    .error(function(){
-                        deferred.reject("msg");
-                    });
-                    return deferred.promise;
-            }
-        //,
-        // Permet de rendre un bar si on a son ID
-        /*get : function(id){
+	    // Quand on veut récupérer tous les barathons
+	    if(barathonId === undefined){
+		$http.get(bootstrap + "?controller=Barathons&action=rend")
+		.success(function(data, status){
+		    factory.listeBars = data;
+		    deferred.resolve(factory.listeBars);
+		})
+		.error(function(){
+		    deferred.reject("msg");
+		});
+		return deferred.promise;
+	    }
+	    // Quand on ne récupère qu'un Bar à la fois
+	    else{
+		$http.get(bootstrap + "?controller=Barathons&action=rend")
+		.success(function(data, status){
+		    factory.listeBars = data;
+		    deferred.resolve(factory.listeBars);
+		})
+		.error(function(){
+		    deferred.reject("msg");
+		});
+		return deferred.promise;
+	    }
+	//,
+	// Permet de rendre un bar si on a son ID
+	/*get : function(id){
             listeBars = {};
             angular.forEach(factory.listeBars, function(value, key){
                 if(value.id == key){
@@ -476,16 +472,17 @@ app.factory('ListeBars', function($http, $q){
 	    return listebars;
 	}*/
        
-    // Permet d'ajouter un bar
-    /*addBar : function(bar){
+	// Permet d'ajouter un bar
+	/*addBar : function(bar){
             var deferred = $q.defer();
             /* TODO ...*/
-    /*deferred.resolve();
+	/*deferred.resolve();
             return deferred.promise;
         }*/
         
-    }};
-    return factory;
+	}
+    };
+return factory;
 }); // factory ListeBars
 
 
@@ -503,34 +500,61 @@ app.factory('ListeBars', function($http, $q){
 app.controller('testNicoCtrl', function($scope, Bar){
     $scope.bars = Bar.find().then(function(bars){
 	$scope.bars = bars;
-	geoBars  = new OpenLayers.Layer.Vector("Features", {
+	geoBars  = new OpenLayers.Layer.Vector("Bars", {
 	    strategies: [
-	    new OpenLayers.Strategy.Fixed(),
-	    new OpenLayers.Strategy.AnimatedCluster({
-		distance: 45,
-		animationMethod: OpenLayers.Easing.Expo.easeOut,
-		animationDuration: 10
-	    })
+		new OpenLayers.Strategy.AnimatedCluster({
+		    distance: 45,
+		    animationMethod: OpenLayers.Easing.Expo.easeOut,
+		    animationDuration: 10
+		})
 	    ],
-	    styleMap: new OpenLayers.Style(ptsBar, {
-		context: ctxBar
+	    styleMap: new OpenLayers.StyleMap({
+		"default": new OpenLayers.Style(ptsBar, {
+		    context: ctxBar
+		}),
+		"select": new OpenLayers.Style(ptsBarOver, {
+		    context: ctxBarOver
+		})
 	    })
 	});
-	console.log(geoBars);	
 	map.addLayer(geoBars);
 	var features = new Array();
-
+	
 	$.each($scope.bars.features, function(i, elem){
-	    ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates);
+	    ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates[0], elem.geometry.coordinates[1]);
 	    ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
 	    features[i] = new OpenLayers.Feature.Vector(ptGeom);
 	    features[i].attributes = {
-		name: elem.properties.name,
-		id: elem.properties.id
+		name: elem.properties.name
 	    };
 	});
 	geoBars.addFeatures(features);
-
+	selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+	    clickout: false, 
+	    toggle: true,
+	    multiple: true, 
+	    hover: false
+	});
+	map.addControl(selectControl);
+	selectControl.activate();
+	geoBars.events.register("featureselected", features, onFeatureSelect);
+	geoBars.events.register("featureunselected", features, onFeatureUnselect);
+	
+	function onFeatureSelect(evt) {
+	    feature = evt.feature;
+	    if(feature.attributes.count>=2){
+		console.log("This is a cluster");
+	    }else{
+		console.log("this is not a cluster");
+	    }
+	}
+              
+	function onFeatureUnselect(evt) {
+	    feature = evt.feature;
+	    console.log("UnSelect" + feature);
+	}
+    
+	
     }, function(msg){
 	alert(msg);
     });
@@ -540,55 +564,82 @@ app.controller('testNicoCtrl', function($scope, Bar){
 /**
  * Contrôleur de la page de carte
  */
-app.controller('CarteCtrl', function($scope) {
+app.controller('CarteCtrl', function($scope, Bar) {
 
     // logo back
     $(".logo").click(function(){
 	history.back();
     });
 
-    // set les bars dans le scope
-    $scope.bars  = new OpenLayers.Layer.Vector("Features", {
-	protocol: new OpenLayers.Protocol.HTTP({
-	    url: bootstrap + "?controller=Bars&action=rendBarEtPub",
-	    format: new OpenLayers.Format.GeoJSON()
-	}),
-	strategies: [
-	new OpenLayers.Strategy.Fixed(),
-	new OpenLayers.Strategy.AnimatedCluster({
-	    distance: 45,
-	    animationMethod: OpenLayers.Easing.Expo.easeOut,
-	    animationDuration: 10
-	})
-	],
-	styleMap: new OpenLayers.StyleMap({
-	    "default": new OpenLayers.Style(ptsBar, {
-		context: ctxBar
-	    }),
-	    "select": new OpenLayers.Style(ptsBarOver, {
-		context: ctxBarOver
+     $scope.bars = Bar.find().then(function(bars){
+	$scope.bars = bars;
+	geoBars  = new OpenLayers.Layer.Vector("Bars", {
+	    strategies: [
+		new OpenLayers.Strategy.AnimatedCluster({
+		    distance: 45,
+		    animationMethod: OpenLayers.Easing.Expo.easeOut,
+		    animationDuration: 10
+		})
+	    ],
+	    styleMap: new OpenLayers.StyleMap({
+		"default": new OpenLayers.Style(ptsBar, {
+		    context: ctxBar
+		}),
+		"select": new OpenLayers.Style(ptsBarOver, {
+		    context: ctxBarOver
+		})
 	    })
-	}),
-	projection: new OpenLayers.Projection("EPSG:4326")
-    });
-    map.addLayer($scope.bars);
-
-    selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {
-	clickout: false, 
-	toggle: true,
-	multiple: true, 
-	hover: false,
-	toggleKey: "ctrlKey", // ctrl key removes from selection
-	multipleKey: "shiftKey" // shift key adds to selection
+	});
+	map.addLayer(geoBars);
+	var features = new Array();
+	
+	$.each($scope.bars.features, function(i, elem){
+	    ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates[0], elem.geometry.coordinates[1]);
+	    ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+	    features[i] = new OpenLayers.Feature.Vector(ptGeom);
+	    features[i].attributes = {
+		name: elem.properties.name
+	    };
+	});
+	geoBars.addFeatures(features);
+	selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+	    clickout: false, 
+	    toggle: true,
+	    multiple: true, 
+	    hover: false
+	});
+	map.addControl(selectControl);
+	selectControl.activate();
+	geoBars.events.register("featureselected", features, onFeatureSelect);
+	geoBars.events.register("featureunselected", features, onFeatureUnselect);
+	
+	function onFeatureSelect(evt) {
+	    feature = evt.feature;
+	    if(feature.attributes.count>=2){
+		console.log(feature);
+		map.zoomIn();
+		console.log(feature.geometry.x + "," + feature.geometry.y);
+		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
+		
+	    }else{
+		
+	    }
+	}
+              
+	function onFeatureUnselect(evt) {
+	    feature = evt.feature;
+	    console.log("UnSelect" + feature);
+	}
+    
+	
+    }, function(msg){
+	alert(msg);
     });
     
-    map.addControl(selectControl);
-    selectControl.activate();
-    
-    /**
+    /***
      * A remettre dans CreationBarathon
      **/
-    $scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
+    /*$scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
 	styleMap: new OpenLayers.StyleMap(ptsBarValider)
     });
     map.addLayer($scope.barsAValider);
@@ -608,11 +659,9 @@ app.controller('CarteCtrl', function($scope) {
 	feature = evt.feature;
 	console.log("UnSelect" + feature);
 
-    }
+    }*/
     
     
-    
- 
 }); // controleur carte
 
 /**
@@ -666,7 +715,6 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
     // Set la liste des barathons dans le scope
     $scope.barathonsProposes = Barathon.rendBarathonsProposes().then(function(barathonsProposes){
 	$scope.barathonsProposes = barathonsProposes;
-	console.log("Liste des barathons proposés --------"+barathonsProposes);
     }, function(msg){
 	alert(msg);
     });
@@ -700,10 +748,10 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     });
     
     $scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
-        $scope.listeBars = listeBars;
-        console.log("Liste des bars : " + listeBars);
-        }, function(msg){
-        alert(msg);
+	$scope.listeBars = listeBars;
+	console.log("Liste des bars : " + listeBars);
+    }, function(msg){
+	alert(msg);
     });
     
     // Récup la liste des Bars de ce Barathon
@@ -719,7 +767,6 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
         },
     ];*/
     
-    //console.log("history : " + history.back());
     
     $(".logo").click(function() {
 	history.back();
@@ -732,17 +779,16 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
  * Controleur Creation Barathon
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
+    console.log("Whooot?" + $scope.bars)
     
-    // logo back
-    $(".logo").click(function(){
-	history.back();
+    $("#creerNewBarathonBtn").click(function() {
+        window.location.href= "#validerBarathon";
     });
-    console.log("Whooot?" + $scope.bars);
     
-    
+    /*
     $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
     $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
-    
+    */
 
     function onFeatureSelect(evt) {
 	feature = evt.feature;
@@ -766,14 +812,49 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
     
     console.log("liste " + $scope.listeBarsAValider)
      
-    $(".logo").click(function() {
-	history.back();
+    
+});
+
+/**
+ * Controleur Validation Barathon
+ */     
+app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
+    
+    $scope.listeBarsAValider = [
+        {
+            "nom" : "Great Escape"
+        },
+        {
+            "nom" : "Lapin vert"
+        },
+    ];
+    
+    console.log("liste " + $scope.listeBarsAValider)
+    
+    
+    $("#validerNewBarathonBtn").click(function(){
+        
+        inputNomBarathon = $("#inputNomBarathon").val();
+        inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
+        inputListeBars = $scope.listeBarsAValider;
+        userCreateurId = loggedUserId;
+
+        alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + "listeBars = " + inputListeBars + " userCreateurId = " + userCreateurId);
+        
+        
+        Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, inputListeBars, userCreateurId).then(function(idBarathonCree){
+            console.log("Barathon.ajouterBarathon() ------------- return :");
+            console.log(idBarathonCree);
+        });
+        
     });
+    
+    
 });
 
 
 /**
- * Controleur Creation Barathon
+ * Controleur Partie en Cours
  */     
 app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     
@@ -787,26 +868,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     ];
     
 
-    
-    $("#okButton").click(function() {
-        inputNomBarathon = $("#inputNomBarathon").val();
-        inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
-        inputListeBars = $scope.listeBarsAValider;
-        createurId = loggedUserId;
-        
-        alert("Enregistrement du Barathon... nom : " +inputNomBarathon +" liste des bars : "+inputListeBars );
-        
-        ajout = Barathon.ajouterBarathon(inputNomBarathon,inputDifficulteBarathon, inputListeBars).then(function(){
-            alert("ajout barathon : " + ajout);
-            console.log("ajout barathon : ");
-            console.log(ajout);
-        });
-        
-        
-        //window.location.replace("#home");
-    });
-    
-    
 
     $(".logo").click(function() {
 	history.go(-2); // TODO : regarder pourquoi ça ne marche pas avec un history.back() - NB
@@ -814,24 +875,3 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
 });
 
 
-/**
- * Controleur Creation Barathon
- */     
-app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
-    
-    
-    $scope.listeBarsAValider = [
-    {
-	"nom" : "Great Escape"
-    },
-    {
-	"nom" : "Lapin vert"
-    },
-    ];
-    
-    console.log("liste " + $scope.listeBarsAValider)
-    
-    $(".logo").click(function() {
-	history.back();
-    });
-});

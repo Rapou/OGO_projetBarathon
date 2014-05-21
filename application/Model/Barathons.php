@@ -69,9 +69,11 @@ class Model_Barathons{
             $difficulte = $_GET['inputDifficulteBarathon']; //calculé en fonction du nbre de bars ?
             $tempsEstime = "3h";//calculé en fonction du nbre de bars + durée trajets
             $description = "Description de " . $inputNom;
-            $userCreateurId = $_GET['$userCreateurId'];
+            $userCreateurId = $_GET['userCreateurId'];
             
-            $sql = "INSERT INTO Barathons (nom, difficulte, tempsEstime, description, userCreateurId) VALUES ( ".$inputNom.", ". $difficulte .",". $tempsEstime .", ".$description.", ".$userCreateurId." )";
+            $sql = "INSERT INTO Barathons (nom, difficulte, tempsEstime, description, userCreateurId) VALUES ( '".$inputNom."', '". $difficulte ."','". $tempsEstime ."', '".$description."', ".$userCreateurId." )";
+            
+            
             
             $statement=$this->db->prepare($sql);
 	    $resultat = $statement->execute();
