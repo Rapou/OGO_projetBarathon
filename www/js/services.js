@@ -169,7 +169,7 @@ app.factory('Barathon', function($http, $q, ListeBars){
 	    return deferred.promise;
 	},
         
-        ajouterBarathon : function(inputNomBarathon, inputDifficulteBarathon, userCreateurId){
+        ajouterBarathon : function(inputNomBarathon, inputDifficulteBarathon, listeBars,  userCreateurId){
             var deferred = $q.defer();
             barathon : false;
             

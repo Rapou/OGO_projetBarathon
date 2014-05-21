@@ -102,17 +102,22 @@ app.controller('CarteCtrl', function($scope, Bar) {
     });
 }); // controleur carte
 
+
+
+
+
+
 /**
  * Controleur Creation Barathon
  */     
-app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, Bar){
-    $scope.listeBarsAValider = listeBarsAValider;
-    
+app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Barathon, Bar){
+		
     $("#creerNewBarathonBtn").click(function() {
 	window.location.href= "#validerBarathon";
     });
     
     $scope.bars = Bar.find().then(function(bars){
+	$scope.listeBarsAValider = listeBarsAValider;
 	function onFeatureSelectCBarathon(evt) {
 	    feature = evt.feature;
 	    if(feature.attributes.count>=2){
@@ -128,8 +133,8 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 		}else{
 		    listeBarsAValider.push(barsARendre);
 		}
-
-		//$routeParams.reload();
+		console.log(listeBarsAValider);
+		$route.reload();
 	    }
 	}
 
@@ -190,20 +195,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 	// $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
     }, function(msg){
 	alert(msg);
-    });
-   
-/*$scope.listeBarsAValider = [
-    {
-	"nom" : "Great Escape"
-    },
-    {
-	"nom" : "Lapin vert"
-    },
-    ];*/
-    
-// console.log("liste " + $scope.listeBarsAValider)
-     
-    
+    });     
 });
 
 /**
@@ -378,7 +370,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
     
     
-    
+            $scope.listeBarsAValider = listeBarsAValider;
+
     /**
      * Bouton valider New Barathon
      */
@@ -389,7 +382,6 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	var inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
 	var userCreateurId = loggedUserId;
         
-        $scope.listeBarsAValider = barsAValider;
         
         console.log("Liste des bars à valider : ---");
         console.log("liste " + $scope.listeBarsAValider)
@@ -397,7 +389,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	//alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + " userCreateurId = " + userCreateurId);
         
         // ajoute le barathon
-	var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, userCreateurId).then(function(idBarathonCree){
+	var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, $scope.listeBarsAValider, userCreateurId).then(function(idBarathonCree){
 	    console.log("Barathon.ajouterBarathon() ok");
 	});
         
