@@ -398,9 +398,6 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
     
     
     $scope.listeBarsAValider = listeBarsAValider;
-    $scope.go = function ( path ) {
-	$location.path( path );
-    };
 
     /**
      * Bouton valider New Barathon
@@ -421,14 +418,14 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 		idBara = parseInt(idBarathonCree.replace('"',''));
 		// ajoute les bars à la listeBars du Barathon
 		ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
-		    console.log("bar ajouté : "+ bar_id);
+		    
 		}, function(msg){
 		    console.log(msg);
 		});
 		ordreDansBarathon++;
 	    });
-	    console.log("Barathon.ajouterBarathon() ok");
 	    listeBarsAValider = "UNDEFINED";
+	    window.location.href= "#home";
 	});
     });
 });
