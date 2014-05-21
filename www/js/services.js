@@ -272,15 +272,18 @@ app.factory('Ways', function($http, $q){
 	ways : {},
         
 	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-	rendCheminEntreDeuxBars : function(start,end){
+	rendCheminEntre2Bars : function(){
+            
 	    var deferred = $q.defer();
             
-	    $http.get(bootstrap + "?controller=Ways&action=rendCheminEntreDeuxBars?start="+start+"&end="+end)
+	    $http.get(bootstrap + "?controller=Ways&action=rendCheminEntre2Bars")
 	    .success(function(data, status){
+                console.log("SUCESS" + data);
 		factory.ways = data;
-		deferred.resolve(factory.listeBars);
+		deferred.resolve(factory.ways);
 	    })
 	    .error(function(){
+                console.log("FAIL");
 		deferred.reject("msg");
 	    });
 	    return deferred.promise;

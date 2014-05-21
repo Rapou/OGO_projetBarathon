@@ -18,34 +18,49 @@ app.controller('homeCtrl', function(){
  */     
 app.controller('testNicoCtrl', function($scope, Bar, Ways){
     
-    console.log("Hello testeur");
     
     // appel ajax pour récup les segments de route
     $scope.segments = Ways.rendCheminEntre2Bars().then(function(segments){
-        $scope.segments = segments;
         
-        $routeAAfficher = new OpenLayers.Layer.Vector();
+        
+        $scope.segments = segments;
+        alert("ctrl testNico : segment de Ajax"+segments);
+        
+        //routeAAfficher = new OpenLayers.Geometry.MultiLineString();
+        //feautre = array();
+        alert("nom geoBars" + geoBars);
         
         //foreach segment, ajout au Vector de la route
-        $($scope.segments).each(function(segment){
-            var geomSegment = segment['the_geom'];
+        $($scope.segments).each(function(i, segment){
+            var geomSegment = $.parseJSON(segment.the_geom);
+            
+            var arrayPoints = Array();
+            
+            $(geomSegment.coordinates).each(function(i, point){
+                arrayPoints[i] = new OpenLayers.Geometry.Point(point[0],point[1] );
+            })
 
-            var vector = new OpenLayers.Layer.Vector();
-            routeAAfficher.addFeatures(new OpenLayers.Feature.Vector(segment['the_geom']));
+            var vector = new OpenLayers.Geometry.LineString(arrayPoints);
+
+            //routeAAfficher.addFeatures(new OpenLayers.Feature.Vector(vector));
+            geoBars.addFeatures(new OpenLayers.Feature.Vector(vector));
+            
+            
         });
         
         // ajout du Vector route sur la map
-        map.addLayers([vector]);
+        map.addLayers(geoBars);
+        
         
     });
     
     
-    
+    /*
     $scope.bars = Bar.find().then(function(bars){
 	$scope.bars = bars;
     }, function(msg){
 	alert(msg);
-    });
+    });*/
 });
 
 

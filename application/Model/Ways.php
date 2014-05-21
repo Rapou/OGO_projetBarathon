@@ -39,7 +39,7 @@ class Model_Ways{
             
             if (is_numeric($start) && is_numeric($end)) {
 
-                $query = "SELECT seq, id1 AS node, id2 AS edge, cost, ST_asewkt(the_geom) as the_geom FROM pgr_dijkstra "
+                $query = "SELECT seq, id1 AS node, id2 AS edge, cost, st_asgeojson(the_geom) as the_geom FROM pgr_dijkstra "
                         . "( 'SELECT gid as id , source, target, length as cost FROM ways', 9000, 9183, false, false) di INNER JOIN ways ON di.id2 = ways.gid "; 
                 
                 
