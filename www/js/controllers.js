@@ -95,7 +95,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
             
             // Centrage de la map pour afficher tous les points
             console.log("Emplacement carteCtrl : " + geoBars.getDataExtent());
-            map.zoomToExtent(geoBars.getDataExtent());
+            map.zoomToExtent(geoBars.getDataExtent()); //////////////////////////////////////////// A DEBUGGER AVEC LE PROF
 	
 	   geoBars.events.register("featureselected", features, onFeatureSelectCarte);
 	   // geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
@@ -126,7 +126,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 		map.zoomIn();
 		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
 	    }else{
-		var barAEnlever = false
+		var barAEnlever = false;
 		
 		var barsARendre = {
 		       gid: feature.cluster[0].attributes.id,
@@ -291,17 +291,6 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
  */
 app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     
-    // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
-    // Puis centrage de la carte
-    //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
-    map.events.register('loadend', map.geoBars, function(evt){
-        console.log("Je suis là !");
-        map.zoomToExtent(geoBars.getDataExtent());
-    });
-    //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
-    //map.zoomToExtent(geoBars.getDataExtent());
-        
-    
     $scope.idBarathon = $routeParams['id'];
 
     $scope.barathon = Barathon.get($scope.idBarathon).then(function(barathon){
@@ -352,6 +341,11 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 		};
 	    });
 	    geoBars.addFeatures(features);
+            map.zoomToExtent(geoBars.getDataExtent());
+            /*geoBars.events.register('loadend', geoBars, function(evt){
+                console.log("Je suis là !");
+                map.zoomToExtent(geoBars.getDataExtent());
+            });*/
             
 	    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
 		clickout: false, 
@@ -362,6 +356,12 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	    map.addControl(selectControl);
 	    selectControl.activate();
             
+            // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
+            // Puis centrage de la carte
+            //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
+            
+            //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
+            //map.zoomToExtent(geoBars.getDataExtent());
 
     }, function(msg){
 	alert(msg);
