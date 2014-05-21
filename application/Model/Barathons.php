@@ -1,6 +1,5 @@
 <?php
 
-include_once 'ListeBars.php';
 
 class Model_Barathons{
 	/**

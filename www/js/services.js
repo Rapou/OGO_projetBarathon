@@ -169,11 +169,11 @@ app.factory('Barathon', function($http, $q, ListeBars){
 	    return deferred.promise;
 	},
         
-        ajouterBarathon : function(inputNomBarathon, inputDifficulteBarathon, inputListeBars, userCreateurId){
+        ajouterBarathon : function(inputNomBarathon, inputDifficulteBarathon, userCreateurId){
             var deferred = $q.defer();
             barathon : false;
             
-            $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&listeBarsAValider="+inputListeBars+"&userCreateurId="+userCreateurId)
+            $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&userCreateurId="+userCreateurId)
                 .success(function(data, status){
                     
                     factory.barathon = data;
@@ -240,42 +240,27 @@ app.factory('ListeBars', function($http, $q){
             });
             return listebars;
         },*/
-	/*listeBars : false,
+	
+	}, // find
         
-	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-	find : function(params){
-	    //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
+        
+        ajouterBarPourBarathon : function(barathonId, barId, ordreDansBarathon){
 	    var deferred = $q.defer();
-	    $http.get(bootstrap + "?controller=Barathons&action=rend")
-	    .success(function(data, status){
-		factory.listeBars = data;
-		deferred.resolve(factory.listeBars);
-	    })
-	    .error(function(){
-		deferred.reject("msg");
-	    });
-	    return deferred.promise;
-	},
-	// Permet de rendre un bar si on a son ID
-	get : function(id){
-	    listeBars = {};
-	    angular.forEach(factory.listeBars, function(value, key){
-		if(value.id == key){
-		    listebars = value;
-		}
-	    });
-	    return listebars;
-	}*/
-       
-	// Permet d'ajouter un bar
-	/*addBar : function(bar){
-            var deferred = $q.defer();
-            /* TODO ...*/
-	/*deferred.resolve();
+            
+            $http.get(bootstrap + "?controller=ListeBars&action=ajouterBarPourBarathon&barathonId="+barathonId+"&barId="+ barId +"&ordreDansBarathon="+ ordreDansBarathon)
+		.success(function(data, status){
+		    factory.listeBars = data;
+		    deferred.resolve(factory.listeBars);
+		})
+		.error(function(){
+		    deferred.reject("msg");
+		});
+		return deferred.promise;
+            
+            
             return deferred.promise;
-        }*/
+        }
         
-	}
     };
 return factory;
 }); // factory ListeBars

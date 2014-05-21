@@ -322,7 +322,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 /**
  * Controleur Validation Barathon
  */     
-app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
+app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
     
     $scope.listeBarsAValider = [
     {
@@ -330,25 +330,47 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
     },
     {
 	"nom" : "Lapin vert"
-    },
+    },{
+        "nom" : "Bleu Lézard"
+    }
     ];
     
+    console.log("Liste des bars à valider : ---");
     console.log("liste " + $scope.listeBarsAValider)
     
-    
+    /**
+     * Bouton valider New Barathon
+     */
     $("#validerNewBarathonBtn").click(function(){
         
-	inputNomBarathon = $("#inputNomBarathon").val();
-	inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
-	inputListeBars = $scope.listeBarsAValider;
-	userCreateurId = loggedUserId;
-
-	alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + "listeBars = " + inputListeBars + " userCreateurId = " + userCreateurId);
+        // Récup des données utilisateur
+	var inputNomBarathon = $("#inputNomBarathon").val();
+	var inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
+	var userCreateurId = loggedUserId;
         
-	Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, inputListeBars, userCreateurId).then(function(idBarathonCree){
-	    console.log("Barathon.ajouterBarathon() ------------- return :");
-	    console.log(idBarathonCree);
+        $scope.listeBarsAValider = listeBarsAValider;
+        
+	//alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + " userCreateurId = " + userCreateurId);
+        
+        // ajoute le barathon
+	var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, userCreateurId).then(function(idBarathonCree){
+	    console.log("Barathon.ajouterBarathon() ok");
 	});
+        
+        
+        console.log("CTRL validerNewB, affichage des bars a valider :");
+        var ordreDansBarathon = 1;
+        
+        
+        // FOR EACH
+        $($scope.listeBarsAValider).each(function(){
+            
+            console.log("bar.gid");
+            // ajoute les bars à la listeBars du Barathon
+            ListeBars.ajouterBarPourBarathon(idBarathonCree, $scope.listeBarsAValider.gid, ordreDansBarathon);
+            ordreDansBarathon++;
+        })
+        
         
     });
 });
