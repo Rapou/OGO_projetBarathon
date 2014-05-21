@@ -4,8 +4,8 @@
     <div class="well bs-component">
         <h1>We're in the bars, y'all!</h1>
         <div>
-            <div ng-repeat="bar in bars.features | orderBy: '+properties.name'">
-                <strong>{{bar.properties.name}}</strong>
+            <div ng-repeat="unBar in bars.features | orderBy: '+properties.name'">
+                <strong>{{unBar.properties.name}}</strong>
             </div>
         </div>
     </div>

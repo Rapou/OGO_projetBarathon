@@ -15,12 +15,13 @@ var ptsBar = new OpenLayers.Symbolizer.Point({
     graphicHeight: 50,
     graphicOpacity: 1,
     label:"${nombre}",
-    fontColor: "#2980B9",
+    fontColor: "${colorLabel}",
     fontSize: "14pt",
     fontWeight: "bold",
     labelOutlineColor: "#FFFFFF",
     labelOutlineWidth: 4,
     labelOutlineOpacity: 0.6,
+    labelYOffset: "${labelPos}",
     labelSelect:true
 });
 
@@ -33,14 +34,36 @@ var ctxBar = {
 	if(feature.attributes.count>=2){
 	    return feature.attributes.count;
 	}else{
-	    return "";
+	    return feature.cluster[0].attributes.name;
+	}
+    },
+    labelPos: function(feature) {
+	if(feature.attributes.count>=2){
+	    return 0;
+	}else{
+	    return -35;
 	}
     },
     myImage: function(feature) {
 	if(feature.attributes.count>=2){
 	    return "img/logo_multi2.png";
 	}else{
-	    return "img/logo_dot.png";
+	    var testSelected = false;
+	    $(listeBarsAValider).each(function(i, bar){
+		console.log(bar.gid);
+		if(feature.cluster[0].attributes.id == bar.gid){
+		    testSelected = true;
+		}
+	    });
+	    var imageARendre = "";
+	    if(testSelected){
+		imageARendre = "img/icon_bar_valider.png"
+
+	    }else{
+imageARendre = "img/logo_dot.png"
+
+	    }
+	    return imageARendre;
 	}
     },
     myWidth: function(feature) {
@@ -48,6 +71,13 @@ var ctxBar = {
 	    return 50;
 	}else{
 	    return 40;
+	}
+    },
+    colorLabel: function(feature) {
+	if(feature.attributes.count>=2){
+	    return "#2980b9";
+	}else{
+	    return "#2c3e50";
 	}
     }
 };
@@ -99,25 +129,6 @@ var ptsBarOver = new OpenLayers.Symbolizer.Point({
     labelSelect:true,
     labelPosition:30
 });
-/**
- * Représentation d'un Bar de ListeBarathon
- * @type OpenLayers.Symbolizer.Point
- */
-var ptsBarValider = new OpenLayers.Symbolizer.Point({
-    externalGraphic: "img/icon_bar_valider.png",
-    graphicWidth: 40,
-    graphicHeight: 50,
-    graphicOpacity: 1,
-    label:"",
-    fontColor: "#e67e22",
-    fontSize: "14pt",
-    fontWeight: "bold",
-    labelOutlineColor: "#FFFFFF",
-    labelOutlineWidth: 4,
-    labelOutlineOpacity: 0.6,
-    labelSelect:true,
-    labelPosition:30
-});
 
 /**
  *                       ---- DOC READY
@@ -154,6 +165,10 @@ var app = angular.module('Barathon', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
+	templateUrl: 'views/home.html',
+        controller: 'homeCtrl'
+    })
+    .when('/home', {
 	templateUrl: 'views/home.html',
         controller: 'homeCtrl'
     })

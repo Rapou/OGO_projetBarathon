@@ -41,14 +41,12 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	    if(feature.attributes.count>=2){
 		map.zoomIn();
 		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
-	    }else{
-		console.log("Select me 1 Voir la map");
 	    }
 	}
-	function onFeatureUnSelectCarte(evt) {
+	/*function onFeatureUnSelectCarte(evt) {
 	    feature = evt.feature;
 	    console.log("UnSelect me 1" + feature);
-	}
+	}*/
 	
 	$scope.bars = bars;
 	if(geoBars != "UNDEFINED"){
@@ -58,7 +56,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	    geoBars  = new OpenLayers.Layer.Vector("Bars", {
 		strategies: [
 		new OpenLayers.Strategy.AnimatedCluster({
-		    distance: 45,
+		    distance: 50,
 		    animationMethod: OpenLayers.Easing.Expo.easeOut,
 		    animationDuration: 10
 		})
@@ -66,10 +64,10 @@ app.controller('CarteCtrl', function($scope, Bar) {
 		styleMap: new OpenLayers.StyleMap({
 		    "default": new OpenLayers.Style(ptsBar, {
 			context: ctxBar
-		    }),
+		    })/*,
 		    "select": new OpenLayers.Style(ptsBarOver, {
 			context: ctxBarOver
-		    })
+		    })*/
 		})
 	    });
 	    map.addLayer(geoBars);
@@ -100,7 +98,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
             map.zoomToExtent(geoBars.getDataExtent());
 	
 	   geoBars.events.register("featureselected", features, onFeatureSelectCarte);
-	   geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
+	   // geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
     }, function(msg){
 	alert(msg);
     });
@@ -128,6 +126,8 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 		map.zoomIn();
 		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
 	    }else{
+		var barAEnlever = false
+		
 		var barsARendre = {
 		       gid: feature.cluster[0].attributes.id,
 		       nom: feature.cluster[0].attributes.name                             
@@ -142,10 +142,10 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 	    }
 	}
 
-	function onFeatureUnSelectCBarathon(evt) {
+	/*function onFeatureUnSelectCBarathon(evt) {
 	    feature = evt.feature;
 	    console.log("UnSelect me 2" + feature);
-	}
+	}*/
 	
 	$scope.bars = bars;
 	if(geoBars != "UNDEFINED"){
@@ -155,7 +155,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 	geoBars  = new OpenLayers.Layer.Vector("Bars", {
 	    strategies: [
 	    new OpenLayers.Strategy.AnimatedCluster({
-		distance: 45,
+		distance: 50,
 		animationMethod: OpenLayers.Easing.Expo.easeOut,
 		animationDuration: 10
 	    })
@@ -163,10 +163,10 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 	    styleMap: new OpenLayers.StyleMap({
 		"default": new OpenLayers.Style(ptsBar, {
 		    context: ctxBar
-		}),
+		})/*,
 		"select": new OpenLayers.Style(ptsBarOver, {
 		    context: ctxBarOver
-		})
+		})*/
 	    })
 	});
 	map.addLayer(geoBars);
@@ -192,11 +192,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 	map.addControl(selectControl);
 	selectControl.activate();
 	geoBars.events.register("featureselected", features, onFeatureSelectCBarathon);
-	geoBars.events.register("featureunselected", features, onFeatureUnSelectCBarathon);
-
-
-	// $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
-	// $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
+	// geoBars.events.register("featureunselected", features, onFeatureUnSelectCBarathon);
     }, function(msg){
 	alert(msg);
     });     
@@ -327,7 +323,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	    geoBars  = new OpenLayers.Layer.Vector("Bars", {
 		strategies: [
 		new OpenLayers.Strategy.AnimatedCluster({
-		    distance: 45,
+		    distance: 50,
 		    animationMethod: OpenLayers.Easing.Expo.easeOut,
 		    animationDuration: 10
 		})
@@ -386,6 +382,9 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
     
     
     $scope.listeBarsAValider = listeBarsAValider;
+    $scope.go = function ( path ) {
+	$location.path( path );
+    };
 
     /**
      * Bouton valider New Barathon
@@ -413,6 +412,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 		ordreDansBarathon++;
 	    });
 	    console.log("Barathon.ajouterBarathon() ok");
+	    listeBarsAValider = "UNDEFINED";
 	});
     });
 });
