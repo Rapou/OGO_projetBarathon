@@ -55,20 +55,16 @@ class Model_ListeBars{
          * Ajoute un bar à la liste des Bars d'un Barathon
          * @param type $barathonId
          */
-        public function ajouteBarPourBarathon($barathonId, $barId, $ordreDansBarathon){
+        public function ajouterBarPourBarathon($barathonId, $barId, $ordreDansBarathon){
             
-            $sql = "INSERT INTO listeBars (barId, barathonId, ordreDansBarathon) VALUES (:barId, :barathonid, :ordreDansBarathon)";
+            $sql = "INSERT INTO listeBars (barId, barathonId, ordreDansBarathon) VALUES ( $barId ,  $barathonId ,  $ordreDansBarathon )";
             
             $statement=$this->db->prepare($sql);
-            $resultats = $statement->execute(array(':barId'=>$barId,
-                              ':barathonId'=>$barathonId,
-                              ':ordreDansbarathon'=>$ordreDansBarathon));
-            
+            $resultats = $statement->execute();
             
             return $resultats;
-            
         }
         
-        
+
         
 }

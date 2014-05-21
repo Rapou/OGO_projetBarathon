@@ -11,61 +11,6 @@
 app.controller('testNicoCtrl', function($scope, Bar){
     $scope.bars = Bar.find().then(function(bars){
 	$scope.bars = bars;
-	geoBars  = new OpenLayers.Layer.Vector("Bars", {
-	    strategies: [
-		new OpenLayers.Strategy.AnimatedCluster({
-		    distance: 45,
-		    animationMethod: OpenLayers.Easing.Expo.easeOut,
-		    animationDuration: 10
-		})
-	    ],
-	    styleMap: new OpenLayers.StyleMap({
-		"default": new OpenLayers.Style(ptsBar, {
-		    context: ctxBar
-		}),
-		"select": new OpenLayers.Style(ptsBarOver, {
-		    context: ctxBarOver
-		})
-	    })
-	});
-	map.addLayer(geoBars);
-	var features = new Array();
-	
-	$.each($scope.bars.features, function(i, elem){
-	    ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates[0], elem.geometry.coordinates[1]);
-	    ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
-	    features[i] = new OpenLayers.Feature.Vector(ptGeom);
-	    features[i].attributes = {
-		name: elem.properties.name
-	    };
-	});
-	geoBars.addFeatures(features);
-	selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
-	    clickout: false, 
-	    toggle: true,
-	    multiple: true, 
-	    hover: false
-	});
-	map.addControl(selectControl);
-	selectControl.activate();
-	geoBars.events.register("featureselected", features, onFeatureSelect);
-	geoBars.events.register("featureunselected", features, onFeatureUnselect);
-	
-	function onFeatureSelect(evt) {
-	    feature = evt.feature;
-	    if(feature.attributes.count>=2){
-		console.log("This is a cluster");
-	    }else{
-		console.log("this is not a cluster");
-	    }
-	}
-              
-	function onFeatureUnselect(evt) {
-	    feature = evt.feature;
-	    console.log("UnSelect" + feature);
-	}
-    
-	
     }, function(msg){
 	alert(msg);
     });
@@ -81,16 +26,111 @@ app.controller('CarteCtrl', function($scope, Bar) {
     $(".logo").click(function(){
 	history.back();
     });
-
-     $scope.bars = Bar.find().then(function(bars){
+    
+    $scope.bars = Bar.find().then(function(bars){
+	function onFeatureSelectCarte(evt) {
+	    feature = evt.feature;
+	    if(feature.attributes.count>=2){
+		map.zoomIn();
+		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
+	    }else{
+		console.log("Select me 1 Voir la map");
+	    }
+	}
+	function onFeatureUnSelectCarte(evt) {
+	    feature = evt.feature;
+	    console.log("UnSelect me 1" + feature);
+	}
+	
 	$scope.bars = bars;
-	geoBars  = new OpenLayers.Layer.Vector("Bars", {
-	    strategies: [
+	if(geoBars != "UNDEFINED"){
+	    map.removeLayer(geoBars);
+	    geoBars = "UNDEFINED";
+	}
+	    geoBars  = new OpenLayers.Layer.Vector("Bars", {
+		strategies: [
 		new OpenLayers.Strategy.AnimatedCluster({
 		    distance: 45,
 		    animationMethod: OpenLayers.Easing.Expo.easeOut,
 		    animationDuration: 10
 		})
+		],
+		styleMap: new OpenLayers.StyleMap({
+		    "default": new OpenLayers.Style(ptsBar, {
+			context: ctxBar
+		    }),
+		    "select": new OpenLayers.Style(ptsBarOver, {
+			context: ctxBarOver
+		    })
+		})
+	    });
+	    map.addLayer(geoBars);
+	    var features = new Array();
+
+	    $.each($scope.bars, function(i, elem){
+		var myGeo = $.parseJSON(elem.geometry);
+		ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
+		ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+		features[i] = new OpenLayers.Feature.Vector(ptGeom);
+		features[i].attributes = {
+		    name: elem.name,
+		    id: elem.gid
+		};
+	    });
+	    geoBars.addFeatures(features);
+	    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+		clickout: false, 
+		toggle: true,
+		multiple: true, 
+		hover: false
+	    });
+	    map.addControl(selectControl);
+	    selectControl.activate();
+	
+	    geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+	    geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
+    }, function(msg){
+	alert(msg);
+    });
+}); // controleur carte
+
+/**
+ * Controleur Creation Barathon
+ */     
+app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, Bar){
+    
+    $("#creerNewBarathonBtn").click(function() {
+	window.location.href= "#validerBarathon";
+    });
+    
+    $scope.bars = Bar.find().then(function(bars){
+	function onFeatureSelectCBarathon(evt) {
+	    feature = evt.feature;
+	    if(feature.attributes.count>=2){
+		map.zoomIn();
+		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
+	    }else{
+		console.log("Select me 2 Créer Barathon");
+	    }
+	}
+
+	function onFeatureUnSelectCBarathon(evt) {
+	    feature = evt.feature;
+	    console.log("UnSelect me 2" + feature);
+	}
+	
+	$scope.bars = bars;
+	if(geoBars != "UNDEFINED"){
+	    map.removeLayer(geoBars);
+	    geoBars = "UNDEFINED";
+	}
+	geoBars  = new OpenLayers.Layer.Vector("Bars", {
+	    strategies: [
+	    new OpenLayers.Strategy.AnimatedCluster({
+		distance: 45,
+		animationMethod: OpenLayers.Easing.Expo.easeOut,
+		animationDuration: 10
+	    })
 	    ],
 	    styleMap: new OpenLayers.StyleMap({
 		"default": new OpenLayers.Style(ptsBar, {
@@ -103,13 +143,15 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	});
 	map.addLayer(geoBars);
 	var features = new Array();
-	
-	$.each($scope.bars.features, function(i, elem){
-	    ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates[0], elem.geometry.coordinates[1]);
+
+	 $.each($scope.bars, function(i, elem){
+	    var myGeo = $.parseJSON(elem.geometry);
+	    ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
 	    ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
 	    features[i] = new OpenLayers.Feature.Vector(ptGeom);
 	    features[i].attributes = {
-		name: elem.properties.name
+		name: elem.name,
+		id: elem.gid
 	    };
 	});
 	geoBars.addFeatures(features);
@@ -121,59 +163,35 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	});
 	map.addControl(selectControl);
 	selectControl.activate();
-	geoBars.events.register("featureselected", features, onFeatureSelect);
-	geoBars.events.register("featureunselected", features, onFeatureUnselect);
+	geoBars.events.register("featureselected", features, onFeatureSelectCBarathon);
+	geoBars.events.register("featureunselected", features, onFeatureUnSelectCBarathon);
 	
-	function onFeatureSelect(evt) {
-	    feature = evt.feature;
-	    if(feature.attributes.count>=2){
-		console.log(feature);
-		map.zoomIn();
-		console.log(feature.geometry.x + "," + feature.geometry.y);
-		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
-		
-	    }else{
-		
-	    }
-	}
-              
-	function onFeatureUnselect(evt) {
-	    feature = evt.feature;
-	    console.log("UnSelect" + feature);
-	}
-    
-	
+	$scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
+	    styleMap: new OpenLayers.StyleMap(ptsBarValider)
+	});
+	map.addLayer($scope.barsAValider);
+
+	console.log($scope);
+
+	$scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
+	$scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
     }, function(msg){
 	alert(msg);
     });
+   
+/*$scope.listeBarsAValider = [
+    {
+	"nom" : "Great Escape"
+    },
+    {
+	"nom" : "Lapin vert"
+    },
+    ];*/
     
-    /***
-     * A remettre dans CreationBarathon
-     **/
-    /*$scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
-	styleMap: new OpenLayers.StyleMap(ptsBarValider)
-    });
-    map.addLayer($scope.barsAValider);
+// console.log("liste " + $scope.listeBarsAValider)
+     
     
-    console.log($scope);
-
-    $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
-    $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
-    
-
-    function onFeatureSelect(evt) {
-	feature = evt.feature;
-	$scope.barsAValider.addFeatures(feature);
-    }
-              
-    function onFeatureUnselect(evt) {
-	feature = evt.feature;
-	console.log("UnSelect" + feature);
-
-    }*/
-    
-    
-}); // controleur carte
+});
 
 /**
  * Contrôleur login
@@ -189,12 +207,13 @@ app.controller('LoginCtrl', function($scope, User) {
     $("#erreurLogin").hide();
         
     $("#submitLogin").click(function(){
-        
-        login = $("#inputLogin").val();
-        mdp = $("#inputPassword").val();
-        
-        // Set l'id et le login de l'utilisateur loggé
-        $scope.user = User.login(login, mdp).then(function(user){
+
+	// Set l'id et le login de l'utilisateur loggé
+	$scope.user = User.login(login, mdp).then(function(user){
+            
+	    // Utile ?
+	    login = $("#inputLogin").val();
+	    mdp = $("#inputPassword").val();
             
             $scope.user = user;
             
@@ -302,108 +321,18 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     });
 });
 
-
-
-/**
- * Controleur Creation Barathon
- */     
-app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, Bar){
-    
-    $("#creerNewBarathonBtn").click(function() {
-        window.location.href= "#validerBarathon";
-    });
-    
-    $scope.bars = Bar.find().then(function(bars){
-	$scope.bars = bars;
-	geoBars  = new OpenLayers.Layer.Vector("Bars", {
-	    strategies: [
-		new OpenLayers.Strategy.AnimatedCluster({
-		    distance: 45,
-		    animationMethod: OpenLayers.Easing.Expo.easeOut,
-		    animationDuration: 10
-		})
-	    ],
-	    styleMap: new OpenLayers.StyleMap({
-		"default": new OpenLayers.Style(ptsBar, {
-		    context: ctxBar
-		}),
-		"select": new OpenLayers.Style(ptsBarOver, {
-		    context: ctxBarOver
-		})
-	    })
-	});
-	map.addLayer(geoBars);
-	var features = new Array();
-	
-	$.each($scope.bars.features, function(i, elem){
-	    ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates[0], elem.geometry.coordinates[1]);
-	    ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
-	    features[i] = new OpenLayers.Feature.Vector(ptGeom);
-	    features[i].attributes = {
-		name: elem.properties.name
-	    };
-	});
-	geoBars.addFeatures(features);
-	selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
-	    clickout: false, 
-	    toggle: true,
-	    multiple: true, 
-	    hover: false
-	});
-	map.addControl(selectControl);
-	selectControl.activate();
-	geoBars.events.register("featureselected", features, onFeatureSelect);
-	geoBars.events.register("featureunselected", features, onFeatureUnselect);
-	
-	function onFeatureSelect(evt) {
-	    feature = evt.feature;
-	    if(feature.attributes.count>=2){
-		console.log(feature);
-		map.zoomIn();
-		console.log(feature.geometry.x + "," + feature.geometry.y);
-		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
-		
-	    }else{
-		
-	    }
-	}
-              
-	function onFeatureUnselect(evt) {
-	    feature = evt.feature;
-	    console.log("UnSelect" + feature);
-	}
-    
-	
-    }, function(msg){
-	alert(msg);
-    });
-    
-    /*$scope.listeBarsAValider = [
-    {
-	"nom" : "Great Escape"
-    },
-    {
-	"nom" : "Lapin vert"
-    },
-    ];*/
-    
-    // console.log("liste " + $scope.listeBarsAValider)
-     
-    
-});
-
 /**
  * Controleur Validation Barathon
  */     
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
     
     $scope.listeBarsAValider = [
-        {
-            "nom" : "Great Escape"
-        },
-        {
-            "nom" : "Lapin vert"
-        },
+    {
+	"nom" : "Great Escape"
+    },
+    {
+	"nom" : "Lapin vert"
+    },
     ];
     
     console.log("liste " + $scope.listeBarsAValider)
@@ -411,17 +340,17 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
     
     $("#validerNewBarathonBtn").click(function(){
         
-        inputNomBarathon = $("#inputNomBarathon").val();
-        inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
-        inputListeBars = $scope.listeBarsAValider;
-        userCreateurId = loggedUserId;
+	inputNomBarathon = $("#inputNomBarathon").val();
+	inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
+	inputListeBars = $scope.listeBarsAValider;
+	userCreateurId = loggedUserId;
 
-        alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + "listeBars = " + inputListeBars + " userCreateurId = " + userCreateurId);
+	alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + "listeBars = " + inputListeBars + " userCreateurId = " + userCreateurId);
         
-        Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, inputListeBars, userCreateurId).then(function(idBarathonCree){
-            console.log("Barathon.ajouterBarathon() ------------- return :");
-            console.log(idBarathonCree);
-        });
+	Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, inputListeBars, userCreateurId).then(function(idBarathonCree){
+	    console.log("Barathon.ajouterBarathon() ------------- return :");
+	    console.log(idBarathonCree);
+	});
         
     });
 });

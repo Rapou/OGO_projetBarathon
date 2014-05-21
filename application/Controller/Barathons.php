@@ -30,26 +30,16 @@ class Controller_Barathons{
 	return $res = $this->model->rendBarathonParId();
     }
     
+    /**
+     * 
+     * @return typeAjoute un Barathon à la BD. Retourne l'id du B créé
+     */
     public function ajouterBarathon(){
+        // crée le Barathon
         $idBarathonCree = $this->model->ajouterBarathon();
         
-        if($idBarathonCree){
-            $listeBars = $_GET['listeBarsAValider'];
-            
-            $ordreDansB = 1;
-            $resultatListeBars = array();
-            
-            
-            for($i=0; $i < count($listeBars); $i++){
-                $resultatListeBars[] = $this->modelListeBars->ajouteBarPourBarathon($idBarathonCree, $bar->id, $ordreDansB);
-                $ordreDansB++;
-            }
-            
-        }
-        
-        return $listeBars;
-        //return $resultatListeBars;
-        //return $idBarathonCree;
+        return $idBarathonCree;
+        die();
     }
     
     /**

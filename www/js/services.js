@@ -111,8 +111,6 @@ app.factory('Bar', function($http, $q){
 
 
 
-
-
 /*
  * Factory pour les Barathons
  */
@@ -159,7 +157,6 @@ app.factory('Barathon', function($http, $q, ListeBars){
             
 	    $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
 	    .success(function(data, status){
-		//angular.forEach() // TODOOOOOOOOOOOOOO !!!!!!!!!!!!!!!!!
                     
 		factory.barathons = data;
 		deferred.resolve(factory.barathons);
@@ -176,7 +173,6 @@ app.factory('Barathon', function($http, $q, ListeBars){
             var deferred = $q.defer();
             barathon : false;
             
-            
             $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&listeBarsAValider="+inputListeBars+"&userCreateurId="+userCreateurId)
                 .success(function(data, status){
                     
@@ -191,20 +187,7 @@ app.factory('Barathon', function($http, $q, ListeBars){
             return deferred.promise;
         },
         
-        /*rendBarathonParId : function(idBarathon){
-            var deferred = $q.defer();
-            /* TODO ...*/
-	/*deferred.resolve();
-            return deferred.promise;
-        },*/
         
-	// Permet d'ajouter un bar
-	addBar : function(bar){
-	    var deferred = $q.defer();
-	    /* TODO ...*/
-	    deferred.resolve();
-	    return deferred.promise;
-	}
         
     };
     return factory;
