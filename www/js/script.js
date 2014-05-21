@@ -383,7 +383,7 @@ app.factory('Barathon', function($http, $q, ListeBars){
 app.factory('ListeBars', function($http, $q){
     var factory = {
         
-        listeBarsCourante : {},
+        listeBars : {},
         
         // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
         find : function(barathonId){
@@ -394,7 +394,7 @@ app.factory('ListeBars', function($http, $q){
                 $http.get(bootstrap + "?controller=Barathons&action=rend")
                     .success(function(data, status){
                         factory.listeBars = data;
-                        deferred.resolve(factory.listeBarsCourante);
+                        deferred.resolve(factory.listeBars);
                             })
                     .error(function(){
                         deferred.reject("msg");
@@ -406,7 +406,7 @@ app.factory('ListeBars', function($http, $q){
                 $http.get(bootstrap + "?controller=Barathons&action=rend")
                     .success(function(data, status){
                         factory.listeBars = data;
-                        deferred.resolve(factory.listeBarsCourante);
+                        deferred.resolve(factory.listeBars);
                             })
                     .error(function(){
                         deferred.reject("msg");
@@ -689,6 +689,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
         },
     ];*/
     
+    //console.log("history : " + history.back());
+    
     $(".logo").click(function() {
 	history.back();
     });
@@ -763,7 +765,7 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     
     console.log("liste " + $scope.listeBarsAValider)
     
-    
+    //console.log("history : " + history.back());
     
     $(".logo").click(function() {
 	history.back();
