@@ -19,17 +19,7 @@ class Model_Bars{
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
 	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
-	    
-	    $i = 0;
-	    $rendu = Array();
-
-	    $fc = new FeatureCollection();
-	    foreach ($resultats as $i => $resultat) {
-		$fc->addFeature(new Feature($i, (json_decode($resultat['geometry'])), array("name" => $resultat['name'])));
-	    }
-	    	   array_push($rendu, $fc);
-
-	    return $rendu;
+	    return $resultats;
 	}
 	
 	public function rendPub(){
@@ -38,34 +28,13 @@ class Model_Bars{
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
 	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
-	    
-	    $i = 0;
-	    $rendu = Array();
-
-	    $fc = new FeatureCollection();
-	    foreach ($resultats as $i => $resultat) {
-		$fc->addFeature(new Feature($i, (json_decode($resultat['geometry'])), array("name" => $resultat['name'])));
-	    }
-	    	   array_push($rendu, $fc);
-
-	    return $rendu;
+	    return $resultats;
 	}
 	public function rendBarEtPub(){
-	    $sql =  "SELECT gid, name, ST_AsGeoJSON(the_geom) AS geometry FROM bars WHERE type like 'pub' OR type like 'bar'";	    
-	    
+	    $sql =  "SELECT gid, name, ST_AsGeoJSON(the_geom) AS geometry FROM bars WHERE type like 'pub' OR type like 'bar'";
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
 	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
-	    
-	    $i = 0;
-	    $rendu = Array();
-
-	    $fc = new FeatureCollection();
-	    foreach ($resultats as $i => $resultat) {
-		$fc->addFeature(new Feature($i, (json_decode($resultat['geometry'])), array("name" => $resultat['name'])));
-	    }
-	    	   array_push($rendu, $fc);
-
-	    return $rendu;
+	    return $resultats;
 	}
 }

@@ -119,6 +119,39 @@ var ptsBarValider = new OpenLayers.Symbolizer.Point({
     labelPosition:30
 });
 
+function onFeatureSelectCarte(evt) {
+    feature = evt.feature;
+    if(feature.attributes.count>=2){
+	console.log(feature);
+	map.zoomIn();
+	console.log(feature.geometry.x + "," + feature.geometry.y);
+	map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
+    }else{
+
+    }
+}
+function onFeatureUnSelectCarte(evt) {
+    feature = evt.feature;
+    console.log("UnSelect" + feature);
+}
+
+function onFeatureSelectCBarathon(evt) {
+    feature = evt.feature;
+    if(feature.attributes.count>=2){
+	console.log(feature);
+	map.zoomIn();
+	console.log(feature.geometry.x + "," + feature.geometry.y);
+	map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
+    }else{
+	console.log("coco");
+    }
+}
+	
+function onFeatureUnSelectCBarathon(evt) {
+    feature = evt.feature;
+    console.log("UnSelect" + feature);
+}
+
 /**
  *                       ---- DOC READY
  * @param {type} param

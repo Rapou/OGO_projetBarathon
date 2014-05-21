@@ -29,7 +29,10 @@ app.controller('CarteCtrl', function($scope, Bar) {
     
     $scope.bars = Bar.find().then(function(bars){
 	$scope.bars = bars;
-	if(geoBars == "UNDEFINED"){
+	if(geoBars != "UNDEFINED"){
+	    map.removeLayer(geoBars);
+	    geoBars = "UNDEFINED";
+	}
 	    geoBars  = new OpenLayers.Layer.Vector("Bars", {
 		strategies: [
 		new OpenLayers.Strategy.AnimatedCluster({
@@ -50,12 +53,14 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	    map.addLayer(geoBars);
 	    var features = new Array();
 
-	    $.each($scope.bars.features, function(i, elem){
-		ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates[0], elem.geometry.coordinates[1]);
+	    $.each($scope.bars, function(i, elem){
+		var myGeo = $.parseJSON(elem.geometry);
+		ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
 		ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
 		features[i] = new OpenLayers.Feature.Vector(ptGeom);
 		features[i].attributes = {
-		    name: elem.properties.name
+		    name: elem.name,
+		    id: elem.gid
 		};
 	    });
 	    geoBars.addFeatures(features);
@@ -67,26 +72,9 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	    });
 	    map.addControl(selectControl);
 	    selectControl.activate();
-	    geoBars.events.register("featureselected", features, onFeatureSelect);
-	    geoBars.events.register("featureunselected", features, onFeatureUnselect);
 	
-	    function onFeatureSelect(evt) {
-		feature = evt.feature;
-		if(feature.attributes.count>=2){
-		    console.log(feature);
-		    map.zoomIn();
-		    console.log(feature.geometry.x + "," + feature.geometry.y);
-		    map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
-		}else{
-
-		}
-	    }
-	    function onFeatureUnselect(evt) {
-		feature = evt.feature;
-		console.log("UnSelect" + feature);
-	    }
-	}
-	
+	    geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+	    geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
     }, function(msg){
 	alert(msg);
     });
@@ -103,65 +91,51 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
     
     $scope.bars = Bar.find().then(function(bars){
 	$scope.bars = bars;
-	if(geoBars == "UNDEFINED"){
-	    geoBars  = new OpenLayers.Layer.Vector("Bars", {
-		strategies: [
-		new OpenLayers.Strategy.AnimatedCluster({
-		    distance: 45,
-		    animationMethod: OpenLayers.Easing.Expo.easeOut,
-		    animationDuration: 10
+	if(geoBars != "UNDEFINED"){
+	    map.removeLayout(geoBars);
+	    geoBars = "UNDEFINED";
+	}
+	geoBars  = new OpenLayers.Layer.Vector("Bars", {
+	    strategies: [
+	    new OpenLayers.Strategy.AnimatedCluster({
+		distance: 45,
+		animationMethod: OpenLayers.Easing.Expo.easeOut,
+		animationDuration: 10
+	    })
+	    ],
+	    styleMap: new OpenLayers.StyleMap({
+		"default": new OpenLayers.Style(ptsBar, {
+		    context: ctxBar
+		}),
+		"select": new OpenLayers.Style(ptsBarOver, {
+		    context: ctxBarOver
 		})
-		],
-		styleMap: new OpenLayers.StyleMap({
-		    "default": new OpenLayers.Style(ptsBar, {
-			context: ctxBar
-		    }),
-		    "select": new OpenLayers.Style(ptsBarOver, {
-			context: ctxBarOver
-		    })
-		})
-	    });
-	    map.addLayer(geoBars);
-	    var features = new Array();
+	    })
+	});
+	map.addLayer(geoBars);
+	var features = new Array();
 
-	    $.each($scope.bars.features, function(i, elem){
-		ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates[0], elem.geometry.coordinates[1]);
-		ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
-		features[i] = new OpenLayers.Feature.Vector(ptGeom);
-		features[i].attributes = {
-		    name: elem.properties.name
-		};
-	    });
-	    geoBars.addFeatures(features);
-	    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
-		clickout: false, 
-		toggle: true,
-		multiple: true, 
-		hover: false
-	    });
-	    map.addControl(selectControl);
-	    selectControl.activate();
-	}
-    
-	function onFeatureSelect(evt) {
-	    feature = evt.feature;
-	    if(feature.attributes.count>=2){
-		console.log(feature);
-		map.zoomIn();
-		console.log(feature.geometry.x + "," + feature.geometry.y);
-		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
-	    }else{
-		console.log("coco");
-	    }
-	}
-	
-	function onFeatureUnselect(evt) {
-	    feature = evt.feature;
-	    console.log("UnSelect" + feature);
-	}
-	    
-	geoBars.events.register("featureselected", features, onFeatureSelect);
-	geoBars.events.register("featureunselected", features, onFeatureUnselect);
+	 $.each($scope.bars, function(i, elem){
+	    var myGeo = $.parseJSON(elem.geometry);
+	    ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
+	    ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+	    features[i] = new OpenLayers.Feature.Vector(ptGeom);
+	    features[i].attributes = {
+		name: elem.name,
+		id: elem.gid
+	    };
+	});
+	geoBars.addFeatures(features);
+	selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+	    clickout: false, 
+	    toggle: true,
+	    multiple: true, 
+	    hover: false
+	});
+	map.addControl(selectControl);
+	selectControl.activate();
+	geoBars.events.register("featureselected", features, onFeatureSelectCBarathon);
+	geoBars.events.register("featureunselected", features, onFeatureUnSelectCBarathon);
 	
     /*$scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
 	styleMap: new OpenLayers.StyleMap(ptsBarValider)

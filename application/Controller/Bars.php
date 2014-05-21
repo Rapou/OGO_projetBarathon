@@ -14,7 +14,7 @@ class Controller_Bars{
 	$res = $this->model->rend();
 	$tableau_partie = "";
 	foreach($res as $i => $partie){
-	    $tableau_partie = $partie;
+	    $tableau_partie[$i] = $partie;
 	}
 	return $tableau_partie;
     }
@@ -23,7 +23,7 @@ class Controller_Bars{
 	$res = $this->model->rendPub();
 	$tableau_partie = "";
 	foreach($res as $i => $partie){
-	    $tableau_partie = $partie;
+	    $tableau_partie[$i] = $partie;
 	}
 	return $tableau_partie;
     }
@@ -31,7 +31,7 @@ class Controller_Bars{
 	$res = $this->model->rendBarEtPub();
 	$tableau_partie = "";
 	foreach($res as $i => $partie){
-	    $tableau_partie = $partie;
+	    $tableau_partie[$i] = $partie;
 	}
 	return $tableau_partie;
     }
