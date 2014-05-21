@@ -388,7 +388,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	    // FOR EACH
 	    $($scope.listeBarsAValider).each(function(i, bar){
 
-		idBara = parseInt(idBarathonCree);
+		idBara = parseInt(idBarathonCree.replace('"',''));
 		// ajoute les bars à la listeBars du Barathon
 		ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
 		    console.log("bar ajouté : "+ bar_id);
