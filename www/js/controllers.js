@@ -119,7 +119,8 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 		}else{
 		    barsAValider.push(barsARendre);
 		}
-		console.log(barsAValider);
+		$scope.barsAValider = barsAValider;
+		$routeParams.reload();
 	    }
 	}
 
