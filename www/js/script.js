@@ -8,96 +8,96 @@ var geoBar;
  * @type OpenLayers.Symbolizer.Point
  */
 var ptsBar = new OpenLayers.Symbolizer.Point({
-	externalGraphic: "${myImage}",
-	graphicWidth: "${myWidth}",
-	graphicHeight: 50,
-	graphicOpacity: 1,
-	label:"${nombre}",
-	fontColor: "#2980B9",
-	fontSize: "14pt",
-	fontWeight: "bold",
-	labelOutlineColor: "#FFFFFF",
-	labelOutlineWidth: 4,
-	labelOutlineOpacity: 0.6,
-	labelSelect:true
-    });
+    externalGraphic: "${myImage}",
+    graphicWidth: "${myWidth}",
+    graphicHeight: 50,
+    graphicOpacity: 1,
+    label:"${nombre}",
+    fontColor: "#2980B9",
+    fontSize: "14pt",
+    fontWeight: "bold",
+    labelOutlineColor: "#FFFFFF",
+    labelOutlineWidth: 4,
+    labelOutlineOpacity: 0.6,
+    labelSelect:true
+});
     
 /**
  * Fonction qui définit les paramètres selon le contexte
  * @type type
  */
 var ctxBar = { 
-	nombre: function(feature) {
-	    if(feature.attributes.count>=2){
-		return feature.attributes.count;
-	    }else{
-		return "";
-	    }
-	},
-	myImage: function(feature) {
-	    if(feature.attributes.count>=2){
-		return "img/logo_multi2.png";
-	    }else{
-		return "img/logo_dot.png";
-	    }
-	},
-	myWidth: function(feature) {
-	    if(feature.attributes.count>=2){
-		return 50;
-	    }else{
-		return 40;
-	    }
+    nombre: function(feature) {
+	if(feature.attributes.count>=2){
+	    return feature.attributes.count;
+	}else{
+	    return "";
 	}
-    };
+    },
+    myImage: function(feature) {
+	if(feature.attributes.count>=2){
+	    return "img/logo_multi2.png";
+	}else{
+	    return "img/logo_dot.png";
+	}
+    },
+    myWidth: function(feature) {
+	if(feature.attributes.count>=2){
+	    return 50;
+	}else{
+	    return 40;
+	}
+    }
+};
     
 /**
  * Représentation d'un Bar:hover
  * @type OpenLayers.Symbolizer.Point
  */
 var ptsBarOver = new OpenLayers.Symbolizer.Point({
-	externalGraphic: "${myImage}",
-	graphicWidth: "${myWidth}",
-	graphicHeight: 50,
-	graphicOpacity: 1,
-	label:"${nombre}",
-	fontColor: "#e67e22",
-	fontSize: "14pt",
-	fontWeight: "bold",
-	labelOutlineColor: "#FFFFFF",
-	labelOutlineWidth: 4,
-	labelOutlineOpacity: 0.6,
-	labelSelect:true,
-	labelPosition:30
-    });
+    externalGraphic: "${myImage}",
+    graphicWidth: "${myWidth}",
+    graphicHeight: 50,
+    graphicOpacity: 1,
+    label:"${nombre}",
+    fontColor: "#e67e22",
+    fontSize: "14pt",
+    fontWeight: "bold",
+    labelOutlineColor: "#FFFFFF",
+    labelOutlineWidth: 4,
+    labelOutlineOpacity: 0.6,
+    labelSelect:true,
+    labelPosition:30
+});
     
 /**
  * Fonction qui définit les paramètres selon le contexte en mode :hover
  * @type type
  */
 var ctxBarOver = { 
-	nombre: function(feature) {
-	    if(feature.attributes.count>=2){
-		return feature.attributes.count;
-	    }else{
-		console.log(feature);
-		return feature.cluster[0].attributes.name;
-	    }
-	},
-	myImage: function(feature) {
-	    if(feature.attributes.count>=2){
-		return "img/logo_multi_over.png";
-	    }else{
-		return "img/logo_dot_over.png";
-	    }
-	},
-	myWidth: function(feature) {
-	    if(feature.attributes.count>=2){
-		return 50;
-	    }else{
-		return 40;
-	    }
+    nombre: function(feature) {
+	if(feature.attributes.count>=2){
+	    return feature.attributes.count;
+	}else{
+	    console.log(feature);
+	    return feature.cluster[0].attributes.name;
 	}
-    };
+    },
+    myImage: function(feature) {
+	if(feature.attributes.count>=2){
+	    return "img/logo_multi_over.png";
+	}else{
+	    return "img/logo_dot_over.png";
+	}
+    },
+    myWidth: function(feature) {
+	if(feature.attributes.count>=2){
+	    return 50;
+	}else{
+	    return 40;
+	}
+    }
+};
 
 /**
  *                       ---- DOC READY
@@ -115,7 +115,7 @@ $(document).ready(function(){
 	sphericalMercator: true,
 	maxZoomLevel:20
     }
-);
+    );
     map.addControl(new OpenLayers.Control.LayerSwitcher());
 
     map.addLayer(goog);
@@ -137,7 +137,7 @@ app.config(function($routeProvider) {
     })
     .when('/listeBars', {
 	templateUrl: 'views/listeBars.html',
-        controller: 'testNicoCtrl'
+	controller: 'testNicoCtrl'
     })
     .when('/carte', {
 	templateUrl: 'views/carte.html',
@@ -157,15 +157,15 @@ app.config(function($routeProvider) {
     })
     .when('/barathons', {
 	templateUrl: 'views/barathons.html',
-        controller: 'BarathonsCtrl'
+	controller: 'BarathonsCtrl'
     })
     .when('/barathons/:id', {
 	templateUrl: 'views/barathon.html',
-        controller: 'BarathonCtrl'
+	controller: 'BarathonCtrl'
     })
     .when('/partieEnCours', {
 	templateUrl: 'views/partieEnCours.html',
-        controller: 'partieEnCoursCtrl'
+	controller: 'partieEnCoursCtrl'
     })
     .otherwise({
 	redirectTo: '/'
@@ -185,49 +185,49 @@ app.config(function($routeProvider) {
  */
 app.factory('User', function($http, $q){
     var factory = {
-        bars : false,
-        // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-        // TODO : si nécessaire, traitement en fonction des params.
-        find : function(barathonId){
-            var deferred = $q.defer();
+	bars : false,
+	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+	// TODO : si nécessaire, traitement en fonction des params.
+	find : function(barathonId){
+	    var deferred = $q.defer();
             
-            // Quand on veut récupérer tous les barathons
-            if(barathonId === undefined){
-                // requête Ajax
-                $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
-                    .success(function(data, status){
-                        factory.bars = data;
-                        deferred.resolve(factory.bars);
-                    })
-                    .error(function(){
-                        deferred.reject("factory.bars : Erreur lors de la récupéaration de tous les bars");
-                    });
-                    return deferred.promise;
-            // Quand on veut les bars visités par un barathon
-            }else{
-                // requête Ajax
-                $http.get(bootstrap + "?controller=listeBars&action=rendListeBarsPourBarathon&barathonId="+barathonId)
-                    .success(function(data, status){
-                        factory.bars = data;
-                        deferred.resolve(factory.bars);
-                    })
-                    .error(function(){
-                        deferred.reject("factory.bars : Erreur lors de la récupération des bars du barathon "+barathonId);
-                    });
-                    return deferred.promise;
-            }
-        },
+	    // Quand on veut récupérer tous les barathons
+	    if(barathonId === undefined){
+		// requête Ajax
+		$http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
+		.success(function(data, status){
+		    factory.bars = data;
+		    deferred.resolve(factory.bars);
+		})
+		.error(function(){
+		    deferred.reject("factory.bars : Erreur lors de la récupéaration de tous les bars");
+		});
+		return deferred.promise;
+	    // Quand on veut les bars visités par un barathon
+	    }else{
+		// requête Ajax
+		$http.get(bootstrap + "?controller=listeBars&action=rendListeBarsPourBarathon&barathonId="+barathonId)
+		.success(function(data, status){
+		    factory.bars = data;
+		    deferred.resolve(factory.bars);
+		})
+		.error(function(){
+		    deferred.reject("factory.bars : Erreur lors de la récupération des bars du barathon "+barathonId);
+		});
+		return deferred.promise;
+	    }
+	},
         
-        // Permet de rendre un bar si on a son ID
-        validerUser : function(){
-            var bar = {};
-            angular.forEach(factory.bars, function(value, key){
-                if(value.id == key){
-                    bar = value;
-                }
-            });
-            return bar;
-        },
+	// Permet de rendre un bar si on a son ID
+	validerUser : function(){
+	    var bar = {};
+	    angular.forEach(factory.bars, function(value, key){
+		if(value.id == key){
+		    bar = value;
+		}
+	    });
+	    return bar;
+	}
         
         
     };
@@ -239,57 +239,57 @@ app.factory('User', function($http, $q){
  */
 app.factory('Bar', function($http, $q){
     var factory = {
-        bars : false,
-        // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-        // TODO : si nécessaire, traitement en fonction des params.
-        find : function(barathonId){
-            var deferred = $q.defer();
+	bars : false,
+	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+	// TODO : si nécessaire, traitement en fonction des params.
+	find : function(barathonId){
+	    var deferred = $q.defer();
             
-            // Quand on veut récupérer tous les barathons
-            if(barathonId === undefined){
-                // requête Ajax
-                $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
-                    .success(function(data, status){
-                        factory.bars = data;
-                        deferred.resolve(factory.bars);
-                    })
-                    .error(function(){
-                        deferred.reject("factory.bars : Erreur lors de la récupéaration de tous les bars");
-                    });
-                    return deferred.promise;
-            // Quand on veut les bars visités par un barathon
-            }else{
-                // requête Ajax
-                $http.get(bootstrap + "?controller=listeBars&action=rendListeBarsPourBarathon&barathonId="+barathonId)
-                    .success(function(data, status){
-                        factory.bars = data;
-                        deferred.resolve(factory.bars);
-                    })
-                    .error(function(){
-                        deferred.reject("factory.bars : Erreur lors de la récupération des bars du barathon "+barathonId);
-                    });
-                    return deferred.promise;
-            }
-        },
+	    // Quand on veut récupérer tous les barathons
+	    if(barathonId === undefined){
+		// requête Ajax
+		$http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
+		.success(function(data, status){
+		    factory.bars = data;
+		    deferred.resolve(factory.bars);
+		})
+		.error(function(){
+		    deferred.reject("factory.bars : Erreur lors de la récupéaration de tous les bars");
+		});
+		return deferred.promise;
+	    // Quand on veut les bars visités par un barathon
+	    }else{
+		// requête Ajax
+		$http.get(bootstrap + "?controller=listeBars&action=rendListeBarsPourBarathon&barathonId="+barathonId)
+		.success(function(data, status){
+		    factory.bars = data;
+		    deferred.resolve(factory.bars);
+		})
+		.error(function(){
+		    deferred.reject("factory.bars : Erreur lors de la récupération des bars du barathon "+barathonId);
+		});
+		return deferred.promise;
+	    }
+	},
         
-        // Permet de rendre un bar si on a son ID
-        get : function(id){
-            var bar = {};
-            angular.forEach(factory.bars, function(value, key){
-                if(value.id == key){
-                    bar = value;
-                }
-            });
-            return bar;
-        },
+	// Permet de rendre un bar si on a son ID
+	get : function(id){
+	    var bar = {};
+	    angular.forEach(factory.bars, function(value, key){
+		if(value.id == key){
+		    bar = value;
+		}
+	    });
+	    return bar;
+	},
         
-        // Permet d'ajouter un bar
-        addBar : function(bar){
-            var deferred = $q.defer();
-            /* TODO ...*/
-            deferred.resolve();
-            return deferred.promise;
-        }
+	// Permet d'ajouter un bar
+	addBar : function(bar){
+	    var deferred = $q.defer();
+	    /* TODO ...*/
+	    deferred.resolve();
+	    return deferred.promise;
+	}
         
     };
     return factory;
@@ -304,74 +304,74 @@ app.factory('Bar', function($http, $q){
  */
 app.factory('Barathon', function($http, $q, ListeBars){
     var factory = {
-        barathons : false,
+	barathons : false,
         
-        // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-        find : function(params){
-            //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
-            var deferred = $q.defer();
-            $http.get(bootstrap + "?controller=Barathons&action=rend")
-                .success(function(data, status){
-                    factory.barathons = data;
-                    deferred.resolve(factory.barathons);
-                        })
-                .error(function(){
-                    deferred.reject("msg");
-                });
-                return deferred.promise;
-        },
-        // Permet de rendre un barathon selon l ID
-        get : function(id){
+	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+	find : function(params){
+	    //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
+	    var deferred = $q.defer();
+	    $http.get(bootstrap + "?controller=Barathons&action=rend")
+	    .success(function(data, status){
+		factory.barathons = data;
+		deferred.resolve(factory.barathons);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+	    return deferred.promise;
+	},
+	// Permet de rendre un barathon selon l ID
+	get : function(id){
             
-            var deferred = $q.defer();
+	    var deferred = $q.defer();
             
-            $http.get(bootstrap + "?controller=Barathons&action=rendBarathonParId&barathonId="+id)
-                .success(function(data, status){
+	    $http.get(bootstrap + "?controller=Barathons&action=rendBarathonParId&barathonId="+id)
+	    .success(function(data, status){
                     
-                    barathon : false;
+		barathon : false;
                     
-                    factory.barathon = data;
-                    deferred.resolve(factory.barathon);
+	    factory.barathon = data;
+	    deferred.resolve(factory.barathon);
                     
-                })
-                .error(function(){
-                    deferred.reject("msg");
-                });
+		})
+	    .error(function(){
+		deferred.reject("msg");
+	    });
                 
-                return deferred.promise;
-        },
-        rendBarathonsProposes : function(){
-            var deferred = $q.defer();
+	    return deferred.promise;
+	},
+	rendBarathonsProposes : function(){
+	    var deferred = $q.defer();
             
-            $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
-                .success(function(data, status){
-                    //angular.forEach() // TODOOOOOOOOOOOOOO !!!!!!!!!!!!!!!!!
+	    $http.get(bootstrap + "?controller=Barathons&action=rendBarathonsProposes")
+	    .success(function(data, status){
+		//angular.forEach() // TODOOOOOOOOOOOOOO !!!!!!!!!!!!!!!!!
                     
-                    factory.barathons = data;
-                    deferred.resolve(factory.barathons);
-                        })
-                .error(function(){
-                    deferred.reject("msg");
-                });
+		factory.barathons = data;
+		deferred.resolve(factory.barathons);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
             
             
-            return deferred.promise;
-        },
+	    return deferred.promise;
+	},
         
-        /*rendBarathonParId : function(idBarathon){
+	/*rendBarathonParId : function(idBarathon){
             var deferred = $q.defer();
             /* TODO ...*/
-            /*deferred.resolve();
+	/*deferred.resolve();
             return deferred.promise;
         },*/
         
-        // Permet d'ajouter un bar
-        addBar : function(bar){
-            var deferred = $q.defer();
-            /* TODO ...*/
-            deferred.resolve();
-            return deferred.promise;
-        }
+	// Permet d'ajouter un bar
+	addBar : function(bar){
+	    var deferred = $q.defer();
+	    /* TODO ...*/
+	    deferred.resolve();
+	    return deferred.promise;
+	}
         
     };
     return factory;
@@ -382,38 +382,38 @@ app.factory('Barathon', function($http, $q, ListeBars){
  */
 app.factory('ListeBars', function($http, $q){
     var factory = {
-        listeBars : false,
+	listeBars : false,
         
-        // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-        find : function(params){
-            //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
-            var deferred = $q.defer();
-            $http.get(bootstrap + "?controller=Barathons&action=rend")
-                .success(function(data, status){
-                    factory.listeBars = data;
-                    deferred.resolve(factory.listeBars);
-                        })
-                .error(function(){
-                    deferred.reject("msg");
-                });
-                return deferred.promise;
-        },
-        // Permet de rendre un bar si on a son ID
-        get : function(id){
-            listeBars = {};
-            angular.forEach(factory.listeBars, function(value, key){
-                if(value.id == key){
-                    listebars = value;
-                }
-            });
-            return listebars;
-        },
+	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+	find : function(params){
+	    //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
+	    var deferred = $q.defer();
+	    $http.get(bootstrap + "?controller=Barathons&action=rend")
+	    .success(function(data, status){
+		factory.listeBars = data;
+		deferred.resolve(factory.listeBars);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+	    return deferred.promise;
+	},
+	// Permet de rendre un bar si on a son ID
+	get : function(id){
+	    listeBars = {};
+	    angular.forEach(factory.listeBars, function(value, key){
+		if(value.id == key){
+		    listebars = value;
+		}
+	    });
+	    return listebars;
+	}
        
-        // Permet d'ajouter un bar
-        /*addBar : function(bar){
+    // Permet d'ajouter un bar
+    /*addBar : function(bar){
             var deferred = $q.defer();
             /* TODO ...*/
-            /*deferred.resolve();
+    /*deferred.resolve();
             return deferred.promise;
         }*/
         
@@ -435,26 +435,28 @@ app.factory('ListeBars', function($http, $q){
  */     
 app.controller('testNicoCtrl', function($scope, Bar){
     $scope.bars = Bar.find().then(function(bars){
-        $scope.bars = bars;
-        console.log($scope.bars);
+	$scope.bars = bars;
+	console.log($scope.bars);
     }, function(msg){
-        alert(msg);
+	alert(msg);
     });
     
     geoBars  = new OpenLayers.Layer.Vector("Features", {
 	strategies: [
-	    new OpenLayers.Strategy.Fixed(),
-	    new OpenLayers.Strategy.AnimatedCluster({
-		distance: 45,
-		animationMethod: OpenLayers.Easing.Expo.easeOut,
-		animationDuration: 10
-	    })
+	new OpenLayers.Strategy.Fixed(),
+	new OpenLayers.Strategy.AnimatedCluster({
+	    distance: 45,
+	    animationMethod: OpenLayers.Easing.Expo.easeOut,
+	    animationDuration: 10
+	})
 	],
-	styleMap: new OpenLayers.Style(ptsBar, {context: ctxBar}),
+	styleMap: new OpenLayers.Style(ptsBar, {
+	    context: ctxBar
+	}),
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
     
-    /*map.addLayer(geoBars);
+/*map.addLayer(geoBars);
     features = new OpenLayers.Feature.Vector();
     var feature;
     $.each($scope.bars.features, function(i, elem){
@@ -475,9 +477,9 @@ app.controller('testNicoCtrl', function($scope, Bar){
  */
 app.controller('CarteCtrl', function($scope) {
 
-   // logo back
-   $(".logo").click(function(){
-        history.back();
+    // logo back
+    $(".logo").click(function(){
+	history.back();
     });
 
     // set les bars dans le scope
@@ -487,29 +489,66 @@ app.controller('CarteCtrl', function($scope) {
 	    format: new OpenLayers.Format.GeoJSON()
 	}),
 	strategies: [
-	    new OpenLayers.Strategy.Fixed(),
-	    new OpenLayers.Strategy.AnimatedCluster({
-		distance: 45,
-		animationMethod: OpenLayers.Easing.Expo.easeOut,
-		animationDuration: 10
-	    })
+	new OpenLayers.Strategy.Fixed(),
+	new OpenLayers.Strategy.AnimatedCluster({
+	    distance: 45,
+	    animationMethod: OpenLayers.Easing.Expo.easeOut,
+	    animationDuration: 10
+	})
 	],
 	styleMap: new OpenLayers.StyleMap({
-                        "default": new OpenLayers.Style(ptsBar, {context: ctxBar}),
-                        "select": new OpenLayers.Style(ptsBarOver, {context: ctxBarOver})
-                    }),
+	    "default": new OpenLayers.Style(ptsBar, {
+		context: ctxBar
+	    }),
+	    "select": new OpenLayers.Style(ptsBarOver, {
+		context: ctxBarOver
+	    })
+	}),
 	projection: new OpenLayers.Projection("EPSG:4326")
     });
     map.addLayer($scope.bars);
 
     selectControl = new OpenLayers.Control.SelectFeature($scope.bars, {
-	clickout: false, toggle: true,
-		multiple: true, hover: false,
-		toggleKey: "ctrlKey", // ctrl key removes from selection
-		multipleKey: "shiftKey", // shift key adds to selection
+	clickout: false, 
+	toggle: true,
+	multiple: true, 
+	hover: false,
+	toggleKey: "ctrlKey", // ctrl key removes from selection
+	multipleKey: "shiftKey" // shift key adds to selection
     });
+    
+    $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
+    $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
     map.addControl(selectControl);
     selectControl.activate();
+
+    function onFeatureSelect(evt) {
+	feature = evt.feature;
+	popup = new OpenLayers.Popup.FramedCloud("featurePopup",
+	    feature.geometry.getBounds().getCenterLonLat(),
+	    new OpenLayers.Size(100,100),
+	    "<h2>" + feature.attributes.wup_aggl + "</h2>" +
+	    feature.attributes.cntry_name,
+	    null,
+	    true,
+	    onPopupClose
+	    );
+	feature.popup = popup;
+	popup.feature = feature;
+	map.addPopup(popup);
+    }
+              
+    function onFeatureUnselect(evt) {
+	feature = evt.feature;
+	if (feature.popup) {
+	    popup.feature = null;
+	    map.removePopup(feature.popup);
+	    feature.popup.destroy();
+	    feature.popup = null;
+	}
+    }
+    
+    
     
  
 }); // controleur carte
@@ -524,18 +563,18 @@ app.controller('LoginCtrl', function() {
 	var login = $("#inputLogin").val();
 	var mdp = $("#inputPassword").val();
         
-	//bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
+    //bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
         
-	// Validate mdp : Controller_Users->validerUsers();
+    // Validate mdp : Controller_Users->validerUsers();
         
     });
     
     $(".logo").click(function() {
-        history.back();
+	history.back();
     });
     
     $("#cancelLogin").click(function() {
-        history.back();
+	history.back();
     });
 });
 
@@ -546,30 +585,30 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
     
     // Set la liste des barathons dans le scope
     $scope.barathons = Barathon.find().then(function(barathons){
-        $scope.barathons = barathons;
-        console.log(barathons);
+	$scope.barathons = barathons;
+	console.log(barathons);
     }, function(msg){
-        alert(msg);
+	alert(msg);
     });
     
     // Set la liste des barathons dans le scope
     $scope.barathonsProposes = Barathon.rendBarathonsProposes().then(function(barathonsProposes){
-        $scope.barathonsProposes = barathonsProposes;
-        console.log("Liste des barathons proposés --------"+barathonsProposes);
+	$scope.barathonsProposes = barathonsProposes;
+	console.log("Liste des barathons proposés --------"+barathonsProposes);
     }, function(msg){
-        alert(msg);
+	alert(msg);
     });
     
     $scope.mesBarathons = Barathon.find().then(function(mesBarathons){
-        $scope.mesBarathons = mesBarathons;
-        console.log(mesBarathons);
+	$scope.mesBarathons = mesBarathons;
+	console.log(mesBarathons);
     }, function(msg){
-        alert(msg);
+	alert(msg);
     });
     
     
     $(".logo").click(function(){
-        history.back();
+	history.back();
     });
     
 });
@@ -582,10 +621,10 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     $scope.idBarathon = $routeParams['id'];
 
     $scope.barathon = Barathon.get($scope.idBarathon).then(function(barathon){
-        $scope.barathon = barathon;
-        console.log(barathon);
+	$scope.barathon = barathon;
+	console.log(barathon);
     }, function(msg){
-        alert(msg);
+	alert(msg);
     });
     
     /*$scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
@@ -609,7 +648,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     ];*/
     
     $(".logo").click(function() {
-        history.back();
+	history.back();
     });
 });
 
@@ -621,17 +660,17 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
     
     $scope.listeBarsAValider = [
-        {
-            "nom" : "Great Escape"
-        },
-        {
-            "nom" : "Lapin vert"
-        },
+    {
+	"nom" : "Great Escape"
+    },
+    {
+	"nom" : "Lapin vert"
+    },
     ];
     
     
     $(".logo").click(function() {
-        history.back();
+	history.back();
     });
 });
 
@@ -643,12 +682,12 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
     
     
     $scope.listeBarsAValider = [
-        {
-            "nom" : "Great Escape"
-        },
-        {
-            "nom" : "Lapin vert"
-        },
+    {
+	"nom" : "Great Escape"
+    },
+    {
+	"nom" : "Lapin vert"
+    },
     ];
     
     console.log("liste " + $scope.listeBarsAValider)
@@ -656,7 +695,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
     
     
     $(".logo").click(function() {
-        history.back();
+	history.back();
     });
 });
 
@@ -672,12 +711,12 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     
     
     $scope.listeBarsAValider = [
-        {
-            "nom" : "Great Escape"
-        },
-        {
-            "nom" : "Lapin vert"
-        },
+    {
+	"nom" : "Great Escape"
+    },
+    {
+	"nom" : "Lapin vert"
+    },
     ];
     
     console.log("liste " + $scope.listeBarsAValider)
@@ -685,6 +724,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     
     
     $(".logo").click(function() {
-        history.back();
+	history.back();
     });
 });
