@@ -23,7 +23,7 @@ var ptsBar = new OpenLayers.Symbolizer.Point({
     labelOutlineOpacity: 0.6,
     labelSelect:true
 });
-    
+
 /**
  * Fonction qui définit les paramètres selon le contexte
  * @type type
