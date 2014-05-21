@@ -9,14 +9,11 @@
             <div id="mesBarathons">
                 
                 <h3>Barathons proposés</h3>
-                <ul>
-                    <div ng-controller="BarathonsCtrl">
-                        <div ng-repeat="barathon in barathons ">
-
-                            <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
-                        </div>
-                    </div>
-                </ul>
+                <div ng-repeat="barathon in barathons ">
+                    <ul>
+                        <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
+                    </ul>
+                </div>
                 
                 <h3>Mes Barathons</h3>
                 <ul>

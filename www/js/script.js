@@ -775,9 +775,8 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     },
     ];
     
-    
     $(".logo").click(function() {
-	history.back();
+	history.go(-2); // TODO : regarder pourquoi ça ne marche pas avec un history.back() - NB
     });
 });
 
@@ -798,8 +797,6 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
     ];
     
     console.log("liste " + $scope.listeBarsAValider)
-    
-    //console.log("history : " + history.back());
     
     $(".logo").click(function() {
 	history.back();
