@@ -92,7 +92,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
     $scope.bars = Bar.find().then(function(bars){
 	$scope.bars = bars;
 	if(geoBars != "UNDEFINED"){
-	    map.removeLayout(geoBars);
+	    map.removeLayer(geoBars);
 	    geoBars = "UNDEFINED";
 	}
 	geoBars  = new OpenLayers.Layer.Vector("Bars", {

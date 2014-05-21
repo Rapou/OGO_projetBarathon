@@ -122,34 +122,30 @@ var ptsBarValider = new OpenLayers.Symbolizer.Point({
 function onFeatureSelectCarte(evt) {
     feature = evt.feature;
     if(feature.attributes.count>=2){
-	console.log(feature);
 	map.zoomIn();
-	console.log(feature.geometry.x + "," + feature.geometry.y);
 	map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
     }else{
-
+	console.log("Select me 1 Voir la map");
     }
 }
 function onFeatureUnSelectCarte(evt) {
     feature = evt.feature;
-    console.log("UnSelect" + feature);
+    console.log("UnSelect me 1" + feature);
 }
 
 function onFeatureSelectCBarathon(evt) {
     feature = evt.feature;
     if(feature.attributes.count>=2){
-	console.log(feature);
 	map.zoomIn();
-	console.log(feature.geometry.x + "," + feature.geometry.y);
 	map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
     }else{
-	console.log("coco");
+	console.log("Select me 2 Créer Barathon");
     }
 }
 	
 function onFeatureUnSelectCBarathon(evt) {
     feature = evt.feature;
-    console.log("UnSelect" + feature);
+    console.log("UnSelect me 2" + feature);
 }
 
 /**
