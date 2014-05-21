@@ -325,24 +325,39 @@ app.factory('Barathon', function($http, $q, ListeBars){
  */
 app.factory('ListeBars', function($http, $q){
     var factory = {
-        listeBars : false,
+        listeBarsCourante : {},
         
         // Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-        find : function(params){
-            //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
+        find : function(barathonId){
             var deferred = $q.defer();
-            $http.get(bootstrap + "?controller=Barathons&action=rend")
-                .success(function(data, status){
-                    factory.listeBars = data;
-                    deferred.resolve(factory.listeBars);
-                        })
-                .error(function(){
-                    deferred.reject("msg");
-                });
-                return deferred.promise;
-        },
+            
+            // Quand on veut récupérer tous les barathons
+            if(barathonId === undefined){
+                $http.get(bootstrap + "?controller=Barathons&action=rend")
+                    .success(function(data, status){
+                        factory.listeBars = data;
+                        deferred.resolve(factory.listeBarsCourante);
+                            })
+                    .error(function(){
+                        deferred.reject("msg");
+                    });
+                    return deferred.promise;
+            }
+            // Quand on ne récupère qu'un Bar à la fois
+            else{
+                $http.get(bootstrap + "?controller=Barathons&action=rend")
+                    .success(function(data, status){
+                        factory.listeBars = data;
+                        deferred.resolve(factory.listeBarsCourante);
+                            })
+                    .error(function(){
+                        deferred.reject("msg");
+                    });
+                    return deferred.promise;
+            }
+        //,
         // Permet de rendre un bar si on a son ID
-        get : function(id){
+        /*get : function(id){
             listeBars = {};
             angular.forEach(factory.listeBars, function(value, key){
                 if(value.id == key){
@@ -350,7 +365,7 @@ app.factory('ListeBars', function($http, $q){
                 }
             });
             return listebars;
-        },
+        },*/
        
         // Permet d'ajouter un bar
         /*addBar : function(bar){
@@ -360,7 +375,7 @@ app.factory('ListeBars', function($http, $q){
             return deferred.promise;
         }*/
         
-    };
+    }};
     return factory;
 }); // factory ListeBars
 
@@ -531,12 +546,12 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
         alert(msg);
     });
     
-    /*$scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
+    $scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
         $scope.listeBars = listeBars;
-        console.log(listeBars);
+        console.log("Liste des bars : " + listeBars);
         }, function(msg){
         alert(msg);
-    });*/
+    });
     
     // Récup la liste des Bars de ce Barathon
     // Appel Ajax :

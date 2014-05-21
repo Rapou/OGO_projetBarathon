@@ -8,23 +8,23 @@
 <div class="containerBarathons">
     <div class="well bs-component">
         
+        <button class="btn btn-primary" style="float:right; margin: 5px;" id="launchButton">Lancer Barathon !</button>
+        
         <div ng-controller="BarathonCtrl">
             <ul>
                 <li>Temps estimé : {{barathon.tempsestime}}</li>
                 <li>Difficulté : {{barathon.difficulte}}</li>
+                <li>Distance : A CALCULER</li>
             </ul>
             
             <h3>Liste des bars :</h3>
             
-            <ul ng-repeat="bar in listeBars">
+            <ul ng-repeat="bar in listeBarsCourante">
                 <li>{{bar.nom}}</li>
             </ul>
             
         </div> 
-        
     </div>
-    
-    <button class="btn btn-primary" style="float:right; margin: 5px;" id="launchButton">Lancer Barathon !</button>
 </div>
 
 <script>

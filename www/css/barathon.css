@@ -13,6 +13,11 @@
 .container {
     margin-top: 20px !important;
     position: relative;
+    padding: 0px;
+}
+/* Surcharge pour corriger la marge du bas sur la page des barathons */
+.well {
+    margin-bottom: 0px;
 }
 
 #page{
