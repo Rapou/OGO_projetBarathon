@@ -7,16 +7,17 @@ class Controller_Users{
      */
     private $model;
     public function __construct(PDO $dbh){
-	$this->model = new Model_User($dbh); 
+	$this->model = new Model_Users($dbh); 
     }
 
     public function rend(){
 	$res = $this->model->rend();
-	$tableau_users = "";
+        return $res;
+	/*$tableau_users = "";
 	foreach($res as $i => $user){
 	    $tableau_users = $user;
 	}
-	return $tableau_users;
+	return $tableau_users;*/
     }
     
     public function rendUserParId(){
@@ -40,9 +41,10 @@ class Controller_Users{
         $mdpBD = $user['mdp'];
         
         if( $mdpRecu == $mdpBD ) {
-            echo "user OK";
+            //echo "user OK";
+            return $user["login"];
         } else {
-            echo "mdp non OK";
+            echo "user ou mdp non OK";
         }
         
         die();

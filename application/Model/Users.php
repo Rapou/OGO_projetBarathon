@@ -1,5 +1,5 @@
 <?php
-class Model_User{ 
+class Model_Users{ 
 	/**
 	 *
 	 * @var PDO
@@ -49,7 +49,7 @@ class Model_User{
             
             $userLogin = $_GET['userLogin'];
             
-            $sql = " SELECT * FROM users WHERE login = '$userLogin'";
+            $sql = " SELECT * FROM users WHERE login = '$userLogin' LIMIT 1";
             
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
