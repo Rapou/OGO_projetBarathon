@@ -98,6 +98,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
  * Controleur Creation Barathon
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, Bar){
+    $scope.listeBarsAValider = listeBarsAValider;
     
     $("#creerNewBarathonBtn").click(function() {
 	window.location.href= "#validerBarathon";
@@ -114,12 +115,11 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 		       gid: feature.cluster[0].attributes.id,
 		       nom: feature.cluster[0].attributes.name                             
 		};
-		if(barsAValider == "UNDEFINED"){
-		    barsAValider = [barsARendre];
+		if(listeBarsAValider == "UNDEFINED"){
+		    listeBarsAValider = [barsARendre];
 		}else{
-		    barsAValider.push(barsARendre);
+		    listeBarsAValider.push(barsARendre);
 		}
-		$scope.barsAValider = barsAValider;
 		$routeParams.reload();
 	    }
 	}
