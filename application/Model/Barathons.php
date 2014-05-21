@@ -71,13 +71,18 @@ class Model_Barathons{
             $description = "Description de " . $inputNom;
             $userCreateurId = $_GET['userCreateurId'];
             
-            $sql = "INSERT INTO Barathons (nom, difficulte, tempsEstime, description, userCreateurId) VALUES ( '".$inputNom."', '". $difficulte ."','". $tempsEstime ."', '".$description."', ".$userCreateurId." )";
-            
-            
+            $sql = "INSERT INTO Barathons (nom, difficulte, tempsEstime, description, userCreateurId) VALUES"
+                    . " ( '".$inputNom."', '". $difficulte ."','". $tempsEstime ."', '".$description."', ".$userCreateurId." ) RETURNING id";
             
             $statement=$this->db->prepare($sql);
 	    $resultat = $statement->execute();
             
-            return $resultat;
+            if($resultat){
+                $idCreated = $this->db->lastInsertId('barathons_id_seq');
+            } else {
+                $idCreated = false;
+            }
+            
+            return $idCreated;
         }
 }

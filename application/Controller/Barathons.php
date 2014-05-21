@@ -6,8 +6,12 @@ class Controller_Barathons{
      * @var model_Bars 
      */
     private $model;
+    private $modelListeBars;
+    
     public function __construct(PDO $dbh){
 	$this->model = new Model_Barathons($dbh); 
+	$this->modelListeBars = new Model_listeBars($dbh); 
+        
     }
 
     /**
@@ -27,17 +31,25 @@ class Controller_Barathons{
     }
     
     public function ajouterBarathon(){
-        $res = $this->model->ajouterBarathon();
+        $idBarathonCree = $this->model->ajouterBarathon();
         
-        //$listeBars = $_GET['listeBars'];
+        if($idBarathonCree){
+            $listeBars = $_GET['listeBarsAValider'];
+            
+            $ordreDansB = 1;
+            $resultatListeBars = array();
+            
+            
+            for($i=0; $i < count($listeBars); $i++){
+                $resultatListeBars[] = $this->modelListeBars->ajouteBarPourBarathon($idBarathonCree, $bar->id, $ordreDansB);
+                $ordreDansB++;
+            }
+            
+        }
         
-        /*foreach ($listeBars as $bars){
-            echo "BAR A AJOUTER";
-            var_dump($bars);
-        }*/
-        
-        
-        return $res;
+        return $listeBars;
+        //return $resultatListeBars;
+        //return $idBarathonCree;
     }
     
     /**

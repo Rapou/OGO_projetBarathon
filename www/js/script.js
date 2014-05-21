@@ -383,7 +383,7 @@ app.factory('Barathon', function($http, $q, ListeBars){
             barathon : false;
             
             
-            $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&inputListeBars="+inputListeBars+"&userCreateurId="+userCreateurId)
+            $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&listeBarsAValider="+inputListeBars+"&userCreateurId="+userCreateurId)
                 .success(function(data, status){
                     
                     factory.barathon = data;
@@ -793,7 +793,6 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
         userCreateurId = loggedUserId;
 
         alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + "listeBars = " + inputListeBars + " userCreateurId = " + userCreateurId);
-        
         
         Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, inputListeBars, userCreateurId).then(function(idBarathonCree){
             console.log("Barathon.ajouterBarathon() ------------- return :");
