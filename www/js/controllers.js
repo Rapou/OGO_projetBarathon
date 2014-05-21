@@ -94,6 +94,10 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	    });
 	    map.addControl(selectControl);
 	    selectControl.activate();
+            
+            // Centrage de la map pour afficher tous les points
+            console.log("Emplacement carteCtrl : " + geoBars.getDataExtent());
+            map.zoomToExtent(geoBars.getDataExtent());
 	
 	   geoBars.events.register("featureselected", features, onFeatureSelectCarte);
 	   geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
@@ -291,6 +295,17 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
  */
 app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     
+    // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
+    // Puis centrage de la carte
+    //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
+    map.events.register('loadend', map.geoBars, function(evt){
+        console.log("Je suis là !");
+        map.zoomToExtent(geoBars.getDataExtent());
+    });
+    //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
+    //map.zoomToExtent(geoBars.getDataExtent());
+        
+    
     $scope.idBarathon = $routeParams['id'];
 
     $scope.barathon = Barathon.get($scope.idBarathon).then(function(barathon){
@@ -326,6 +341,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 		    })
 		})
 	    });
+            
 	    map.addLayer(geoBars);
 	    var features = new Array();
 
@@ -340,6 +356,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 		};
 	    });
 	    geoBars.addFeatures(features);
+            
 	    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
 		clickout: false, 
 		toggle: true,
@@ -349,9 +366,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	    map.addControl(selectControl);
 	    selectControl.activate();
             
-            // TODO Puis centrage de la carte
-            map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
-        
+
     }, function(msg){
 	alert(msg);
     });
