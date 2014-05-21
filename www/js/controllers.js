@@ -105,8 +105,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
 /**
  * Controleur Creation Barathon
  */     
-app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, Bar){
-    $scope.listeBarsAValider = listeBarsAValider;
+app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Barathon, Bar){
     
     $("#creerNewBarathonBtn").click(function() {
 	window.location.href= "#validerBarathon";
@@ -128,8 +127,8 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 		}else{
 		    listeBarsAValider.push(barsARendre);
 		}
-
-		//$routeParams.reload();
+		$scope.listeBarsAValider = listeBarsAValider;
+		$route.reload();
 	    }
 	}
 
