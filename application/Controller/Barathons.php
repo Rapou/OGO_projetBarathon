@@ -31,23 +31,28 @@ class Controller_Barathons{
     }
     
     public function ajouterBarathon(){
+        // crée le Barathon
         $idBarathonCree = $this->model->ajouterBarathon();
         
+        // crée la listeBars pour ce Barathon
         if($idBarathonCree){
             $listeBars = $_GET['listeBarsAValider'];
             
             $ordreDansB = 1;
             $resultatListeBars = array();
             
+            $return = array();
             
             for($i=0; $i < count($listeBars); $i++){
-                $resultatListeBars[] = $this->modelListeBars->ajouteBarPourBarathon($idBarathonCree, $bar->id, $ordreDansB);
+                $resultatListeBars[] = $this->modelListeBars->ajouteBarPourBarathon($idBarathonCree, $listeBars[$i]->id, $ordreDansB);
+                $return[] = $listeBars[$i];
+                
                 $ordreDansB++;
             }
             
         }
-        
-        return $listeBars;
+        die();
+        return $return;
         //return $resultatListeBars;
         //return $idBarathonCree;
     }

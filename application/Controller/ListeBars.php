@@ -18,12 +18,9 @@ class Controller_ListeBars{
         return $this->model->rendListeBarsPourBarathon();
     }
     
-    public function addBarToBarathon(){
-        return $this->model->addBarToBarathon();
+    public function ajouterBarPourBarathon(){
+        return $this->model->ajouterBarPourBarathon();
     }
     
-    public function ajouteBarABarathon(){
-            
-    }
     
 }
