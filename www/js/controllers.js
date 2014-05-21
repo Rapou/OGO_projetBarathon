@@ -16,25 +16,29 @@ app.controller('homeCtrl', function(){
 /**
  * Controleur de test
  */     
-app.controller('testNicoCtrl', function($scope, Bar){
+app.controller('testNicoCtrl', function($scope, Bar, Ways){
     
     console.log("Hello testeur");
     
     // appel ajax pour récup les segments de route
-    
-    
-    //foreach segment, ajout au Vector de la route
-    
-    /*
-    var start_point = new OpenLayers.Geometry.Point(0,10);
-    var end_point = new OpenLayers.Geometry.Point(30,0);
+    $scope.segments = Ways.rendCheminEntre2Bars().then(function(segments){
+        $scope.segments = segments;
+        
+        $routeAAfficher = new OpenLayers.Layer.Vector();
+        
+        //foreach segment, ajout au Vector de la route
+        $($scope.segments).each(function(segment){
+            var geomSegment = segment['the_geom'];
 
-    var vector = new OpenLayers.Layer.Vector();
-    vector.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point]))]);
-    */
+            var vector = new OpenLayers.Layer.Vector();
+            routeAAfficher.addFeatures(new OpenLayers.Feature.Vector(segment['the_geom']));
+        });
+        
+        // ajout du Vector route sur la map
+        map.addLayers([vector]);
+        
+    });
     
-    // ajout du Vector route sur la map
-    map.addLayers([vector]);
     
     
     $scope.bars = Bar.find().then(function(bars){
