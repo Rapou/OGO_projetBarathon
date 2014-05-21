@@ -126,18 +126,34 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 		map.zoomIn();
 		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
 	    }else{
-		var barAEnlever = false;
-		
-		var barsARendre = {
-		       gid: feature.cluster[0].attributes.id,
-		       nom: feature.cluster[0].attributes.name                             
-		};
-		if(listeBarsAValider == "UNDEFINED"){
-		    listeBarsAValider = [barsARendre];
+		var barAEnlever = false
+		$(listeBarsAValider).each(function(i, bar){
+		    if(feature.cluster[0].attributes.id == bar.gid){
+			barAEnlever = true;
+		    }
+		});
+		console.log(barAEnlever);
+		if(barAEnlever){
+		    var nouvelleListe = [];
+		   $(listeBarsAValider).each(function(i, bar){
+			if(feature.cluster[0].attributes.id != bar.gid){
+			    nouvelleListe.push(bar);
+			}
+		    }); 
+		    console.log(nouvelleListe);
+		    listeBarsAValider = nouvelleListe;
 		}else{
-		    listeBarsAValider.push(barsARendre);
+		    var barsARendre = {
+			   gid: feature.cluster[0].attributes.id,
+			   nom: feature.cluster[0].attributes.name                             
+		    };
+		    if(listeBarsAValider == "UNDEFINED"){
+			listeBarsAValider = [barsARendre];
+		    }else{
+			listeBarsAValider.push(barsARendre);
+		    }
+		    console.log(listeBarsAValider);
 		}
-		console.log(listeBarsAValider);
 		$route.reload();
 	    }
 	}
