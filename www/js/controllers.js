@@ -102,6 +102,11 @@ app.controller('CarteCtrl', function($scope, Bar) {
     });
 }); // controleur carte
 
+
+
+
+
+
 /**
  * Controleur Creation Barathon
  */     
@@ -128,7 +133,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 		    listeBarsAValider.push(barsARendre);
 		}
 		$scope.listeBarsAValider = listeBarsAValider;
-		$route.reload();
+		//$route.reload();
 	    }
 	}
 
@@ -339,7 +344,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	var inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
 	var userCreateurId = loggedUserId;
         
-        $scope.listeBarsAValider = barsAValider;
+        $scope.listeBarsAValider = listeBarsAValider;
         
         console.log("Liste des bars à valider : ---");
         console.log("liste " + $scope.listeBarsAValider)
