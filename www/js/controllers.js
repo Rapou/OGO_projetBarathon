@@ -321,7 +321,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
     
     
-    
+            $scope.listeBarsAValider = listeBarsAValider;
+
     /**
      * Bouton valider New Barathon
      */
@@ -332,7 +333,6 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	var inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
 	var userCreateurId = loggedUserId;
         
-        $scope.listeBarsAValider = listeBarsAValider;
         
         console.log("Liste des bars à valider : ---");
         console.log("liste " + $scope.listeBarsAValider)
