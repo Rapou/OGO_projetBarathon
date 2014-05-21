@@ -247,6 +247,8 @@ app.controller('LoginCtrl', function($scope, User) {
         
     // Validate mdp : Controller_Users->validerUsers();
 
+    $("#inputLogin").focus();
+
     login = $("#inputLogin").val();
     mdp = $("#inputPassword").val();
     $("#erreurLogin").hide();
@@ -266,7 +268,7 @@ app.controller('LoginCtrl', function($scope, User) {
             if(user.login == null){
                 loggedUserId = -1;
                 console.log($scope.user);
-                $("#inputPassword").val("");
+                //$("#inputPassword").val("");
                 $("#erreurLogin").fadeIn(1000);
             }
             // En cas de concordance du couple login-mot de passe
