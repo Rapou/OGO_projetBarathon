@@ -28,6 +28,20 @@ app.controller('CarteCtrl', function($scope, Bar) {
     });
     
     $scope.bars = Bar.find().then(function(bars){
+	function onFeatureSelectCarte(evt) {
+	    feature = evt.feature;
+	    if(feature.attributes.count>=2){
+		map.zoomIn();
+		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
+	    }else{
+		console.log("Select me 1 Voir la map");
+	    }
+	}
+	function onFeatureUnSelectCarte(evt) {
+	    feature = evt.feature;
+	    console.log("UnSelect me 1" + feature);
+	}
+	
 	$scope.bars = bars;
 	if(geoBars != "UNDEFINED"){
 	    map.removeLayer(geoBars);
@@ -90,6 +104,21 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
     });
     
     $scope.bars = Bar.find().then(function(bars){
+	function onFeatureSelectCBarathon(evt) {
+	    feature = evt.feature;
+	    if(feature.attributes.count>=2){
+		map.zoomIn();
+		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
+	    }else{
+		console.log("Select me 2 Créer Barathon");
+	    }
+	}
+
+	function onFeatureUnSelectCBarathon(evt) {
+	    feature = evt.feature;
+	    console.log("UnSelect me 2" + feature);
+	}
+	
 	$scope.bars = bars;
 	if(geoBars != "UNDEFINED"){
 	    map.removeLayer(geoBars);
@@ -137,28 +166,15 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 	geoBars.events.register("featureselected", features, onFeatureSelectCBarathon);
 	geoBars.events.register("featureunselected", features, onFeatureUnSelectCBarathon);
 	
-    /*$scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
-	styleMap: new OpenLayers.StyleMap(ptsBarValider)
-    });
-    map.addLayer($scope.barsAValider);
-    
-    console.log($scope);
+	$scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
+	    styleMap: new OpenLayers.StyleMap(ptsBarValider)
+	});
+	map.addLayer($scope.barsAValider);
 
-    $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
-    $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
-    
+	console.log($scope);
 
-    function onFeatureSelect(evt) {
-	feature = evt.feature;
-	$scope.barsAValider.addFeatures(feature);
-    }
-              
-    function onFeatureUnselect(evt) {
-	feature = evt.feature;
-	console.log("UnSelect" + feature);
-
-    }*/
-	
+	$scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
+	$scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
     }, function(msg){
 	alert(msg);
     });

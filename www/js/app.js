@@ -1,9 +1,9 @@
 var bootstrap = "bootstrap.php";
 var map;
 var geoBars = "UNDEFINED";
+var barsAValider = "UNDEFINED";
 
 var loggedUserId = -1; // Par défaut, le user n'est pas loggé (= -1)
-var barAValider;
 
 /**
  * Représentation d'un Bar
@@ -118,35 +118,6 @@ var ptsBarValider = new OpenLayers.Symbolizer.Point({
     labelSelect:true,
     labelPosition:30
 });
-
-function onFeatureSelectCarte(evt) {
-    feature = evt.feature;
-    if(feature.attributes.count>=2){
-	map.zoomIn();
-	map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
-    }else{
-	console.log("Select me 1 Voir la map");
-    }
-}
-function onFeatureUnSelectCarte(evt) {
-    feature = evt.feature;
-    console.log("UnSelect me 1" + feature);
-}
-
-function onFeatureSelectCBarathon(evt) {
-    feature = evt.feature;
-    if(feature.attributes.count>=2){
-	map.zoomIn();
-	map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
-    }else{
-	console.log("Select me 2 Créer Barathon");
-    }
-}
-	
-function onFeatureUnSelectCBarathon(evt) {
-    feature = evt.feature;
-    console.log("UnSelect me 2" + feature);
-}
 
 /**
  *                       ---- DOC READY
