@@ -22,20 +22,14 @@ app.controller('testNicoCtrl', function($scope, Bar, Ways){
     // appel ajax pour récup les segments de route
     $scope.segments = Ways.rendCheminEntre2Bars().then(function(segments){
         
-        
         $scope.segments = segments;
-        alert("ctrl testNico : segment de Ajax"+segments);
-        
-        //routeAAfficher = new OpenLayers.Geometry.MultiLineString();
-        //feautre = array();
-        alert("nom geoBars" + geoBars);
-        
+
         //foreach segment, ajout au Vector de la route
         $($scope.segments).each(function(i, segment){
             var geomSegment = $.parseJSON(segment.the_geom);
-            
+
             var arrayPoints = Array();
-            
+
             $(geomSegment.coordinates).each(function(i, point){
                 arrayPoints[i] = new OpenLayers.Geometry.Point(point[0],point[1] );
             })
@@ -44,23 +38,15 @@ app.controller('testNicoCtrl', function($scope, Bar, Ways){
 
             //routeAAfficher.addFeatures(new OpenLayers.Feature.Vector(vector));
             geoBars.addFeatures(new OpenLayers.Feature.Vector(vector));
-            
-            
+
+
         });
-        
+
         // ajout du Vector route sur la map
         map.addLayers(geoBars);
         
-        
     });
     
-    
-    /*
-    $scope.bars = Bar.find().then(function(bars){
-	$scope.bars = bars;
-    }, function(msg){
-	alert(msg);
-    });*/
 });
 
 
@@ -152,7 +138,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
  * Controleur Creation Barathon
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Barathon, Bar){
-		
+    
     $("#creerNewBarathonBtn").click(function() {
 	window.location.href= "#validerBarathon";
     });
@@ -399,6 +385,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	    });
 	    geoBars.addFeatures(features);
             map.zoomToExtent(geoBars.getDataExtent());
+            
             /*geoBars.events.register('loadend', geoBars, function(evt){
                 console.log("Je suis là !");
                 map.zoomToExtent(geoBars.getDataExtent());
