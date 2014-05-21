@@ -498,39 +498,37 @@ app.factory('ListeBars', function($http, $q){
 app.controller('testNicoCtrl', function($scope, Bar){
     $scope.bars = Bar.find().then(function(bars){
 	$scope.bars = bars;
-	console.log($scope.bars);
+	geoBars  = new OpenLayers.Layer.Vector("Features", {
+	    /*strategies: [
+	    new OpenLayers.Strategy.Fixed(),
+	    new OpenLayers.Strategy.AnimatedCluster({
+		distance: 45,
+		animationMethod: OpenLayers.Easing.Expo.easeOut,
+		animationDuration: 10
+	    })
+	    ],*/
+	    styleMap: new OpenLayers.Style(ptsBar, {
+		context: ctxBar
+	    })
+	});
+	console.log(geoBars);	
+	map.addLayer(geoBars);
+	var features = new Array();
+
+	$.each($scope.bars.features, function(i, elem){
+	    ptGeom = new OpenLayers.Geometry.Point(elem.geometry.coordinates);
+	   //  ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+	    features[i] = new OpenLayers.Feature.Vector(ptGeom);
+	    features[i].attributes = {
+		name: elem.properties.name,
+		id: elem.properties.id
+	    };
+	});
+	geoBars.addFeatures(features);
+
     }, function(msg){
 	alert(msg);
     });
-    
-    geoBars  = new OpenLayers.Layer.Vector("Features", {
-	strategies: [
-	new OpenLayers.Strategy.Fixed(),
-	new OpenLayers.Strategy.AnimatedCluster({
-	    distance: 45,
-	    animationMethod: OpenLayers.Easing.Expo.easeOut,
-	    animationDuration: 10
-	})
-	],
-	styleMap: new OpenLayers.Style(ptsBar, {
-	    context: ctxBar
-	}),
-	projection: new OpenLayers.Projection("EPSG:4326")
-    });
-    
-/*map.addLayer(geoBars);
-    features = new OpenLayers.Feature.Vector();
-    var feature;
-    $.each($scope.bars.features, function(i, elem){
-        console.log(elem.properties.name);
-	feature = new OpenLayers.Feature();
-	feature.geometry = new OpenLayers.Geometry.Point(elem.geometry.coordinates);
-	feature.attributes = {
-	    name: elem.properties.name,
-	    id: elem.properties.id
-	};
-	geoBars.addFeatures([feature]);
-    });*/
 });
 
 
@@ -585,7 +583,6 @@ app.controller('CarteCtrl', function($scope) {
     /**
      * A remettre dans CreationBarathon
      **/
-    
     $scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
 	styleMap: new OpenLayers.StyleMap(ptsBarValider)
     });
@@ -599,7 +596,7 @@ app.controller('CarteCtrl', function($scope) {
 
     function onFeatureSelect(evt) {
 	feature = evt.feature;
-	// $scope.barsAValider.addFeatures(feature);
+	$scope.barsAValider.addFeatures(feature);
     }
               
     function onFeatureUnselect(evt) {
