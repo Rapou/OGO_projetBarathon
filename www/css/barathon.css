@@ -64,7 +64,8 @@
 
 /*     ---  Header  --- */
 .appHeader {
-    background-color: whitesmoke;//#2980b9;
+    //background-color: whitesmoke;//#2980b9;
+    background-color: rgba(245, 245, 245, 0.4);
     width: 100%;
     height:80px;
     //float:left;
