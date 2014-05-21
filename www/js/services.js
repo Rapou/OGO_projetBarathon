@@ -11,29 +11,29 @@ app.factory('User', function($http, $q){
     var factory = {
 	user : -1,
         
-        // On vérifie si le couple utilisateur + mot de passe est correct
-        login : function(userId, pass){
-            var deferred = $q.defer();
-            $http.get(bootstrap + "?controller=Users&action=validerUser&userLogin="+userId+"&mdp="+pass)
+	// On vérifie si le couple utilisateur + mot de passe est correct
+	login : function(userId, pass){
+	    var deferred = $q.defer();
+	    $http.get(bootstrap + "?controller=Users&action=validerUser&userLogin="+userId+"&mdp="+pass)
             
-                // Si le couple est correct, on renvoie le user entier
-                .success(function(data, status){
-                    factory.user = data;
-                    console.log("Data : " + data);
-                    console.log("Status : " + status);
-                    console.log("Authentifié en tant que : " + data);
-                    deferred.resolve(factory.user);
-                })
+	    // Si le couple est correct, on renvoie le user entier
+	    .success(function(data, status){
+		factory.user = data;
+		console.log("Data : " + data);
+		console.log("Status : " + status);
+		console.log("Authentifié en tant que : " + data);
+		deferred.resolve(factory.user);
+	    })
                     
-                // Sinon on renvoie un message d'erreur
-                .error(function(){
-                    console.log("Echec d'authentification");
-                    deferred.reject("Factory Users : Erreur lors du login");
-                });
-                return deferred.promise;
-            }
+	    // Sinon on renvoie un message d'erreur
+	    .error(function(){
+		console.log("Echec d'authentification");
+		deferred.reject("Factory Users : Erreur lors du login");
+	    });
+	    return deferred.promise;
+	}
         
-	/*validerUser : function(){
+    /*validerUser : function(){
 	    var bar = {};
 	    angular.forEach(factory.bars, function(value, key){
 		if(value.id == key){
@@ -169,20 +169,22 @@ app.factory('Barathon', function($http, $q, ListeBars){
 	    return deferred.promise;
 	},
         
-        ajouterBarathon : function(inputNomBarathon, inputDifficulteBarathon, listeBars,  userCreateurId){
-            var deferred = $q.defer();
-            barathon : false;
-            
-            $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&userCreateurId="+userCreateurId)
-                .success(function(data, status){
-                    factory.barathon = data;
-                    deferred.resolve(factory.barathon);
-                        })
-                .error(function(){
-                    deferred.reject("msg");
-                });
+	ajouterBarathon : function(inputNomBarathon, inputDifficulteBarathon,  userCreateurId){
+	    var deferred = $q.defer();
+		barathon : false;
+		
+	    
+	    $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&userCreateurId="+userCreateurId)
+	    .success(function(data, status){
+		factory.barathon = data;
+		console.log(data);
+		deferred.resolve(factory.barathon);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
 	    return deferred.promise;
-        }
+	}
         
         
         
@@ -207,6 +209,7 @@ app.factory('ListeBars', function($http, $q){
 		$http.get(bootstrap + "?controller=Barathons&action=rend")
 		.success(function(data, status){
 		    factory.listeBars = data;
+		    
 		    deferred.resolve(factory.listeBars);
 		})
 		.error(function(){
@@ -241,19 +244,20 @@ app.factory('ListeBars', function($http, $q){
 	}, // find
         
         
-        ajouterBarPourBarathon : function(barathonId, barId, ordreDansBarathon){
+	ajouterBarPourBarathon : function(barathonId, barId, ordreDansBarathon){
 	    var deferred = $q.defer();
-            
-            $http.get(bootstrap + "?controller=ListeBars&action=ajouterBarPourBarathon&barathonId="+barathonId+"&barId="+ barId +"&ordreDansBarathon="+ ordreDansBarathon)
-		.success(function(data, status){
-		    factory.listeBars = data;
-		    deferred.resolve(factory.listeBars);
-		})
-		.error(function(){
-		    deferred.reject("msg");
-		});
-		return deferred.promise;            
-        }
+	    var requete = bootstrap + "?controller=ListeBars&action=ajouterBarPourBarathon&barathonId="+barathonId+"&barId="+ barId +"&ordreDansBarathon="+ ordreDansBarathon;
+	    	    console.log(requete);
+	    $http.get(requete)
+	    .success(function(data, status){
+		factory.listeBars = data;
+		deferred.resolve(factory.listeBars);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+	    return deferred.promise;            
+	}
     };
-return factory;
+    return factory;
 }); // factory ListeBars

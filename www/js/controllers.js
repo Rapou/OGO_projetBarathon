@@ -370,7 +370,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
     
     
-            $scope.listeBarsAValider = listeBarsAValider;
+    $scope.listeBarsAValider = listeBarsAValider;
 
     /**
      * Bouton valider New Barathon
@@ -382,32 +382,23 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	var inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
 	var userCreateurId = loggedUserId;
         
-        
-        console.log("Liste des bars à valider : ---");
-        console.log("liste " + $scope.listeBarsAValider)
-        
-	//alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + " userCreateurId = " + userCreateurId);
-        
         // ajoute le barathon
-	var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, $scope.listeBarsAValider, userCreateurId).then(function(idBarathonCree){
+	var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, userCreateurId).then(function(idBarathonCree){
+	    var ordreDansBarathon = 1;
+	    // FOR EACH
+	    $($scope.listeBarsAValider).each(function(i, bar){
+
+		idBara = parseInt(idBarathonCree);
+		// ajoute les bars à la listeBars du Barathon
+		ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
+		    console.log("bar ajouté : "+ bar_id);
+		}, function(msg){
+		    console.log(msg);
+		});
+		ordreDansBarathon++;
+	    });
 	    console.log("Barathon.ajouterBarathon() ok");
 	});
-        
-        
-        console.log("CTRL validerNewB, affichage des bars a valider :");
-        var ordreDansBarathon = 1;
-        
-        
-        // FOR EACH
-        $($scope.listeBarsAValider).each(function(){
-            
-            console.log("bar.gid");
-            // ajoute les bars à la listeBars du Barathon
-            ListeBars.ajouterBarPourBarathon(idBarathonCree, $scope.listeBarsAValider.gid, ordreDansBarathon);
-            ordreDansBarathon++;
-        })
-        
-        
     });
 });
 
