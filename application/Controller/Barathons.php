@@ -27,7 +27,7 @@ class Controller_Barathons{
     }
     
     public function ajouterBarathon(){
-        //$res = $this->model->ajouterBarathon();
+        $res = $this->model->ajouterBarathon();
         
         //$listeBars = $_GET['listeBars'];
         
@@ -36,7 +36,6 @@ class Controller_Barathons{
             var_dump($bars);
         }*/
         
-        $res = "TESTESTESTEST";
         
         return $res;
     }

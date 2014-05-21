@@ -383,10 +383,6 @@ app.factory('Barathon', function($http, $q, ListeBars){
             barathon : false;
             
             
-            
-            
-            
-            
             $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&inputListeBars="+inputListeBars+"&userCreateurId="+userCreateurId)
                 .success(function(data, status){
                     
@@ -629,8 +625,6 @@ app.controller('CarteCtrl', function($scope) {
     }
     
     
-    
- 
 }); // controleur carte
 
 /**
@@ -674,7 +668,6 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
     // Set la liste des barathons dans le scope
     $scope.barathonsProposes = Barathon.rendBarathonsProposes().then(function(barathonsProposes){
 	$scope.barathonsProposes = barathonsProposes;
-	console.log("Liste des barathons proposés --------"+barathonsProposes);
     }, function(msg){
 	alert(msg);
     });
@@ -727,7 +720,6 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
         },
     ];*/
     
-    //console.log("history : " + history.back());
     
     $(".logo").click(function() {
 	history.back();
@@ -740,17 +732,16 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
  * Controleur Creation Barathon
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
+    console.log("Whooot?" + $scope.bars)
     
-    // logo back
-    $(".logo").click(function(){
-	history.back();
+    $("#creerNewBarathonBtn").click(function() {
+        window.location.href= "#validerBarathon";
     });
-    console.log("Whooot?" + $scope.bars);
     
-    
+    /*
     $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
     $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
-    
+    */
 
     function onFeatureSelect(evt) {
 	feature = evt.feature;
@@ -774,14 +765,49 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
     
     console.log("liste " + $scope.listeBarsAValider)
      
-    $(".logo").click(function() {
-	history.back();
+    
+});
+
+/**
+ * Controleur Validation Barathon
+ */     
+app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
+    
+    $scope.listeBarsAValider = [
+        {
+            "nom" : "Great Escape"
+        },
+        {
+            "nom" : "Lapin vert"
+        },
+    ];
+    
+    console.log("liste " + $scope.listeBarsAValider)
+    
+    
+    $("#validerNewBarathonBtn").click(function(){
+        
+        inputNomBarathon = $("#inputNomBarathon").val();
+        inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
+        inputListeBars = $scope.listeBarsAValider;
+        userCreateurId = loggedUserId;
+
+        alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + "listeBars = " + inputListeBars + " userCreateurId = " + userCreateurId);
+        
+        
+        Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, inputListeBars, userCreateurId).then(function(idBarathonCree){
+            console.log("Barathon.ajouterBarathon() ------------- return :");
+            console.log(idBarathonCree);
+        });
+        
     });
+    
+    
 });
 
 
 /**
- * Controleur Creation Barathon
+ * Controleur Partie en Cours
  */     
 app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     
@@ -795,26 +821,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     ];
     
 
-    
-    $("#okButton").click(function() {
-        inputNomBarathon = $("#inputNomBarathon").val();
-        inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
-        inputListeBars = $scope.listeBarsAValider;
-        createurId = loggedUserId;
-        
-        alert("Enregistrement du Barathon... nom : " +inputNomBarathon +" liste des bars : "+inputListeBars );
-        
-        ajout = Barathon.ajouterBarathon(inputNomBarathon,inputDifficulteBarathon, inputListeBars).then(function(){
-            alert("ajout barathon : " + ajout);
-            console.log("ajout barathon : ");
-            console.log(ajout);
-        });
-        
-        
-        //window.location.replace("#home");
-    });
-    
-    
 
     $(".logo").click(function() {
 	history.go(-2); // TODO : regarder pourquoi ça ne marche pas avec un history.back() - NB
@@ -822,24 +828,3 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
 });
 
 
-/**
- * Controleur Creation Barathon
- */     
-app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
-    
-    
-    $scope.listeBarsAValider = [
-    {
-	"nom" : "Great Escape"
-    },
-    {
-	"nom" : "Lapin vert"
-    },
-    ];
-    
-    console.log("liste " + $scope.listeBarsAValider)
-    
-    $(".logo").click(function() {
-	history.back();
-    });
-});
