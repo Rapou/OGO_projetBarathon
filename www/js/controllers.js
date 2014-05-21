@@ -340,7 +340,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	//alert("Enregistrement B avec info : nom = " + inputNomBarathon + " difficulte = " + inputDifficulteBarathon + " userCreateurId = " + userCreateurId);
         
         // ajoute le barathon
-	var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, userCreateurId).then(function(idBarathonCree){
+	var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, $scope.listeBarsAValider, userCreateurId).then(function(idBarathonCree){
 	    console.log("Barathon.ajouterBarathon() ok");
 	});
         
