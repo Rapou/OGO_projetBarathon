@@ -16,7 +16,7 @@ app.factory('User', function($http, $q){
             var deferred = $q.defer();
             $http.get(bootstrap + "?controller=Users&action=validerUser&userLogin="+userId+"&mdp="+pass)
             
-                // Si oui, on set la globale userLoggedIn et on revient à l'index
+                // Si le couple est correct, on renvoie le user entier
                 .success(function(data, status){
                     factory.user = data;
                     console.log("Data : " + data);
@@ -25,7 +25,7 @@ app.factory('User', function($http, $q){
                     deferred.resolve(factory.user);
                 })
                     
-                // Sinon on affiche un message d'erreur
+                // Sinon on renvoie un message d'erreur
                 .error(function(){
                     console.log("Echec d'authentification");
                     deferred.reject("Factory Users : Erreur lors du login");
