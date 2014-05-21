@@ -15,14 +15,20 @@ app.factory('User', function($http, $q){
         login : function(userId, pass){
             var deferred = $q.defer();
             $http.get(bootstrap + "?controller=Users&action=validerUser&userLogin="+userId+"&mdp="+pass)
+            
                 // Si oui, on set la globale userLoggedIn et on revient à l'index
                 .success(function(data, status){
                     factory.user = data;
+                    console.log("Data : " + data);
+                    console.log("Status : " + status);
+                    console.log("Authentifié en tant que : " + data);
                     deferred.resolve(factory.user);
-                    })
-                // Sinon on affiche un message d'erreur et on vide le champs password
+                })
+                    
+                // Sinon on affiche un message d'erreur
                 .error(function(){
-                    deferred.reject("msg");
+                    console.log("Echec d'authentification");
+                    deferred.reject("Factory Users : Erreur lors du login");
                 });
                 return deferred.promise;
             }

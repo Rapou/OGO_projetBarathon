@@ -33,7 +33,6 @@ class Controller_Users{
      * url test : http://localhost/OGO_projetBarathon/www/bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
      */
     public function validerUser(){
-        $login = $_GET['userLogin'];
         $mdpRecu = $_GET['mdp'];
         
         $user = $this->rendUserParLogin();
@@ -42,11 +41,10 @@ class Controller_Users{
         
         if( $mdpRecu == $mdpBD ) {
             //echo "user OK";
-            return $user["login"];
+            return $user;
         } else {
-            echo "user ou mdp non OK";
+            return -1;
         }
         
-        die();
     }
 }

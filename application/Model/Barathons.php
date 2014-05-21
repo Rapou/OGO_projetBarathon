@@ -2,7 +2,7 @@
 
 include_once 'ListeBars.php';
 
-class Model_Barathons{ 
+class Model_Barathons{
 	/**
 	 *
 	 * @var PDO
@@ -17,7 +17,7 @@ class Model_Barathons{
 	 * @return array
 	 */
 	public function rend(){
-	    $sql =  "SELECT * FROM barathons";	    
+	    $sql =  "SELECT * FROM barathons";
 	    
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
@@ -35,7 +35,7 @@ class Model_Barathons{
             
             $barathonId = $_GET['barathonId'];
             
-	    $sql =  "SELECT * FROM barathons WHERE id = " . $barathonId;	    
+	    $sql =  "SELECT * FROM barathons WHERE id = " . $barathonId;
 	    
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
@@ -54,7 +54,7 @@ class Model_Barathons{
             $userCreateurId = 0;
             
             // Récupération des barathons
-	    $sql =  "SELECT * FROM barathons WHERE userCreateurId = " . $userCreateurId;	    
+	    $sql =  "SELECT * FROM barathons WHERE userCreateurId = " . $userCreateurId;
 	    
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
