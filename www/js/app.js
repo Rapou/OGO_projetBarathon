@@ -50,7 +50,6 @@ var ctxBar = {
 	}else{
 	    var testSelected = false;
 	    $(listeBarsAValider).each(function(i, bar){
-		console.log(bar.gid);
 		if(feature.cluster[0].attributes.id == bar.gid){
 		    testSelected = true;
 		}
