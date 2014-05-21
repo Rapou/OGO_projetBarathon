@@ -106,12 +106,13 @@ app.controller('CarteCtrl', function($scope, Bar) {
  * Controleur Creation Barathon
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Barathon, Bar){
-    
+		
     $("#creerNewBarathonBtn").click(function() {
 	window.location.href= "#validerBarathon";
     });
     
     $scope.bars = Bar.find().then(function(bars){
+	$scope.listeBarsAValider = listeBarsAValider;
 	function onFeatureSelectCBarathon(evt) {
 	    feature = evt.feature;
 	    if(feature.attributes.count>=2){
@@ -127,7 +128,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 		}else{
 		    listeBarsAValider.push(barsARendre);
 		}
-		$scope.listeBarsAValider = listeBarsAValider;
+		console.log(listeBarsAValider);
 		$route.reload();
 	    }
 	}
@@ -189,20 +190,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 	// $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
     }, function(msg){
 	alert(msg);
-    });
-   
-/*$scope.listeBarsAValider = [
-    {
-	"nom" : "Great Escape"
-    },
-    {
-	"nom" : "Lapin vert"
-    },
-    ];*/
-    
-// console.log("liste " + $scope.listeBarsAValider)
-     
-    
+    });     
 });
 
 /**
