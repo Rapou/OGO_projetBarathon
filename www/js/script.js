@@ -2,6 +2,7 @@ var bootstrap = "bootstrap.php";
 var map;
 var loggedUserId;
 var geoBar;
+var barAValider;
 
 /**
  * Représentation d'un Bar
@@ -69,6 +70,25 @@ var ptsBarOver = new OpenLayers.Symbolizer.Point({
     labelSelect:true,
     labelPosition:30
 });
+/**
+ * Représentation d'un Bar de ListeBarathon
+ * @type OpenLayers.Symbolizer.Point
+ */
+var ptsBarValider = new OpenLayers.Symbolizer.Point({
+    externalGraphic: "img/icon_bar_valider.png",
+    graphicWidth: 40,
+    graphicHeight: 50,
+    graphicOpacity: 1,
+    label:"",
+    fontColor: "#e67e22",
+    fontSize: "14pt",
+    fontWeight: "bold",
+    labelOutlineColor: "#FFFFFF",
+    labelOutlineWidth: 4,
+    labelOutlineOpacity: 0.6,
+    labelSelect:true,
+    labelPosition:30
+});
     
 /**
  * Fonction qui définit les paramètres selon le contexte en mode :hover
@@ -79,7 +99,6 @@ var ctxBarOver = {
 	if(feature.attributes.count>=2){
 	    return feature.attributes.count;
 	}else{
-	    console.log(feature);
 	    return feature.cluster[0].attributes.name;
 	}
     },
@@ -116,10 +135,11 @@ $(document).ready(function(){
 	maxZoomLevel:20
     }
     );
+	
     map.addControl(new OpenLayers.Control.LayerSwitcher());
-
     map.addLayer(goog);
     map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14); 
+    
 }); // DOC READY
 
 /*******************************************************************************
@@ -559,35 +579,33 @@ app.controller('CarteCtrl', function($scope) {
 	multipleKey: "shiftKey" // shift key adds to selection
     });
     
-    $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
-    $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
     map.addControl(selectControl);
     selectControl.activate();
+    
+    /**
+     * A remettre dans CreationBarathon
+     **/
+    
+    $scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
+	styleMap: new OpenLayers.StyleMap(ptsBarValider)
+    });
+    map.addLayer($scope.barsAValider);
+    
+    console.log($scope);
+
+    $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
+    $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
+    
 
     function onFeatureSelect(evt) {
 	feature = evt.feature;
-	popup = new OpenLayers.Popup.FramedCloud("featurePopup",
-	    feature.geometry.getBounds().getCenterLonLat(),
-	    new OpenLayers.Size(100,100),
-	    "<h2>" + feature.attributes.wup_aggl + "</h2>" +
-	    feature.attributes.cntry_name,
-	    null,
-	    true,
-	    onPopupClose
-	    );
-	feature.popup = popup;
-	popup.feature = feature;
-	map.addPopup(popup);
+	// $scope.barsAValider.addFeatures(feature);
     }
               
     function onFeatureUnselect(evt) {
 	feature = evt.feature;
-	if (feature.popup) {
-	    popup.feature = null;
-	    map.removePopup(feature.popup);
-	    feature.popup.destroy();
-	    feature.popup = null;
-	}
+	console.log("UnSelect" + feature);
+
     }
     
     
@@ -703,6 +721,51 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
     
+    // logo back
+    $(".logo").click(function(){
+	history.back();
+    });
+    console.log("Whooot?" + $scope.bars);
+    
+    
+    $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
+    $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
+    
+
+    function onFeatureSelect(evt) {
+	feature = evt.feature;
+	console.log("Select" + feature);
+    }
+              
+    function onFeatureUnselect(evt) {
+	feature = evt.feature;
+	console.log("UnSelect" + feature);
+
+    }
+    
+    $scope.listeBarsAValider = [
+    {
+	"nom" : "Great Escape"
+    },
+    {
+	"nom" : "Lapin vert"
+    },
+    ];
+    
+    console.log("liste " + $scope.listeBarsAValider)
+     
+    $(".logo").click(function() {
+	history.back();
+    });
+});
+
+
+/**
+ * Controleur Creation Barathon
+ */     
+app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
+    
+    
     $scope.listeBarsAValider = [
     {
 	"nom" : "Great Escape"
@@ -723,35 +786,6 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon){
  * Controleur Creation Barathon
  */     
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon){
-    
-    
-    $scope.listeBarsAValider = [
-    {
-	"nom" : "Great Escape"
-    },
-    {
-	"nom" : "Lapin vert"
-    },
-    ];
-    
-    console.log("liste " + $scope.listeBarsAValider)
-    
-    
-    
-    $(".logo").click(function() {
-	history.back();
-    });
-});
-
-
-
-
-
-
-/**
- * Controleur Creation Barathon
- */     
-app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     
     
     $scope.listeBarsAValider = [
