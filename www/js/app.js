@@ -139,7 +139,7 @@ $(document).ready(function(){
 	
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     map.addLayer(goog);
-    map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14); 
+    map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
     
 }); // DOC READY
 
