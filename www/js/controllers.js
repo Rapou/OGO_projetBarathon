@@ -244,10 +244,6 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
  */
 app.controller('LoginCtrl', function($scope, User) {
       
-    //bootstrap.php?controller=Users&action=validerUser&userLogin=admin&mdp=1234
-        
-    // Validate mdp : Controller_Users->validerUsers();
-
     $("#inputLogin").focus();
 
     login = $("#inputLogin").val();
@@ -255,13 +251,13 @@ app.controller('LoginCtrl', function($scope, User) {
     $("#erreurLogin").hide();
         
     $("#submitLogin").click(function(){
-
+        
+        login = $("#inputLogin").val();
+        mdp = $("#inputPassword").val();
+        
 	// Set l'id et le login de l'utilisateur loggé
 	$scope.user = User.login(login, mdp).then(function(user){
 
-	    login = $("#inputLogin").val();
-	    mdp = $("#inputPassword").val();
-            
             $scope.user = user;
             
             // Définition de la variable globale pour les tests d'autentification
