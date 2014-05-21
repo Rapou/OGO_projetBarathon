@@ -261,3 +261,30 @@ app.factory('ListeBars', function($http, $q){
     };
     return factory;
 }); // factory ListeBars
+
+
+/*
+ * Factory pour la liste des bars d'un barathon
+ */
+app.factory('Ways', function($http, $q){
+    var factory = {
+        
+	ways : {},
+        
+	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
+	rendCheminEntreDeuxBars : function(start,end){
+	    var deferred = $q.defer();
+            
+	    $http.get(bootstrap + "?controller=Ways&action=rendCheminEntreDeuxBars?start="+start+"&end="+end)
+	    .success(function(data, status){
+		factory.ways = data;
+		deferred.resolve(factory.listeBars);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+	    return deferred.promise;
+	} // Fin rendCheminEntreDeuxBars
+    };
+    return factory;
+}); // factory ListeBars
