@@ -175,17 +175,14 @@ app.factory('Barathon', function($http, $q, ListeBars){
             
             $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&userCreateurId="+userCreateurId)
                 .success(function(data, status){
-                    
                     factory.barathon = data;
                     deferred.resolve(factory.barathon);
                         })
                 .error(function(){
                     deferred.reject("msg");
                 });
-            
-            
-            return deferred.promise;
-        },
+	    return deferred.promise;
+        }
         
         
         
@@ -255,12 +252,8 @@ app.factory('ListeBars', function($http, $q){
 		.error(function(){
 		    deferred.reject("msg");
 		});
-		return deferred.promise;
-            
-            
-            return deferred.promise;
+		return deferred.promise;            
         }
-        
     };
 return factory;
 }); // factory ListeBars
