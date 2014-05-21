@@ -87,8 +87,8 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	    map.addControl(selectControl);
 	    selectControl.activate();
 	
-	    geoBars.events.register("featureselected", features, onFeatureSelectCarte);
-	    geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
+	   geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+	   geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
     }, function(msg){
 	alert(msg);
     });
@@ -110,7 +110,11 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 		map.zoomIn();
 		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
 	    }else{
-		console.log("Select me 2 Créer Barathon");
+		var barsARendre = 
+		    {
+		       gid: feature.cluster[0].attributes.id,
+		       nom: feature.cluster[0].attributes.name                             
+		    };
 	    }
 	}
 
@@ -165,16 +169,10 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, Barathon, 
 	selectControl.activate();
 	geoBars.events.register("featureselected", features, onFeatureSelectCBarathon);
 	geoBars.events.register("featureunselected", features, onFeatureUnSelectCBarathon);
-	
-	$scope.barsAValider  = new OpenLayers.Layer.Vector("ListeBar", {
-	    styleMap: new OpenLayers.StyleMap(ptsBarValider)
-	});
-	map.addLayer($scope.barsAValider);
 
-	console.log($scope);
 
-	$scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
-	$scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
+	// $scope.bars.events.register("featureselected", $scope.bars, onFeatureSelect);
+	// $scope.bars.events.register("featureunselected", $scope.bars, onFeatureUnselect);
     }, function(msg){
 	alert(msg);
     });
