@@ -17,6 +17,26 @@ app.controller('homeCtrl', function(){
  * Controleur de test
  */     
 app.controller('testNicoCtrl', function($scope, Bar){
+    
+    console.log("Hello testeur");
+    
+    // appel ajax pour récup les segments de route
+    
+    
+    //foreach segment, ajout au Vector de la route
+    
+    /*
+    var start_point = new OpenLayers.Geometry.Point(0,10);
+    var end_point = new OpenLayers.Geometry.Point(30,0);
+
+    var vector = new OpenLayers.Layer.Vector();
+    vector.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point]))]);
+    */
+    
+    // ajout du Vector route sur la map
+    map.addLayers([vector]);
+    
+    
     $scope.bars = Bar.find().then(function(bars){
 	$scope.bars = bars;
     }, function(msg){
