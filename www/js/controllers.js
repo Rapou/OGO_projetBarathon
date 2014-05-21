@@ -343,6 +343,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	alert(msg);
     });
     
+    // On récupère et passe dans le scope la liste des bars pour ce barathon
     $scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
 	$scope.listeBars = listeBars;
 	console.log("Liste des bars : " + listeBars);
@@ -371,6 +372,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	    });
             
 	    map.addLayer(geoBars);
+            
+            // On ajoute ensuite les éléments graphiques à la carte
 	    var features = new Array();
 
 	    $.each($scope.listeBars, function(i, elem){
@@ -453,6 +456,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 		ordreDansBarathon++;
 	    });
 	    listeBarsAValider = "UNDEFINED";
+            
 	    window.location.href= "#home";
 	});
     });
