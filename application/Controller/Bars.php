@@ -19,6 +19,10 @@ class Controller_Bars{
 	return $tableau_partie;
     }
     
+    public function rendBar(){
+        return $this->model->rendBar();
+    }
+    
     public function rendPub(){
 	$res = $this->model->rendPub();
 	$tableau_partie = "";
