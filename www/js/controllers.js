@@ -307,10 +307,6 @@ function func($scope, User){
 };
     
 app.controller('LoginCtrl', function($scope, User) {
-<<<<<<< HEAD
-    
-=======
->>>>>>> 9baa0d05dfc97c081e561ca28c7581b58a083334
     $(".logo").click(function() {
 	 window.location.replace("#home" );
     });
@@ -377,14 +373,12 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
 /**
  * Controleur affichage 1 Barathon
  */
-<<<<<<< HEAD
+
 app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar, Parties){
-=======
-app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
+
     $(".logo").click(function() {
 	history.back();
     });
->>>>>>> 9baa0d05dfc97c081e561ca28c7581b58a083334
     
     $scope.idBarathon = $routeParams['id'];
 
@@ -573,15 +567,12 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 
 /**
  * Controleur Partie en Cours
- */     
-<<<<<<< HEAD
+ */
 app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Barathon, ListeBars){
-=======
-app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties){
+
      $(".logo").click(function() {
 	window.location.replace("#home" );
     });
->>>>>>> 9baa0d05dfc97c081e561ca28c7581b58a083334
     
     console.log("idPartieEnCours : "+ $scope.idPartieEnCours);
     console.log($routeParams.id);

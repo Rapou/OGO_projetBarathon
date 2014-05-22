@@ -321,7 +321,7 @@ app.factory('Parties', function($http, $q){
                 return deferred.promise;
                 
             }
-<<<<<<< HEAD
+
         },
         nouvellePartie : function(idBarathon, idUser) {
             
@@ -341,9 +341,6 @@ app.factory('Parties', function($http, $q){
         }
         
         
-=======
-        }
->>>>>>> 9baa0d05dfc97c081e561ca28c7581b58a083334
     };
     return factory;
 });
