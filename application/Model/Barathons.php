@@ -50,7 +50,7 @@ class Model_Barathons{
 	 */
 	public function rendBarathonsProposes(){
             
-            $userCreateurId = -0;
+            $userCreateurId = 0;
             
             // Récupération des barathons
 	    $sql =  "SELECT * FROM barathons WHERE userCreateurId = " . $userCreateurId;
