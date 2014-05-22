@@ -342,6 +342,8 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
 	history.back();
     });
     
+    
+    
 });
 
 /**
@@ -429,7 +431,9 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	alert(msg);
     });
     
-    
+    $("#launchButton").click(function(){
+        window.location.replace("#partieEnCours" );
+    }); 
     
     
     $(".logo").click(function() {
@@ -481,19 +485,38 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 /**
  * Controleur Partie en Cours
  */     
-app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
+app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties){
     
     console.log("idPartieEnCours : "+idPartieEnCours);
     
-    if(idPartieEnCours > 0){
+    //$routeParams
+    
+    // s'il n y pas de partie en cours
+    if(idPartieEnCours == 0){
+        // créer nouvelle partie
         
+        // récupérer barathon, liste bars et calculs des routes
+        
+        // affichage barathon et bars
+        
+    } else { // il y a une partie en cours !
+        // affichage barathon
     }
     
     $scope.idPartieEnCours = idPartieEnCours;
+    $scope.poil = 0;
+    
+    // controlleur parties pour créer new partie avec idBarathon
+    
+    // location replace -> partieEnCours/idNewPartie
+   
+    
     
     $(".logo").click(function() {
-	history.go(-2); // TODO : regarder pourquoi ça ne marche pas avec un history.back() - NB
+	window.location.replace("#home" );
     });
+    
+    
 });
 
 
