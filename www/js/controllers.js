@@ -599,16 +599,7 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
         
     });
 
-    // récupérer barathon, liste bars et calculs des routes
 
-    // affichage barathon et bars
-        
-    
-    $scope.poil = 0;
-    
-    // controlleur parties pour créer new partie avec idBarathon
-    
-    // location replace -> partieEnCours/idNewPartie
 });
 
 
