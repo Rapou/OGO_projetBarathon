@@ -164,7 +164,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Barathon, Bar){
     $(".logo").click(function() {
-	 window.location.replace("#carte" );
+	 window.location.replace("#carte");
     });
     
     $("#creerNewBarathonBtn").click(function() {
@@ -185,7 +185,6 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 			barAEnlever = true;
 		    }
 		});
-		console.log(barAEnlever);
 		if(barAEnlever){
 		    var nouvelleListe = [];
 		   $(listeBarsAValider).each(function(i, bar){
@@ -379,7 +378,9 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
 /**
  * Controleur affichage 1 Barathon
  */
-app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
+
+app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBars, Parties){
+
     $(".logo").click(function() {
 	history.back();
     });
@@ -402,9 +403,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     });
     
     // On récupère et passe dans le scope la liste des bars pour ce barathon
-    $scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
+    $scope.listeBars = ListeBars.find($scope.idBarathon).then(function(listeBars){
 	$scope.listeBars = listeBars;
-	console.log("Liste des bars : " + listeBars);
         
         // Ajout des bars à la carte
         if(geoBars != "UNDEFINED"){
@@ -475,11 +475,30 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	alert(msg);
     });
     
+    /**
+     * BOUTON lancer Barathon, crée une partie et va l'afficher
+     */
     $("#launchButton").click(function(){
-	//crée partie
-	idPartieEnCours 
-        window.location.replace("#partieEnCours/" + idPartieEnCours);
-    }); 
+        
+        if (idPartieEnCours > 0){
+            alert("il y a deja une partie en cours !");
+        } else {
+            
+            // Créée new Partie
+            Parties.nouvellePartie($scope.idBarathon, loggedUserId).then(function(idPartieCreee){
+                
+                idPartieCreee = parseInt(idPartieCreee.replace('"',''));
+                
+                // affichage de la bonne partie
+                $scope.idPartieEnCours = idPartieCreee;
+                
+                alert("CTRL BarathonCtrl/ SCOPE idPartie " +$scope.idPartieEnCours );
+                
+                window.location.replace("#parties/" + $scope.idPartieEnCours);
+            });
+        }
+	
+    });  // launch button
     
     // Resize de la police quand le nom du barathon est trop long
     var $body = $('body'); //Cache this for performance
@@ -550,36 +569,94 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 });
 
 
+
 /**
  * Controleur Partie en Cours
- */     
-app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties){
+ */
+app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Barathon, ListeBars){
+
      $(".logo").click(function() {
 	window.location.replace("#home" );
+    });    
+    
+    // récup la partieEnCours
+    $scope.partieEnCours = Parties.parties($routeParams.id).then(function(partie){
+        
+        $scope.partieEnCours = partie;
+        
+        var barathonId = partie.barathonid;
+        
+        $scope.barathonEnCours = Barathon.get(barathonId).then(function(barathon){
+            $scope.barathonEnCours = barathon;
+	    
+	    $scope.listeBars = ListeBars.find(barathonId).then(function(listeBars){
+		    $scope.listeBars = listeBars;
+
+		    // Ajout des bars à la carte
+		    if(geoBars != "UNDEFINED"){
+			map.removeLayer(geoBars);
+			geoBars = "UNDEFINED";
+		    }
+		    geoBars  = new OpenLayers.Layer.Vector("Bars", {
+			strategies: [
+			new OpenLayers.Strategy.AnimatedCluster({
+			    distance: 50,
+			    animationMethod: OpenLayers.Easing.Expo.easeOut,
+			    animationDuration: 10
+			})
+			],
+			styleMap: new OpenLayers.StyleMap({
+			    "default": new OpenLayers.Style(ptsBar, {
+				context: ctxBar
+			    }),
+			    "select": new OpenLayers.Style(ptsBarOver, {
+				context: ctxBarOver
+			    })
+			})
+		    });
+
+		    map.addLayer(geoBars);
+		    console.log("yo");
+		    console.log($scope.listeBars);
+
+/*
+		    // On ajoute ensuite les éléments graphiques à la carte
+		    var features = new Array();
+
+		    $.each($scope.listeBars, function(i, elem){
+			var myGeo = $.parseJSON(elem.geometry);
+			ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
+			ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+			features[i] = new OpenLayers.Feature.Vector(ptGeom);
+			features[i].attributes = {
+			    name: elem.name,
+			    id: elem.gid
+			};
+		    });
+		    geoBars.addFeatures(features);
+
+		    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+			clickout: false, 
+			toggle: true,
+			multiple: true, 
+			hover: false
+		    });
+
+		    map.addControl(selectControl);
+		    selectControl.activate();
+
+		    geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+		    */
+		}); 
+        });
+        
+        //partieEnCours = partie;
+        
+        //barathonId = partie.id;
+        
     });
-    
-    console.log("idPartieEnCours : "+idPartieEnCours);
-    
-    //$routeParams
-    
-    // s'il n y pas de partie en cours
-    if(idPartieEnCours == 0){
-        // créer nouvelle partie
-        
-        // récupérer barathon, liste bars et calculs des routes
-        
-        // affichage barathon et bars
-        
-    } else { // il y a une partie en cours !
-        // affichage barathon
-    }
-    
-    $scope.idPartieEnCours = idPartieEnCours;
-    $scope.poil = 0;
-    
-    // controlleur parties pour créer new partie avec idBarathon
-    
-    // location replace -> partieEnCours/idNewPartie
+
+
 });
 
 

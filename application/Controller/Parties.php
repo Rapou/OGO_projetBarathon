@@ -1,22 +1,26 @@
 <?php
 
-class Controller_Partie{
+class Controller_Parties{
     /**
      *
      * @var model_Partie 
      */
     private $model;
     
-    /**
-     *
-     * @var model_Etape 
-     */
-    private $etape;
+    
     public function __construct(PDO $dbh){
-	$this->model = new Model_Partie($dbh); 
-	$this->etape = new Model_Etape($dbh);
+	$this->model = new Model_Parties($dbh); 
     }
 
+    public function nouvellePartie(){
+        return $this->model->nouvellePartie();
+    }
+    
+    public function rendPartie(){
+        return $this->model->rendPartie();
+    }
+    
+    
     public function changeBarPremier(){
 	$idEtatSuivant = $_GET['idEtatSuivant'];
 	$idEtape = $this->etape->rendsIdSelonNum(1);

@@ -39,7 +39,10 @@
 .site-title {
     position: absolute;
     top: 140px;
-    margin-left: -30px;
+    margin-left: -20px;
+    font-weight:bold;
+    text-shadow: 3px 3px 6px white;
+    color:#182b33;
 }
 
 #map{

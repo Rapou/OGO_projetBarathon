@@ -201,8 +201,12 @@ app.config(function($routeProvider) {
 	templateUrl: 'views/barathon.html',
 	controller: 'BarathonCtrl'
     })
-    .when('/partieEnCours', {
-	templateUrl: 'views/partieEnCours.html',
+    .when('/parties', {
+	templateUrl: 'views/parties.html',
+	controller: 'partiesCtrl'
+    })
+    .when('/parties/:id', {
+        templateUrl: 'views/partieEnCours.html',
 	controller: 'partieEnCoursCtrl'
     })
     .otherwise({
