@@ -432,7 +432,9 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     });
     
     $("#launchButton").click(function(){
-        window.location.replace("#partieEnCours" );
+	//crée partie
+	idPartieEnCours 
+        window.location.replace("#partieEnCours/" + idPartieEnCours);
     }); 
     
     
