@@ -97,58 +97,52 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	    map.removeLayer(geoBars);
 	    geoBars = "UNDEFINED";
 	}
-        geoBars  = new OpenLayers.Layer.Vector("Bars", {
-            strategies: [
-            new OpenLayers.Strategy.AnimatedCluster({
-                distance: 50,
-                animationMethod: OpenLayers.Easing.Expo.easeOut,
-                animationDuration: 10
-            })
-            ],
-            styleMap: new OpenLayers.StyleMap({
-                "default": new OpenLayers.Style(ptsBar, {
-                    context: ctxBar
-                })/*,
-                "select": new OpenLayers.Style(ptsBarOver, {
-                    context: ctxBarOver
-                })*/
-            })
-        });
-        map.addLayer(geoBars);
-        
-        geoBars.events.register('featuresadded', geoBars, function(evt){
-            console.log("featuresadded de la carte");
-            map.zoomToExtent(geoBars.getDataExtent());
-        });
-        
-        var features = new Array();
+	    geoBars  = new OpenLayers.Layer.Vector("Bars", {
+		strategies: [
+		new OpenLayers.Strategy.AnimatedCluster({
+		    distance: 50,
+		    animationMethod: OpenLayers.Easing.Expo.easeOut,
+		    animationDuration: 10
+		})
+		],
+		styleMap: new OpenLayers.StyleMap({
+		    "default": new OpenLayers.Style(ptsBar, {
+			context: ctxBar
+		    })/*,
+		    "select": new OpenLayers.Style(ptsBarOver, {
+			context: ctxBarOver
+		    })*/
+		})
+	    });
+	    map.addLayer(geoBars);
+	    var features = new Array();
 
-        $.each($scope.bars, function(i, elem){
-            var myGeo = $.parseJSON(elem.geometry);
-            ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
-            ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
-            features[i] = new OpenLayers.Feature.Vector(ptGeom);
-            features[i].attributes = {
-                name: elem.name,
-                id: elem.gid
-            };
-        });
-        geoBars.addFeatures(features);
-        selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
-            clickout: false, 
-            toggle: true,
-            multiple: true, 
-            hover: false
-        });
-        map.addControl(selectControl);
-        selectControl.activate();
-
-        // Centrage de la map pour afficher tous les points
-        console.log("Emplacement carteCtrl : " + geoBars.getDataExtent());
-        //map.zoomToExtent(geoBars.getDataExtent()); //////////////////////////////////////////// A DEBUGGER AVEC LE PROF
-
-       geoBars.events.register("featureselected", features, onFeatureSelectCarte);
-       // geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
+	    $.each($scope.bars, function(i, elem){
+		var myGeo = $.parseJSON(elem.geometry);
+		ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
+		ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+		features[i] = new OpenLayers.Feature.Vector(ptGeom);
+		features[i].attributes = {
+		    name: elem.name,
+		    id: elem.gid
+		};
+	    });
+	    geoBars.addFeatures(features);
+	    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+		clickout: false, 
+		toggle: true,
+		multiple: true, 
+		hover: false
+	    });
+	    map.addControl(selectControl);
+	    selectControl.activate();
+            
+            // Centrage de la map pour afficher tous les points
+            console.log("Emplacement carteCtrl : " + geoBars.getDataExtent());
+            map.zoomToExtent(geoBars.getDataExtent()); //////////////////////////////////////////// A DEBUGGER AVEC LE PROF
+	
+	   geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+	   // geoBars.events.register("featureunselected", features, onFeatureUnSelectCarte);
     }, function(msg){
 	alert(msg);
     });
@@ -177,7 +171,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 	    feature = evt.feature;
 	    if(feature.attributes.count>=2){
 		map.zoomIn();
-		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y));
+		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
 	    }else{
 		var barAEnlever = false
 		$(listeBarsAValider).each(function(i, bar){
@@ -411,65 +405,64 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
 	    map.removeLayer(geoBars);
 	    geoBars = "UNDEFINED";
 	}
-        geoBars  = new OpenLayers.Layer.Vector("Bars", {
-            strategies: [
-            new OpenLayers.Strategy.AnimatedCluster({
-                distance: 50,
-                animationMethod: OpenLayers.Easing.Expo.easeOut,
-                animationDuration: 10
-            })
-            ],
-            styleMap: new OpenLayers.StyleMap({
-                "default": new OpenLayers.Style(ptsBar, {
-                    context: ctxBar
-                }),
-                "select": new OpenLayers.Style(ptsBarOver, {
-                    context: ctxBarOver
-                })
-            })
-        });
+	    geoBars  = new OpenLayers.Layer.Vector("Bars", {
+		strategies: [
+		new OpenLayers.Strategy.AnimatedCluster({
+		    distance: 50,
+		    animationMethod: OpenLayers.Easing.Expo.easeOut,
+		    animationDuration: 10
+		})
+		],
+		styleMap: new OpenLayers.StyleMap({
+		    "default": new OpenLayers.Style(ptsBar, {
+			context: ctxBar
+		    }),
+		    "select": new OpenLayers.Style(ptsBarOver, {
+			context: ctxBarOver
+		    })
+		})
+	    });
             
-        map.addLayer(geoBars);
-        
-        geoBars.events.register('featureadded', geoBars, function(evt){
-            console.log("featuresadded de la liste des bars");
-            //$route.reload();
+	    map.addLayer(geoBars);
+            
+            // On ajoute ensuite les éléments graphiques à la carte
+	    var features = new Array();
+
+	    $.each($scope.listeBars, function(i, elem){
+		var myGeo = $.parseJSON(elem.geometry);
+		ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
+		ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+		features[i] = new OpenLayers.Feature.Vector(ptGeom);
+		features[i].attributes = {
+		    name: elem.name,
+		    id: elem.gid
+		};
+	    });
+	    geoBars.addFeatures(features);
             map.zoomToExtent(geoBars.getDataExtent());
-        });
-
-        // On ajoute ensuite les éléments graphiques à la carte
-        var features = new Array();
-
-        $.each($scope.listeBars, function(i, elem){
-            var myGeo = $.parseJSON(elem.geometry);
-            ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
-            ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
-            features[i] = new OpenLayers.Feature.Vector(ptGeom);
-            features[i].attributes = {
-                name: elem.name,
-                id: elem.gid
-            };
-        });
-        geoBars.addFeatures(features);
-        //map.zoomToExtent(geoBars.getDataExtent());
-
-        selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
-            clickout: false, 
-            toggle: true,
-            multiple: true, 
-            hover: false
-        });
-        map.addControl(selectControl);
-        selectControl.activate();
-
-        geoBars.events.register("featureselected", features, onFeatureSelectCarte);
-
-        // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
-        // Puis centrage de la carte
-        //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
-
-        //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
-        //map.zoomToExtent(geoBars.getDataExtent());
+            
+            /*geoBars.events.register('loadend', geoBars, function(evt){
+                console.log("Je suis là !");
+                map.zoomToExtent(geoBars.getDataExtent());
+            });*/
+            
+	    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+		clickout: false, 
+		toggle: true,
+		multiple: true, 
+		hover: false
+	    });
+	    map.addControl(selectControl);
+	    selectControl.activate();
+            
+            geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+            
+            // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
+            // Puis centrage de la carte
+            //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
+            
+            //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
+            //map.zoomToExtent(geoBars.getDataExtent());
 
     }, function(msg){
 	alert(msg);
