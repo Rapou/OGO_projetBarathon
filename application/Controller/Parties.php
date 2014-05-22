@@ -26,6 +26,10 @@ class Controller_Parties{
         return $this->model_partie->changeBarSuivant($idBarSuivant);
     }
     
+    public function rendMesPartiesJouees(){
+        return $this->model_partie->rendMesPartiesJouees();
+    }
+    
     /*
     public function changeBarPremier(){
 	$idEtatSuivant = $_GET['idEtatSuivant'];

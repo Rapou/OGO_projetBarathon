@@ -5,45 +5,39 @@
 </div>
 <div class="containerAtBottom container">
 	<div id="wrapperBarathons" class="well bs-component">
-            <div id="mesBarathons">
-                
+
+            <div id="barathonsProposes">
                 <h3>Barathons proposés</h3>
                 <div ng-repeat="barathon in barathons ">
                     <ul>
                         <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
                     </ul>
                 </div>
-                
+            </div>
+
+            <div id="mesBarathons">
                 <h3>Mes Barathons</h3>
+                <ul>
+                    <div ng-repeat="barathon in mesBarathons ">
+
+                        <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
+                    </div>
+                </ul>
+            </div>
+            
+            <div id="partiesJouees">
+                <h3>Parties jouées</h3>
                 <ul>
                     <div ng-repeat="barathon in barathonsProposes ">
 
                         <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
                     </div>
                 </ul>
-                    
-                    
             </div>
+
         </div>
             
             
-            
-            
-            
-            <!--
-            <div id="barathonsProposes">
-                <h3>Barathons proposés</h3>
-                <ul>
-                    <li><a href="#barathons/12">SuperStar Barathon</a></li>
-                    <li><a href="#barathons/14">The Descent Barathon</a></li>
-                </ul>
-            </div>
-            <div class="barathonsEffectues">
-                <h3>Barathons effectués</h3>
-                <ul>
-                    <li><a href="#parties/1">Mon Barathon   --   temps : 3h25</a></li>
-                </ul>
-            </div>
-            -->
+
 </div>
 

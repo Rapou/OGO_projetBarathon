@@ -84,8 +84,7 @@ class Model_ListeBars{
 	    $statement->execute();
 	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
             
-	    
-            return $resultats;// $resultats;
+            return $resultats;
         }
 
         

@@ -84,4 +84,19 @@ class Model_Barathons{
             
             return $idCreated;
         }
+        
+        public function rendMesBarathons(){
+            
+            $userId = $_GET['userId'];
+            
+            $sql = "SELECT * FROM barathons WHERE userCreateurId = $userId";
+            
+            $statement=$this->db->prepare($sql);
+	    $resultat = $statement->execute();
+            
+            $resultats=$statement->fetchAll();
+            
+            return $resultats;
+            
+        }
 }

@@ -425,10 +425,35 @@ app.controller('LoginCtrl', function($scope, User) {
  * @param {scope} $scope Le scope global d'angularJS
  * @param {barathon} Barathon La Factory pour faire des barathons
  */
-app.controller('BarathonsCtrl', function($scope, Barathon){
+app.controller('BarathonsCtrl', function($scope, Barathon, Parties){
     $(".logo").click(function(){
 	history.back();
     });
+    
+    // check si un user est authentifié. Si non, on cache les les div d'affichage
+    if(loggedUserId == -1){
+        $("#mesBarathons").hide();
+        $("#partiesJouees").hide();
+    } else {
+        // récupère mes Barathons
+        $scope.mesBarathons = Barathon.rendMesBarathons(loggedUserId).then(function(mesBarathons){
+            $scope.mesBarathons = mesBarathons;
+            console.log("mesBarathons : "+mesBarathons);
+            $("#mesBarathons").show();
+            
+            /*
+            // récupère mes parties jouées
+            $scope.partiesJouees = Parties.rendMesPartiesJouees(loggedUserId).then(function(partiesJouees){
+                $scope.partiesJouees = partiesJouees;
+            })*/
+            
+            
+        }, function(msg){
+            alert(msg);
+        });
+        
+        
+    }
     
     // Set la liste des barathons dans le scope
     $scope.barathons = Barathon.find().then(function(barathons){
@@ -445,12 +470,8 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
 	alert(msg);
     });
     
-    $scope.mesBarathons = Barathon.find().then(function(mesBarathons){
-	$scope.mesBarathons = mesBarathons;
-	console.log("mesBarathons : "+mesBarathons);
-    }, function(msg){
-	alert(msg);
-    });
+    
+    
 });
 
 /**

@@ -80,4 +80,17 @@ class Model_Parties{
             
             return $idCreated;
         }
+        
+        public function rendMesPartiesJouees(){
+            
+            $userId = $_GET['userId'];
+            
+            $sql = "SELECT * FROM parties WHERE userId= $userId ";
+            
+            $statement=$this->db->prepare($sql);
+	    $statement->execute();
+	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $resultats;
+        }
 }

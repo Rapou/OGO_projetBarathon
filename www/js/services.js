@@ -178,7 +178,6 @@ app.factory('Barathon', function($http, $q, ListeBars){
 	    var deferred = $q.defer();
 		barathon : false;
 		
-	    
 	    $http.get(bootstrap + "?controller=Barathons&action=ajouterBarathon&inputNomBarathon="+inputNomBarathon+"&inputDifficulteBarathon="+inputDifficulteBarathon+"&userCreateurId="+userCreateurId)
 	    .success(function(data, status){
 		factory.barathon = data;
@@ -189,8 +188,23 @@ app.factory('Barathon', function($http, $q, ListeBars){
 		deferred.reject("msg");
 	    });
 	    return deferred.promise;
-	}
+	},
         
+        rendMesBarathons : function(idUser){
+            var deferred = $q.defer();
+            
+            $http.get(bootstrap + "?controller=Barathons&action=rendMesBarathons&userId="+idUser)
+	    .success(function(data, status){
+		factory.barathon = data;
+		console.log(data);
+		deferred.resolve(factory.barathon);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+            
+            return deferred.promise;
+        }
         
         
     };
@@ -224,7 +238,7 @@ app.factory('ListeBars', function($http, $q){
 	ajouterBarPourBarathon : function(barathonId, barId, ordreDansBarathon){
 	    var deferred = $q.defer();
 	    var requete = bootstrap + "?controller=ListeBars&action=ajouterBarPourBarathon&barathonId="+barathonId+"&barId="+ barId +"&ordreDansBarathon="+ ordreDansBarathon;
-	    	    console.log(requete);
+
 	    $http.get(requete)
 	    .success(function(data, status){
 		factory.listeBars = data;
@@ -235,6 +249,7 @@ app.factory('ListeBars', function($http, $q){
 	    });
 	    return deferred.promise;            
 	}
+        
     };
     return factory;
 }); // factory ListeBars
@@ -346,7 +361,23 @@ app.factory('Parties', function($http, $q){
 		deferred.reject("msg");
 	    });
 	    return deferred.promise;
-	}
+	},
+        rendMesPartiesJouees : function(userId){
+            var deferred = $q.defer();
+    
+            var requete = bootstrap + "?controller=parties&action=rendMesPartiesJouees&userId="+userId;
+
+	    $http.get(requete)
+	    .success(function(data, status){
+		factory.listeBars = data;
+		deferred.resolve(factory.listeBars);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+    
+            return deferred.promise; 
+        }
     };
     return factory;
 });
