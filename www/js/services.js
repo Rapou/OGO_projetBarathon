@@ -56,7 +56,7 @@ app.factory('Bar', function($http, $q){
 	bars : false,
 	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
 	// TODO : si nécessaire, traitement en fonction des params.
-	find : function(barId){
+	find : function(barathonId){
 	    var deferred = $q.defer();
             
 	    // Quand on veut récupérer tous les barathons
