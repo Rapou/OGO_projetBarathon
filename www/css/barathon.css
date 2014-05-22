@@ -19,6 +19,9 @@
 .well {
     margin-bottom: 0px;
 }
+.panel {
+    margin-bottom: 0px;
+}
 .panel-body {
     padding: 5px;
 }
@@ -69,6 +72,13 @@
     margin: 0px auto 0 auto;
     z-index: 99999;
 }
+ul {
+    margin-bottom: 0;
+    padding: 0px;
+}
+li.buttons {
+    float: right;
+}
 
 /*     ---  Header  --- */
 .appHeader {
@@ -100,6 +110,13 @@
     text-align: center;
     vertical-align: central;
     color : #2980b9;
+}
+
+#barathonCree {
+    position: absolute;
+    bottom: 50%;
+    width: 90%;
+    margin-left: 5%;
 }
 
 /*    --- Création Barathon  --- */
@@ -143,7 +160,7 @@
     width:100%;
     heigth:auto;
     max-height: 50%;
-    background-color: whitesmoke;
+    background-color: rgba(245, 245, 245, 0.6);
     color: #2980b9;
 }
 

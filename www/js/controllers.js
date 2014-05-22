@@ -22,8 +22,8 @@ app.controller('homeCtrl', function($scope){
     // Hide le message pour un barathon créé
     $("#barathonCree").hide();
     // Affichage de l'alerte Succes Barathon créé
-    if(barathonCree == true){
-        $("#barathonCree").fadeIn(2000).fadeOut(1000);
+    if(barathonCree === true){
+        $("#barathonCree").fadeIn(1000).delay(2000).fadeOut(1000);
         
         window.setInterval(function() {
             barathonCree = false;
