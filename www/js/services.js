@@ -332,7 +332,7 @@ app.factory('Parties', function($http, $q){
 		deferred.reject("msg");
 	    });
 	    return deferred.promise;
-        }/*,
+        },
         valideBar : function(idPartie, idBarathon, idBar){
 	    var deferred = $q.defer();
             partie : false;
@@ -346,7 +346,7 @@ app.factory('Parties', function($http, $q){
 		deferred.reject("msg");
 	    });
 	    return deferred.promise;
-	}  */
+	}
     };
     return factory;
 });

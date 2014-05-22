@@ -70,21 +70,22 @@ class Model_ListeBars{
         }
         
 	/**
-         * Ajoute un bar à la liste des Bars d'un Barathon
+         * Permet de récupérer l'id du bar suivant dans la liste des bar d'un barathon. 
          * @param type $barathonId
          */
-        public function recupereBarSuivant(){
+        public function recupereIdBarSuivant(){
             
-           /* $barId = $_GET['idBar'];
-	    
+	    $barId = $_GET['idBar'];
             $barathonId = $_GET['idBarathon'];
             
-            $sql = "SELECT ordreDansBarathon FROME listeBars WHERE (barId, barathonId, ordreDansBarathon) VALUES ( $barId ,  idBarathon ,  $ordreDansBarathon )";
+            $sql = "SELECT barid FROM ListeBars WHERE barathonid = ".$barathonId." AND ordredansbarathon = (1+(SELECT ordredansbarathon FROM ListeBars WHERE barid = ". $barId ." AND barathonid = ".$barathonId."))";
             
-            $statement=$this->db->prepare($sql);
-            $resultats = $statement->execute();
-            */
-            return "";// $resultats;
+	    $statement=$this->db->prepare($sql);
+	    $statement->execute();
+	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
+            
+	    
+            return $resultats;// $resultats;
         }
 
         

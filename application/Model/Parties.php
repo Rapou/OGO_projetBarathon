@@ -20,6 +20,16 @@ class Model_Parties{
             
             return $resultat;
         }
+	
+	public function changeBarSuivant($idBarSuivant){
+            $partieId = $_GET['idPartie'];
+            $sql = "UPDATE parties SET barencoursid = ". $idBarSuivant ." WHERE partie = " . $partieId;
+            
+            $statement=$this->db->prepare($sql);
+            $resultats = $statement->execute();
+            
+            return $resultats;
+        }
         
 	/**
 	 

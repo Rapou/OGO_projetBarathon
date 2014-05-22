@@ -547,6 +547,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
             
             geoBars.events.register("featureselected", features, onFeatureSelectCarte);
             
+	    
+	    
             // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
             // Puis centrage de la carte
             //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
@@ -673,10 +675,11 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
     });
     
     $("#prochainBar").click(function() {
-	/*
-	if(){
-	    
-	}*/
+	
+	/*var changementBar = Parties.valideBar($scope.partieEnCours.id, $scope.barathonEnCours.id, $scope.barAVisite.gid).then(function(changementbar2){
+	    changementBar = changementbar2;
+	    console.log(changementBar);
+	});*/
     });
     
     
@@ -756,8 +759,9 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 
 		    map.addControl(selectControl);
 		    selectControl.activate();
-
+		    
 		    geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+		   
 		}); 
         });
         

@@ -22,9 +22,8 @@ class Controller_Parties{
     }
     
     public function changeBarActif(){
-	
-	
-        return "";// $this->model_partie->changeBarActif();
+	$idBarSuivant = $this->model_ListeBars->recupereIdBarSuivant();
+        return $this->model_partie->changeBarSuivant($idBarSuivant);
     }
     
     /*
