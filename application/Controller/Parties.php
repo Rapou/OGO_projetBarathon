@@ -5,19 +5,26 @@ class Controller_Parties{
      *
      * @var model_Partie 
      */
-    private $model;
-    
+    private $model_partie;
+    private $model_ListeBars;
     
     public function __construct(PDO $dbh){
-	$this->model = new Model_Parties($dbh); 
+	$this->model_partie = new Model_Parties($dbh);
+	$this->model_ListeBars = new Model_ListeBars($dbh); 
     }
 
     public function nouvellePartie(){
-        return $this->model->nouvellePartie();
+        return $this->model_partie->nouvellePartie();
     }
     
     public function rendPartie(){
-        return $this->model->rendPartie();
+        return $this->model_partie->rendPartie();
+    }
+    
+    public function changeBarActif(){
+	
+	
+        return "";// $this->model_partie->changeBarActif();
     }
     
     /*

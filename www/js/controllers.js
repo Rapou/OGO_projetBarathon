@@ -653,10 +653,26 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
  * Controleur Partie en Cours
  */
 app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Barathon, ListeBars){
+    $scope.partieEnCours = "" ;
+    $scope.barathonEnCours = "";
+    $scope.listeBars = "";
+    $scope.barAVisite = "";
 
-     $(".logo").click(function() {
-	window.location.replace("#home" );
+    $(".logo").click(function() {
+	window.location.replace("#home");
     });    
+    
+    $("#validerEtape").click(function() {
+        alert("Valide étape");
+    });
+    
+    $("#prochainBar").click(function() {
+	/*
+	if(){
+	    
+	}*/
+    });
+    
     
     // récup la partieEnCours
     $scope.partieEnCours = Parties.parties($routeParams.id).then(function(partie){
@@ -669,7 +685,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 	}
     
         $scope.partieEnCours = partie;
-        
         var barathonId = partie.barathonid;
         
         $scope.barathonEnCours = Barathon.get(barathonId).then(function(barathon){
@@ -720,7 +735,8 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 			if(elem.gid == partie.barencoursid){
 			    map.setCenter(new OpenLayers.LonLat(myGeo.coordinates[0], myGeo.coordinates[1]).transform("EPSG:4326", "EPSG:900913"), 14); 
 			    $scope.barAVisite = elem;
-			    console.log(elem.gid);
+			    
+			    console.log($scope.barAVisite);
 			}
 		    });
 		    geoBars.addFeatures(features);

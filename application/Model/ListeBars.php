@@ -69,6 +69,23 @@ class Model_ListeBars{
             return $resultats;
         }
         
+	/**
+         * Ajoute un bar à la liste des Bars d'un Barathon
+         * @param type $barathonId
+         */
+        public function recupereBarSuivant(){
+            
+           /* $barId = $_GET['idBar'];
+	    
+            $barathonId = $_GET['idBarathon'];
+            
+            $sql = "SELECT ordreDansBarathon FROME listeBars WHERE (barId, barathonId, ordreDansBarathon) VALUES ( $barId ,  idBarathon ,  $ordreDansBarathon )";
+            
+            $statement=$this->db->prepare($sql);
+            $resultats = $statement->execute();
+            */
+            return "";// $resultats;
+        }
 
         
 }

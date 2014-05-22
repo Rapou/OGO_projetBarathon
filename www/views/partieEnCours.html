@@ -5,24 +5,9 @@
     </div>
 </div>
 
-<div class="container containerAtBottom">
-    <h3>Mode utilisation ! </h3>
+<div id="etapeBar" class="container containerAtBottom">
+    <h3>Rendez-vous au prochain bar : {{barAVisite.name}}</h3>
     
     <button class="btn btn-primary" style="float:right; margin: 5px;" id="validerEtape">Valider etape</button>
     <button class="btn " style="float:right; margin: 5px;" id="prochainBar">Prochain bar</button>
 </div>
-
-<script>
-    $(".logo").click(function() {
-        history.back();
-    });
-    
-    $("#validerEtape").click(function() {
-        alert("Valide étape");
-    });
-    
-    $("#prochainBar").click(function() {
-        alert("Prochain bar");
-    });
-    
-</script>

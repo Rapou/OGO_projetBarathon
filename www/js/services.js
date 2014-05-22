@@ -332,10 +332,21 @@ app.factory('Parties', function($http, $q){
 		deferred.reject("msg");
 	    });
 	    return deferred.promise;
+        }/*,
+        valideBar : function(idPartie, idBarathon, idBar){
+	    var deferred = $q.defer();
+            partie : false;
             
-        }
-        
-        
+	    $http.get(bootstrap + "?controller=Parties&action=changeBarActif&idPartie="+ idPartie +"&idBarathon=" + idBarathon + "&idBar=" +idBar)
+	    .success(function(data){
+		factory.partie = data;
+		deferred.resolve(factory.partie);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+	    return deferred.promise;
+	}  */
     };
     return factory;
 });
