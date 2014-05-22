@@ -40,7 +40,7 @@ class Model_ListeBars{
 
             $barathonId = $_GET['barathonId'];
 
-            $sql = "SELECT b.gid, b.name, ST_AsGeoJSON(b.the_geom) AS geometry from Bars as b LEFT JOIN ListeBars ON b.gid = ListeBars.barId ".
+            $sql = "SELECT b.gid, b.name, ST_AsGeoJSON(b.the_geom) AS geometry, ListeBars.ordreDansBarathon from Bars as b LEFT JOIN ListeBars ON b.gid = ListeBars.barId ".
                 "WHERE barathonId = $barathonId ORDER BY ListeBars.ordreDansBarathon ASC";
 
             $statement=$this->db->prepare($sql);

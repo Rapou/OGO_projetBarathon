@@ -20,7 +20,7 @@ class Controller_Parties{
         return $this->model->rendPartie();
     }
     
-    
+    /*
     public function changeBarPremier(){
 	$idEtatSuivant = $_GET['idEtatSuivant'];
 	$idEtape = $this->etape->rendsIdSelonNum(1);
@@ -61,5 +61,5 @@ class Controller_Parties{
 	    $tableau_partie = $partie;
 	}
 	return $tableau_partie;
-    }
+    }*/
 }

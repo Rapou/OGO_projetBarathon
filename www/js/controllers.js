@@ -574,14 +574,21 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
     
     // récup la partieEnCours
     $scope.partieEnCours = Parties.parties($routeParams.id).then(function(partie){
-        
+        function onFeatureSelectCarte(evt) {
+	    feature = evt.feature;
+	    if(feature.attributes.count>=2){
+		map.zoomIn();
+		map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
+	    }
+	}
+    
         $scope.partieEnCours = partie;
         
         var barathonId = partie.barathonid;
         
         $scope.barathonEnCours = Barathon.get(barathonId).then(function(barathon){
             $scope.barathonEnCours = barathon;
-	    
+	    console.log($scope.barathonEnCours);
 	    $scope.listeBars = ListeBars.find(barathonId).then(function(listeBars){
 		    $scope.listeBars = listeBars;
 
@@ -609,13 +616,11 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 		    });
 
 		    map.addLayer(geoBars);
-		    console.log("yo");
-		    console.log($scope.listeBars);
+		    console.log(partie);
 
-/*
 		    // On ajoute ensuite les éléments graphiques à la carte
 		    var features = new Array();
-
+		    console.log($scope.listeBars);
 		    $.each($scope.listeBars, function(i, elem){
 			var myGeo = $.parseJSON(elem.geometry);
 			ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
@@ -623,8 +628,13 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 			features[i] = new OpenLayers.Feature.Vector(ptGeom);
 			features[i].attributes = {
 			    name: elem.name,
-			    id: elem.gid
+			    id: elem.gid,
+			    ordre: elem.ordredansbarathon
 			};
+			if(elem.gid == partie.barencoursid){
+			    map.setCenter(new OpenLayers.LonLat(myGeo.coordinates[0], myGeo.coordinates[1]).transform("EPSG:4326", "EPSG:900913"), 14); 
+			    console.log(elem.gid);
+			}
 		    });
 		    geoBars.addFeatures(features);
 
@@ -639,11 +649,9 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 		    selectControl.activate();
 
 		    geoBars.events.register("featureselected", features, onFeatureSelectCarte);
-		    */
 		}); 
         });
         
-        //partieEnCours = partie;
         
         //barathonId = partie.id;
         

@@ -9,12 +9,6 @@ class Model_Parties{
 	    $this->db = $mydb;
 	}
 	
-	public function change($idEtat, $idEtape){
-	    $this->db->exec("UPDATE partie SET etape_id=$idEtape, etat_id=$idEtat WHERE id=1");
-	    return true;
-	}
-	
-        
         public function rendPartie(){
             $idPartie = $_GET['idPartie'];
             
@@ -28,9 +22,12 @@ class Model_Parties{
         }
         
 	/**
-	 * 
-	 * @return array
-	 */
+	 
+	public function change($idEtat, $idEtape){
+	    $this->db->exec("UPDATE partie SET etape_id=$idEtape, etat_id=$idEtat WHERE id=1");
+	    return true;
+	}
+	
 	public function rends($idPartie){
 	    $sql =  "	SELECT partie.id AS partieID, 
 			    partie.nom AS partieNOM , 
@@ -53,7 +50,7 @@ class Model_Parties{
 	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
 	    
 	    return $resultats;
-	}
+	}*/
         
         public function nouvellePartie(){
             $idBarathon = $_GET['idBarathon'];
