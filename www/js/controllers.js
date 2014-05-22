@@ -682,35 +682,42 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
      */
     $("#validerNewBarathonBtn").click(function(){
         
-        // Récup des données utilisateur
-	var inputNomBarathon = $("#inputNomBarathon").val();
-	var inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
-	var userCreateurId = loggedUser.Id;
+        if(loggedUser == undefined){
+            alert("Vous devez être loggé pour créer un barathon.");
+        }
+        else {
+             // Récup des données utilisateur
+            var inputNomBarathon = $("#inputNomBarathon").val();
+            var inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
+            var userCreateurId = loggedUser.id;
+
+            // ajoute le barathon
+            var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, userCreateurId).then(function(idBarathonCree){
+                var ordreDansBarathon = 1;
+                // FOR EACH
+                $($scope.listeBarsAValider).each(function(i, bar){
+
+                    console.log("IDIDIDID barathon créé"+idBarathonCree);
+
+                    var idBara = parseInt(idBarathonCree.replace('"',''));
+                    // ajoute les bars à la listeBars du Barathon
+                    ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
+
+                    }, function(msg){
+                        console.log(msg);
+                    });
+                    ordreDansBarathon++;
+                });
+                listeBarsAValider = "UNDEFINED";
+
+                barathonCree = true;
+                console.log("BARATHON CREE validerBarathon : "+ barathonCree);
+
+                window.location.replace("#home" );
+            });
+        }
         
-        // ajoute le barathon
-	var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, userCreateurId).then(function(idBarathonCree){
-	    var ordreDansBarathon = 1;
-	    // FOR EACH
-	    $($scope.listeBarsAValider).each(function(i, bar){
-		
-                console.log("IDIDIDID barathon créé"+idBarathonCree);
-                
-		var idBara = parseInt(idBarathonCree.replace('"',''));
-		// ajoute les bars à la listeBars du Barathon
-		ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
-		    
-		}, function(msg){
-		    console.log(msg);
-		});
-		ordreDansBarathon++;
-	    });
-	    listeBarsAValider = "UNDEFINED";
-            
-            barathonCree = true;
-            console.log("BARATHON CREE validerBarathon : "+ barathonCree);
-            
-	    window.location.replace("#home" );
-	});
+       
     });
 });
 
