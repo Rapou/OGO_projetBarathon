@@ -258,7 +258,7 @@ function func($scope, User){
 
     // Set l'id et le login de l'utilisateur loggé
     $scope.user = User.login(login, mdp).then(function(user){
-
+        
         $scope.user = user;
 
         // Définition de la variable globale pour les tests d'autentification
@@ -271,6 +271,7 @@ function func($scope, User){
         }
         // En cas de concordance du couple login-mot de passe
         else {
+            console.log("ici");
             loggedUserId = user.login;
             console.log($scope.user);
             history.back();
@@ -285,6 +286,8 @@ function func($scope, User){
     
 app.controller('LoginCtrl', function($scope, User) {
     
+    // Focus par défaut dans la barre de login
+    $("#inputLogin").focus();
     
     $(".logo").click(function() {
 	history.back();
@@ -293,8 +296,6 @@ app.controller('LoginCtrl', function($scope, User) {
     $("#cancelLogin").click(function() {
 	history.back();
     });
- 
-    $("#inputLogin").focus();
 
     login = $("#inputLogin").val();
     mdp = $("#inputPassword").val();
@@ -307,8 +308,11 @@ app.controller('LoginCtrl', function($scope, User) {
            func($scope, User);
         }
     });
-        
-    //$("#submitLogin").click();
+    // Ou click normal sur le bouton valider
+    $("#submitLogin").click(function(){
+        console.log("là !");
+        func($scope, User);
+    });
 });
 
 /**
