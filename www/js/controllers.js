@@ -285,6 +285,7 @@ function func($scope, User){
     
 app.controller('LoginCtrl', function($scope, User) {
     
+    
     $(".logo").click(function() {
 	history.back();
     });
@@ -482,14 +483,13 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
  */     
 app.controller('partieEnCoursCtrl', function($scope, $routeParams, Barathon){
     
-    $scope.listeBarsAValider = [
-    {
-	"nom" : "Great Escape"
-    },
-    {
-	"nom" : "Lapin vert"
-    },
-    ];
+    console.log("idPartieEnCours : "+idPartieEnCours);
+    
+    if(idPartieEnCours > 0){
+        
+    }
+    
+    $scope.idPartieEnCours = idPartieEnCours;
     
     $(".logo").click(function() {
 	history.go(-2); // TODO : regarder pourquoi ça ne marche pas avec un history.back() - NB

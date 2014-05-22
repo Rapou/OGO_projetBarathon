@@ -264,7 +264,7 @@ app.factory('ListeBars', function($http, $q){
 
 
 /*
- * Factory pour la liste des bars d'un barathon
+ * Factory pour les chemins de Lausanne
  */
 app.factory('Ways', function($http, $q){
     var factory = {
@@ -291,3 +291,32 @@ app.factory('Ways', function($http, $q){
     };
     return factory;
 }); // factory ListeBars
+
+/*
+ * Factory pour les Parties jouées et en cours
+ */
+app.factory('Parties', function($http, $q){
+    var factory = {
+        
+        parties : function(idPartie){
+            
+            // s'il n y pas de partie en cours
+            if(idPartie != 0){
+                // new partie avec barthon id = idBarathon
+                
+                //affichage du barathon
+                
+                // affichage des bars et des routes
+                
+                // affichage du prochain bar
+            } 
+            else { //il y a une partieEnCours
+                
+            }
+        },
+        
+        
+        
+    };
+    return factory;
+});
