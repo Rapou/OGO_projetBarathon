@@ -22,6 +22,18 @@ class Model_Bars{
 
 	    return $resultats;
 	}
+        
+        public function rendBar(){
+            $barId = $_GET['barId'];
+            
+            $sql = "SELECT gid, name, ST_AsGeoJSON(the_geom) AS geometry  FROM bars WHERE gid = $barId";
+            
+            $statement=$this->db->prepare($sql);
+            $statement->execute();
+	    $resultats=$statement->fetch();
+            
+	    return $resultats;
+        }
 	
 	public function rendPub(){
 	    $sql =  "SELECT gid, name, ST_AsGeoJSON(the_geom) AS geometry FROM bars WHERE type like 'pub'";	    

@@ -56,7 +56,7 @@ app.factory('Bar', function($http, $q){
 	bars : false,
 	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
 	// TODO : si nécessaire, traitement en fonction des params.
-	find : function(barathonId){
+	find : function(barId){
 	    var deferred = $q.defer();
             
 	    // Quand on veut récupérer tous les barathons
@@ -87,14 +87,19 @@ app.factory('Bar', function($http, $q){
 	},
         
 	// Permet de rendre un bar si on a son ID
-	get : function(id){
-	    var bar = {};
-	    angular.forEach(factory.bars, function(value, key){
-		if(value.id == key){
-		    bar = value;
-		}
-	    });
-	    return bar;
+	get : function(barId){
+	    var deferred = $q.defer();
+            
+            $http.get(bootstrap + "?controller=Bars&action=rendBar&barId="+barId)
+		.success(function(data, status){
+		    factory.bars = data;
+		    deferred.resolve(factory.bars);
+		})
+		.error(function(){
+		    deferred.reject("factory.bars : Erreur lors de la récupération des bars du barathon "+barId);
+		});
+            
+            return deferred.promise;
 	},
         
 	// Permet d'ajouter un bar
@@ -244,11 +249,11 @@ app.factory('Ways', function($http, $q){
 	ways : {},
         
 	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-	rendCheminEntre2Bars : function(){
+	rendCheminEntre2Bars : function(barStart, barEnd){
             
 	    var deferred = $q.defer();
             
-	    $http.get(bootstrap + "?controller=Ways&action=rendCheminEntre2Bars")
+	    $http.get(bootstrap + "?controller=Ways&action=rendCheminEntre2Bars&start="+barStart+"&end="+barEnd)
 	    .success(function(data, status){
                 console.log("SUCESS" + data);
 		factory.ways = data;
@@ -259,7 +264,25 @@ app.factory('Ways', function($http, $q){
 		deferred.reject("msg");
 	    });
 	    return deferred.promise;
-	} // Fin rendCheminEntreDeuxBars
+	}, // Fin rendCheminEntreDeuxBars
+        rendNodeLePlusProche : function(pointJSON){
+            var deferred = $q.defer();
+            
+            var lon = pointJSON.coordinates[0];
+            var lat = pointJSON.coordinates[1];
+
+            
+            $http.get(bootstrap + "?controller=Ways&action=rendNodeLePlusProche&lat="+lat+"&lon="+lon)
+	    .success(function(data, status){
+		factory.ways = data;
+		deferred.resolve(factory.ways);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+            
+            return deferred.promise;
+        }
     };
     return factory;
 }); // factory ListeBars

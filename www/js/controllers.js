@@ -29,50 +29,125 @@ app.controller('homeCtrl', function($scope){
  * Controleur de test
  */     
 app.controller('testNicoCtrl', function($scope, Bar, Ways){
+    
     $(".logo").click(function() {
 	 window.location.replace("#home" );
     });
     
-    // appel ajax pour récup les segments de route
-    $scope.segments = Ways.rendCheminEntre2Bars().then(function(segments){
+    // Récup du Bar 1
+    $scope.bar1 = Bar.get(1).then(function(bar){
+        var bar1_geoJSON = $.parseJSON(bar.geometry);
         
-	if(geoBars != "UNDEFINED"){
-	    map.removeLayer(geoBars);
-	    geoBars = "UNDEFINED";
-	}
-	if(geoRoutes != "UNDEFINED"){
-	    map.removeLayer(geoRoutes);
-	    geoRoutes = "UNDEFINED";
-	}
+        //Récup du node le plus proche du bar 1
+        $scope.node1 = Ways.rendNodeLePlusProche(bar1_geoJSON).then(function(node){
+            $scope.node1 = node;
+            
+            // récup bar 2
+            $scope.bar2 = Bar.get(2).then(function(bar2){
+                var bar2_geoJSON = $.parseJSON(bar2.geometry);
+                
+                
+                // récup du node le plus proche du bar 2
+                $scope.node2 = Ways.rendNodeLePlusProche(bar2_geoJSON).then(function(node3){
+                    $scope.node2 = node3;
+                    
+                    console.log("Id des 2 nodes : ");
+                    console.log($scope.node1[0].id);
+                    console.log($scope.node2[0].id);
+                    
+                    
+                    // appel ajax pour récup les segments de route
+                   $scope.segments = Ways.rendCheminEntre2Bars($scope.node1[0].id,$scope.node2[0].id).then(function(segments){
 
-	geoRoutes  = new OpenLayers.Layer.Vector("Routes", {
-	    styleMap: new OpenLayers.StyleMap({
-		"default": new OpenLayers.Style({
-		    strokeWidth: "5"
-		})
-	    })
-	});
-	console.log(geoRoutes);
-	map.addLayer(geoRoutes);
-	
-	
-        $scope.segments = segments;
-	var arrayPoints = [];
-        //foreach segment, ajout au Vector de la route
-        $($scope.segments).each(function(i, segment){
-            var geomSegment = $.parseJSON(segment.the_geom);
+                       if(geoBars != "UNDEFINED"){
+                           map.removeLayer(geoBars);
+                           geoBars = "UNDEFINED";
+                       }
+
+                       geoRoutes  = new OpenLayers.Layer.Vector("Routes", {
+                           styleMap: new OpenLayers.StyleMap({
+                               "default": new OpenLayers.Style({
+                                   strokeWidth: "5"
+                               })
+                           })
+                       });
+                       console.log(geoRoutes);
+                       map.addLayer(geoRoutes);
+
+                       $scope.segments = segments;
+                       var arrayPoints = [];
+                       //foreach segment, ajout au Vector de la route
+                       $($scope.segments).each(function(i, segment){
+                           
+                           console.log(segment);
+                           
+                           var geomSegment = $.parseJSON(segment.the_geom);
 
 
-            $(geomSegment.coordinates).each(function(i, point){
-                arrayPoints.push(new OpenLayers.Geometry.Point(point[0],point[1]));
-            });
-        });
-	var vector = new OpenLayers.Geometry.LineString(arrayPoints);
-	vector = vector.transform("EPSG:4326", "EPSG:900913");
+                           $(geomSegment.coordinates).each(function(i, point){
+                               arrayPoints.push(new OpenLayers.Geometry.Point(point[0],point[1]));
+                           });
+                       });
+                       var vector = new OpenLayers.Geometry.LineString(arrayPoints);
+                       vector = vector.transform("EPSG:4326", "EPSG:900913");
 
-	geoRoutes.addFeatures(new OpenLayers.Feature.Vector(vector));
-        console.log(geoRoutes);        
-    });
+                       geoRoutes.addFeatures(new OpenLayers.Feature.Vector(vector));
+                       console.log(geoRoutes);        
+                   });
+                    
+                    
+                });
+                
+            }); // get bar 2
+            
+        }); // ge node1
+        
+
+            
+            /*
+             // appel ajax pour récup les segments de route
+            $scope.segments = Ways.rendCheminEntre2Bars($scope.bar1_geoJSON,$scope.bar2_geoJSON).then(function(segments){
+
+                if(geoBars != "UNDEFINED"){
+                    map.removeLayer(geoBars);
+                    geoBars = "UNDEFINED";
+                }
+
+                geoRoutes  = new OpenLayers.Layer.Vector("Routes", {
+                    styleMap: new OpenLayers.StyleMap({
+                        "default": new OpenLayers.Style({
+                            strokeWidth: "5"
+                        })
+                    })
+                });
+                console.log(geoRoutes);
+                map.addLayer(geoRoutes);
+
+                $scope.segments = segments;
+                var arrayPoints = [];
+                //foreach segment, ajout au Vector de la route
+                $($scope.segments).each(function(i, segment){
+                    var geomSegment = $.parseJSON(segment.the_geom);
+
+
+                    $(geomSegment.coordinates).each(function(i, point){
+                        arrayPoints.push(new OpenLayers.Geometry.Point(point[0],point[1]));
+                    });
+                });
+                var vector = new OpenLayers.Geometry.LineString(arrayPoints);
+                vector = vector.transform("EPSG:4326", "EPSG:900913");
+
+                geoRoutes.addFeatures(new OpenLayers.Feature.Vector(vector));
+                console.log(geoRoutes);        
+            });*/
+            
+            
+    }); // get Bar 1
+    
+    
+    
+
+
     
 });
 
@@ -644,6 +719,7 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 			};
 			if(elem.gid == partie.barencoursid){
 			    map.setCenter(new OpenLayers.LonLat(myGeo.coordinates[0], myGeo.coordinates[1]).transform("EPSG:4326", "EPSG:900913"), 14); 
+			    $scope.barAVisite = elem;
 			    console.log(elem.gid);
 			}
 		    });

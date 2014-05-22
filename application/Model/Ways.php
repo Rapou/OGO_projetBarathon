@@ -34,14 +34,13 @@ class Model_Ways{
          */
         public function rendCheminEntre2Bars(){
             
-            $start = 2339;
-            $end = 2443;
+            $start = $_GET['start'];
+            $end = $_GET['end'];
             
             if (is_numeric($start) && is_numeric($end)) {
 
                 $query = "SELECT seq, id1 AS node, id2 AS edge, cost, st_asgeojson(the_geom) as the_geom FROM pgr_dijkstra "
-                        . "( 'SELECT gid as id , source, target, length as cost FROM ways', $start, $end, false, false) di INNER JOIN ways ON di.id2 = ways.gid "; 
-                
+                        . "( 'SELECT gid as id , source, target, length as cost FROM ways', $start, $end, false, false) di INNER JOIN ways ON di.id2 = ways.gid ORDER BY seq ASC "; 
                 
                 
                 $rs = pg_query($this->conn, $query);
@@ -54,42 +53,20 @@ class Model_Ways{
             return $results;
         }
         
-        
+        /**
+         * Requete PGIS pour prendre le point le plus proche d'un bar
+         * @return type
+         */
         public function rendNodeLePlusProche() {
             $lat = $_GET['lat'];
             $lon = $_GET['lon'];
 
-            /*
-            if (is_numeric($lat) && is_numeric($lon)) {
-
-                // Récupère les coordonées xy en 900913 et récupère le x/y en 4326
-                if (isset($_GET['srid'])) {
-                    $transform_query = "SELECT st_x(st_transform(st_geomfromtext('POINT(" . $lon . " " . $lat . ")', ".$_GET['srid']."), 4326)), st_y(st_transform(st_geomfromtext('POINT(" . $lon . " " . $lat . ")', ".$_GET['srid']."), 4326))";
-
-                    $rs = pg_query($conn, $transform_query);
-                    $transform_result = pg_fetch_assoc($rs);
-
-
-                    $lon = $transform_result['st_x'];
-                    $lat = $transform_result['st_y'];
-
-                }
-
-
-                $query =" ????? ";
-
-                $rs = pg_query($conn, $query);
-                $result = pg_fetch_assoc($rs);
-
-                if (isset($result['id']) && $result['id'] != -1) {
-                    echo '{"success": { "id": '.$result['id'].', "x": '.$result['x'].', "y": '.$result['y'].'}}';
-                } else {
-                    echo '{"error": "No nearby points..."}';
-                }
-
-            } else {
-                echo '{"error": "problem with lat or lon..."}';
-            }*/
+            $sql = "SELECT * FROM ways_vertices_pgr ORDER BY the_geom <-> ST_GeometryFromText('POINT($lon $lat)',4326) LIMIT 1;";
+            
+            $rs = pg_query($this->conn, $sql);
+            $result = pg_fetch_all($rs);
+            
+            return $result;
         }
         
         
