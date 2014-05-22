@@ -72,12 +72,12 @@ class Model_Parties{
 	    return $resultats;
 	}*/
         
-        public function nouvellePartie(){
+        public function nouvellePartie($idBarDebut){
             $idBarathon = $_GET['idBarathon'];
             $idUser = $_GET['idUser'];
             
             $sql = "INSERT INTO parties (barathonId, userId, etat, barEnCoursId, tempsEffectue, positionsRecues) VALUES"
-                                   . "( $idBarathon, $idUser, 'en cours', 0, null, null )";
+                                   . "( $idBarathon, $idUser, 'en cours', $idBarDebut, null, null )";
             
             $statement=$this->db->prepare($sql);
 	    $res = $statement->execute();

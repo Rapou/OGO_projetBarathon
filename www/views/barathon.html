@@ -5,21 +5,27 @@
 <div class="containerAtBottom container">
     <div class="well bs-component">
         
-        <button class="btn btn-primary" style="float:right; margin: 5px;" id="launchButton">Lancer Barathon !</button>
+        <ul class="nav nav-pills">
+            <li class="active" id="launchButton"><a href="#">Lancer Barathon !</a></li>
+            <li class="active" id="partager"><a href="#">Partager</a></li>
+        </ul>
         
         <!--<div ng-controller="BarathonCtrl">-->
         <div>
-            <ul>
-                <li>Temps estimé : {{barathon.tempsestime}}</li>
-                <li>Difficulté : {{barathon.difficulte}}</li>
-                <li>Distance : A CALCULER</li>
+            <ul class="well">
+                <li class="list-group-item">Temps estimé : {{barathon.tempsestime}}</li>
+                <li class="list-group-item">Difficulté : {{barathon.difficulte}}</li>
+                <li class="list-group-item">Distance : A CALCULER</li>
             </ul>
             
-            <h3>Liste des bars :</h3>
-            
-            <ul ng-repeat="bar in listeBars">
-                <li>{{bar.name}}</li>
-            </ul>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Liste des bars</h3>
+                </div>
+                <div ng-repeat="bar in listeBars">
+                    <div class="panel-body">{{bar.name}}</div>
+                </div>
+            </div>
             
         </div> 
     </div>

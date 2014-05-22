@@ -6,10 +6,12 @@
 <div class="containerAtBottom container">
 	<div id="wrapperBarathons" class="well bs-component">
 
-            <div id="barathonsProposes">
-                <h3>Barathons proposés</h3>
-                <div ng-repeat="barathon in barathonsProposes ">
-                    <ul>
+            <div id="barathonsProposes" class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3>Barathons proposés</h3>
+                </div>
+                <div class="panel-body" ng-repeat="barathon in barathonsProposes">
+                    <ul class="nav nav-pills nav-stacked">
                         <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
                     </ul>
                 </div>

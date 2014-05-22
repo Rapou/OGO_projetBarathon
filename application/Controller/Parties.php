@@ -14,7 +14,8 @@ class Controller_Parties{
     }
 
     public function nouvellePartie(){
-        return $this->model_partie->nouvellePartie();
+	$idBarDebut = $this->model_ListeBars->rendIdPremierePartie();
+        return $this->model_partie->nouvellePartie($idBarDebut);
     }
     
     public function rendPartie(){

@@ -1,9 +1,14 @@
+// Lien vers l'API
 var bootstrap = "bootstrap.php";
+// Variable globale de la map. 
 var map;
+// Layers des vecteurs pour bars et routes. 
 var geoBars = "UNDEFINED";
 var geoRoutes = "UNDEFINED";
 
-var listeBarsAValider = "UNDEFINED";
+// Variables globales utiles aux processus 
+var listeBarsAValider = "UNDEFINED"; 
+var idBarActif = 0;
 var idPartieEnCours = 0; // à 0 si pas de partie en cours
 var loggedUserId = -1; // Par défaut, le user n'est pas loggé (= -1)
 var barathonCree = false;
@@ -27,6 +32,75 @@ var ptsBar = new OpenLayers.Symbolizer.Point({
     labelYOffset: "${labelPos}",
     labelSelect:true
 });
+
+/**
+ * Représentation d'un Bar durant une partie
+ * @type OpenLayers.Symbolizer.Point
+ */
+var ptsBarPartie = new OpenLayers.Symbolizer.Point({
+    externalGraphic: "${myImage}",
+    graphicWidth: "${myWidth}",
+    graphicHeight: 50,
+    graphicOpacity: 1,
+    label:"${nombre}",
+    fontColor: "${colorLabel}",
+    fontSize: "14pt",
+    fontWeight: "bold",
+    labelOutlineColor: "#FFFFFF",
+    labelOutlineWidth: 4,
+    labelOutlineOpacity: 0.6,
+    labelYOffset: "${labelPos}",
+    labelSelect:true
+});
+
+/**
+ * Fonction qui définit les paramètres selon le contexte pour un bar d'une partie
+ * @type type
+ */
+var ctxBarPartie = { 
+    nombre: function(feature) {
+	if(feature.attributes.count>=2){
+	    return feature.attributes.count;
+	}else{
+	    return feature.cluster[0].attributes.name;
+	}
+    },
+    labelPos: function(feature) {
+	if(feature.attributes.count>=2){
+	    return 0;
+	}else{
+	    return -35;
+	}
+    },
+    myImage: function(feature) {
+	if(feature.attributes.count>=2){
+	    return "img/logo_multi2.png";
+	}else{
+	    console.log("Ordre feature : " + feature.cluster[0].attributes.ordre);
+	    console.log(listeBarsAValider);
+	    if(feature.cluster[0].attributes.ordre < listeBarsAValider.ordredansbarathon){
+		return "img/icon_bar_passer.png";
+	    }else{
+		return "img/logo_dot.png";
+	    }
+	}
+    },
+    myWidth: function(feature) {
+	if(feature.attributes.count>=2){
+	    return 50;
+	}else{
+	    return 40;
+	}
+    },
+    colorLabel: function(feature) {
+	if(feature.attributes.count>=2){
+	    return "#2980b9";
+	}else{
+	    return "#2c3e50";
+	}
+    }
+};
+
 
 /**
  * Fonction qui définit les paramètres selon le contexte
@@ -150,7 +224,6 @@ $(document).ready(function(){
     }
     );
 	
-    map.addControl(new OpenLayers.Control.LayerSwitcher());
     map.addLayer(goog);
     map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
     
