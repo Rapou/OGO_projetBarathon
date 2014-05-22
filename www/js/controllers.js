@@ -597,6 +597,10 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
                alert("il y a deja une partie en cours !");
            } else {
 
+                if(loggedUser == undefined){
+                    loggedUser.id = -1;
+                }
+
                // Créée new Partie
                Parties.nouvellePartie($scope.idBarathon, loggedUser.id).then(function(idPartieCreee){
 
