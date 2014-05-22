@@ -11,12 +11,19 @@ app.controller('homeCtrl', function(){
     else {
         $("#login").html("Loggé en tant que <strong>"+loggedUserId+"</strong>");
     }
+    if(geoRoutes != "UNDEFINED"){
+	map.removeLayer(geoRoutes);
+	geoRoutes = "UNDEFINED";
+    }
 });
 
 /**
  * Controleur de test
  */     
 app.controller('testNicoCtrl', function($scope, Bar, Ways){
+    $(".logo").click(function() {
+	 window.location.replace("#home" );
+    });
     
     // appel ajax pour récup les segments de route
     $scope.segments = Ways.rendCheminEntre2Bars().then(function(segments){
@@ -69,7 +76,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
 
     // logo back
     $(".logo").click(function(){
-	history.back();
+	 window.location.replace("#home" );
     });
     
     $scope.bars = Bar.find().then(function(bars){
@@ -150,6 +157,9 @@ app.controller('CarteCtrl', function($scope, Bar) {
  * Controleur Creation Barathon
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Barathon, Bar){
+    $(".logo").click(function() {
+	 window.location.replace("#carte" );
+    });
     
     $("#creerNewBarathonBtn").click(function() {
 	window.location.href= "#validerBarathon";
@@ -297,17 +307,19 @@ function func($scope, User){
 };
     
 app.controller('LoginCtrl', function($scope, User) {
+    $(".logo").click(function() {
+	 window.location.replace("#home" );
+    });
+    
+    $("#cancelLogin").click(function() {
+	 window.location.replace("#home" );
+    });
+    
     
     // Focus par défaut dans la barre de login
     $("#inputLogin").focus();
     
-    $(".logo").click(function() {
-	history.back();
-    });
     
-    $("#cancelLogin").click(function() {
-	history.back();
-    });
 
     login = $("#inputLogin").val();
     mdp = $("#inputPassword").val();
@@ -331,6 +343,9 @@ app.controller('LoginCtrl', function($scope, User) {
  * Controleur liste des Barathons
  */
 app.controller('BarathonsCtrl', function($scope, Barathon){
+    $(".logo").click(function(){
+	history.back();
+    });
     
     // Set la liste des barathons dans le scope
     $scope.barathons = Barathon.find().then(function(barathons){
@@ -353,19 +368,15 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
     }, function(msg){
 	alert(msg);
     });
-    
-    $(".logo").click(function(){
-	history.back();
-    });
-    
-    
-    
 });
 
 /**
  * Controleur affichage 1 Barathon
  */
 app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
+    $(".logo").click(function() {
+	history.back();
+    });
     
     $scope.idBarathon = $routeParams['id'];
 
@@ -463,10 +474,6 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
         window.location.replace("#partieEnCours/" + idPartieEnCours);
     }); 
     
-    $(".logo").click(function() {
-	history.back();
-    });
-    
     // Resize de la police quand le nom du barathon est trop long
     var $body = $('body'); //Cache this for performance
 
@@ -497,7 +504,9 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
  * Contrôleur validation Barathon
  */
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
-    
+    $(".logo").click(function() {
+	window.location.replace("#creationBarathon" );
+    });
     
     $scope.listeBarsAValider = listeBarsAValider;
 
@@ -538,6 +547,9 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
  * Controleur Partie en Cours
  */     
 app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties){
+     $(".logo").click(function() {
+	window.location.replace("#home" );
+    });
     
     console.log("idPartieEnCours : "+idPartieEnCours);
     
@@ -561,14 +573,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties){
     // controlleur parties pour créer new partie avec idBarathon
     
     // location replace -> partieEnCours/idNewPartie
-   
-    
-    
-    $(".logo").click(function() {
-	window.location.replace("#home" );
-    });
-    
-    
 });
 
 
