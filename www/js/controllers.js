@@ -285,7 +285,6 @@ function func($scope, User){
     
 app.controller('LoginCtrl', function($scope, User) {
     
-    
     $(".logo").click(function() {
 	history.back();
     });
@@ -349,7 +348,7 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
 /**
  * Controleur affichage 1 Barathon
  */
-app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
+app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar, Parties){
     
     $scope.idBarathon = $routeParams['id'];
 
@@ -431,11 +430,30 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	alert(msg);
     });
     
+    /**
+     * BOUTON lancer Barathon, crée une partie et va l'afficher
+     */
     $("#launchButton").click(function(){
-	//crée partie
-	idPartieEnCours 
-        window.location.replace("#partieEnCours/" + idPartieEnCours);
-    }); 
+        
+        if (idPartieEnCours > 0){
+            alert("il y a deja une partie en cours !");
+        } else {
+            
+            // Créée new Partie
+            Parties.nouvellePartie($scope.idBarathon, loggedUserId).then(function(idPartieCreee){
+                
+                idPartieCreee = parseInt(idPartieCreee.replace('"',''));
+                
+                // affichage de la bonne partie
+                $scope.idPartieEnCours = idPartieCreee;
+                
+                alert("CTRL BarathonCtrl/ SCOPE idPartie " +$scope.idPartieEnCours );
+                
+                window.location.replace("#parties/" + $scope.idPartieEnCours);
+            });
+        }
+	
+    });  // launch button
     
     
     $(".logo").click(function() {
@@ -484,28 +502,42 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 });
 
 
+
 /**
  * Controleur Partie en Cours
  */     
-app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties){
+app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Barathon, ListeBars){
     
-    console.log("idPartieEnCours : "+idPartieEnCours);
+    console.log("idPartieEnCours : "+ $scope.idPartieEnCours);
+    console.log($routeParams.id);
     
-    //$routeParams
     
-    // s'il n y pas de partie en cours
-    if(idPartieEnCours == 0){
-        // créer nouvelle partie
+    // récup la partieEnCours
+    $scope.partieEnCours = Parties.parties($routeParams.id).then(function(partie){
         
-        // récupérer barathon, liste bars et calculs des routes
+        $scope.partieEnCours = partie;
         
-        // affichage barathon et bars
+        var barathonId = partie.barathonid;
         
-    } else { // il y a une partie en cours !
-        // affichage barathon
-    }
+        $scope.barathonEnCours = Barathon.get(barathonId).then(function(barathon){
+            $scope.barathonEnCours = barathon;
+            $scope.nomB = "askdasdsad";
+            //alert("barathon getB success barathon :" + barathon);
+            console.log("BARATHON dans SCOPE ::");
+            console.log($scope.barathonEnCours);
+        });
+        
+        //partieEnCours = partie;
+        
+        //barathonId = partie.id;
+        
+    });
+
+    // récupérer barathon, liste bars et calculs des routes
+
+    // affichage barathon et bars
+        
     
-    $scope.idPartieEnCours = idPartieEnCours;
     $scope.poil = 0;
     
     // controlleur parties pour créer new partie avec idBarathon

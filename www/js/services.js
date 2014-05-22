@@ -119,7 +119,7 @@ app.factory('Barathon', function($http, $q, ListeBars){
 	barathons : false,
         
 	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
-	find : function(params){
+	find : function(){
 	    //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
 	    var deferred = $q.defer();
 	    $http.get(bootstrap + "?controller=Barathons&action=rend")
@@ -299,22 +299,45 @@ app.factory('Parties', function($http, $q){
     var factory = {
         
         parties : function(idPartie){
+            parties : false;
             
-            // s'il n y pas de partie en cours
-            if(idPartie != 0){
-                // new partie avec barthon id = idBarathon
-                
-                //affichage du barathon
-                
-                // affichage des bars et des routes
-                
-                // affichage du prochain bar
+            // rend la partie selon l
+            if(idPartie === undefined){
+                alert("Rends toutes les parties...");
             } 
-            else { //il y a une partieEnCours
+            else { //il y a un no de partie
+                
+                var deferred = $q.defer();
+                partie : false;
+
+                $http.get(bootstrap + "?controller=Parties&action=rendPartie&idPartie="+idPartie)
+                .success(function(data){
+                    factory.partie = data;
+                    deferred.resolve(factory.partie);
+                })
+                .error(function(){
+                    deferred.reject("msg");
+                });
+                return deferred.promise;
                 
             }
         },
-        
+        nouvellePartie : function(idBarathon, idUser) {
+            
+            var deferred = $q.defer();
+            partie : false;
+            
+	    $http.get(bootstrap + "?controller=Parties&action=nouvellePartie&idBarathon="+idBarathon+"&idUser="+idUser)
+	    .success(function(data){
+		factory.partie = data;
+		deferred.resolve(factory.partie);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+	    return deferred.promise;
+            
+        }
         
         
     };
