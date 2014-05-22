@@ -221,7 +221,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	    selectControl.activate();
             
             // Centrage de la map pour afficher tous les points
-            console.log("Emplacement carteCtrl : " + geoBars.getDataExtent());
+            //console.log("Emplacement carteCtrl : " + geoBars.getDataExtent());
             map.zoomToExtent(geoBars.getDataExtent()); //////////////////////////////////////////// A DEBUGGER AVEC LE PROF
 	
 	   geoBars.events.register("featureselected", features, onFeatureSelectCarte);
@@ -431,23 +431,23 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
     });
     
     // Set la liste des barathons dans le scope
-    $scope.barathons = Barathon.find().then(function(barathons){
+    Barathon.find().then(function(barathons){
 	$scope.barathons = barathons;
-	console.log("barathons : "+barathons);
+	//console.log("barathons : "+barathons);
     }, function(msg){
 	alert(msg);
     });
     
     // Set la liste des barathons dans le scope
-    $scope.barathonsProposes = Barathon.rendBarathonsProposes().then(function(barathonsProposes){
+    Barathon.rendBarathonsProposes().then(function(barathonsProposes){
 	$scope.barathonsProposes = barathonsProposes;
     }, function(msg){
 	alert(msg);
     });
     
-    $scope.mesBarathons = Barathon.find().then(function(mesBarathons){
+    Barathon.find().then(function(mesBarathons){
 	$scope.mesBarathons = mesBarathons;
-	console.log("mesBarathons : "+mesBarathons);
+	//console.log("mesBarathons : "+mesBarathons);
     }, function(msg){
 	alert(msg);
     });
@@ -473,92 +473,96 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
         }
     }
 
-    $scope.barathon = Barathon.get($scope.idBarathon).then(function(barathon){
+    Barathon.get($scope.idBarathon).then(function(barathon){
 	$scope.barathon = barathon;
-	console.log(barathon);
+	//console.log(barathon);
+        
+        // En cas de succès, on ajoute ensuite les bars à la carte
+        // On récupère et passe dans le scope la liste des bars pour ce barathon
+        ListeBars.find($scope.idBarathon).then(function(listeBars){
+            $scope.listeBars = listeBars;
+
+            // Ajout des bars à la carte
+            if(geoBars != "UNDEFINED"){
+                map.removeLayer(geoBars);
+                geoBars = "UNDEFINED";
+            }
+                geoBars  = new OpenLayers.Layer.Vector("Bars", {
+                    strategies: [
+                    new OpenLayers.Strategy.AnimatedCluster({
+                        distance: 50,
+                        animationMethod: OpenLayers.Easing.Expo.easeOut,
+                        animationDuration: 10
+                    })
+                    ],
+                    styleMap: new OpenLayers.StyleMap({
+                        "default": new OpenLayers.Style(ptsBar, {
+                            context: ctxBar
+                        }),
+                        "select": new OpenLayers.Style(ptsBarOver, {
+                            context: ctxBarOver
+                        })
+                    })
+                });
+
+
+
+                /*geoBars.events.register('featuresadded', geoBars, function(evt){
+                    console.log("Etat des bars avant zoom : " + geoBars);
+                    if(geoBars != undefined){
+                        map.zoomToExtent(geoBars.getDataExtent());
+                    }else {
+                        // On ne fait rien
+                    }
+                });*/
+
+                // On ajoute ensuite les éléments graphiques à la carte
+                var features = new Array();
+
+                $.each($scope.listeBars, function(i, elem){
+                    var myGeo = $.parseJSON(elem.geometry);
+                    ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
+                    ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+                    features[i] = new OpenLayers.Feature.Vector(ptGeom);
+                    features[i].attributes = {
+                        name: elem.name,
+                        id: elem.gid
+                    };
+                });
+                map.addLayer(geoBars);
+                geoBars.addFeatures(features);
+
+                map.zoomToExtent(geoBars.getDataExtent());
+
+                selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+                    clickout: false, 
+                    toggle: true,
+                    multiple: true, 
+                    hover: false
+                });
+                map.addControl(selectControl);
+                selectControl.activate();
+
+                geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+
+
+
+                // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
+                // Puis centrage de la carte
+                //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
+
+                //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
+                //map.zoomToExtent(geoBars.getDataExtent());
+
+        }, function(msg){
+            alert(msg);
+        });
+        
     }, function(msg){
 	alert(msg);
     });
     
-    // On récupère et passe dans le scope la liste des bars pour ce barathon
-    $scope.listeBars = ListeBars.find($scope.idBarathon).then(function(listeBars){
-	$scope.listeBars = listeBars;
-        
-        // Ajout des bars à la carte
-        if(geoBars != "UNDEFINED"){
-	    map.removeLayer(geoBars);
-	    geoBars = "UNDEFINED";
-	}
-	    geoBars  = new OpenLayers.Layer.Vector("Bars", {
-		strategies: [
-		new OpenLayers.Strategy.AnimatedCluster({
-		    distance: 50,
-		    animationMethod: OpenLayers.Easing.Expo.easeOut,
-		    animationDuration: 10
-		})
-		],
-		styleMap: new OpenLayers.StyleMap({
-		    "default": new OpenLayers.Style(ptsBar, {
-			context: ctxBar
-		    }),
-		    "select": new OpenLayers.Style(ptsBarOver, {
-			context: ctxBarOver
-		    })
-		})
-	    });
-            
-	    
-            
-            /*geoBars.events.register('featuresadded', geoBars, function(evt){
-                console.log("Etat des bars avant zoom : " + geoBars);
-                if(geoBars != undefined){
-                    map.zoomToExtent(geoBars.getDataExtent());
-                }else {
-                    // On ne fait rien
-                }
-            });*/
-            
-            // On ajoute ensuite les éléments graphiques à la carte
-	    var features = new Array();
-
-	    $.each($scope.listeBars, function(i, elem){
-		var myGeo = $.parseJSON(elem.geometry);
-		ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
-		ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
-		features[i] = new OpenLayers.Feature.Vector(ptGeom);
-		features[i].attributes = {
-		    name: elem.name,
-		    id: elem.gid
-		};
-	    });
-            map.addLayer(geoBars);
-	    geoBars.addFeatures(features);
-            
-            map.zoomToExtent(geoBars.getDataExtent());
-            
-	    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
-		clickout: false, 
-		toggle: true,
-		multiple: true, 
-		hover: false
-	    });
-	    map.addControl(selectControl);
-	    selectControl.activate();
-            
-            geoBars.events.register("featureselected", features, onFeatureSelectCarte);
-            
-	    
-	    
-            // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
-            // Puis centrage de la carte
-            //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
-            
-            //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
-            //map.zoomToExtent(geoBars.getDataExtent());
-
-    }, function(msg){
-	alert(msg);
-    });
+    
     
     /**
      * BOUTON lancer Barathon, crée une partie et va l'afficher
