@@ -482,7 +482,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
         if (fontSize < minScale) fontSize = minScale; //Enforce the minimum and maximums
 
         $('.headerText h3').css('font-size', fontSize + '%');
-    }
+    };
 
     $(window).resize(function(){
         setBodyScale();
@@ -494,8 +494,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 });
 
 /**
- * Controleur Validation Barathon
- */     
+ * Contrôleur validation Barathon
+ */
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
     
     
