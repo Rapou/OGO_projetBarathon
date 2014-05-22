@@ -38,6 +38,7 @@ app.controller('testNicoCtrl', function($scope, Bar, Ways){
             $scope.bar2 = Bar.get(2).then(function(bar2){
                 var bar2_geoJSON = $.parseJSON(bar2.geometry);
                 
+                
                 // récup du node le plus proche du bar 2
                 $scope.node2 = Ways.rendNodeLePlusProche(bar2_geoJSON).then(function(node3){
                     $scope.node2 = node3;
