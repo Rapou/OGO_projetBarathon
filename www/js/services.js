@@ -60,7 +60,7 @@ app.factory('Bar', function($http, $q){
 	    var deferred = $q.defer();
             
 	    // Quand on veut récupérer tous les barathons
-	    if(barathonId == undefined){
+	    if(barathonId === undefined){
 		// requête Ajax
 		$http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
 		.success(function(data, status){
@@ -204,20 +204,6 @@ app.factory('ListeBars', function($http, $q){
     var factory = {
         
 	listeBars : {},
-        
-        // Récupération de la liste de tous les bars
-        getAll : function(){
-            var deferred = $q.defer();
-            $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
-            .success(function(data, status){
-                factory.bars = data;
-                deferred.resolve(factory.bars);
-            })
-            .error(function(){
-                deferred.reject("factory.listeBars : Erreur lors de la récupéaration de tous les bars");
-            });
-            return deferred.promise;
-	},
         
 	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
 	find : function(barathonId){
