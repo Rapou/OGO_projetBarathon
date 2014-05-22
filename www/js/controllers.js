@@ -158,7 +158,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
  */     
 app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Barathon, Bar){
     $(".logo").click(function() {
-	 window.location.replace("#carte" );
+	 window.location.replace("#carte");
     });
     
     $("#creerNewBarathonBtn").click(function() {
@@ -179,7 +179,6 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 			barAEnlever = true;
 		    }
 		});
-		console.log(barAEnlever);
 		if(barAEnlever){
 		    var nouvelleListe = [];
 		   $(listeBarsAValider).each(function(i, bar){
@@ -374,7 +373,7 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
  * Controleur affichage 1 Barathon
  */
 
-app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar, Parties){
+app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBars, Parties){
 
     $(".logo").click(function() {
 	history.back();
@@ -398,9 +397,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar, Par
     });
     
     // On récupère et passe dans le scope la liste des bars pour ce barathon
-    $scope.listeBars = Bar.find($scope.idBarathon).then(function(listeBars){
+    $scope.listeBars = ListeBars.find($scope.idBarathon).then(function(listeBars){
 	$scope.listeBars = listeBars;
-	console.log("Liste des bars : " + listeBars);
         
         // Ajout des bars à la carte
         if(geoBars != "UNDEFINED"){
@@ -572,11 +570,7 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 
      $(".logo").click(function() {
 	window.location.replace("#home" );
-    });
-    
-    console.log("idPartieEnCours : "+ $scope.idPartieEnCours);
-    console.log($routeParams.id);
-    
+    });    
     
     // récup la partieEnCours
     $scope.partieEnCours = Parties.parties($routeParams.id).then(function(partie){
@@ -587,10 +581,66 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
         
         $scope.barathonEnCours = Barathon.get(barathonId).then(function(barathon){
             $scope.barathonEnCours = barathon;
-            $scope.nomB = "askdasdsad";
-            //alert("barathon getB success barathon :" + barathon);
-            console.log("BARATHON dans SCOPE ::");
-            console.log($scope.barathonEnCours);
+	    
+	    $scope.listeBars = ListeBars.find(barathonId).then(function(listeBars){
+		    $scope.listeBars = listeBars;
+
+		    // Ajout des bars à la carte
+		    if(geoBars != "UNDEFINED"){
+			map.removeLayer(geoBars);
+			geoBars = "UNDEFINED";
+		    }
+		    geoBars  = new OpenLayers.Layer.Vector("Bars", {
+			strategies: [
+			new OpenLayers.Strategy.AnimatedCluster({
+			    distance: 50,
+			    animationMethod: OpenLayers.Easing.Expo.easeOut,
+			    animationDuration: 10
+			})
+			],
+			styleMap: new OpenLayers.StyleMap({
+			    "default": new OpenLayers.Style(ptsBar, {
+				context: ctxBar
+			    }),
+			    "select": new OpenLayers.Style(ptsBarOver, {
+				context: ctxBarOver
+			    })
+			})
+		    });
+
+		    map.addLayer(geoBars);
+		    console.log("yo");
+		    console.log($scope.listeBars);
+
+/*
+		    // On ajoute ensuite les éléments graphiques à la carte
+		    var features = new Array();
+
+		    $.each($scope.listeBars, function(i, elem){
+			var myGeo = $.parseJSON(elem.geometry);
+			ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
+			ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+			features[i] = new OpenLayers.Feature.Vector(ptGeom);
+			features[i].attributes = {
+			    name: elem.name,
+			    id: elem.gid
+			};
+		    });
+		    geoBars.addFeatures(features);
+
+		    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+			clickout: false, 
+			toggle: true,
+			multiple: true, 
+			hover: false
+		    });
+
+		    map.addControl(selectControl);
+		    selectControl.activate();
+
+		    geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+		    */
+		}); 
         });
         
         //partieEnCours = partie;

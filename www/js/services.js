@@ -204,43 +204,15 @@ app.factory('ListeBars', function($http, $q){
 	find : function(barathonId){
 	    var deferred = $q.defer();
             
-	    // Quand on veut récupérer tous les barathons
-	    if(barathonId === undefined){
-		$http.get(bootstrap + "?controller=Barathons&action=rend")
-		.success(function(data, status){
-		    factory.listeBars = data;
-		    
-		    deferred.resolve(factory.listeBars);
-		})
-		.error(function(){
-		    deferred.reject("msg");
-		});
-		return deferred.promise;
-	    }
-	    // Quand on ne récupère qu'un Bar à la fois
-	    else{
-		$http.get(bootstrap + "?controller=Barathons&action=rend")
-		.success(function(data, status){
-		    factory.listeBars = data;
-		    deferred.resolve(factory.listeBars);
-		})
-		.error(function(){
-		    deferred.reject("msg");
-		});
-		return deferred.promise;
-	    }
-	//,
-	// Permet de rendre un bar si on a son ID
-	/*get : function(id){
-            listeBars = {};
-            angular.forEach(factory.listeBars, function(value, key){
-                if(value.id == key){
-                    listebars = value;
-                }
-            });
-            return listebars;
-        },*/
-	
+	    $http.get(bootstrap + "?controller=listeBars&action=rendListeBarsPourBarathon&barathonId="+barathonId)
+	    .success(function(data, status){
+		factory.bars = data;
+		deferred.resolve(factory.bars);
+	    })
+	    .error(function(){
+		deferred.reject("factory.bars : Erreur lors de la récupération des bars du barathon "+barathonId);
+	    });
+	    return deferred.promise;
 	}, // find
         
         
