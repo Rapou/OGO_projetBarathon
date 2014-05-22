@@ -155,14 +155,14 @@ app.controller('testNicoCtrl', function($scope, Bar, Ways){
 /**
  * Contrôleur de la page de carte
  */
-app.controller('CarteCtrl', function($scope, Bar) {
+app.controller('CarteCtrl', function($scope, ListeBars) {
 
     // logo back
     $(".logo").click(function(){
 	 window.location.replace("#home" );
     });
     
-    $scope.bars = Bar.find().then(function(bars){
+    $scope.bars = ListeBars.getAll().then(function(bars){
 	function onFeatureSelectCarte(evt) {
 	    feature = evt.feature;
 	    if(feature.attributes.count>=2){
@@ -375,7 +375,6 @@ function func($scope, User){
         }
         // En cas de concordance du couple login-mot de passe
         else {
-            console.log("ici");
             loggedUserId = user.login;
             console.log($scope.user);
             history.back();
