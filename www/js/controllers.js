@@ -242,45 +242,48 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
 /**
  * Contrôleur login
  */
-app.controller('LoginCtrl', function($scope, User) {
-      
-    $("#inputLogin").focus();
+/**
+ * Permet d'externaliser la gestion de la pression de la touche "retour chariot"
+ * pour pouvoir l'appeler plus bas.
+ * Si le login est réussi, la fonction renvoie sur l'accueil, sinon affiche un
+ * avertissement à l'utilisateur.
+ * @param {type} $scope Le scope actuel
+ * @param {type} User La fabrique de User
+ * @returns N/A
+ */
+function func($scope, User){
 
     login = $("#inputLogin").val();
     mdp = $("#inputPassword").val();
-    $("#erreurLogin").hide();
-        
-    $("#submitLogin").click(function(){
-        
-        login = $("#inputLogin").val();
-        mdp = $("#inputPassword").val();
-        
-	// Set l'id et le login de l'utilisateur loggé
-	$scope.user = User.login(login, mdp).then(function(user){
 
-            $scope.user = user;
-            
-            // Définition de la variable globale pour les tests d'autentification
-            // En cas d'erreur dans le login ou mot de passe
-            if(user.login == null){
-                loggedUserId = -1;
-                console.log($scope.user);
-                //$("#inputPassword").val("");
-                $("#erreurLogin").fadeIn(1000);
-            }
-            // En cas de concordance du couple login-mot de passe
-            else {
-                loggedUserId = user.login;
-                console.log($scope.user);
-                history.back();
-            }
+    // Set l'id et le login de l'utilisateur loggé
+    $scope.user = User.login(login, mdp).then(function(user){
 
-        }, function(msg){
-            // Remise du champ mot de passe à zéro
-            $("#inputPassword").val("");
-            alert(msg);
-        });
+        $scope.user = user;
+
+        // Définition de la variable globale pour les tests d'autentification
+        // En cas d'erreur dans le login ou mot de passe
+        if(user.login == null){
+            loggedUserId = -1;
+            console.log($scope.user);
+            //$("#inputPassword").val("");
+            $("#erreurLogin").fadeIn(1000);
+        }
+        // En cas de concordance du couple login-mot de passe
+        else {
+            loggedUserId = user.login;
+            console.log($scope.user);
+            history.back();
+        }
+
+    }, function(msg){
+        // Remise du champ mot de passe à zéro
+        $("#inputPassword").val("");
+        alert(msg);
     });
+};
+    
+app.controller('LoginCtrl', function($scope, User) {
     
     $(".logo").click(function() {
 	history.back();
@@ -289,6 +292,22 @@ app.controller('LoginCtrl', function($scope, User) {
     $("#cancelLogin").click(function() {
 	history.back();
     });
+ 
+    $("#inputLogin").focus();
+
+    login = $("#inputLogin").val();
+    mdp = $("#inputPassword").val();
+    $("#erreurLogin").hide();
+        
+    // Récupération de la touche "Retour clavier" pour valider cette page
+    $(document).keypress(function( event ) {
+        if ( event.which == 13 ) {
+           event.preventDefault();
+           func($scope, User);
+        }
+    });
+        
+    //$("#submitLogin").click();
 });
 
 /**
@@ -317,7 +336,6 @@ app.controller('BarathonsCtrl', function($scope, Barathon){
     }, function(msg){
 	alert(msg);
     });
-    
     
     $(".logo").click(function(){
 	history.back();
