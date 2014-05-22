@@ -8,7 +8,7 @@
 
             <div id="barathonsProposes">
                 <h3>Barathons proposés</h3>
-                <div ng-repeat="barathon in barathons ">
+                <div ng-repeat="barathon in barathonsProposes ">
                     <ul>
                         <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
                     </ul>
@@ -28,10 +28,12 @@
             <div id="partiesJouees">
                 <h3>Parties jouées</h3>
                 <ul>
-                    <div ng-repeat="barathon in barathonsProposes ">
+                    <!--<div ng-repeat="barathon in partiesJouees ">-->
 
-                        <li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>
-                    </div>
+                        <!--<li><a href="#barathons/{{barathon.id}}">{{barathon.nom}}</a></li>-->
+                        
+                        <li><a href="#">Mon Barathon     temps : 4h15</a></li>
+                    <!--</div>-->
                 </ul>
             </div>
 

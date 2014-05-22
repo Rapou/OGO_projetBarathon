@@ -429,6 +429,15 @@ app.controller('BarathonsCtrl', function($scope, Barathon, Parties){
 	history.back();
     });
     
+    $scope.mesBarathons = {};
+    
+    // Set la liste des barathons dans le scope
+    $scope.barathonsProposes = Barathon.rendBarathonsProposes().then(function(barathonsProposes){
+	$scope.barathonsProposes = barathonsProposes;
+    }, function(msg){
+	alert(msg);
+    });
+    
     // check si un user est authentifié. Si non, on cache les les div d'affichage
     if(loggedUserId == -1){
         $("#mesBarathons").hide();
@@ -437,14 +446,8 @@ app.controller('BarathonsCtrl', function($scope, Barathon, Parties){
         // récupère mes Barathons
         $scope.mesBarathons = Barathon.rendMesBarathons(loggedUserId).then(function(mesBarathons){
             $scope.mesBarathons = mesBarathons;
-            console.log("mesBarathons : "+mesBarathons);
+            console.log("mesBarathons : "+$scope.mesBarathons);
             $("#mesBarathons").show();
-            
-            /*
-            // récupère mes parties jouées
-            $scope.partiesJouees = Parties.rendMesPartiesJouees(loggedUserId).then(function(partiesJouees){
-                $scope.partiesJouees = partiesJouees;
-            })*/
             
             
         }, function(msg){
@@ -462,12 +465,7 @@ app.controller('BarathonsCtrl', function($scope, Barathon, Parties){
 	alert(msg);
     });
     
-    // Set la liste des barathons dans le scope
-    Barathon.rendBarathonsProposes().then(function(barathonsProposes){
-	$scope.barathonsProposes = barathonsProposes;
-    }, function(msg){
-	alert(msg);
-    });
+    
     
 /*
     Barathon.find().then(function(mesBarathons){
