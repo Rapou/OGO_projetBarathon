@@ -34,13 +34,13 @@ class Model_Ways{
          */
         public function rendCheminEntre2Bars(){
             
-            $start = 172251;
-            $end = 172272;
+            $start = 2339;
+            $end = 2443;
             
             if (is_numeric($start) && is_numeric($end)) {
 
                 $query = "SELECT seq, id1 AS node, id2 AS edge, cost, st_asgeojson(the_geom) as the_geom FROM pgr_dijkstra "
-                        . "( 'SELECT gid as id , source, target, length as cost FROM ways', 9000, 9183, false, false) di INNER JOIN ways ON di.id2 = ways.gid "; 
+                        . "( 'SELECT gid as id , source, target, length as cost FROM ways', $start, $end, false, false) di INNER JOIN ways ON di.id2 = ways.gid "; 
                 
                 
                 
