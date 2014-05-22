@@ -118,6 +118,11 @@ li.buttons {
     width: 90%;
     margin-left: 5%;
 }
+/*    --- Mode partie  --- */
+#partager a{
+    background-image: url('../img/social.png');
+    width: 123px;
+}
 
 /*    --- Création Barathon  --- */
 #barathonCreation {

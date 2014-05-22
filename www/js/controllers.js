@@ -490,6 +490,10 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
 	history.back();
     });
     
+    $("#partager").click(function(){
+        alert("Désolé, cette fonction n'est pas encore implémentée.");
+    });
+    
     $scope.idBarathon = $routeParams['id'];
 
     function onFeatureSelectCarte(evt) {
