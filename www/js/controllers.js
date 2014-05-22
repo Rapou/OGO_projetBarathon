@@ -4,13 +4,21 @@
 /**
  * Contrôleur de la page d'accueil
  */
-app.controller('homeCtrl', function(){
+app.controller('homeCtrl', function($scope){
     if(loggedUserId == -1){
         $("#login").html("Login");
     }
     else {
         $("#login").html("Loggé en tant que <strong>"+loggedUserId+"</strong>");
     }
+    
+    // Affichage du message pour un barathon créé
+    $("#barathonCree").hide();
+    if($scope.barathonCree === true){
+        $("#barathonCree").fadeIn(1000);
+        $scope.barathonCree = false;
+    }
+    
     if(geoRoutes != "UNDEFINED"){
 	map.removeLayer(geoRoutes);
 	geoRoutes = "UNDEFINED";
@@ -333,13 +341,14 @@ app.controller('LoginCtrl', function($scope, User) {
     });
     // Ou click normal sur le bouton valider
     $("#submitLogin").click(function(){
-        console.log("là !");
         func($scope, User);
     });
 });
 
 /**
  * Controleur liste des Barathons
+ * @param {scope} $scope Le scope global d'angularJS
+ * @param {barathon} Barathon La Factory pour faire des barathons
  */
 app.controller('BarathonsCtrl', function($scope, Barathon){
     $(".logo").click(function(){
@@ -555,6 +564,8 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 		ordreDansBarathon++;
 	    });
 	    listeBarsAValider = "UNDEFINED";
+            
+            $scope.barathonCree = true;
             
 	    window.location.replace("#home" );
 	});
