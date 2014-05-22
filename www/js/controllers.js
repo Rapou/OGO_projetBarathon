@@ -507,7 +507,16 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
 		})
 	    });
             
-	    map.addLayer(geoBars);
+	    
+            
+            /*geoBars.events.register('featuresadded', geoBars, function(evt){
+                console.log("Etat des bars avant zoom : " + geoBars);
+                if(geoBars != undefined){
+                    map.zoomToExtent(geoBars.getDataExtent());
+                }else {
+                    // On ne fait rien
+                }
+            });*/
             
             // On ajoute ensuite les éléments graphiques à la carte
 	    var features = new Array();
@@ -522,13 +531,10 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
 		    id: elem.gid
 		};
 	    });
+            map.addLayer(geoBars);
 	    geoBars.addFeatures(features);
-            map.zoomToExtent(geoBars.getDataExtent());
             
-            /*geoBars.events.register('loadend', geoBars, function(evt){
-                console.log("Je suis là !");
-                map.zoomToExtent(geoBars.getDataExtent());
-            });*/
+            map.zoomToExtent(geoBars.getDataExtent());
             
 	    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
 		clickout: false, 
