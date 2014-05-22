@@ -313,10 +313,7 @@ app.factory('Parties', function($http, $q){
             else { //il y a une partieEnCours
                 
             }
-        },
-        
-        
-        
+        }
     };
     return factory;
 });

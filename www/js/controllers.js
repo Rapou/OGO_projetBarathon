@@ -18,33 +18,45 @@ app.controller('homeCtrl', function(){
  */     
 app.controller('testNicoCtrl', function($scope, Bar, Ways){
     
-    
     // appel ajax pour récup les segments de route
     $scope.segments = Ways.rendCheminEntre2Bars().then(function(segments){
         
-        $scope.segments = segments;
+	if(geoBars != "UNDEFINED"){
+	    map.removeLayer(geoBars);
+	    geoBars = "UNDEFINED";
+	}
+	if(geoRoutes != "UNDEFINED"){
+	    map.removeLayer(geoRoutes);
+	    geoRoutes = "UNDEFINED";
+	}
 
+	geoRoutes  = new OpenLayers.Layer.Vector("Routes", {
+	    styleMap: new OpenLayers.StyleMap({
+		"default": new OpenLayers.Style({
+		    strokeWidth: "5"
+		})
+	    })
+	});
+	console.log(geoRoutes);
+	map.addLayer(geoRoutes);
+	
+	
+        $scope.segments = segments;
+	var arrayPoints = [];
         //foreach segment, ajout au Vector de la route
         $($scope.segments).each(function(i, segment){
             var geomSegment = $.parseJSON(segment.the_geom);
 
-            var arrayPoints = Array();
 
             $(geomSegment.coordinates).each(function(i, point){
-                arrayPoints[i] = new OpenLayers.Geometry.Point(point[0],point[1] );
-            })
-
-            var vector = new OpenLayers.Geometry.LineString(arrayPoints);
-
-            //routeAAfficher.addFeatures(new OpenLayers.Feature.Vector(vector));
-            geoBars.addFeatures(new OpenLayers.Feature.Vector(vector));
-
-
+                arrayPoints.push(new OpenLayers.Geometry.Point(point[0],point[1]));
+            });
         });
+	var vector = new OpenLayers.Geometry.LineString(arrayPoints);
+	vector = vector.transform("EPSG:4326", "EPSG:900913");
 
-        // ajout du Vector route sur la map
-        map.addLayers(geoBars);
-        
+	geoRoutes.addFeatures(new OpenLayers.Feature.Vector(vector));
+        console.log(geoRoutes);        
     });
     
 });
@@ -483,7 +495,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 
 		idBara = parseInt(idBarathonCree.replace('"',''));
 		// ajoute les bars à la listeBars du Barathon
-		ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
+		    ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
 		    
 		}, function(msg){
 		    console.log(msg);
@@ -492,7 +504,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	    });
 	    listeBarsAValider = "UNDEFINED";
             
-	    window.location.href= "#home";
+	    window.location.replace("#home" );
 	});
     });
 });

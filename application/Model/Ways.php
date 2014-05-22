@@ -9,7 +9,7 @@ class Model_Ways{
         
 	public function __construct(PDO $mydb){
 	    $this->db = $mydb;
-            $conn_string = "host=193.134.217.65 port=5432 dbname=ogo_barathon user=ogo_barathon password=(7;/&[5[C connect_timeout=1";
+            $conn_string = "host=".DB_HOST ." port=5432 dbname=" . ." user=ogo_barathon password=(7;/&[5[C connect_timeout=1";
             $this->conn = pg_connect($conn_string);
 	}
 	
