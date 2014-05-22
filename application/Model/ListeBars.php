@@ -82,10 +82,8 @@ class Model_ListeBars{
             
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
-	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
-            
-	    
-            return $resultats;// $resultats;
+	    $resultats=$statement->fetch(PDO::FETCH_ASSOC);
+            return $resultats['barid'];// $resultats;
         }
 
         

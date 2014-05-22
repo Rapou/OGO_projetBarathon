@@ -26,6 +26,10 @@ class Controller_Parties{
         return $this->model_partie->changeBarSuivant($idBarSuivant);
     }
     
+    public function termineBarathon(){
+        return $this->model_partie->termineBarathon();
+    }
+    
     /*
     public function changeBarPremier(){
 	$idEtatSuivant = $_GET['idEtatSuivant'];

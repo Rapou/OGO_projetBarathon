@@ -11,7 +11,6 @@ class Model_Parties{
 	
         public function rendPartie(){
             $idPartie = $_GET['idPartie'];
-            
             $sql = "SELECT * FROM parties WHERE id = $idPartie";
             
             $statement=$this->db->prepare($sql);
@@ -22,8 +21,8 @@ class Model_Parties{
         }
 	
 	public function changeBarSuivant($idBarSuivant){
-            $partieId = $_GET['idPartie'];
-            $sql = "UPDATE parties SET barencoursid = ". $idBarSuivant ." WHERE partie = " . $partieId;
+            $partieId = $_GET['idPartie'];	 
+	    $sql = "UPDATE parties SET barencoursid = ". $idBarSuivant ." WHERE id = " . $partieId;
             
             $statement=$this->db->prepare($sql);
             $resultats = $statement->execute();
@@ -31,6 +30,17 @@ class Model_Parties{
             return $resultats;
         }
         
+	public function termineBarathon(){
+            $partieId = $_GET['idPartie'];	 
+	    $sql = "UPDATE parties SET etat = 'terminee' WHERE id = " . $partieId;
+            
+            $statement=$this->db->prepare($sql);
+            $resultats = $statement->execute();
+            
+            return $resultats;
+        }
+	
+	
 	/**
 	 
 	public function change($idEtat, $idEtape){

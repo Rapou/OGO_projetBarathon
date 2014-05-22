@@ -346,6 +346,20 @@ app.factory('Parties', function($http, $q){
 		deferred.reject("msg");
 	    });
 	    return deferred.promise;
+	},
+	termineBarathon : function(idPartie){
+	    var deferred = $q.defer();
+            partie : false;
+            
+	    $http.get(bootstrap + "?controller=Parties&action=termineBarathon&idPartie="+ idPartie)
+	    .success(function(data){
+		factory.partie = data;
+		deferred.resolve(factory.partie);
+	    })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+	    return deferred.promise;
 	}
     };
     return factory;

@@ -92,7 +92,6 @@ app.controller('testNicoCtrl', function($scope, Bar, Ways){
                        vector = vector.transform("EPSG:4326", "EPSG:900913");
 
                        geoRoutes.addFeatures(new OpenLayers.Feature.Vector(vector));
-                       console.log(geoRoutes);        
                    });
                     
                     
@@ -664,7 +663,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 /**
  * Controleur Partie en Cours
  */
-app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Barathon, ListeBars){
+app.controller('partieEnCoursCtrl', function($scope, $routeParams, $route, Parties, Barathon, ListeBars){
     $scope.partieEnCours = "" ;
     $scope.barathonEnCours = "";
     $scope.listeBars = "";
@@ -673,18 +672,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
     $(".logo").click(function() {
 	window.location.replace("#home");
     });    
-    
-    $("#validerEtape").click(function() {
-        alert("Valide étape");
-    });
-    
-    $("#prochainBar").click(function() {
-	
-	/*var changementBar = Parties.valideBar($scope.partieEnCours.id, $scope.barathonEnCours.id, $scope.barAVisite.gid).then(function(changementbar2){
-	    changementBar = changementbar2;
-	    console.log(changementBar);
-	});*/
-    });
     
     
     // récup la partieEnCours
@@ -702,7 +689,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
         
         $scope.barathonEnCours = Barathon.get(barathonId).then(function(barathon){
             $scope.barathonEnCours = barathon;
-	    console.log($scope.barathonEnCours);
 	    $scope.listeBars = ListeBars.find(barathonId).then(function(listeBars){
 		    $scope.listeBars = listeBars;
 
@@ -730,11 +716,9 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 		    });
 
 		    map.addLayer(geoBars);
-		    console.log(partie);
 
 		    // On ajoute ensuite les éléments graphiques à la carte
 		    var features = new Array();
-		    console.log($scope.listeBars);
 		    $.each($scope.listeBars, function(i, elem){
 			var myGeo = $.parseJSON(elem.geometry);
 			ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
@@ -748,8 +732,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 			if(elem.gid == partie.barencoursid){
 			    map.setCenter(new OpenLayers.LonLat(myGeo.coordinates[0], myGeo.coordinates[1]).transform("EPSG:4326", "EPSG:900913"), 14); 
 			    $scope.barAVisite = elem;
-			    
-			    console.log($scope.barAVisite);
 			}
 		    });
 		    geoBars.addFeatures(features);
@@ -765,7 +747,33 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 		    selectControl.activate();
 		    
 		    geoBars.events.register("featureselected", features, onFeatureSelectCarte);
-		   
+		    
+		    $("#validerEtape").click(function() {
+			console.log($scope.partieEnCours);
+			console.log($scope.listeBars.length);
+		    });
+		    
+		    if($scope.partieEnCours.etat == "terminee"){
+			$("#prochainBar").text("Retour à l'accueil");
+			$("#titreHaut").append(" - Terminé"); 
+			$("#prochainBar").click(function(event) {
+			    event.preventDefault();
+			    window.location.replace("#home");
+			});
+		    }else{
+			$("#prochainBar").click(function(event) {
+			    event.preventDefault();
+			    if($scope.listeBars.length == $scope.barAVisite.ordredansbarathon){
+				var finiPartie = Parties.termineBarathon($scope.partieEnCours.id).then(function(fin){
+				    $route.reload();
+				});
+			    }else{
+				var changementBar = Parties.valideBar($scope.partieEnCours.id, $scope.barathonEnCours.id, $scope.barAVisite.gid).then(function(changement){
+				    $route.reload();
+				});
+			    }
+			});
+		    }
 		}); 
         });
         
