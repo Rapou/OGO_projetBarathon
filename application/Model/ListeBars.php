@@ -82,11 +82,25 @@ class Model_ListeBars{
             
 	    $statement=$this->db->prepare($sql);
 	    $statement->execute();
-	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
-            
-	    
-            return $resultats;// $resultats;
+
+
+	    $resultats=$statement->fetch(PDO::FETCH_ASSOC);
+            return $resultats['barid'];// $resultats;
         }
+	
+	/**
+	 * Permet de rendre l'id du premier bar d'un barathon.
+	 * @return int, l'id du bar. 
+	 */
+	public function rendIdPremierePartie(){
+	    $barathonId = $_GET['idBarathon'];
+	    $sql = "SELECT barid FROM ListeBars WHERE barathonid = ".$barathonId." AND ordredansbarathon = 1";
+            
+	    $statement=$this->db->prepare($sql);
+	    $statement->execute();
+	    $resultats=$statement->fetch(PDO::FETCH_ASSOC);
+            return $resultats['barid'];
+	}
 
         
 }

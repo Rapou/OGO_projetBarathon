@@ -50,7 +50,7 @@ class Model_Barathons{
 	 */
 	public function rendBarathonsProposes(){
             
-            $userCreateurId = 0;
+            $userCreateurId = -1;
             
             // Récupération des barathons
 	    $sql =  "SELECT * FROM barathons WHERE userCreateurId = " . $userCreateurId;
@@ -83,5 +83,20 @@ class Model_Barathons{
             }
             
             return $idCreated;
+        }
+        
+        public function rendMesBarathons(){
+            
+            $userId = $_GET['userId'];
+            
+            $sql = "select * from barathons as b inner join users as u on u.id = b.userCreateurId where u.login = '$userId'";
+            
+            $statement=$this->db->prepare($sql);
+	    $resultat = $statement->execute();
+            
+            $resultats=$statement->fetchAll();
+            
+            return $resultats;
+            
         }
 }

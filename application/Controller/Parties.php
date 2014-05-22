@@ -14,7 +14,8 @@ class Controller_Parties{
     }
 
     public function nouvellePartie(){
-        return $this->model_partie->nouvellePartie();
+	$idBarDebut = $this->model_ListeBars->rendIdPremierePartie();
+        return $this->model_partie->nouvellePartie($idBarDebut);
     }
     
     public function rendPartie(){
@@ -24,6 +25,15 @@ class Controller_Parties{
     public function changeBarActif(){
 	$idBarSuivant = $this->model_ListeBars->recupereIdBarSuivant();
         return $this->model_partie->changeBarSuivant($idBarSuivant);
+    }
+    
+
+    public function rendMesPartiesJouees(){
+        return $this->model_partie->rendMesPartiesJouees();
+    }
+    
+    public function termineBarathon(){
+        return $this->model_partie->termineBarathon();
     }
     
     /*

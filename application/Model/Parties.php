@@ -11,7 +11,6 @@ class Model_Parties{
 	
         public function rendPartie(){
             $idPartie = $_GET['idPartie'];
-            
             $sql = "SELECT * FROM parties WHERE id = $idPartie";
             
             $statement=$this->db->prepare($sql);
@@ -22,8 +21,8 @@ class Model_Parties{
         }
 	
 	public function changeBarSuivant($idBarSuivant){
-            $partieId = $_GET['idPartie'];
-            $sql = "UPDATE parties SET barencoursid = ". $idBarSuivant ." WHERE partie = " . $partieId;
+            $partieId = $_GET['idPartie'];	 
+	    $sql = "UPDATE parties SET barencoursid = ". $idBarSuivant ." WHERE id = " . $partieId;
             
             $statement=$this->db->prepare($sql);
             $resultats = $statement->execute();
@@ -31,6 +30,17 @@ class Model_Parties{
             return $resultats;
         }
         
+	public function termineBarathon(){
+            $partieId = $_GET['idPartie'];	 
+	    $sql = "UPDATE parties SET etat = 'terminee' WHERE id = " . $partieId;
+            
+            $statement=$this->db->prepare($sql);
+            $resultats = $statement->execute();
+            
+            return $resultats;
+        }
+	
+	
 	/**
 	 
 	public function change($idEtat, $idEtape){
@@ -62,12 +72,12 @@ class Model_Parties{
 	    return $resultats;
 	}*/
         
-        public function nouvellePartie(){
+        public function nouvellePartie($idBarDebut){
             $idBarathon = $_GET['idBarathon'];
             $idUser = $_GET['idUser'];
             
             $sql = "INSERT INTO parties (barathonId, userId, etat, barEnCoursId, tempsEffectue, positionsRecues) VALUES"
-                                   . "( $idBarathon, $idUser, 'en cours', 0, null, null )";
+                                   . "( $idBarathon, $idUser, 'en cours', $idBarDebut, null, null )";
             
             $statement=$this->db->prepare($sql);
 	    $res = $statement->execute();
@@ -79,5 +89,18 @@ class Model_Parties{
             }
             
             return $idCreated;
+        }
+        
+        public function rendMesPartiesJouees(){
+            
+            $userId = $_GET['userId'];
+            
+            $sql = "SELECT * FROM parties WHERE userId= $userId ";
+            
+            $statement=$this->db->prepare($sql);
+	    $statement->execute();
+	    $resultats=$statement->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $resultats;
         }
 }
