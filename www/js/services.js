@@ -60,7 +60,7 @@ app.factory('Bar', function($http, $q){
 	    var deferred = $q.defer();
             
 	    // Quand on veut récupérer tous les barathons
-	    if(barathonId === undefined){
+	    if(barathonId == undefined){
 		// requête Ajax
 		$http.get(bootstrap + "?controller=Bars&action=rendBarEtPub")
 		.success(function(data, status){
@@ -119,7 +119,7 @@ app.factory('Bar', function($http, $q){
 /*
  * Factory pour les Barathons
  */
-app.factory('Barathon', function($http, $q){
+app.factory('Barathon', function($http, $q, ListeBars){
     var factory = {
 	barathons : false,
         
