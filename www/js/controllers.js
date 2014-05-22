@@ -12,12 +12,23 @@ app.controller('homeCtrl', function($scope){
         $("#login").html("Loggé en tant que <strong>"+loggedUserId+"</strong>");
     }
     
-    // Affichage du message pour un barathon créé
-    $("#barathonCree").hide();
-    if($scope.barathonCree === true){
-        $("#barathonCree").fadeIn(1000);
-        $scope.barathonCree = false;
+    if(idPartieEnCours == 0){
+        $("#partieEnCours").hide();
+    } else {
+        $scope.partieEnCours = idPartieEnCours;
+        $("#partieEnCours").show();
     }
+    
+    // Hide le message pour un barathon créé
+    $("#barathonCree").hide();
+    // Affichage de l'alerte Succes Barathon créé
+    if(barathonCree == true){
+        $("#barathonCree").fadeIn(1000).fadeOut(1000);
+        
+        window.setInterval(function() {
+            barathonCree = false;
+        }, 1000);
+    } 
     
     if(geoRoutes != "UNDEFINED"){
 	map.removeLayer(geoRoutes);
@@ -597,10 +608,11 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
             // Créée new Partie
             Parties.nouvellePartie($scope.idBarathon, loggedUserId).then(function(idPartieCreee){
                 
-                idPartieCreee = parseInt(idPartieCreee.replace('"',''));
+                var idNewPartie = parseInt(idPartieCreee.replace('"',''));
                 
                 // affichage de la bonne partie
-                $scope.idPartieEnCours = idPartieCreee;
+                $scope.idPartieEnCours = idNewPartie;
+                idPartieEnCours = idNewPartie;
                 
                 alert("CTRL BarathonCtrl/ SCOPE idPartie " +$scope.idPartieEnCours );
                 
@@ -640,13 +652,10 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
  * Contrôleur validation Barathon
  */
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
-    $(".logo").click(function() {
-	console.log(listeBarsAValider);
-	// window.location.replace("#creationBarathon" );
-    });
     
     $scope.listeBarsAValider = listeBarsAValider;
 
+    
     /**
      * Bouton valider New Barathon
      */
@@ -674,7 +683,8 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	    });
 	    listeBarsAValider = "UNDEFINED";
             
-            $scope.barathonCree = true;
+            barathonCree = true;
+            console.log("BARATHON CREE validerBarathon : "+ barathonCree);
             
 	    window.location.replace("#home" );
 	});
