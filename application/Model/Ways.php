@@ -9,7 +9,7 @@ class Model_Ways{
         
 	public function __construct(PDO $mydb){
 	    $this->db = $mydb;
-            $conn_string = "host=193.134.217.65 port=5432 dbname=ogo_barathon user=ogo_barathon password=(7;/&[5[C connect_timeout=1";
+            $conn_string = "host=". DB_HOST ." port=5432 dbname=" . DB_NAME  ." user=" . DB_USER . " password=" . DB_PASS . " connect_timeout=1";
             $this->conn = pg_connect($conn_string);
 	}
 	
@@ -34,13 +34,13 @@ class Model_Ways{
          */
         public function rendCheminEntre2Bars(){
             
-            $start = 172251;
-            $end = 172272;
+            $start = 2339;
+            $end = 2443;
             
             if (is_numeric($start) && is_numeric($end)) {
 
                 $query = "SELECT seq, id1 AS node, id2 AS edge, cost, st_asgeojson(the_geom) as the_geom FROM pgr_dijkstra "
-                        . "( 'SELECT gid as id , source, target, length as cost FROM ways', 9000, 9183, false, false) di INNER JOIN ways ON di.id2 = ways.gid "; 
+                        . "( 'SELECT gid as id , source, target, length as cost FROM ways', $start, $end, false, false) di INNER JOIN ways ON di.id2 = ways.gid "; 
                 
                 
                 

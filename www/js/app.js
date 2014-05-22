@@ -1,6 +1,8 @@
 var bootstrap = "bootstrap.php";
 var map;
 var geoBars = "UNDEFINED";
+var geoRoutes = "UNDEFINED";
+
 var listeBarsAValider = "UNDEFINED";
 var idPartieEnCours = 0; // à 0 si pas de partie en cours
 var loggedUserId = -1; // Par défaut, le user n'est pas loggé (= -1)
