@@ -5,11 +5,11 @@
  * Contrôleur de la page d'accueil
  */
 app.controller('homeCtrl', function($scope){
-    if(loggedUserId == -1){
+    if(loggedUser == undefined){
         $("#login").html("Login");
     }
     else {
-        $("#login").html("Loggé en tant que <strong>"+loggedUserId+"</strong>");
+        $("#login").html("Loggé en tant que <strong>"+loggedUser.login+"</strong>");
     }
     
     if(idPartieEnCours == 0){
@@ -23,7 +23,7 @@ app.controller('homeCtrl', function($scope){
     $("#barathonCree").hide();
     // Affichage de l'alerte Succes Barathon créé
     if(barathonCree == true){
-        $("#barathonCree").fadeIn(1000).fadeOut(1000);
+        $("#barathonCree").fadeIn(2000).fadeOut(1000);
         
         window.setInterval(function() {
             barathonCree = false;
@@ -373,21 +373,16 @@ function validerUser($scope, User){
     // Set l'id et le login de l'utilisateur loggé
     $scope.user = User.login(login, mdp).then(function(user){
         
-        $scope.user = user;
-
         // Définition de la variable globale pour les tests d'autentification
         // En cas d'erreur dans le login ou mot de passe
         if(user.login == null){
-            loggedUserId = -1;
-            console.log($scope.user);
+            loggedUser = undefined;
             //$("#inputPassword").val("");
             $("#erreurLogin").fadeIn(1000);
         }
         // En cas de concordance du couple login-mot de passe
         else {
-            console.log("ici");
-            loggedUserId = user.login;
-            console.log($scope.user);
+            loggedUser = user;
             history.back();
         }
 
@@ -448,12 +443,12 @@ app.controller('BarathonsCtrl', function($scope, Barathon, Parties){
     });
     
     // check si un user est authentifié. Si non, on cache les les div d'affichage
-    if(loggedUserId == -1){
+    if(loggedUser == undefined){
         $("#mesBarathons").hide();
         $("#partiesJouees").hide();
     } else {
         // récupère mes Barathons
-        $scope.mesBarathons = Barathon.rendMesBarathons(loggedUserId).then(function(mesBarathons){
+        $scope.mesBarathons = Barathon.rendMesBarathons(loggedUser.login).then(function(mesBarathons){
             $scope.mesBarathons = mesBarathons;
             console.log("mesBarathons : "+$scope.mesBarathons);
             $("#mesBarathons").show();
@@ -587,7 +582,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
 			} else {
 
 			    // Créée new Partie
-			    Parties.nouvellePartie($scope.idBarathon, loggedUserId).then(function(idPartieCreee){
+			    Parties.nouvellePartie($scope.idBarathon, loggedUser.id).then(function(idPartieCreee){
 
 			    idPartieCreee = parseInt(idPartieCreee.replace('"',''));
 
@@ -629,7 +624,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
         } else {
             
             // Créée new Partie
-            Parties.nouvellePartie($scope.idBarathon, loggedUserId).then(function(idPartieCreee){
+            Parties.nouvellePartie($scope.idBarathon, loggedUser.Id).then(function(idPartieCreee){
                 
                 var idNewPartie = parseInt(idPartieCreee.replace('"',''));
                 
@@ -690,7 +685,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
         // Récup des données utilisateur
 	var inputNomBarathon = $("#inputNomBarathon").val();
 	var inputDifficulteBarathon = $("#inputDifficulteBarathon").val();
-	var userCreateurId = loggedUserId;
+	var userCreateurId = loggedUser.Id;
         
         // ajoute le barathon
 	var idBarathonCree = Barathon.ajouterBarathon(inputNomBarathon, inputDifficulteBarathon, userCreateurId).then(function(idBarathonCree){
@@ -698,7 +693,9 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	    // FOR EACH
 	    $($scope.listeBarsAValider).each(function(i, bar){
 		
-		idBara = parseInt(idBarathonCree.replace('"',''));
+                console.log("IDIDIDID barathon créé"+idBarathonCree);
+                
+		var idBara = parseInt(idBarathonCree.replace('"',''));
 		// ajoute les bars à la listeBars du Barathon
 		ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
 		    

@@ -10,7 +10,8 @@ var geoRoutes = "UNDEFINED";
 var listeBarsAValider = "UNDEFINED"; 
 var idBarActif = 0;
 var idPartieEnCours = 0; // à 0 si pas de partie en cours
-var loggedUserId = -1; // Par défaut, le user n'est pas loggé (= -1)
+//var loggedUserId = -1; // Par défaut, le user n'est pas loggé (= -1)
+var loggedUser = undefined;
 var barathonCree = false;
 
 /**

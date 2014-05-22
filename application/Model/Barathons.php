@@ -70,6 +70,7 @@ class Model_Barathons{
             $description = "Description de " . $inputNom;
             $userCreateurId = $_GET['userCreateurId'];
             
+            
             $sql = "INSERT INTO Barathons (nom, difficulte, tempsEstime, description, userCreateurId) VALUES"
                     . " ( '".$inputNom."', '". $difficulte ."','". $tempsEstime ."', '".$description."', ".$userCreateurId." ) RETURNING id";
             
