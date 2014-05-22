@@ -619,7 +619,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
  */
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
     $(".logo").click(function() {
-	window.location.replace("#creationBarathon" );
+	console.log(listeBarsAValider);
+	// window.location.replace("#creationBarathon" );
     });
     
     $scope.listeBarsAValider = listeBarsAValider;
@@ -639,10 +640,10 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	    var ordreDansBarathon = 1;
 	    // FOR EACH
 	    $($scope.listeBarsAValider).each(function(i, bar){
-
+		
 		idBara = parseInt(idBarathonCree.replace('"',''));
 		// ajoute les bars à la listeBars du Barathon
-		    ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
+		ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
 		    
 		}, function(msg){
 		    console.log(msg);
