@@ -22,5 +22,4 @@ class Controller_ListeBars{
         return $this->model->ajouterBarPourBarathon();
     }
     
-    
 }
