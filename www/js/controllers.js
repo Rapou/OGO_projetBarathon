@@ -92,7 +92,6 @@ app.controller('testNicoCtrl', function($scope, Bar, Ways){
                        vector = vector.transform("EPSG:4326", "EPSG:900913");
 
                        geoRoutes.addFeatures(new OpenLayers.Feature.Vector(vector));
-                       console.log(geoRoutes);        
                    });
                     
                     
@@ -221,7 +220,7 @@ app.controller('CarteCtrl', function($scope, Bar) {
 	    selectControl.activate();
             
             // Centrage de la map pour afficher tous les points
-            console.log("Emplacement carteCtrl : " + geoBars.getDataExtent());
+            //console.log("Emplacement carteCtrl : " + geoBars.getDataExtent());
             map.zoomToExtent(geoBars.getDataExtent()); //////////////////////////////////////////// A DEBUGGER AVEC LE PROF
 	
 	   geoBars.events.register("featureselected", features, onFeatureSelectCarte);
@@ -456,22 +455,27 @@ app.controller('BarathonsCtrl', function($scope, Barathon, Parties){
     }
     
     // Set la liste des barathons dans le scope
-    $scope.barathons = Barathon.find().then(function(barathons){
+    Barathon.find().then(function(barathons){
 	$scope.barathons = barathons;
-	console.log("barathons : "+barathons);
+	//console.log("barathons : "+barathons);
     }, function(msg){
 	alert(msg);
     });
     
     // Set la liste des barathons dans le scope
-    $scope.barathonsProposes = Barathon.rendBarathonsProposes().then(function(barathonsProposes){
+    Barathon.rendBarathonsProposes().then(function(barathonsProposes){
 	$scope.barathonsProposes = barathonsProposes;
     }, function(msg){
 	alert(msg);
     });
     
-    
-    
+/*
+    Barathon.find().then(function(mesBarathons){
+	$scope.mesBarathons = mesBarathons;
+	//console.log("mesBarathons : "+mesBarathons);
+    }, function(msg){
+	alert(msg);
+    });*/
 });
 
 /**
@@ -494,92 +498,96 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
         }
     }
 
-    $scope.barathon = Barathon.get($scope.idBarathon).then(function(barathon){
+    Barathon.get($scope.idBarathon).then(function(barathon){
 	$scope.barathon = barathon;
-	console.log(barathon);
+	//console.log(barathon);
+        
+        // En cas de succès, on ajoute ensuite les bars à la carte
+        // On récupère et passe dans le scope la liste des bars pour ce barathon
+        ListeBars.find($scope.idBarathon).then(function(listeBars){
+            $scope.listeBars = listeBars;
+
+            // Ajout des bars à la carte
+            if(geoBars != "UNDEFINED"){
+                map.removeLayer(geoBars);
+                geoBars = "UNDEFINED";
+            }
+                geoBars  = new OpenLayers.Layer.Vector("Bars", {
+                    strategies: [
+                    new OpenLayers.Strategy.AnimatedCluster({
+                        distance: 50,
+                        animationMethod: OpenLayers.Easing.Expo.easeOut,
+                        animationDuration: 10
+                    })
+                    ],
+                    styleMap: new OpenLayers.StyleMap({
+                        "default": new OpenLayers.Style(ptsBar, {
+                            context: ctxBar
+                        }),
+                        "select": new OpenLayers.Style(ptsBarOver, {
+                            context: ctxBarOver
+                        })
+                    })
+                });
+
+
+
+                /*geoBars.events.register('featuresadded', geoBars, function(evt){
+                    console.log("Etat des bars avant zoom : " + geoBars);
+                    if(geoBars != undefined){
+                        map.zoomToExtent(geoBars.getDataExtent());
+                    }else {
+                        // On ne fait rien
+                    }
+                });*/
+
+                // On ajoute ensuite les éléments graphiques à la carte
+                var features = new Array();
+
+                $.each($scope.listeBars, function(i, elem){
+                    var myGeo = $.parseJSON(elem.geometry);
+                    ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
+                    ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
+                    features[i] = new OpenLayers.Feature.Vector(ptGeom);
+                    features[i].attributes = {
+                        name: elem.name,
+                        id: elem.gid
+                    };
+                });
+                map.addLayer(geoBars);
+                geoBars.addFeatures(features);
+
+                map.zoomToExtent(geoBars.getDataExtent());
+
+                selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
+                    clickout: false, 
+                    toggle: true,
+                    multiple: true, 
+                    hover: false
+                });
+                map.addControl(selectControl);
+                selectControl.activate();
+
+                geoBars.events.register("featureselected", features, onFeatureSelectCarte);
+
+
+
+                // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
+                // Puis centrage de la carte
+                //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
+
+                //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
+                //map.zoomToExtent(geoBars.getDataExtent());
+
+        }, function(msg){
+            alert(msg);
+        });
+        
     }, function(msg){
 	alert(msg);
     });
     
-    // On récupère et passe dans le scope la liste des bars pour ce barathon
-    $scope.listeBars = ListeBars.find($scope.idBarathon).then(function(listeBars){
-	$scope.listeBars = listeBars;
-        
-        // Ajout des bars à la carte
-        if(geoBars != "UNDEFINED"){
-	    map.removeLayer(geoBars);
-	    geoBars = "UNDEFINED";
-	}
-	    geoBars  = new OpenLayers.Layer.Vector("Bars", {
-		strategies: [
-		new OpenLayers.Strategy.AnimatedCluster({
-		    distance: 50,
-		    animationMethod: OpenLayers.Easing.Expo.easeOut,
-		    animationDuration: 10
-		})
-		],
-		styleMap: new OpenLayers.StyleMap({
-		    "default": new OpenLayers.Style(ptsBar, {
-			context: ctxBar
-		    }),
-		    "select": new OpenLayers.Style(ptsBarOver, {
-			context: ctxBarOver
-		    })
-		})
-	    });
-            
-	    
-            
-            /*geoBars.events.register('featuresadded', geoBars, function(evt){
-                console.log("Etat des bars avant zoom : " + geoBars);
-                if(geoBars != undefined){
-                    map.zoomToExtent(geoBars.getDataExtent());
-                }else {
-                    // On ne fait rien
-                }
-            });*/
-            
-            // On ajoute ensuite les éléments graphiques à la carte
-	    var features = new Array();
-
-	    $.each($scope.listeBars, function(i, elem){
-		var myGeo = $.parseJSON(elem.geometry);
-		ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
-		ptGeom = ptGeom.transform("EPSG:4326", "EPSG:900913");
-		features[i] = new OpenLayers.Feature.Vector(ptGeom);
-		features[i].attributes = {
-		    name: elem.name,
-		    id: elem.gid
-		};
-	    });
-            map.addLayer(geoBars);
-	    geoBars.addFeatures(features);
-            
-            map.zoomToExtent(geoBars.getDataExtent());
-            
-	    selectControl = new OpenLayers.Control.SelectFeature(geoBars, {
-		clickout: false, 
-		toggle: true,
-		multiple: true, 
-		hover: false
-	    });
-	    map.addControl(selectControl);
-	    selectControl.activate();
-            
-            geoBars.events.register("featureselected", features, onFeatureSelectCarte);
-            
-	    
-	    
-            // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
-            // Puis centrage de la carte
-            //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
-            
-            //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
-            //map.zoomToExtent(geoBars.getDataExtent());
-
-    }, function(msg){
-	alert(msg);
-    });
+    
     
     /**
      * BOUTON lancer Barathon, crée une partie et va l'afficher
@@ -637,7 +645,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
  */
 app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, ListeBars){
     $(".logo").click(function() {
-	window.location.replace("#creationBarathon" );
+	console.log(listeBarsAValider);
+	// window.location.replace("#creationBarathon" );
     });
     
     $scope.listeBarsAValider = listeBarsAValider;
@@ -657,10 +666,10 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 	    var ordreDansBarathon = 1;
 	    // FOR EACH
 	    $($scope.listeBarsAValider).each(function(i, bar){
-
+		
 		idBara = parseInt(idBarathonCree.replace('"',''));
 		// ajoute les bars à la listeBars du Barathon
-		    ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
+		ListeBars.ajouterBarPourBarathon(idBara, bar.gid, ordreDansBarathon).then(function(bar_id){
 		    
 		}, function(msg){
 		    console.log(msg);
@@ -681,7 +690,7 @@ app.controller('ValiderBarathonCtrl', function($scope, $routeParams, Barathon, L
 /**
  * Controleur Partie en Cours
  */
-app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Barathon, ListeBars){
+app.controller('partieEnCoursCtrl', function($scope, $routeParams, $route, Parties, Barathon, ListeBars){
     $scope.partieEnCours = "" ;
     $scope.barathonEnCours = "";
     $scope.listeBars = "";
@@ -690,18 +699,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
     $(".logo").click(function() {
 	window.location.replace("#home");
     });    
-    
-    $("#validerEtape").click(function() {
-        alert("Valide étape");
-    });
-    
-    $("#prochainBar").click(function() {
-	
-	/*var changementBar = Parties.valideBar($scope.partieEnCours.id, $scope.barathonEnCours.id, $scope.barAVisite.gid).then(function(changementbar2){
-	    changementBar = changementbar2;
-	    console.log(changementBar);
-	});*/
-    });
     
     
     // récup la partieEnCours
@@ -719,7 +716,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
         
         $scope.barathonEnCours = Barathon.get(barathonId).then(function(barathon){
             $scope.barathonEnCours = barathon;
-	    console.log($scope.barathonEnCours);
 	    $scope.listeBars = ListeBars.find(barathonId).then(function(listeBars){
 		    $scope.listeBars = listeBars;
 
@@ -747,11 +743,9 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 		    });
 
 		    map.addLayer(geoBars);
-		    console.log(partie);
 
 		    // On ajoute ensuite les éléments graphiques à la carte
 		    var features = new Array();
-		    console.log($scope.listeBars);
 		    $.each($scope.listeBars, function(i, elem){
 			var myGeo = $.parseJSON(elem.geometry);
 			ptGeom = new OpenLayers.Geometry.Point(myGeo.coordinates[0], myGeo.coordinates[1]);
@@ -765,8 +759,6 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 			if(elem.gid == partie.barencoursid){
 			    map.setCenter(new OpenLayers.LonLat(myGeo.coordinates[0], myGeo.coordinates[1]).transform("EPSG:4326", "EPSG:900913"), 14); 
 			    $scope.barAVisite = elem;
-			    
-			    console.log($scope.barAVisite);
 			}
 		    });
 		    geoBars.addFeatures(features);
@@ -782,7 +774,33 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 		    selectControl.activate();
 		    
 		    geoBars.events.register("featureselected", features, onFeatureSelectCarte);
-		   
+		    
+		    $("#validerEtape").click(function() {
+			console.log($scope.partieEnCours);
+			console.log($scope.listeBars.length);
+		    });
+		    
+		    if($scope.partieEnCours.etat == "terminee"){
+			$("#prochainBar").text("Retour à l'accueil");
+			$("#titreHaut").append(" - Terminé"); 
+			$("#prochainBar").click(function(event) {
+			    event.preventDefault();
+			    window.location.replace("#home");
+			});
+		    }else{
+			$("#prochainBar").click(function(event) {
+			    event.preventDefault();
+			    if($scope.listeBars.length == $scope.barAVisite.ordredansbarathon){
+				var finiPartie = Parties.termineBarathon($scope.partieEnCours.id).then(function(fin){
+				    $route.reload();
+				});
+			    }else{
+				var changementBar = Parties.valideBar($scope.partieEnCours.id, $scope.barathonEnCours.id, $scope.barAVisite.gid).then(function(changement){
+				    $route.reload();
+				});
+			    }
+			});
+		    }
 		}); 
         });
         

@@ -362,6 +362,7 @@ app.factory('Parties', function($http, $q){
 	    });
 	    return deferred.promise;
 	},
+
         rendMesPartiesJouees : function(userId){
             var deferred = $q.defer();
     
@@ -371,13 +372,30 @@ app.factory('Parties', function($http, $q){
 	    .success(function(data, status){
 		factory.listeBars = data;
 		deferred.resolve(factory.listeBars);
+
+            })
+	    .error(function(){
+		deferred.reject("msg");
+	    });
+        },
+	termineBarathon : function(idPartie){
+	    var deferred = $q.defer();
+            partie : false;
+            
+	    $http.get(bootstrap + "?controller=Parties&action=termineBarathon&idPartie="+ idPartie)
+	    .success(function(data){
+		factory.partie = data;
+		deferred.resolve(factory.partie);
+
 	    })
 	    .error(function(){
 		deferred.reject("msg");
 	    });
+
     
             return deferred.promise; 
         }
+
     };
     return factory;
 });

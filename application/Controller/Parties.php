@@ -26,8 +26,13 @@ class Controller_Parties{
         return $this->model_partie->changeBarSuivant($idBarSuivant);
     }
     
+
     public function rendMesPartiesJouees(){
         return $this->model_partie->rendMesPartiesJouees();
+    }
+    
+    public function termineBarathon(){
+        return $this->model_partie->termineBarathon();
     }
     
     /*
