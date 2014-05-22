@@ -357,6 +357,14 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
     
     $scope.idBarathon = $routeParams['id'];
 
+    function onFeatureSelectCarte(evt) {
+        feature = evt.feature;
+        if(feature.attributes.count>=2){
+            map.zoomIn();
+            map.setCenter(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y)); 
+        }
+    }
+
     $scope.barathon = Barathon.get($scope.idBarathon).then(function(barathon){
 	$scope.barathon = barathon;
 	console.log(barathon);
@@ -423,6 +431,8 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, Bar){
 	    });
 	    map.addControl(selectControl);
 	    selectControl.activate();
+            
+            geoBars.events.register("featureselected", features, onFeatureSelectCarte);
             
             // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
             // Puis centrage de la carte
