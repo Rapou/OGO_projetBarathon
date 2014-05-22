@@ -89,7 +89,7 @@ class Model_Barathons{
             
             $userId = $_GET['userId'];
             
-            $sql = "SELECT * FROM barathons WHERE userCreateurId = $userId";
+            $sql = "select * from barathons as b inner join users as u on u.id = b.userCreateurId where u.login = '$userId'";
             
             $statement=$this->db->prepare($sql);
 	    $resultat = $statement->execute();

@@ -354,7 +354,7 @@ app.controller('CreationBarathonCtrl', function($scope, $routeParams, $route, Ba
  * @param {type} User La fabrique de User
  * @returns N/A
  */
-function func($scope, User){
+function validerUser($scope, User){
 
     login = $("#inputLogin").val();
     mdp = $("#inputPassword").val();
@@ -400,8 +400,6 @@ app.controller('LoginCtrl', function($scope, User) {
     // Focus par défaut dans la barre de login
     $("#inputLogin").focus();
     
-    
-
     login = $("#inputLogin").val();
     mdp = $("#inputPassword").val();
     $("#erreurLogin").hide();
@@ -410,12 +408,12 @@ app.controller('LoginCtrl', function($scope, User) {
     $(document).keypress(function( event ) {
         if ( event.which == 13 ) {
            event.preventDefault();
-           func($scope, User);
+           validerUser($scope, User);
         }
     });
     // Ou click normal sur le bouton valider
     $("#submitLogin").click(function(){
-        func($scope, User);
+        validerUser($scope, User);
     });
 });
 
