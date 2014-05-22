@@ -576,37 +576,7 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
 
                 geoBars.events.register("featureselected", features, onFeatureSelectCarte);
 
-		 /**
-		  * BOUTON lancer Barathon, crée une partie et va l'afficher
-		  */
-		    $("#launchButton").click(function(){
-
-			if (idPartieEnCours > 0){
-			    alert("il y a deja une partie en cours !");
-			} else {
-
-			    // Créée new Partie
-			    Parties.nouvellePartie($scope.idBarathon, loggedUser.id).then(function(idPartieCreee){
-
-			    idPartieCreee = parseInt(idPartieCreee.replace('"',''));
-
-			    // affichage de la bonne partie
-			    $scope.idPartieEnCours = idPartieCreee;
-
-
-			    window.location.replace("#parties/" + $scope.idPartieEnCours);
-			});
-		    }
-	
-		});  // launch button
-
-                // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
-                // Puis centrage de la carte
-                //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
-
-                //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
-                //map.zoomToExtent(geoBars.getDataExtent());
-
+		
         }, function(msg){
             alert(msg);
         });
@@ -643,6 +613,13 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
         }
 	
     });  // launch button
+    
+    
+    
+    
+    
+    
+    
     
 
     // Resize de la police quand le nom du barathon est trop long
