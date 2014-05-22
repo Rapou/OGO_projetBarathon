@@ -633,6 +633,7 @@ app.controller('partieEnCoursCtrl', function($scope, $routeParams, Parties, Bara
 			};
 			if(elem.gid == partie.barencoursid){
 			    map.setCenter(new OpenLayers.LonLat(myGeo.coordinates[0], myGeo.coordinates[1]).transform("EPSG:4326", "EPSG:900913"), 14); 
+			    $scope.barAVisite = elem;
 			    console.log(elem.gid);
 			}
 		    });
