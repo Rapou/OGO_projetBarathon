@@ -591,28 +591,35 @@ app.controller('BarathonCtrl', function($scope, $routeParams, Barathon, ListeBar
     /**
      * BOUTON lancer Barathon, crée une partie et va l'afficher
      */
-    $("#launchButton").click(function(){
-        
-        if (idPartieEnCours > 0){
-            alert("il y a deja une partie en cours !");
-        } else {
-            
-            // Créée new Partie
-            Parties.nouvellePartie($scope.idBarathon, loggedUser.Id).then(function(idPartieCreee){
-                
-                var idNewPartie = parseInt(idPartieCreee.replace('"',''));
-                
-                // affichage de la bonne partie
-                $scope.idPartieEnCours = idNewPartie;
-                idPartieEnCours = idNewPartie;
-                
-                alert("CTRL BarathonCtrl/ SCOPE idPartie " +$scope.idPartieEnCours );
-                
-                window.location.replace("#parties/" + $scope.idPartieEnCours);
-            });
-        }
-	
-    });  // launch button
+       $("#launchButton").click(function(){
+
+           if (idPartieEnCours > 0){
+               alert("il y a deja une partie en cours !");
+           } else {
+
+               // Créée new Partie
+               Parties.nouvellePartie($scope.idBarathon, loggedUser.id).then(function(idPartieCreee){
+
+               idPartieCreee = parseInt(idPartieCreee.replace('"',''));
+
+               // affichage de la bonne partie
+               $scope.idPartieEnCours = idPartieCreee;
+
+               alert("CTRL BarathonCtrl/ SCOPE idPartie " +$scope.idPartieEnCours );
+
+               window.location.replace("#parties/" + $scope.idPartieEnCours);
+           });
+       }
+
+   });  // launch button
+
+   // FONCTION PERMETTANT D'ENREGISTRER UNE ACTION
+   // Puis centrage de la carte
+   //map.setCenter(new OpenLayers.LonLat(6.645, 46.53).transform("EPSG:4326", "EPSG:900913"), 14);
+
+   //console.log("Emplacement barathonCtrl : " + geoBars.getDataExtent());
+   //map.zoomToExtent(geoBars.getDataExtent());
+
     
     
     
