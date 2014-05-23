@@ -41,12 +41,11 @@ app.controller('homeCtrl', function($scope){
  */     
 app.controller('testNicoCtrl', function($scope, Bar, Ways){
     
-    $(".logo").click(function() {
-	 window.location.replace("#home" );
-    });
+    var idBar1 = 1;
+    var idBar2 = 2;
     
     // Récup du Bar 1
-    $scope.bar1 = Bar.get(1).then(function(bar){
+    $scope.bar1 = Bar.get(idBar1).then(function(bar){
         var bar1_geoJSON = $.parseJSON(bar.geometry);
         
         //Récup du node le plus proche du bar 1
@@ -54,7 +53,7 @@ app.controller('testNicoCtrl', function($scope, Bar, Ways){
             $scope.node1 = node;
             
             // récup bar 2
-            $scope.bar2 = Bar.get(2).then(function(bar2){
+            $scope.bar2 = Bar.get(idBar2).then(function(bar2){
                 var bar2_geoJSON = $.parseJSON(bar2.geometry);
                 
                 
@@ -111,50 +110,13 @@ app.controller('testNicoCtrl', function($scope, Bar, Ways){
             }); // get bar 2
             
         }); // ge node1
-        
-
-            
-            /*
-             // appel ajax pour récup les segments de route
-            $scope.segments = Ways.rendCheminEntre2Bars($scope.bar1_geoJSON,$scope.bar2_geoJSON).then(function(segments){
-
-                if(geoBars != "UNDEFINED"){
-                    map.removeLayer(geoBars);
-                    geoBars = "UNDEFINED";
-                }
-
-                geoRoutes  = new OpenLayers.Layer.Vector("Routes", {
-                    styleMap: new OpenLayers.StyleMap({
-                        "default": new OpenLayers.Style({
-                            strokeWidth: "5"
-                        })
-                    })
-                });
-                console.log(geoRoutes);
-                map.addLayer(geoRoutes);
-
-                $scope.segments = segments;
-                var arrayPoints = [];
-                //foreach segment, ajout au Vector de la route
-                $($scope.segments).each(function(i, segment){
-                    var geomSegment = $.parseJSON(segment.the_geom);
-
-
-                    $(geomSegment.coordinates).each(function(i, point){
-                        arrayPoints.push(new OpenLayers.Geometry.Point(point[0],point[1]));
-                    });
-                });
-                var vector = new OpenLayers.Geometry.LineString(arrayPoints);
-                vector = vector.transform("EPSG:4326", "EPSG:900913");
-
-                geoRoutes.addFeatures(new OpenLayers.Feature.Vector(vector));
-                console.log(geoRoutes);        
-            });*/
-            
+         
             
     }); // get Bar 1
     
-    
+    $(".logo").click(function() {
+	 window.location.replace("#home" );
+    });
     
 
 
