@@ -5,13 +5,13 @@
  * Contrôleur de la page d'accueil
  */
 app.controller('homeCtrl', function($scope){
-    if(loggedUser == undefined){
+    // Affichage du premier lien différent si on est loggé ou pas
+    if(loggedUser == undefined)
         $("#login").html("Login");
-    }
-    else {
+    else
         $("#login").html("Loggé en tant que <strong>"+loggedUser.login+"</strong>");
-    }
     
+    // Si une partie est en cours, on affiche un lien  pour y retourner
     if(idPartieEnCours == 0){
         $("#partieEnCours").hide();
     } else {
@@ -19,9 +19,10 @@ app.controller('homeCtrl', function($scope){
         $("#partieEnCours").show();
     }
     
-    // Hide le message pour un barathon créé
+    // Etat initial du message de création d'un barathon à 'caché'
     $("#barathonCree").hide();
-    // Affichage de l'alerte Succes Barathon créé
+    
+    // Affichage de l'alerte Success Barathon créé
     if(barathonCree === true){
         $("#barathonCree").fadeIn(1000).delay(2000).fadeOut(1000);
         
@@ -30,6 +31,7 @@ app.controller('homeCtrl', function($scope){
         }, 1000);
     } 
     
+    // Réinitialisation de la layer affichée par-dessus la carte
     if(geoRoutes != "UNDEFINED"){
 	map.removeLayer(geoRoutes);
 	geoRoutes = "UNDEFINED";
