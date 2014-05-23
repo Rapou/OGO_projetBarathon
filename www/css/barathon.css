@@ -79,6 +79,9 @@ ul {
 li.buttons {
     float: right;
 }
+#partager {
+    margin-right: 5px;
+}
 
 /*     ---  Header  --- */
 .appHeader {
