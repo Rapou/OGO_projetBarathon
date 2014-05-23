@@ -125,7 +125,6 @@ app.factory('Barathon', function($http, $q, ListeBars){
         
 	// Permet de retourner tous les bars, ou de faire une recherche si un paramètre est renseigné.
 	find : function(){
-	    //var val = $http.get(bootstrap + "?controller=Bars&action=rendBarEtPub"); 
 	    var deferred = $q.defer();
 	    $http.get(bootstrap + "?controller=Barathons&action=rend")
 	    .success(function(data, status){
